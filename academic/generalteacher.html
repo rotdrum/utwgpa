@@ -380,6 +380,7 @@
       })
     }
 
+    var responseResult;
     function render() {
       loading(true)
       $.ajax({
@@ -387,6 +388,7 @@
         url: endpoint + '/utw-cors-api/teachers.php',
         success: response => {
           console.log(response)
+          responseResult = response;
           if (response.status.code == 200) {
             var html = ''
             for (let i = 0; i < response.data.length; i++) {
@@ -402,6 +404,9 @@
                     <td>${element.room}</td>
                     <td>
                       <div class="d-flex">
+                        <div onclick="bpbd(${i})" style="cursor: pointer;" class="btn-sm me-1 btn-dark">
+                          <i class="bi bi-door-open-fill"></i>
+                        </div>
                         <div onclick="detailInfo(${element.id}, '${element.tname}', '${element.fname}', '${element.lname}', '${element.email}', '${element.class}', '${element.room}', ${element.department_id})" style="cursor: pointer;" class="btn-sm me-1 btn-primary" data-bs-toggle="modal" data-bs-target="#md_info">
                           <i class="bi bi-search"></i>
                         </div>
@@ -442,6 +447,29 @@
           errswal()
         }
       })
+    }
+
+    function bpbd(i) {
+      const data = responseResult.data[i];
+      console.log("data",data)
+      localStorage.clear();
+      
+      localStorage.setItem("utwlname", data.lname);
+      localStorage.setItem("utwUserno", "");
+      localStorage.setItem("utwDepartment", data.department_id);
+      localStorage.setItem("utw_sidebar", "sidebar4");
+      localStorage.setItem("utwtname", data.tname);
+      localStorage.setItem("utwfname", data.fname);
+      localStorage.setItem("utwFullname", data.tname + data.fname + " " + data.lname);
+      localStorage.setItem("utwEmail", data.email);
+      localStorage.setItem("utwToken", data.mail_token);
+      localStorage.setItem("utwUserId", data.id);
+      localStorage.setItem("utwClassRoom", data.class + "/" + data.room);
+      localStorage.setItem("utwImg", "");
+      localStorage.setItem("utwAccessToken", data.access_token);
+
+
+      window.location.href = "../modify-grade/dashboard/courseregister.html"
     }
 
     function detailInfo(idx, tname, fname, lname, email, classx, room, depid) {
