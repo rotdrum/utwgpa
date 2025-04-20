@@ -101,7 +101,7 @@ p {
     height: 100%;
     padding: 30px;
     transition: .3s;
-    background: linear-gradient(125deg, #e67e22, red);
+    background: linear-gradient(125deg, #0fcff1, #0f44f1);
     position: absolute;
 }
 .content {
