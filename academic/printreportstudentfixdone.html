@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;500;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFA;
+            font: 12pt "Tahoma";
+        }
+
+        .page {
+            width: 29.7cm;
+            min-height: 21cm;
+            padding: 1cm;
+            margin: auto;
+            /* border: 1px #D3D3D3 solid; */
+            border-radius: 5px;
+            /* background: white; */
+            /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
+        }
+
+        .subpage {
+            padding: 1cm;
+            /* border: 5px red solid; */
+            height: 210mm;
+            /* outline: 1cm #FFEAEA solid; */
+        }
+
+        @page {
+            size: landscape;
+            /* size: A4; */
+            margin: 0;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            width: 297mm;
+            height: 210mm;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 297mm;
+                height: 210mm;
+            }
+        }
+
+        .table-breaked {
+            page-break-before: auto;
+        }
+
+        div,
+        span {
+            font-size: 16px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #000;
+            font-size: 12px;
+
+        }
+
+        table td {
+            padding: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="book">
+        <div class="page">
+            <section class="subpage"
+                style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                <div style="position: absolute; top: 10px; right: 38px; border: 1px solid #000;" class="px-4 py-2">
+                    วผ.11/1</div>
+                <div class="flex flex-col items-end px-4 py-2"
+                    style="position: absolute; top: 60px; right: 38px; border: 1px solid #000;">
+                    <div class="flex">
+                        <div>ครั้งที่</div>
+                        <span id="countja" class="border-dotted border-b-2 border-slate-900 px-4"></span>
+                    </div>
+                    <div class="flex mt-2">
+                        <div>ภาคเรียนที่</div>
+                        <span id="numyearja" class="border-dotted border-b-2 border-slate-900 px-4"></span>
+                        <div>/</div>
+                        <span id="yearterm" class="border-dotted border-b-2 border-slate-900 px-4"></span>
+                    </div>
+                </div>
+                <h4 style="font-size: 20px; " class="font-bold">โรงเรียนอุทัยวิทยาคม จังหวัดอุทัยธานี</h4>
+                <h4 style="font-size: 20px; " class="font-bold">แบบรายงานผลการสอบแก้ตัว</h4>
+                <div class="flex  mt-2">
+                    <div>กลุ่มสาระการเรียนรู้</div>
+                    <span id="groupsara" class="border-dotted border-b-2 border-slate-900 px-4 w-64 text-center"></span>
+                </div>
+                <br>
+
+                <div class="table-breaked" style="width: 100%;">
+                    <table class="w-full" style="width: 100%; font-size: 14px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; padding: 0 5px;">ที่</th>
+                                <th style="text-align: center; padding: 0 5px;">ชื่อ-นามสกุล ครูผู้สอน</th>
+                                <th style="text-align: center; padding: 0 5px;">ชื่อ-นามสกุล นักเรียน</th>
+                                <th style="text-align: center; padding: 0 5px;">ชั้น</th>
+                                <th style="text-align: center; padding: 0 5px;">ชื่อวิชา/รหัสวิชา</th>
+                                <th style="text-align: center; padding: 0 5px;">ผลการเรียนเดิม</th>
+                                <th style="text-align: center; padding: 0 5px; width: 106px;">ผลการสอบแก้ตัว</th>
+                                <!-- <th style="text-align: center; padding: 0 5px;">ลายมือชื่อครูผู้สอน</th> -->
+                                <th style="text-align: center; padding: 0 5px;">วัน/เดือน/ปีที่ส่ง</th>
+                                <th style="text-align: center; padding: 0 5px;">หมายเหตุ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="w-full">
+                    <div class="w-16"></div>
+                    <div class="w-full flex justify-around">
+                        <div class="flex flex-col items-center">
+                            <div>รับรองข้อมูล</div>
+                            <br><br>
+                            <div class="flex">
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-64"></span>
+                            </div>
+                            <div class="flex mt-2">
+                                <div>(</div>
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 ">นางสมสุข โชติพิเชฐ</span>
+                                <div>)</div>
+                            </div>
+                            <div>นายทะเบียน</div>
+                            <span class="border-dotted border-b-2 border-slate-900 px-8 datenow"></span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div>ดำเนินการแก้ไขเรียบร้อยแล้ว</div>
+                            <br><br>
+                            <div class="flex">
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-64"></span>
+                            </div>
+                            <div class="flex mt-2">
+                                <div>(</div>
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 ">นางสาวสุภาวดี
+                                    กระแสสินธุ์</span>
+                                <div>)</div>
+                            </div>
+                            <div>งาน GPA</div>
+                            <!-- <span class="border-dotted border-b-2 border-slate-900 px-8 datenow"></span> -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="./global.js"></script>
+    <script>
+        const urlx = new URL(window.location.href);
+        const idx = urlx.searchParams.get("id");
+        const gsr = urlx.searchParams.get("gsr");
+        const edu_year = urlx.searchParams.get("ey");
+        const edu_count = urlx.searchParams.get("ec");
+        const edu_term = urlx.searchParams.get("et");
+
+        $(document).ready(() => {
+            render()
+            $('#countja').text(edu_count)
+            $('#numyearja').text(edu_term)
+            $('#yearterm').text(edu_year)
+            $('.datenow').text(dateengtodatethai(getDateNow().split(" ")[0]))
+        })
+
+        function render() {
+            loading(true)
+            // $.ajax({
+            //     method: 'post',
+            //     url: endpoint + '/utw-cors-api/settings/get-one.php',
+            //     data: {
+            //         _method: "GET",
+            //         key_address: 'modify_grade_date'
+            //     }, success: response => {
+            //         console.log('good', response)
+            //         if (response.status.code == 200) {
+                        
+            //         }
+            //         else {
+            //             errswal()
+            //         }
+            //     }, error: err => {
+            //         errswal()
+            //         console.log('bad', err)
+            //     }
+            // })
+
+            $.ajax({
+                method: 'post',
+                url: endpoint + `/utw-repeat-api/history/admin`,
+                headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
+                data: {
+                    round_at: parseInt(edu_count),
+                    term_at: parseInt(edu_term),
+                    year_at: parseInt(edu_year),
+                    department_id: parseInt(idx),
+                }, success: response => {
+                    console.log(response)
+                    if (response.status.code == 200) {
+                        $('#groupsara').text(gsr)
+                        var html = '';
+                        for (let i = 0; i < response.data.length; i++) {
+                            const element = response.data[i];
+                            var date = String(element.confirm_date).split("T")[0];
+
+                            var teacher = "-";
+                            var student = "-";
+                            if(element.teacher) {
+                                teacher = `${element.teacher.tname}${element.teacher.fname} ${element.teacher.lname}`;
+                            } 
+                            if(element.student) {
+                                student = `${element.student.tname}${element.student.fname} ${element.student.lname}`;
+                            } 
+
+                            html += `
+                            <tr>
+                                <td style="text-align: left; padding: 0 5px;">${i+1}</td>
+                                <td style="text-align: left; padding: 0 5px;">${teacher}</td>
+                                <td style="text-align: left; padding: 0 5px;">${student}</td>
+                                <td style="text-align: left; padding: 0 5px;">ม.${element.student.class}/${element.student.room}</td>
+                                <td style="text-align: left; padding: 0 5px;">${element.subject_code} ${element.subject_title}</td>
+                                <td style="text-align: left; padding: 0 5px;">${element.grade_old}</td>
+                                <td style="text-align: left; padding: 0 5px; widtd: 106px;">${element.grade_new}</td>
+                                <td style="text-align: left; padding: 0 5px;">${dateentoth(date)}</td>
+                                <td style="text-align: left; padding: 0 5px;"></td>
+                            </tr>
+                            `
+                        }
+                        $('#tbody').html(html)
+                        loading(false)
+
+                    }
+                    else {
+                        loading(false)
+                    }
+                }, error: err => {
+                    loading(false)
+                    console.log(err)
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

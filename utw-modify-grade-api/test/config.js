@@ -1,0 +1,1 @@
+var domainApiModifyGrade = 'https://utwgpa.com/uat/utw-modify-grade-api';

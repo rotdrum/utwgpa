@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานกลุ่มสาระ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <style>
+    .dataTables_wrapper {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
+    </div>
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>ข้อมูลพื้นฐาน</h2>
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div> -->
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <h5 class="mb-0"><b>ข้อมูลรายวิชา</b></h5>
+          <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#md_add">เพิ่มรายวิชา</div>
+        </div>
+
+        <div class="card">
+          <table id="myTable" class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">รหัสรายวิชา</th>
+                <th scope="col">ชื่อรายวิชา</th>
+                <th scope="col">ชั้นเรียน</th>
+                <th scope="col">ห้องเรียน</th>
+                <th scope="col">สถานะ</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal add -->
+  <form class="modal fade" id="md_add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">เพิ่มรายวิชา</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสวิชา</span>
+            <input id="add_code" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชื่อวิชา</span>
+            <input id="add_subject" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>กลุ่มสาระการเรียนรู้</span>
+            <select id="add_department" class="form-control txt-add">
+              <option value="">ไม่กำหนด</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="add_class" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน [เช่น 1,2,3]</span>
+            <input id="add_room" type="text" class="txt-add form-control" placeholder="ไม่กำหนด">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <div onclick="addInfo()" type="button" class="btn btn-primary">บันทึก</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal edit -->
+  <form class="modal fade" id="md_edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขรายวิชา</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสวิชา</span>
+            <input id="edit_code" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชื่อวิชา</span>
+            <input id="edit_subject" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>กลุ่มสาระการเรียนรู้</span>
+            <select id="edit_department" class="form-control txt-add">
+              <option value="">ไม่กำหนด</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="edit_class" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน [เช่น 1,2,3]</span>
+            <input id="edit_room" type="text" class="txt-add form-control" placeholder="ไม่กำหนด">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <div onclick="editInfoList()" type="button" class="btn btn-primary">บันทึก</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <script src="./global.js"></script>
+  <script>
+    $(document).ready(() => {
+      render()
+      getDepartment();
+    })
+
+    function getDepartment() {
+      $.ajax({
+        method: "post",
+        url: endpoint + '/utw-cors-api/department.php',
+        success: response => {
+          console.log(response)
+          if (response.status.code == 200) {
+            var html = `<option value="">--- เลือก ---</option>`
+            for (let i = 0; i < response.data.length; i++) {
+              const element = response.data[i];
+              html += `
+                <option value="${element.id}">${element.name}</option>
+                `
+            }
+            $("#add_department").html(html)
+            $("#info_department").html(html)
+            $("#edit_department").html(html)
+          }
+        }, error: err => {
+          loading(false)
+          errswal()
+        }
+      })
+    }
+
+    function render() {
+      loading(true)
+      $.ajax({
+        method: "post",
+        url: endpoint + '/utw-cors-api/subjects.php',
+        success: response => {
+          console.log(response)
+          if (response.status.code == 200) {
+            var html = ''
+            for (let i = 0; i < response.data.length; i++) {
+              const element = response.data[i];
+              html += `
+                  <tr>
+                    <td>${element.id}</td>
+                    <td>${element.subject_code}</td>
+                    <td>${element.name}</td>
+                    <td>${element.class ? element.class : 'ไม่กำนหด'}</td>
+                    <td>${element.room || 'ไม่กำหนด'}</td>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input style="cursor: pointer;"
+                          onclick="tgactive(${element.id}, '${element.is_active == '1' ? 'checked' : ''}')"
+                          ${element.is_active == '1' ? 'checked' : ''} class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex">
+                        <div onclick="editInfo(${element.id}, '${element.subject_code}', '${element.name}', '${element.class}', '${element.room}', ${element.department_id})" style="cursor: pointer;" class="btn-sm me-1 btn-warning" data-bs-toggle="modal" data-bs-target="#md_edit">
+                          <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <div onclick="removeInfo(${element.id}, '${element.subject_code}','${element.name}')" style="cursor: pointer;" class="btn-sm me-1 btn-danger">
+                          <i class="bi bi-trash3-fill"></i>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  
+                `
+            }
+            loading(false)
+            $("#tbody").html(html).promise().done(() => {
+              $('#myTable').DataTable({
+                "language": {
+                  "lengthMenu": "แสดงผล _MENU_ รายการ",
+                  "info": "พบข้อมูล _PAGE_ จาก _PAGES_ รายการ"
+                },
+                "oLanguage": {
+                  "sSearch": "ค้นหา",
+                  "sEmptyTable": 'ไม่พบข้อมูล',
+                  "sInfoEmpty": 'ไม่พบข้อมูล',
+                  "sZeroRecords": 'ไม่พบข้อมูล',
+                  "oPaginate": {
+                    "sNext": "ถัดไป",
+                    "sPrevious": "ก่อนหน้า",
+                  },
+                  "sInfoFiltered": '',
+                }
+              })
+            })
+          }
+        }, error: err => {
+          loading(false)
+          errswal()
+        }
+      })
+    }
+
+    function addInfo() {
+      $(".errmsg").removeClass().remove()
+      $(".txt-add").removeClass("is-invalid")
+      if ($('#add_code').val().length <= 0) {
+        $('#add_code').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_subject').val().length <= 0) {
+        $('#add_subject').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_department').val() == '') {
+        $('#add_department').after(`<span class="text-danger errmsg">โปรดเลือกกลุ่มสาระการเรียนรู้</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_class').val() == '') {
+        $('#add_class').after(`<span class="text-danger errmsg">โปรดกรอกเลือกชั้นเรียน</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else {
+        $.ajax({
+          type: "POST",
+          dataType: "JSON",
+          url: endpoint + '/utw-cors-api/subjects/add.php',
+          headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
+          data: {
+            _method: "GET",
+            subject_code: $('#add_code').val(),
+            name: $('#add_subject').val(),
+            class: $('#add_class').val() ? parseInt($('#add_class').val()) : null, /* null ได้ */
+            room: $('#add_room').val() ? $('#add_room').val() : null, /* null ได้ */
+            department_id: parseInt($('#add_department').val()),
+          },
+          success: function (response) {
+            console.log("good", response);
+            if (response.status.code == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                timer: 2000
+              }).then(() => {
+                window.location.reload()
+              })
+            }
+            else {
+              errswal()
+            }
+          }, error: function (err) {
+            console.log("bad", err);
+            if (JSON.parse(err.responseText).status.code == 422) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'อีเมลไม่ถูกต้อง',
+                text: 'โปรดตรวจสอบอีเมลอีกครั้ง'
+              })
+              $('#add_email').after(`<span class="text-danger errmsg">อีเมลไม่ถูกต้อง</span>`)
+                .focus().addClass('is-invalid')
+            }
+            else {
+              errswal()
+
+            }
+          }
+        })
+      }
+    }
+
+    function tgactive(idx, active) {
+      var tg = 1
+      if (active) {
+        tg = 0;
+      }
+
+      $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: endpoint + '/utw-cors-api/subjects/updateActive.php',
+        headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
+        data: {
+          id: parseInt(idx),
+          is_active: tg
+        },
+        success: function (response) {
+          console.log("good", response);
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            }).then(() => {
+              window.location.reload()
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: function (err) {
+          console.log("bad", err);
+          errswal()
+        }
+      })
+    }
+
+    var edit_id = 0;
+    function editInfo(idx, code, name, classx, room, depid) {
+      edit_id = idx;
+      $('#edit_code').val(code)
+      $('#edit_subject').val(name)
+      $('#edit_department').val(depid)
+      $('#edit_class').val(classx)
+      $('#edit_room').val(room)
+    }
+
+    function editInfoList() {
+      $(".errmsg").removeClass().remove()
+      $(".txt-add").removeClass("is-invalid")
+      if ($('#edit_code').val().length <= 0) {
+        $('#edit_code').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_subject').val().length <= 0) {
+        $('#edit_subject').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_department').val() == '') {
+        $('#edit_department').after(`<span class="text-danger errmsg">โปรดเลือกกลุ่มสาระการเรียนรู้</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_class').val() == '') {
+        $('#edit_class').after(`<span class="text-danger errmsg">โปรดกรอกเลือกชั้นเรียน</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else {
+        $.ajax({
+          type: "POST",
+          dataType: "JSON",
+          url: endpoint + '/utw-cors-api/subjects/update.php',
+          headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
+          data: {
+            _method: "GET",
+            id: edit_id,
+            subject_code: $('#edit_code').val(),
+            name: $('#edit_subject').val(),
+            class: $('#edit_class').val() ? parseInt($('#edit_class').val()) : null, /* null ได้ */
+            room: $('#edit_room').val() ? $('#edit_room').val() : null, /* null ได้ */
+            department_id: parseInt($('#edit_department').val()),
+          },
+          success: function (response) {
+            console.log("good", response);
+            if (response.status.code == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                timer: 2000
+              }).then(() => {
+                window.location.reload()
+              })
+            }
+            else {
+              errswal()
+            }
+          }, error: function (err) {
+            console.log("bad", err);
+            if (JSON.parse(err.responseText).status.code == 422) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'อีเมลไม่ถูกต้อง',
+                text: 'โปรดตรวจสอบอีเมลอีกครั้ง'
+              })
+              $('#add_email').after(`<span class="text-danger errmsg">อีเมลไม่ถูกต้อง</span>`)
+                .focus().addClass('is-invalid')
+            }
+            else {
+              errswal()
+
+            }
+          }
+        })
+      }
+    }
+
+    function removeInfo(idx,code,name) {
+      Swal.fire({
+        icon: "warning",
+        title: `คุณต้องการจะลบ ?`,
+        text: `[${code}] ${name}`,
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `ลบ`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isDenied) {
+          $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: endpoint + '/utw-cors-api/subjects/delete.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwAdminToken
+            },
+            data: {
+              id: idx,
+              _method: "GET",
+            },
+            success: function (response) {
+              console.log("good", response);
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                }).then(() => {
+                  window.location.reload()
+                })
+              }
+            }, error: function (err) {
+              console.log("bad", err);
+            }
+          })
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

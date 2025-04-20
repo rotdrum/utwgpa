@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTW</title>
+  <link rel="icon" href="../imgs/utw.gif">
+  <link rel="stylesheet" href="../global.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+  <style>
+    .bpbd {
+      background: #000 !important;
+      color: #fff !important;
+      border-radius: 5px !important;
+    }
+
+    .calendar {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0px 0px 3px #dadada;
+    }
+
+    .calendar .calendar-dates,
+    .calendar .calendar-day-name {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      /* grid-gap: 8px; */
+    }
+
+    .calendar .calendar-dates-day {
+      min-height: 62px;
+      display: flex !important;
+      justify-content: center !important;
+      flex-direction: row !important;
+      font-family: "Manrope", sans-serif;
+      font-size: 13px;
+      border: 1px solid #efefef;
+      padding: 5px;
+      box-sizing: border-box;
+      background: #fff;
+      /* border-radius: 4px; */
+      color: #333;
+    }
+
+    .calendar .calendar-dates-day:hover {
+      background: #d4ffee;
+    }
+
+    .calendar .calendar-dates-day-empty {
+      background: none;
+      min-height: 62px !important;
+      border: 0;
+      color: #000;
+      background: #f2f2f2;
+      min-height: 28px;
+    }
+
+    .calendar .calendar-day-name div {
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .calendar .calendar-title {
+      padding-bottom: 16px;
+      text-align: center;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    .calendar .calendar-dates-day.today-date {}
+
+    .calendar .calendar-dates-day.today-date span {
+      background: red;
+      padding: 2px 6px;
+      border-radius: 50%;
+      color: #fff;
+    }
+
+    .calendar #prevMonth,
+    .calendar #nextMonth,
+    .calendar #today {
+      padding: 2px 6px;
+      box-sizing: border-box;
+      font-family: "Manrope", sans-serif;
+      font-size: 20px;
+      line-height: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .calendar #today {
+      font-size: 13px;
+    }
+
+    .calendar .calendar-title-text {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .calendar .calendar-button-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .disabledja {
+      background: #adadad !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div id="sidebartitle" style="display: flex; align-items: center;">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex align-items-center">
+            <a href="" id="btn_backhistory" class="mb-0 btn btn-dark me-2 d-flex align-items-center">
+              <i class="fa-solid fa-chevron-left me-2"></i>
+              <div>ย้อนกลับ</div>
+            </a>
+
+            <div>
+              <h2 class="mb-0">ปฏิทินลงเวลา</h2>
+              <div style="font-size: .8rem;" class="text-danger">(*การนับเวลา จันทร์-ศุกร์ นับเป็น 3 ชั่วโมง /
+                เสาร์-อาทิตย์ นับเป็น 6 ชั่วโมง)</div>
+            </div>
+          </div>
+          <h2>รวม <span id="hourssum">0</span>/<span id="hoursall">20</span> ชั่วโมง</h2>
+        </div>
+        <div style="display: flex; align-items: flex-end;" class="mb-3">
+          <div class="me-3">
+            <div>วันที่เริ่มต้น</div>
+            <input id="txt_std" type="text" class="form-control" disabled style="width: 150px;">
+          </div>
+          <div>
+            <div>วันที่สิ้นสุด</div>
+            <input id="txt_end" type="text" class="form-control" disabled style="width: 150px;">
+          </div>
+          <div style="width: 250px; display: none;">
+            <p>ค้นหา</p>
+            <input id="txt_search" type="text" class="form-control" placeholder="ค้นหา" style="width: 100%;">
+          </div>
+          <div style="width: 250px; margin-left: 15px;">
+            <p>เดือน</p>
+            <select id="selmonth" class="form-control" style="width: 100%; cursor: pointer;">
+              <option value="">--- เลือกเดือน ---</option>
+              <option value="01">มกราคม</option>
+              <option value="02">กุมภาพันธ์</option>
+              <option value="03">มีนาคม</option>
+              <option value="04">เมษายน</option>
+              <option value="05">พฤษภาคม</option>
+              <option value="06">มิถุนายน</option>
+              <option value="07">กรกฏาคม</option>
+              <option value="08">สิงหาคม</option>
+              <option value="09">กันยายน</option>
+              <option value="10">ตุลาคม</option>
+              <option value="11">พฤศจิกายน</option>
+              <option value="12">ธันวาคม</option>
+            </select>
+          </div>
+          <div style="width: 250px; margin-left: 15px;">
+            <p>ปี</p>
+            <select id="selyear" class="form-control" style="width: 100%; cursor: pointer;">
+              <option value="">--- เลือกปี ---</option>
+              <option value="2023">2566</option>
+              <option value="2024" selected>2567</option>
+              <option value="2025">2568</option>
+              <option value="2026">2569</option>
+              <option value="2027">2570</option>
+              <option value="2028">2571</option>
+              <option value="2029">2572</option>
+              <option value="2030">2573</option>
+            </select>
+          </div>
+          <div onclick="render()" class="btn btn-primary text-white d-flex align-items-center me-1 ms-3">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <p>ค้นหา</p>
+          </div>
+          <div onclick="window.location.reload();" class="btn btn-dark text-white d-flex align-items-center">
+            <i class="fa-solid fa-rotate-right" style="margin-right: 5px;"></i>
+            <p>รีเฟรช</p>
+          </div>
+          <!-- <div onclick="window.location.reload()" class="btn-primary" style="margin-left: 10px;">
+              รีเฟรช
+          </div> -->
+        </div>
+        <div class="card p-2">
+          <div id="calendar" class="calendar">
+            <div class="calendar-title" style="display: none;">
+              <div class="calendar-title-text"></div>
+              <div class="calendar-button-group" style="display: none;">
+                <button id="prevMonth">&lt;</button>
+                <button id="today">Today</button>
+                <button id="nextMonth">&gt;</button>
+              </div>
+            </div>
+            <div class="calendar-day-name"></div>
+            <div class="calendar-dates"></div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="../global.js"></script>
+  <script>
+    var urlx = new URL(window.location.href);
+    const id = urlx.searchParams.get("id");
+
+    var daysInMonth, currentDate, firstDayPosition;
+    let dateItems = null;
+    let dateElement, weekNames, calendarTitle, nextMonthButton, prevMonthButton, dayNamesElement, todayButton;
+    var std = "2024-05-04";
+    var exp = "2024-05-25";
+
+    var monthNames = [
+      "มกราคา",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฏาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม"
+    ];
+    var calInfo = [];
+    $(document).ready(() => {
+      if(localStorage.utwCalendarNuikit) {
+        $("#hoursall").text(localStorage.utwCalendarNuikit)
+      }
+      if (localStorage.utwHistoryPage) {
+        $("#btn_backhistory").attr('href', localStorage.utwHistoryPage + "?openmd=true")
+      }
+      
+      if (localStorage.utwCalendar) {
+        var pushDate = JSON.parse(localStorage.utwCalendar);
+        var sumScore = 0;
+        if (pushDate && pushDate.length > 0) {
+          for (let i = 0; i < pushDate.length; i++) {
+            const element = pushDate[i];
+            var d = String(new Date(element)).substr(0, 3);
+            var score = 3;
+            if (d == "Sat" || d == "Sun") {
+              score = 6;
+            }
+            sumScore += score;
+            calInfo.push({
+              date: element,
+              score: score
+            })
+          }
+          $("#hourssum").text(sumScore)
+        }
+
+      }
+      getSettingDate()
+      // dateElement = document.querySelector("#calendar .calendar-dates");
+      // weekNames = ["จ (3)", "อ (3)", "พ (3)", "พฤ (3)", "ศ (3)", "ส (6)", "อ (6)"];
+      // calendarTitle = document.querySelector(".calendar-title-text");
+      // nextMonthButton = document.querySelector("#nextMonth");
+      // prevMonthButton = document.querySelector("#prevMonth");
+      // dayNamesElement = document.querySelector(".calendar-day-name");
+      // todayButton = document.querySelector("#today");
+
+
+      // currentDate = dayjs();
+      // var d = new Date();
+      // var dy = d.getFullYear();
+      // var dm = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : (d.getMonth() + 1);
+      // var dy = d.getFullYear();
+      // console.log(parseInt(dm) - 1);
+      // $('#selmonth').val(dm)
+      // $("#selyear").val(dy)
+      // render(dm, dy);
+    })
+
+    function render(month, year) {
+      var monthx;
+      var yearx;
+      var flag = '';
+      if (month && year) {
+        monthx = month;
+        yearx = year;
+        flag = 'init';
+      } else {
+        monthx = $('#selmonth').val();
+        yearx = $('#selyear').val();
+        flag = 'search';
+      }
+      loading(true)
+
+      // calInfo = [];
+      if (flag == 'init') {
+        loading(false)
+        rendercalendar()
+      } else {
+        loading(false)
+        // newMonth = currentDate.add(1, "month").startOf("month");
+        var m = parseInt($('#selmonth').val()) - 1;
+        var y = parseInt($('#selyear').val());
+        newMonth = dayjs().year(y).month(m).date(1);
+        setSelectedMonth('search');
+      }
+
+    }
+
+
+    function rendercalendar() {
+      daysInMonth = dayjs().daysInMonth();
+      firstDayPosition = dayjs().startOf("month").day();
+
+      console.log('daysInMonth', daysInMonth);
+      console.log('firstDayPosition', firstDayPosition);
+
+
+
+      let calendarTitle = document.querySelector(".calendar-title-text");
+      let nextMonthButton = document.querySelector("#nextMonth");
+      let prevMonthButton = document.querySelector("#prevMonth");
+      let dayNamesElement = document.querySelector(".calendar-day-name");
+      let todayButton = document.querySelector("#today");
+      dateItems = null;
+      let newMonth = null;
+
+      weekNames.forEach(function (item) {
+        dayNamesElement.innerHTML += `<div>${item}</div>`;
+      });
+
+      //next month button event
+      nextMonthButton.addEventListener("click", function () {
+        newMonth = currentDate.add(1, "month").startOf("month");
+        setSelectedMonth();
+      });
+
+      //prev month button event
+      prevMonthButton.addEventListener("click", function () {
+        newMonth = currentDate.subtract(1, "month").startOf("month");
+        setSelectedMonth();
+      });
+
+      //today button event
+      todayButton.addEventListener("click", function () {
+        newMonth = dayjs();
+        setSelectedMonth();
+        setTimeout(function () {
+          highlightCurrentDate();
+        }, 50);
+      });
+
+
+
+      //init
+      plotDays();
+      setTimeout(function () {
+        highlightCurrentDate();
+      }, 50);
+    }
+    //set next and prev month
+    function setSelectedMonth(search) {
+      daysInMonth = newMonth.daysInMonth();
+      firstDayPosition = newMonth.startOf("month").day();
+      if (firstDayPosition == 0) {
+        firstDayPosition = 7;
+      }
+      currentDate = newMonth;
+      plotDays(search);
+    }
+    function plotDays(search) {
+      let count = 1;
+      dateElement.innerHTML = "";
+
+      let prevMonthLastDate = currentDate.subtract(1, "month").endOf("month").$D;
+      let prevMonthDateArray = [];
+
+      //plot prev month array
+      for (let p = 1; p < firstDayPosition; p++) {
+        prevMonthDateArray.push(prevMonthLastDate--);
+      }
+      prevMonthDateArray.reverse().forEach(function (day) {
+        dateElement.innerHTML += `  <div class="calendar-dates-day-empty" style="position: relative; cursor: pointer;">
+                                                <span style="position: absolute; left: 3px; top: 3px; font-size: .6rem; ">${day}</span>
+                                            </div>`;
+      });
+
+      //plot current month dates
+      for (let i = 0; i < daysInMonth; i++) {
+        const element = daysInMonth;
+        console.log("element", element)
+        var day = count < 10 ? '0' + count : count;
+        var month = $("#selmonth").val();
+        var year = $("#selyear").val();
+        var fulldate = `${year}-${month}-${day}`
+        var d = String(new Date(fulldate)).split(" ")[0];
+        var actiiveGeen = "";
+        if (d == "Sat" || d == "Sun") {
+          console.log("d", d)
+          actiiveGeen = "background: #fffde4;";
+        }
+        // if(day)
+        var mil = new Date(fulldate).getTime();
+        var stdmil = new Date(std).getTime();
+        var expmil = new Date(exp).getTime();
+        var clickja = `checkClickDate('${fulldate}');`;
+        var disabledja = "";
+        //2024-05-04 - 2024-05-05
+        if (stdmil > mil || expmil < mil) {
+          clickja = "";
+          disabledja = "disabledja";
+        }
+        dateElement.innerHTML += `  <a id="boxcal${fulldate}" onclick="${clickja}" class="${disabledja} calendar-dates-day" 
+                                      style="${actiiveGeen} position: relative; cursor: pointer; display: flex; flex-direction: column; align-items:center; justify-content: flex-end;">
+                                                <span id="boxdate${fulldate}" style="position: absolute; left: 3px; top: 3px; font-size: .6rem;">${count++}</span>
+                                            </a>`;
+      }
+
+      $('.bpbd').remove()
+      var txt = $('#txt_search').val().toLowerCase()
+      var case_allday = 0;
+      var case_allmonth = 0;
+      var case_pending = 0;
+      var case_done = 0;
+      console.log('calInfo', calInfo);
+      for (let i = 0; i < calInfo.length; i++) {
+        var d = String(calInfo[i].date).split('-')
+        var date = d[2];
+        var month = $("#selmonth").val();
+        var year = $("#selyear").val();
+        var today = new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate() + '';
+        //     case_allday = parseInt(calInfo[i].count); 
+        //     case_pending = parseInt(calInfo[i].pending);
+        //     case_done = parseInt(calInfo[i].done);
+
+        // console.log(2222222, calInfo[i].status)
+        case_allmonth++;
+        // case_allmonth += parseInt(calInfo[i].count);
+
+        $(`#boxdate${calInfo[i].date}`).after(`<b id="bd${calInfo[i].date}" class="bpbd"  style="font-size: .7rem;   margin: 2px; color: var(--w);  padding: 2px 7px; border-radius: 5px;">${calInfo[i].score}</b>`)
+        $(`#boxcal${calInfo[i].date}`).css("background", "#93d4ff")
+      }
+      var a = String(new Date()).split(" ");
+      var m = a[2];
+      var y = a[3];
+      if (m == month && y == year) {
+        highlightCurrentDate();
+      }
+      if(localStorage.utwCalendarDisabled) {
+        $(".calendar-dates-day").attr("onclick", "")
+      }
+
+    }
+
+
+
+    // if (txt) {
+    // $('#case_allday').text(`${case_allday} เคส`)
+    // $('#case_allmonth').text(`${case_allmonth} เคส`)
+    // $('#case_pending').text(`${case_pending} เคส`)
+    // $('#case_done').text(`${case_done} เคส`)
+    // }
+
+
+    //next month dates
+    let diff =
+      42 - Number(document.querySelector(".calendar-dates").children.length);
+    let nextMonthDates = 1;
+    for (let d = 0; d < diff; d++) {
+      console.log("diff", diff)
+      document.querySelector(".calendar-dates").innerHTML += `
+                                <div class="calendar-dates-day-empty" style="position: relative; cursor: pointer;">
+                                    <span style="position: absolute; left: 3px; top: 3px; font-size: .6rem;">${nextMonthDates++}</span>
+                                </div>`;
+    }
+
+    //month name and year
+    calendarTitle.innerHTML = `${monthNames[currentDate.month()]
+      } - ${currentDate.year() + 543}`;
+
+    setTimeout(function () {
+      highlightCurrentDate(search);
+    }, 50);
+
+    //highlight current date
+    function highlightCurrentDate(search) {
+      if (search) {
+        // alert(4)
+        currentDate = dayjs().month(new Date().getMonth());
+        //3 Mar
+        console.log(3333, currentDate, (currentDate.$M + 1), parseInt($('#selmonth').val()));
+        if ((currentDate.$M + 1) == parseInt($('#selmonth').val())) {
+          // console.log(5555);
+          dateItems = document.querySelectorAll(".calendar-dates-day");
+          if (dateElement && dateItems[currentDate.$D - 1]) {
+            dateItems[currentDate.$D - 1].classList.add("today-date");
+          }
+        } else {
+          // console.log(6666);
+          dateItems = document.querySelectorAll(".calendar-dates-day");
+          if (dateElement && dateItems[currentDate.$D - 1]) {
+            dateItems[currentDate.$D - 1].classList.remove("today-date");
+          }
+        }
+      }
+      else {
+        // alert(3)
+        // console.log(4444);
+        console.log("currentDate", dateItems, currentDate)
+        currentDate = dayjs().month(new Date().getMonth());
+        dateItems = document.querySelectorAll(".calendar-dates-day");
+        if (dateElement && dateItems[currentDate.$D - 1]) {
+          dateItems[currentDate.$D - 1].classList.add("today-date");
+        }
+      }
+    }
+
+    function checkClickDate(date) {
+      var pass = false;
+      for (let i = 0; i < calInfo.length; i++) {
+        const element = calInfo[i];
+        if (element.date == date) {
+          calInfo.splice(i, 1);
+          popDateNow(date);
+          pass = true;
+        }
+      }
+
+      if (pass) {
+        plotDays()
+      }
+      else {
+        var d = String(new Date(date)).split(" ")[0];
+        console.log(date, d)
+        var obj = {};
+        if (d == "Sat" || d == "Sun") {
+          obj = {
+            date: date,
+            score: 6
+          }
+        } else {
+          obj = {
+            date: date,
+            score: 3
+          }
+        }
+
+
+        calInfo.push(obj)
+        pushDateNow(date);
+        plotDays()
+      }
+      var sumScore = 0;
+      if (calInfo.length > 0) {
+        for (let i = 0; i < calInfo.length; i++) {
+          const element = calInfo[i];
+          sumScore += element.score;
+        }
+
+      }
+      $("#hourssum").text(sumScore)
+
+    }
+    function pushDateNow(date) {
+      $.ajax({
+        method: "post",
+        url: `https://utwgpa.com/utw-repeat-api/teacher/update-time-edu/${id}`,
+        "headers": {
+          "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+        },
+        data: {
+          date: date
+        }, success: response => {
+          if (response.status.code == 200)
+            localStorage.setItem("utwCalendar", JSON.stringify(response.data.time_learning))
+        }
+      })
+    }
+    function popDateNow(date) {
+      $.ajax({
+        method: "post",
+        url: `https://utwgpa.com/utw-repeat-api/teacher/delete-time-edu/${id}`,
+        "headers": {
+          "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+        },
+        data: {
+          date: date
+        }, success: response => {
+          if (response.status.code == 200)
+            localStorage.setItem("utwCalendar", JSON.stringify(response.data.time_learning))
+        }
+      })
+    }
+    function getSettingDate() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'repeat_date'
+        }, success: response => {
+          console.log('good 1', response)
+          if (response.status.code == 200) {
+
+            std = response.data.in_data.date_start;
+            exp = response.data.in_data.date_end;
+
+            if (localStorage.utwCalendarStartDate) {
+              Date.prototype.addHours = function (h) {
+                this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+                return this;
+              };
+              var d1 = String(localStorage.utwCalendarStartDate)
+              var d = new Date(d1)
+
+              var dy = d.getFullYear();
+              var dm = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : (d.getMonth() + 1);
+              var dd = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
+
+              var th = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
+              var tm = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+              var ts = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
+
+              var d2 = `${dy}-${dm}-${dd} ${th}:${tm}:${ts}`;
+
+              std = String(d2 + "").split(" ")[0];
+            }
+            $("#txt_std").val(std)
+            $("#txt_end").val(exp)
+
+            dateElement = document.querySelector("#calendar .calendar-dates");
+            weekNames = ["จ (3)", "อ (3)", "พ (3)", "พฤ (3)", "ศ (3)", "ส (6)", "อ (6)"];
+            calendarTitle = document.querySelector(".calendar-title-text");
+            nextMonthButton = document.querySelector("#nextMonth");
+            prevMonthButton = document.querySelector("#prevMonth");
+            dayNamesElement = document.querySelector(".calendar-day-name");
+            todayButton = document.querySelector("#today");
+
+
+            currentDate = dayjs();
+            var d = new Date();
+            var dy = d.getFullYear();
+            var dm = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : (d.getMonth() + 1);
+            var dy = d.getFullYear();
+            console.log(parseInt(dm) - 1);
+            $('#selmonth').val(dm)
+            $("#selyear").val(dy)
+            render(dm, dy);
+          }
+          else {
+
+          }
+        }, error: err => {
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

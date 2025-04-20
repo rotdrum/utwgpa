@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTW</title>
+  <link rel="icon" href="../imgs/utw.gif">
+  <link rel="stylesheet" href="../global.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <style>
+    .pac-container {
+      z-index: 99999;
+    }
+
+    .select2-container {
+      width: 100% !important;
+    }
+
+    span.select2.select2-container.select2-container--bootstrap {
+      width: 100% !important;
+    }
+
+    .select2-container--default .select2-results__option[aria-disabled=true] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div id="sidebartitle" style="display: flex; align-items: center;">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="card p-2 flex-row d-flex " style="height: fit-content;">
+              <i class="fa-solid fa-bullhorn text-danger"></i>
+              <div class="ms-2" id="annou">
+                <div id="annou1"></div>
+                <div id="annou2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>ลงทะเบียนแก้ตัวนักเรียน</h2>
+          <div onclick="clearlist(); openmd('#openModalAddSubject');" class="btn btn-success">
+            <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>
+            <span>ลงทะเบียน</span>
+          </div>
+        </div>
+
+        <div id="render-box" class="row">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="openModalAddSubject" class="modal"
+    style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+    <div onclick="close_modal()"
+      style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+    <div class="card"
+      style="position: relative; display: flex;  flex-direction: column; width: 50%; max-width: 90%; max-height: 90vh; overflow: scroll; border-radius: 10px; background: #fff; z-index: 999999; padding: 20px;">
+      <div onclick="close_modal()"
+        style="cursor: pointer; position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <h4>ลงทะเบียนแก้ตัวนักเรียน</h4>
+      <hr>
+      <div class="mb-3">
+        <b>ชื่อกลุ่ม</b>
+        <input id="add_gname" type="text" placeholder="ตั้งชื่อกลุ่ม" class="form-add form-control">
+      </div>
+      <div class="mb-5">
+        <b class="mb-3">รายวิชา</b>
+        <select id="add_sname" onchange="fetchindicator()" class="form-add form-control">
+          <option value="">เลือก</option>
+        </select>
+      </div>
+
+      <div id="indicator-box" style="display: none;">
+        <b class="mb-3">เลือกรายการภาระงาน</b>
+        <div id="indicator-list" class="list-group mb-5">
+          <!-- <a href="#" onclick="selectGage(this)" id="gage1" class="list-group-item list-group-item-action active" aria-current="true">asdasd</a>
+              <a href="#" onclick="selectGage(this)" id="gage2" class="list-group-item list-group-item-action">A second link item</a>
+              <a href="#" onclick="selectGage(this)" id="gage3" class="list-group-item list-group-item-action">A third link item</a>
+              <a href="#" onclick="selectGage(this)" id="gage4" class="list-group-item list-group-item-action">A fourth link item</a> -->
+        </div>
+      </div>
+
+
+      <b class="mb-3">รายชื่อนักเรียนสำหรับกลุ่มนี้</b>
+      <div id="boxStudent">
+        <div class="mb-3">
+          <div>
+            <span>นักเรียนคนที่ 1</span>
+
+            <div class="d-flex justify-content-between mb-2 ">
+
+              <select id="add_stu_name1"
+                class="form-add-student form-add-student-lvl1 form-add form-control js-example-basic-single mr-2">
+                <option value="">เลือก</option>
+                <option value="1">1</option>
+              </select>
+              <input id="add_score_name1" type="text" placeholder="คะแนนเดิม"
+                class="form-add-student form-add-student-lvl1 form-add form-control" style="margin-left: 10px;">
+            </div>
+
+          </div>
+          <div class="d-flex mt-2">
+            <button onclick="selectZeroCal(this, '1r', 1, '0')" id="1r1"
+              class="1r btn btn-outline-primary me-1">0</button>
+            <button onclick="selectZeroCal(this, '1r', 1, 'ร')" id="1r2"
+              class="1r btn btn-outline-primary me-1">ร</button>
+            <button onclick="selectZeroCal(this, '1r', 1, 'มผ.')" id="1r3"
+              class="1r btn btn-outline-primary me-1">มผ.</button>
+            <button onclick="selectZeroCal(this, '1r', 1, 'มส.')" id="1r4"
+              class="1r btn btn-outline-primary me-1">มส.</button>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex">
+        <button onclick="addStudent()" class="btn btn-success">
+          เพิ่มนักเรียน
+        </button>
+        <button onclick="removeStudent()" id="btnAddStudentRemove" class="btn btn-danger ms-1" style="display: none;">
+          ลบนักเรียนล่าสุด
+        </button>
+      </div>
+      <br>
+      <div class="modal-footer p-0">
+        <button onclick="close_modal()" id="cm_openModalAddSubject" type="button" class="btn btn-secondary"
+          data-bs-dismiss="modal">ยกเลิก</button>
+        <button onclick="submit()" type="button" class="btn btn-primary">บันทึก</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div id="openModalAddSubject" class="modal fade" tabindex="-1" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">ลงทะเบียนแก้ตัวนักเรียน</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                  <b>ชื่อกลุ่ม</b>
+                  <input id="add_gname" type="text" placeholder="ตั้งชื่อกลุ่ม" class="form-add form-control">
+                </div>
+                <div class="mb-5">
+                  <b class="mb-3">รายวิชา</b>
+                  <select id="add_sname" onchange="fetchindicator()" class="form-add form-control">
+                    <option value="">เลือก</option>
+                  </select>
+                </div>
+                
+                <div id="indicator-box" style="display: none;" >
+                  <b class="mb-3">เลือกรายการภาระงาน</b>
+                  <div id="indicator-list" class="list-group mb-5">
+                    
+                  </div>
+                </div>
+                
+
+                <b class="mb-3">รายชื่อนักเรียนสำหรับกลุ่มนี้</b>
+                <div id="boxStudent">
+                  <div class="mb-3">
+                    <div>
+                      <span>นักเรียนคนที่ 1</span>
+                      <select id="add_stu_name1"  class="form-add-student form-add-student-lvl1 form-add form-control js-example-basic-single">
+                        <option value="">เลือก</option>
+                        <option value="1">1</option>
+                      </select>
+                    </div>
+                    <div class="d-flex mt-2">
+                      <button onclick="selectZeroCal(this, '1r', 1, '0')" id="1r1" class="1r btn btn-outline-primary me-1">0</button>
+                      <button onclick="selectZeroCal(this, '1r', 1, 'ร')" id="1r2" class="1r btn btn-outline-primary me-1">ร</button>
+                      <button onclick="selectZeroCal(this, '1r', 1, 'มผ.')" id="1r3" class="1r btn btn-outline-primary me-1">มผ.</button>
+                      <button onclick="selectZeroCal(this, '1r', 1, 'มส.')" id="1r4" class="1r btn btn-outline-primary me-1">มส.</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <button onclick="addStudent()" class="btn btn-success" >
+                    เพิ่มนักเรียน
+                  </button>
+                  <button onclick="removeStudent()" id="btnAddStudentRemove" class="btn btn-danger ms-1" style="display: none;">
+                    ลบนักเรียนล่าสุด
+                  </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalAddSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <button onclick="submit()" type="button" class="btn btn-primary">บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+  <div id="openModalInfoStudent" class="modal"
+    style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+    <div onclick="close_modal()"
+      style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+    <div class="card"
+      style="position: relative; display: flex;  flex-direction: column; width: 50%; max-width: 90%; max-height: 90vh; overflow: scroll; border-radius: 10px; background: #fff; z-index: 999999999; padding: 20px;">
+      <div onclick="close_modal()"
+        style="cursor: pointer; position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <h4>รายละเอียด</h4>
+      <hr>
+      <div class="mb-3">
+        <b>ชื่อกลุ่ม</b>
+        <input id="info_gname" disabled type="text" placeholder="ชื่อกลุ่ม" class="form-add form-control">
+      </div>
+      <div class="mb-3">
+        <b>รายวิชา</b>
+        <input id="info_sname" disabled type="text" placeholder="รายวิชา" class="form-add form-control">
+      </div>
+      <div class="mb-3" id="info-indicator-box">
+        <b>เลือกรายการภาระงาน</b>
+        <div id="info-indicator-list" class="list-group ">
+
+        </div>
+      </div>
+      <div id="info-name-list">
+        <div class="mb-3">
+          <b>นักเรียนคนที่ 1</b>
+          <input id="info_stu_name1" disabled type="text" placeholder="นักเรียนคนที่ 1" class="form-add form-control">
+        </div>
+      </div>
+      <br>
+
+      <div class="modal-footer p-0">
+        <button onclick="close_modal()" id="cm_openModalInfoStudent" type="button" class="btn btn-secondary"
+          data-bs-dismiss="modal">ปิด</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div id="openModalInfoStudent" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">รายละเอียด</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="" class="modal-body">
+              
+              <div class="mb-3">
+                <b>ชื่อกลุ่ม</b>
+                <input id="info_gname" disabled type="text" placeholder="ชื่อกลุ่ม" class="form-add form-control">
+              </div>
+              <div class="mb-3">
+                <b>รายวิชา</b>
+                <input id="info_sname" disabled type="text" placeholder="รายวิชา" class="form-add form-control">
+              </div>
+              <div class="mb-3" id="info-indicator-box">
+                <b>เลือกรายการภาระงาน</b>
+                <div id="info-indicator-list" class="list-group ">
+                  
+                </div>
+              </div>
+              <div id="info-name-list">
+                <div class="mb-3">
+                  <b>นักเรียนคนที่ 1</b>
+                  <input id="info_stu_name1" disabled type="text" placeholder="นักเรียนคนที่ 1" class="form-add form-control">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalInfoStudent" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+  <div id="openModalEditStudent" class="modal"
+    style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+    <div onclick="close_modal()"
+      style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+    <div class="card"
+      style="position: relative; display: flex;  flex-direction: column; width: 50%; max-width: 90%; max-height: 90vh; overflow: scroll; border-radius: 10px; background: #fff; z-index: 999999; padding: 20px;">
+      <div onclick="close_modal()"
+        style="cursor: pointer; position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <h4>แก้ไขรายละเอียด</h4>
+      <hr>
+      <div class="mb-3">
+        <b>ชื่อกลุ่ม</b>
+        <input id="edit_gname" type="text" placeholder="ชื่อกลุ่ม" class="form-add form-control">
+      </div>
+      <div class="mb-3">
+        <b>รายวิชา</b>
+        <select class="form-control" onchange="fetchindicator('','edit')" id="edit_sname">
+
+        </select>
+      </div>
+      <div class="mb-3" id="edit-indicator-box">
+        <b>เลือกรายการภาระงาน</b>
+        <div id="edit-indicator-list" class="list-group " style="position: relative;">
+
+        </div>
+      </div>
+      <div id="edit-name-list">
+        <div class="mb-3">
+          <b>นักเรียนคนที่ 1</b>
+          <input id="edit_stu_name1" type="text" placeholder="นักเรียนคนที่ 1" class="form-add form-control">
+        </div>
+      </div>
+      <div class="d-flex">
+        <button onclick="editstudentAdd()" class="btn btn-success me-1">เพิ่มนักเรียน</button>
+        <button onclick="editstudentDelete()" id="btnedit-delete" class="btn btn-danger">ลบนักเรียน</button>
+      </div>
+      <br>
+
+      <div class="modal-footer p-0">
+        <button onclick="close_modal()" id="cm_closeModalEditStudent" type="button" class="btn btn-secondary"
+          data-bs-dismiss="modal">ปิด</button>
+        <button onclick="submitEdit()" id="cm_openModalEditStudent" type="button"
+          class="btn btn-primary">บันทึก</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div id="openModalEditStudent" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">แก้ไขรายละเอียด</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="" class="modal-body">
+              
+              <div class="mb-3">
+                <b>ชื่อกลุ่ม</b>
+                <input id="edit_gname"  type="text" placeholder="ชื่อกลุ่ม" class="form-add form-control">
+              </div>
+              <div class="mb-3">
+                <b>รายวิชา</b>
+                <select class="form-control" onchange="fetchindicator('','edit')" id="edit_sname">
+
+                </select>
+              </div>
+              <div class="mb-3" id="edit-indicator-box">
+                <b>เลือกรายการภาระงาน</b>
+                <div id="edit-indicator-list" class="list-group ">
+                  
+                </div>
+              </div>
+              <div id="edit-name-list">
+                <div class="mb-3">
+                  <b>นักเรียนคนที่ 1</b>
+                  <input id="edit_stu_name1"  type="text" placeholder="นักเรียนคนที่ 1" class="form-add form-control">
+                </div>
+              </div>
+              <div class="d-flex">
+                <button onclick="editstudentAdd()" class="btn btn-success me-1">เพิ่มนักเรียน</button>
+                <button onclick="editstudentDelete()" id="btnedit-delete" class="btn btn-danger">ลบนักเรียน</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_closeModalEditStudent" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+              <button onclick="submitEdit()" id="cm_openModalEditStudent" type="button" class="btn btn-primary" >บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+  <script src="../global.js"></script>
+  <script>
+    var grouplist;
+    var studentlist;
+    var optionstudent = '<option value="">--- เลือก ---</option>';
+    var subjecthtml;
+
+    $(document).ready(() => {
+
+      render()
+      annou()
+      openclassroom()
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/students.php',
+        data: {
+          _method: "GET"
+        }, success: (response) => {
+          console.log('student', response)
+          if (response.status.code == 200) {
+            studentlist = response.data;
+            for (let i = 0; i < studentlist.length; i++) {
+              const data = studentlist[i]
+              optionstudent += `<option value="${data.id}">${data.tname}${data.fname} ${data.lname} | ม.${data.class}/${data.room}</option>`
+            }
+            $('#add_stu_name1').html(optionstudent).promise().done(() => {
+              $('#add_stu_name1').select2({
+                placeholder: "สามารถพิมพ์ค้นหาจาก ชื่อ-นามสกุล หรือ ชั้นเรียน",
+                dropdownParent: $('#openModalAddSubject')
+              });
+            })
+          }
+        }
+      })
+
+      $.ajax({
+        type: 'post',
+        url: endpoint + '/utw-modify-grade-api/course/getAll.php',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwToken
+        },
+        data: {
+          _method: 'GET',
+          user_id: parseInt(localStorage.utwUserId)
+        }, success: (response) => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            grouplist = response.data;
+            subjecthtml = '<option value="">--- เลือก ---</option>';
+            for (let i = 0; i < response.data.length; i++) {
+              const data = response.data[i];
+              subjecthtml += `<option value="${data.id}|${data.subject_id}">${data.subject_code} ${data.subject_title} ม.${data.subject_class}</option>`
+
+              var indicators = JSON.parse(data.indicators);
+              console.log(indicators)
+            }
+            $('#add_sname').html(subjecthtml)
+          }
+          else {
+            // Swal.fire({
+            //   icon: 'error',
+            //   title: 'getAll \nมีบางอย่างผิดพลาด'
+            // })
+          }
+        }, error: (err) => {
+          console.log('bad', err)
+        }
+      })
+    })
+
+    function annou() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'grade_announce'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            $("#annou1").text(response.data.in_data.modify);
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+    function openclassroom() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'modify_grade_class_active'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            var html = "";
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              html += "ม." + element + ", "
+            }
+            html = String(html).substring(0, html.length - 2)
+            $("#annou2").text("ใช้งานระดับชั้น " + html);
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+
+    var gage = ''
+    function selectGage(elem, act) {
+      var element = $('#' + elem.id)
+      console.log('gage')
+      if (element.hasClass('active')) {
+        console.log('gage 1')
+        element.removeClass('active')
+        gage = gage.replace(act + ',', '')
+      } else {
+        console.log('gage 2')
+        element.addClass('active')
+        gage += act + ',';
+      }
+    }
+
+    var studentindex = 2;
+    function addStudent() {
+      zerotoheero[studentindex] = '';
+      $("#btnAddStudentRemove").css('display', 'block')
+      $('#boxStudent').append(`
+
+          <div class="mb-3" id="student${studentindex}">
+            <div>
+              <span>นักเรียนคนที่ ${studentindex}</span>
+              <div class="d-flex justify-content-between mb-2 ">
+                <select id="add_stu_name${studentindex}"  class="form-add-student form-add-student-lvl${studentindex} form-add form-control mr-2">
+                  <option value="">เลือก</option>
+                  ${optionstudent}
+                </select>
+                <input id="add_score_name${studentindex}"  type="text" placeholder="คะแนนเดิม นักเรียนคนที่ ${studentindex}" class="form-add-student form-add-student-lvl${studentindex} form-add form-control" style="margin-left: 10px;">  
+              </div>
+
+            </div>
+            <div class="d-flex mt-2">
+              <button onclick="selectZeroCal(this, '${studentindex}r', ${studentindex}, '0')" id="${studentindex}r1" class="${studentindex}r btn btn-outline-primary me-1">0</button>
+              <button onclick="selectZeroCal(this, '${studentindex}r', ${studentindex}, 'ร')" id="${studentindex}r2" class="${studentindex}r btn btn-outline-primary me-1">ร</button>
+              <button onclick="selectZeroCal(this, '${studentindex}r', ${studentindex}, 'มผ.')" id="${studentindex}r3" class="${studentindex}r btn btn-outline-primary me-1">มผ.</button>
+              <button onclick="selectZeroCal(this, '${studentindex}r', ${studentindex}, 'มส.')" id="${studentindex}r4" class="${studentindex}r btn btn-outline-primary me-1">มส.</button>
+            </div>
+          </div>
+          `)
+      $('#add_stu_name' + studentindex).select2({
+        placeholder: "สามารถพิมพ์ค้นหาจาก ชื่อ-นามสกุล หรือ ชั้นเรียน",
+        dropdownParent: $('#openModalAddSubject')
+      });
+      studentindex++;
+    }
+
+    function removeStudent() {
+      studentindex--;
+      delete zerotoheero[studentindex];
+      $('#student' + studentindex).remove()
+      if (studentindex <= 2) {
+        $("#btnAddStudentRemove").css('display', 'none')
+      }
+    }
+
+    function submitEdit() {
+      Swal.fire({
+        icon: "info",
+        title: "ยืนยันการแก้ไขข้อมูล?",
+        showConfirmButton: true,
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: "บันทึก",
+        denyButtonText: `ลบ`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var ind = gage.substring(0, gage.length - 1)
+          ind = ind.split(',')
+
+          var student = [];
+          var oldgrade = [];
+          var scoreold = [];
+
+          for (let i = 1; i <= editstudentlist; i++) {
+            console.log(`#edit_stu_name${i}`)
+            if ($(`#edit_stu_name${i}`).val()) {
+              student.push(parseInt($(`#edit_stu_name${i}`).val()))
+            }
+
+            scoreold.push(parseInt($(`#edit_score_name${i}`).val()))
+            oldgrade.push(zerotoheero[i]);
+
+            if (zerotoheero[i] == '') {
+              Swal.fire({
+                icon: 'warning',
+                title: 'โปรดเลือกผลการเรียนเก่า',
+                text: 'ของนักเรียนคนที่ ' + i
+              })
+              pass = false;
+              break;
+            }
+          }
+
+
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-modify-grade-api/groub_course/update.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+              _method: "PUT",
+              id: parseInt(editid),
+              course_id: parseInt(courseid),
+              users_id: JSON.stringify(student),
+              grade_old: JSON.stringify(oldgrade),
+              score_old: JSON.stringify(scoreold),
+              title: $('#edit_gname').val(),
+              indicators: JSON.stringify(ind),
+            }, success: (response) => {
+              console.log(response)
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                })
+                render()
+                $('#cm_closeModalEditStudent').trigger('click')
+              }
+            }, error: (err) => {
+              console.log(err)
+            }
+          })
+        }
+      });
+
+    }
+
+    function submit() {
+      var pass = true;
+      $('.form-add').removeClass('is-invalid')
+      if ($('#add_gname').val().length <= 0) {
+        pass = false;
+        $('#add_gname').addClass('is-invalid').focus()
+      }
+      else if ($('#add_sname').val().length <= 0) {
+        pass = false;
+        $('#add_sname').addClass('is-invalid').focus()
+      }
+      else if (gage == '') {
+        pass = false;
+        Swal.fire({
+          icon: 'warning',
+          title: 'โปรดเลือกภาระงานอย่างน้อย 1 ข้อ'
+        })
+      }
+
+      var studentid = [];
+      var oldgrade = [];
+      var oldscore = [];
+      if (pass) {
+        for (let i = 1; i <= studentindex - 1; i++) {
+          oldscore.push($('#add_score_name' + (i)).val())
+        }
+
+        for (let i = 1; i <= studentindex - 1; i++) {
+          if ($('#add_stu_name' + (i)).val().length <= 0) {
+            pass = false;
+            Swal.fire({
+              icon: 'warning',
+              title: 'โปรดเลือกนักเรียนคนที่ ' + i
+            })
+            break;
+          }
+          else {
+            studentid.push(parseInt($('#add_stu_name' + (i)).val()))
+          }
+
+          oldgrade.push(zerotoheero[i]);
+          if (zerotoheero[i] == '') {
+            Swal.fire({
+              icon: 'warning',
+              title: 'โปรดเลือกผลการเรียนเก่า',
+              text: 'ของนักเรียนคนที่ ' + i
+            })
+            pass = false;
+            break;
+          }
+        }
+
+        if (pass) {
+          var ind = gage.substring(0, gage.length - 1)
+          ind = ind.split(',')
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-modify-grade-api/groub_course/create.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+              _method: "POST",
+              course_id: parseInt($('#add_sname').val()),
+              title: $('#add_gname').val(),
+              users_id: JSON.stringify(studentid),
+              grade_old: JSON.stringify(oldgrade),
+              score_old: JSON.stringify(oldscore),
+              indicators: JSON.stringify(ind),
+            }, success: (response) => {
+              console.log(response)
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                })
+                $('#add_gname').val('')
+                $('#add_sname').val('')
+                gage = '';
+                studentindex = 2;
+                $('#boxStudent').html(`
+                      <div class="mb-3">
+                        <span>นักเรียนคนที่ 1</span>
+                        <select id="add_stu_name1"  class="form-add-student form-add-student-lvl1 form-add form-control js-example-basic-single">
+                          ${optionstudent}
+                        </select>
+                      </div>
+                    `).promise().done(() => {
+                  $('#add_stu_name1').select2({
+                    placeholder: "สามารถพิมพ์ค้นหาจาก ชื่อ-นามสกุล หรือ ชั้นเรียน",
+                    dropdownParent: $('#openModalAddSubject')
+                  });
+                })
+                $('#btnAddStudentRemove').css('display', 'none')
+                $('#cm_openModalAddSubject').trigger('click')
+                $('#indicator-box').css('display', 'none')
+                render()
+                $('#cm_openModalAddSubject').trigger('click')
+                clearlist()
+
+              }
+            }, error: (err) => {
+              console.log(err)
+            }
+          })
+        }
+      }
+    }
+
+
+
+    function detailInfo(i) {
+      openmd('#openModalInfoStudent')
+      const data = resultrender[i]
+      $('#info_gname').val(data.title)
+      $('#info_sname').val(data.subject_code + ' ' + data.subject_title + ' ม.' + data.subject_class)
+
+      var indicator = JSON.parse(data.indicators)
+      var html = '';
+      for (let i = 0; i < indicator.length; i++) {
+        const element = indicator[i];
+        html += `<a class="list-group-item list-group-item-action " aria-current="true">${element}</a>`
+      }
+      $('#info-indicator-list').html(html)
+
+      var activity = JSON.parse(data.activity)
+      html = '';
+      for (let i = 0; i < activity.length; i++) {
+        const element = activity[i];
+        html += `<div class="mb-3">
+                      <div class="d-flex mb-2 justify-content-between align-items-center">
+                        <b>นักเรียนคนที่ ${i + 1}</b>
+                        <button disabled class="btn-sm btn-primary ms-1">ผลการเรียนเดิม ${element.grade_old}</button>
+                        <button disabled class="btn-sm btn-primary ms-1"  style="margin-left: 5px;">  คะแนนเดิม ${element.score_old || ""}</button>
+                      </div>
+                      <div class="d-flex">
+                        <input value="${element.tname}${element.fname} ${element.lname} | ม.${element.class}/${element.room}" disabled type="text" placeholder="นักเรียนคนที่ ${i + 1}" class="form-add form-control">  
+                      </div>
+                    </div>`
+      }
+      $('#info-name-list').html(html)
+
+    }
+
+    var strindicator = []
+    var editstudentlist = 0;
+    function fetchindicator(rid, action) {
+      var pid = '';
+      if (rid) {
+        for (let i = 0; i < rid.length; i++) {
+          const element = rid[i];
+          pid += element + ',';
+        }
+      }
+
+      strindicator = []
+      var id;
+      var renderbox = '';
+      var mainbox = '';
+      if (rid) {
+        id = String($('#edit_sname').val())
+        renderbox = 'edit-indicator-list'
+        mainbox = 'edit-indicator-box'
+        console.log(1)
+      }
+      else if (action == 'edit') {
+        id = String($('#edit_sname').val()).split('|')[1]
+        renderbox = 'edit-indicator-list'
+        mainbox = 'edit-indicator-box'
+        console.log(2)
+      }
+      else {
+        id = String($('#add_sname').val()).split('|')[1]
+        renderbox = 'indicator-list'
+        mainbox = 'indicator-box'
+        console.log(3)
+      }
+
+      gage = pid;
+      var html = '';
+      for (let i = 0; i < grouplist.length; i++) {
+        const data = grouplist[i];
+        if (parseInt(data.subject_id) == parseInt(id)) {
+          var list = JSON.parse(data.indicators);
+          $('#' + mainbox).css('display', 'block')
+          for (let k = 0; k < list.length; k++) {
+            const datb = list[k];
+
+            var active = '';
+            if (pid.includes(datb)) {
+              active = 'active';
+            }
+            html += `<a  onclick="selectGage(this, '${datb}')" id="gage${k + 1}" class="${active} list-group-item list-group-item-action" aria-current="true" style="cursor: pointer;">${datb}</a>`
+            strindicator.push(datb)
+          }
+
+          // break;
+        }
+        // break;
+      }
+      $('#' + renderbox).html(html)
+    }
+
+    var editid = 0;
+    var courseid = 0;
+    var foundactivity = false;
+    function detailEdit(i) {
+      foundactivity = false;
+      openmd('#openModalEditStudent');
+      const data = resultrender[i]
+      console.log('detailEdit', data)
+      var shtml = `<option value="${data.subject_id}">${data.subject_code} ${data.subject_title} ม.${data.subject_class}</option>`;
+      shtml += subjecthtml;
+      $('#edit_sname').html(shtml).promise().done(() => {
+        // console.log('ssssssss', `${data.id}|${data.subject_id}`)
+        // $("#edit_sname").val(`${data.id}|${data.subject_id}`)
+      })
+      $('#edit_gname').val(data.title)
+      editid = data.id;
+      courseid = data.course_id;
+
+      var indicator = JSON.parse(data.indicators)
+      fetchindicator(indicator);
+      console.log('indicator', indicator)
+
+      var activity = JSON.parse(data.activity)
+      console.log('activity', activity)
+
+      // <select class="edit-select-fullname" id="edit_stu_name${i + 1}">
+      //                   <option value="${element.id}">${element.tname}${element.fname} ${element.lname} | ม.${element.class}/${element.room}</option>  
+      //                   ${optionstudent}
+      //                 </select>
+
+      html = '';
+      for (let i = 0; i < activity.length; i++) {
+        const element = activity[i];
+        if (element.status != "wait_register") {
+          foundactivity = true;
+        }
+        zerotoheero[`${i + 1}`] = element.grade_old;
+        html += `<div class="mb-3" id="editstudent${i + 1}">
+                      <b>นักเรียนคนที่ ${i + 1}</b>
+
+                      <div class="d-flex justify-content-between mb-2 ">
+
+                        <select class="edit-select-fullname" id="edit_stu_name${i + 1}"
+  class="form-add-student form-add-student-lvl1 form-add form-control js-example-basic-single mr-2">
+  <option value="${element.id}">${element.tname}${element.fname} ${element.lname} | ม.${element.class}/${element.room}</option>  
+                        ${optionstudent}
+</select>
+<input id="edit_score_name${i + 1}" type="text" placeholder="คะแนนเดิม" value="${element.score_old}"
+  class="form-add-student form-add-student-lvl1 form-add form-control" style="margin-left: 10px;">
+</div>
+
+                    
+                      <div class="d-flex mt-2 mb-3">
+                        <button onclick="selectZeroCal(this, '${i + 1}e', ${i + 1}, '0')" id="${i + 1}e1" class="${i + 1}e btn ${element.grade_old == '0' ? 'btn-primary' : 'btn-outline-primary'}  me-1">0</button>
+                        <button onclick="selectZeroCal(this, '${i + 1}e', ${i + 1}, 'ร')" id="${i + 1}e2" class="${i + 1}e btn ${element.grade_old == 'ร' ? 'btn-primary' : 'btn-outline-primary'} me-1">ร</button>
+                        <button onclick="selectZeroCal(this, '${i + 1}e', ${i + 1}, 'มผ.')" id="${i + 1}e3" class="${i + 1}e btn ${element.grade_old == 'มผ.' ? 'btn-primary' : 'btn-outline-primary'} me-1">มผ.</button>
+                        <button onclick="selectZeroCal(this, '${i + 1}e', ${i + 1}, 'มส.')" id="${i + 1}e4" class="${i + 1}e btn ${element.grade_old == 'มส.' ? 'btn-primary' : 'btn-outline-primary'} me-1">มส.</button>
+                      </div>
+                    </div>
+                    `
+      }
+
+      if (foundactivity) {
+        $("#edit-indicator-list").append(`
+              <div onclick="cantdo()" style="width: 100%; height: 100%; cursor: pointer; position: absolute; background: rgba(0,0,0,0.3); color: #fff; display: flex; flex-direction: column; font-size: .8rem; justify-content: center; align-items: center; z-index: 999999;">
+                <p>ไม่สามารถแก้ไขข้อมูลตัวชี้วัดได้</ย>
+              </div>
+            `)
+      }
+
+      console.log('activity.length', activity.length)
+      editstudentlist = activity.length;
+      if (activity.length <= 1) {
+        $('#btnedit-delete').css('display', 'none')
+      } else {
+        $('#btnedit-delete').css('display', 'block')
+      }
+
+      $('#edit-name-list').html(html).promise().done(() => {
+        $('.edit-select-fullname').select2({
+          placeholder: "สามารถพิมพ์ค้นหาจาก ชื่อ-นามสกุล หรือ ชั้นเรียน",
+          dropdownParent: $('#openModalEditStudent')
+        });
+      })
+
+    }
+
+    function cantdo() {
+      Swal.fire({
+        icon: 'warning',
+        title: "ไม่สามารถแก้ไขข้อมูลตัวชี้วัดได้",
+        html: `
+            <p>เนื่องจากมีนักเรียนกำลังดำเนินการแก้อยู่</p>
+            <p>หากต้องการเพิ่มตัวชี้วัด กรุณาสร้างกลุ่มใหม่</p>`,
+        confirmButtonText: "ตกลง"
+      })
+    }
+
+    function deleteList(i, title) {
+      Swal.fire({
+        icon: "warning",
+        title: `คุณต้องการจะลบ\n${title} ?`,
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `ลบ`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isDenied) {
+          const rowid = resultrender[i].id
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-modify-grade-api/groub_course/delete.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+              _method: "DELETE",
+              id: parseInt(rowid)
+            }, success: (response) => {
+              console.log(response)
+              if (response.status.code == 200) {
+                render();
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                })
+              }
+              else {
+                errswal()
+              }
+            }, error: (err) => {
+              console.log(err)
+              errswal()
+            }
+          })
+        }
+      });
+
+    }
+
+    var resultrender;
+    function render() {
+      loading(true)
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-modify-grade-api/groub_course/getAll.php',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwToken
+        },
+        data: {
+          _method: "GET",
+          user_id: parseInt(localStorage.utwUserId),
+        }, success: (response) => {
+          console.log('render', response)
+          loading(false)
+          if (response.status.code == 200) {
+            resultrender = response.data;
+            var html = '';
+            for (let i = 0; i < response.data.length; i++) {
+              const data = response.data[i];
+              html += `
+                  <div class="col-sm-6 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">${data.title}</h5>
+                        <p>[${data.subject_code}] ${data.subject_title} ม.${data.subject_class}</p>
+                        <p class="card-text mb-2" style="font-size: .8rem;">${data.updated_at}</p>
+                        <div class="d-flex">
+                          <button onclick="detailInfo(${i})" class="btn btn-primary me-1">
+                            <i class="fas fa-search"></i>
+                          </button>
+                          <button onclick="detailEdit(${i})" class="btn btn-warning me-1" >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                          </button>
+                          <button onclick="deleteList(${i},'${data.title}')" class="btn btn-danger me-1" >
+                            <i class="fa-solid fa-trash-can"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`
+            }
+            if (html == "") {
+              html = `
+                    <div style="width: 100%; height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                      <img src="../../imgs/notfound.png" style="width: 30%; object-fit: contain; margin-bottom: 20px;" />
+                      <h2>ไม่พบข้อมูล</h2>
+                    </div>`;
+            }
+            $('#render-box').html(html)
+          }
+        }, error: (err) => {
+          console.log(err)
+          loading(false)
+        }
+      })
+    }
+
+    function clearlist() {
+      $('#indicator-list').html('')
+    }
+
+    function editstudentAdd() {
+      editstudentlist++;
+      zerotoheero[editstudentlist] = '';
+
+      // <select class="edit-select-fullname" id="edit_stu_name${editstudentlist}">
+      //                   ${optionstudent}
+      //                 </select>
+
+      var html = `<div class="mb-3" id="editstudent${editstudentlist}">
+                      <b>นักเรียนคนที่ ${editstudentlist}</b>
+            
+                      <div class="d-flex justify-content-between mb-2 ">
+<select class="edit-select-fullname" id="edit_stu_name${editstudentlist}"
+class="form-add-student form-add-student-lvl1 form-add form-control js-example-basic-single mr-2">
+${optionstudent}
+</select>
+<input id="edit_score_name${editstudentlist}" type="text" placeholder="คะแนนเดิม" 
+class="form-add-student form-add-student-lvl1 form-add form-control" style="margin-left: 10px;">
+</div>
+
+                      <div class="d-flex mt-2 mb-3">
+                        <button onclick="selectZeroCal(this, '${editstudentlist}e', ${editstudentlist}, '0')" id="${editstudentlist}e1" class="${editstudentlist}e btn btn-outline-primary me-1">0</button>
+                        <button onclick="selectZeroCal(this, '${editstudentlist}e', ${editstudentlist}, 'ร')" id="${editstudentlist}e2" class="${editstudentlist}e btn btn-outline-primary me-1">ร</button>
+                        <button onclick="selectZeroCal(this, '${editstudentlist}e', ${editstudentlist}, 'มผ.')" id="${editstudentlist}e3" class="${editstudentlist}e btn btn-outline-primary me-1">มผ.</button>
+                        <button onclick="selectZeroCal(this, '${editstudentlist}e', ${editstudentlist}, 'มส.')" id="${editstudentlist}e4" class="${editstudentlist}e btn btn-outline-primary me-1">มส.</button>
+                      </div>
+                    </div>
+                    `
+      $('#edit-name-list').append(html).promise().done(() => {
+        $('#edit_stu_name' + editstudentlist).select2({
+          placeholder: "สามารถพิมพ์ค้นหาจาก ชื่อ-นามสกุล หรือ ชั้นเรียน",
+          dropdownParent: $('#openModalEditStudent')
+        });
+        $('#btnedit-delete').css('display', 'block')
+      })
+    }
+
+    function editstudentDelete() {
+      $(`#editstudent${editstudentlist}`).remove()
+      delete zerotoheero[editstudentlist];
+      editstudentlist--;
+      if (editstudentlist <= 1) {
+        $('#btnedit-delete').css('display', 'none')
+      }
+    }
+
+    var zerotoheero = { '1': '' }
+    function selectZeroCal(elem, cls, index, act) {
+      $(`.${cls}`).removeClass('btn-primary').addClass('btn-outline-primary').removeClass('text-white')
+      $(`#${elem.id}`).addClass('btn-primary').addClass('text-white')
+      zerotoheero[index] = act
+    }
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>UTW</title>
+    <link rel="icon" href="../imgs/utw.gif">
+    <link rel="stylesheet" href="../global.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+    <style>
+      .list-group-item.active {
+        background-color: #20c997;
+        border-color: #198754;
+      }
+      .d-none {
+        display: none !important;
+      }
+      .d-block {
+        display: block !important;
+      }
+    </style>
+</head>
+<body>
+    
+    <div class="page">
+        <div class="fakesidebar">
+                
+        </div>
+        <div class="sidebar">
+          <div onclick="keepSidebar()" class="keepsidebar">
+            <i class="fa-solid fa-arrow-left"></i>
+          </div>
+          <div id="sidebartitle" style="display: flex; align-items: center;">
+                
+          </div>
+    
+          <div id="sidebar" class="sidebar-main">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <div style="display: flex; align-items: center;">
+                <div onclick="toggleSidebar()" class="hamburger me-3" >
+                  <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="card p-2 flex-row d-flex ">
+                  <i class="fa-solid fa-bullhorn text-danger"></i>
+                  <div class="ms-2" id="annou">
+                    <div id="annou1"></div>
+                    <div id="annou2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="boxProfile" class="content-profile">
+              
+            </div>
+          </div>
+          <div class="content-page">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2>ลงทะเบียนเรียนซ้ำนักเรียน</h2>
+              </div>
+
+              <div id="render">
+
+              </div>
+
+              <!-- <div class="d-flex justify-content-between align-items-center mb-1">
+                <h5 class="mb-0">ก22911 แนะแนว ม.2</h5>
+                <div class="btn btn-success" id="btn_add1" style="font-size: 1.2rem; display: none;">
+                  <div class="spinner-border text-light" role="status" style=" width: 1rem; height: 1rem;">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <span>สร้างภาระงาน</span>
+                </div>
+              </div>
+              <div class="card p-2">
+                <table class="w-100 table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>ลำดับ</th>
+                      <th>ชื่อ-สกุล</th>
+                      <th>ระดับชั้น</th>
+                      <th>ผลการเรียน</th>
+                      <th style="width:300px;">สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input onclick="checkTik(this, 1)" id="checkbox_compliance1"  type="checkbox" name="compliance1" value="1" style="display: none;">
+                        <label class="checkbox checkbox-success mb-1" for="checkbox_compliance1" style="width: fit-content; background: #fff;">
+                            <div class="checkbox-circle" style="margin-right: 0;">
+                                <i class="fa-solid fa-check" style="display: none;"></i>
+                            </div>
+                        </label>
+                      </td>
+                      <td>1</td>
+                      <td>ด.ช.ณัฐเกียรติ ขุนแก้ว</td>
+                      <td>ม.2/1</td>
+                      <td>ร</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center " style="color: #f39c12;">
+                            <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                            <span class="ms-2">ลงทะเบียนแล้ว</span>
+                          </div>
+                          <div class="btn_raikon1 btn-sm btn-success ms-3 " style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                            สร้างภาระงาน
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input onclick="checkTik(this, 1)" id="checkbox_compliance2" type="checkbox" name="compliance1" value="2" style="display: none;">
+                        <label class="checkbox checkbox-success mb-1" for="checkbox_compliance2" style="width: fit-content; background: #fff;">
+                            <div class="checkbox-circle" style="margin-right: 0;">
+                                <i class="fa-solid fa-check" style="display: none;"></i>
+                            </div>
+                        </label>
+                      </td>
+                      <td>2</td>
+                      <td>ด.ช.ณัฐเกียรติ ขุนแก้ว</td>
+                      <td>ม.2/1</td>
+                      <td>ร</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center " style="color: #f39c12;">
+                            <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                            <span class="ms-2">ลงทะเบียนแล้ว</span>
+                          </div>
+                          <div class="btn_raikon1 btn-sm btn-success ms-3 " style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                            สร้างภาระงาน
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        
+                      </td>
+                      <td>3</td>
+                      <td>ด.ช.หมี มีของกลาง</td>
+                      <td>ม.2/1</td>
+                      <td>ร</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center text-danger" >
+                            <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                            <span class="ms-2">รอลงทะเบียน</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <br>
+              <div class="d-flex justify-content-between align-items-center">
+                <h5>ก22912 สังคมศึกษา ม.2</h5>
+                <div class="btn btn-success" id="btn_add2" style="font-size: 1.2rem; display: none;">
+                  <div class="spinner-border text-light" role="status" style=" width: 1rem; height: 1rem;">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <span>สร้างภาระงาน</span>
+                </div>
+              </div>
+              <div class="card p-2">
+                <table class="w-100 table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>ลำดับ</th>
+                      <th>ชื่อ-สกุล</th>
+                      <th>ระดับชั้น</th>
+                      <th>ผลการเรียน</th>
+                      <th style="width:300px;">สถานะ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input onclick="checkTik(this, 2)" id="checkbox_compliance3"  type="checkbox" name="compliance2" value="3" style="display: none;">
+                        <label class="checkbox checkbox-success mb-1" for="checkbox_compliance3" style="width: fit-content; background: #fff;">
+                            <div class="checkbox-circle" style="margin-right: 0;">
+                                <i class="fa-solid fa-check" style="display: none;"></i>
+                            </div>
+                        </label>
+                      </td>
+                      <td>1</td>
+                      <td>ด.ช.ณัฐเกียรติ ขุนแก้ว</td>
+                      <td>ม.2/1</td>
+                      <td>ร</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center " style="color: #f39c12;">
+                            <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                            <span class="ms-2">ลงทะเบียนแล้ว</span>
+                          </div>
+                          <div class="btn_raikon2 btn-sm btn-success ms-3 " style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                            สร้างภาระงาน
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>2</td>
+                      <td>ด.ช.หมี มีของกลาง</td>
+                      <td>ม.2/1</td>
+                      <td>ร</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="d-flex align-items-center text-danger" >
+                            <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                            <span class="ms-2">รอลงทะเบียน</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> -->
+    
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="md_para" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">ภาระงาน</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="standalone studentgroup  align-items-center" style="display: flex;">
+                <b>ชื่อ-สกุล : </b>
+                <p id="mdpara_fullname" class="ms-2 text-success"></p>
+              </div>
+              <div class="standalone studentgroup  align-items-center" style="display: flex;">
+                <b>ชั้น : </b>
+                <p id="mdpara_classroom" class="ms-2 text-success"></p>
+              </div>
+              <div id="render_multiple" class="multiple studentgroup mb-3">
+                <!-- <div class="card p-2 mb-1">
+                  <div class="d-flex align-items-center">
+                    <b>ชื่อ-สกุล : </b>
+                    <p id="mdpara_fullname" class="ms-2 text-success"></p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <b>ชั้น : </b>
+                    <p id="mdpara_classroom" class="ms-2 text-success"></p>
+                  </div>
+                </div> -->
+              </div>
+              <div class="d-flex align-items-center">
+                <b>รายวิชา : </b>
+                <p id="mdpara_subject" class="ms-2 text-success">แนะแนว</p>
+              </div>
+              <div class="d-flex align-items-center">
+                <b>ผลการเรียนเดิม : </b>
+                <p id="mdpara_gradeold" class="ms-2 text-success">ร</p>
+              </div>
+              
+              <br>
+              <div>
+                <div class="d-flex ">
+                  <b>น้ำหนักหน่วยกิต</b>
+                </div>
+                <select class="form-control" id="txt_unit" onchange="checkUnit(this)">
+                  <option value="">--- เลือก ---</option>
+                  <option value="0.5">0.5</option>
+                  <option value="1.0">1.0</option>
+                  <option value="1.5">1.5</option>
+                  <option value="2.0">2.0</option>
+                  <option value="2.5">2.5</option>
+                  <option value="0.5">ไม่มีหน่วยกิต</option>
+                </select>
+              </div>
+              <br class="box_unit" style="display: none;">
+              <div class="box_unit" style="display: none;">
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                  <b>รายการภาระงาน</b>
+                  <div class="d-flex">
+                    <div onclick="addordel('-')" id="btn_txtapp_del" style="width:30px; cursor: pointer;" class="text-center btn-sm btn-danger me-1">-</div>
+                    <div onclick="addordel('+')" style="width:30px; cursor: pointer;" class="text-center btn-sm btn-success">+</div>
+                  </div>
+                </div>
+                <input id="txt_unitfix" disabled type="text" class="box_unit form-control mb-1">
+                
+                <div id="render_txt">
+                  <input type="text" class="form-control mb-1" placeholder="กรอกข้อความ">
+                </div>
+              </div>
+              <br>
+              <div class="d-none justify-content-between mb-3">
+                <div style="width: 49%;">
+                  <b>วันที่เริ่มเรียน</b>
+                  <input id="std" disabled autocomplete="off" type="text" class="form-control" placeholder="วว/ดด/ปปปป">
+                </div>
+                <div style="width: 49%;">
+                  <b>วันที่สิ้นสุดการเรียน</b>
+                  <input id="expt" autocomplete="off" type="text" class="form-control" placeholder="วว/ดด/ปปปป">
+                </div>
+              </div>
+              <span class="text-danger d-none">* หมายเหตุ "วันที่เริ่มต้น" นับจากวันที่นักเรียนลงทะเบียน "วันที่สิ้นสุด" ให้นับได้วันละไม่เกิน 2 ชม. ไม่รวมเสาร์-อาทิตย์และวันหยุดนักขัตฤกษ์</span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary close_md" data-bs-dismiss="modal">ยกเลิก</button>
+              <button onclick="submitForm()" type="button" class="btn btn-success">บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <script src="../global.js"></script>
+      <script>
+        var data;
+        var extra_name;
+        $(document).ready(() => {
+          set_cal($("#std"), new_date);
+          set_cal($("#expt"), new_date);
+          render()
+          openclassroom();
+          annou()
+        })
+        function annou() {
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-cors-api/settings/get-one.php',
+            data: {
+                _method: "GET",
+                key_address: 'grade_announce'
+            }, success: response => {
+                console.log('good', response)
+                if (response.status.code == 200) {
+                  $("#annou1").text(response.data.in_data.repeat);
+                }
+            }, error: err => {
+                console.log('bad', err)
+            }
+          })
+        }
+        function openclassroom() {
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-cors-api/settings/get-one.php',
+            data: {
+                _method: "GET",
+                key_address: 'repeat_grade_class_active'
+            }, success: response => {
+                console.log('good', response)
+                if (response.status.code == 200) {
+                  var html = "";
+                  for (let i = 0; i < response.data.in_data.length; i++) {
+                    const element = response.data.in_data[i];
+                    html += "ม." + element + ", "
+                  }
+                  html = String(html).substring(0, html.length - 2)
+                  $("#annou2").text("ใช้งานระดับชั้น " + html);
+                }
+            }, error: err => {
+                console.log('bad', err)
+            }
+          })
+        }
+
+        function render() {
+          loading(true);
+          var settings = {
+              "url": endpoint + "/utw-repeat-api/teacher/list-register/" + localStorage.utwUserId,
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                  "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+              },
+          };
+          $.ajax(settings).done(function (response) {
+            console.log(">>>", response)
+            if(response.status.code == 200 || response.status.code == 201) {
+              data = response.data;
+              var html = "";
+              var lastsubject = "";
+              for (let i = 0, j = 1, r = 1; i < response.data.length; i++, j++) {
+                const element = response.data[i];
+                if(lastsubject != element.subject_code) {
+                  console.log('lastsubject', lastsubject)
+                  r++;
+                  if(i != 0) {
+                    html += `
+                    </tbody>
+                    </table>
+                    </div>
+                    `;
+                  }
+
+                  j = 1;
+                  lastsubject = element.subject_code;
+                  html += `
+                  <br>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h5 class="mb-0">${element.subject_code} ${element.subject_title} ม.${element.subject_class}</h5>
+                    <div onclick="md_para(${i}, '${element.start_date}', '${element.end_date}', ${element.id}, 'multiple', 'compliance${r}')" data-bs-toggle="modal" data-bs-target="#md_para" class="btn btn-success" id="btn_add${r}" style="font-size: 1.2rem; display: none;">
+                      <div class="spinner-border text-light" role="status" style=" width: 1rem; height: 1rem;">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      <span>สร้างภาระงาน</span>
+                    </div>
+                  </div>
+                  
+                  <div class="card p-2">
+                    <table class="w-100 table table-hover table-striped">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>ลำดับ</th>
+                          <th>ชื่อ-สกุล</th>
+                          <th>ปีการศึกษา</th>
+                          <th>ระดับชั้น</th>
+                          <th>ผลการเรียน</th>
+                          <th style="width:300px;">สถานะ</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                  `;
+                }
+
+                var status = "";
+                var btn_register = "";
+                var inp_check = "";
+                if(element.status == 'register') {
+                  inp_check = `
+                  <input onclick="checkTik(this, ${r})" id="checkbox_compliance${element.id}"  type="checkbox" name="compliance${r}" value="${element.student.tname}${element.student.fname} ${element.student.lname}|${element.student.class}/${element.student.room}|${element.id}" style="display: none;">
+                  <label class="checkbox checkbox-success mb-1" for="checkbox_compliance${element.id}" style="width: fit-content; background: #fff;">
+                      <div class="checkbox-circle" style="margin-right: 0;">
+                          <i class="fa-solid fa-check" style="display: none;"></i>
+                      </div>
+                  </label>
+                  `;
+                  btn_register = `
+                  <div class="btn_raikon${r} btn-sm btn-success ms-3 "
+                        onclick="md_para(${i}, '${element.start_date}', '${element.end_date}', ${element.id})"
+                        style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                        สร้างภาระงาน
+                  </div>`;
+                  status = `<span class="ms-2">ลงทะเบียนแล้ว</span>`;
+                } 
+                else if(element.status == 'wait_register') {
+                  inp_check = `<div style="width: 50px;"></div>`
+                  status = `<span class="ms-2">รอลงทะเบียน</span>`;
+                }
+                else {
+                  status = `<span class="ms-2">รอลงทะเบียน</span>`;
+                }
+
+               
+
+                html += `
+                <tr>
+                  <td>
+                    ${inp_check}
+                  </td>
+                  <td>${j}</td>
+                  <td>${element.student.tname}${element.student.fname} ${element.student.lname}</td>
+                  <td>${element.term_at}/${element.year_at}</td>
+                  <td>ม.${element.student.class}/${element.student.room}</td>
+                  <td>${element.grade_old}</td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="d-flex align-items-center " style="color: #f39c12;">
+                        <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                        ${status}
+                      </div>
+                      ${btn_register}
+                    </div>
+                  </td>
+                </tr>`;
+              }
+              $("#render").html(html)
+              loading(false);
+            }
+          })
+        }
+
+        var end_date;
+        function checkUnit(elem) {
+          var val = $(`#${elem.id}`).val();
+          
+          if(val == "") {
+            $(".box_unit").css('display','none')
+          } else {
+            var a = (parseFloat(val)*20)/0.5;
+            var b = (80 / 100) * a;
+            $("#txt_unitfix").val(`นักเรียนต้องเรียนอย่างน้อย ${b}/${a} ชั่วโมง`)
+            $(".box_unit").css('display','block')
+
+            const personal_day = ((parseFloat(val)*20) / 0.5) / 2;
+            const rest_day = (personal_day / 5) * 2;
+            const add_day = personal_day + rest_day;
+            end_date = new Date();
+            end_date.setDate(end_date.getDate() + add_day);
+
+            var a = getDateMil(end_date).split(" ")[0];
+            var b = dateentoth(a)
+            $("#expt").val(b)
+          }
+
+          
+        }
+
+        function checkTik(elem, n) {
+          var val = $(`input[name="compliance${n}"]`).val()
+          if($(`input[name="compliance${n}"]`).is(":checked")) {
+            $(`#btn_add${n}`).css("display","block")
+            $(`.btn_raikon${n}`).css('display','none')
+          } else {
+            $(`#btn_add${n}`).css("display","none")
+            $(`.btn_raikon${n}`).css('display','block')
+          }
+        }
+
+        var extra_exp = "";
+        var extra_md = "";
+        var extra_info = {};
+        function md_para(i, std, exp, ids, from, name) {
+          const info = data[i];
+          $("#mdpara_fullname").text(`${info.student.tname}${info.student.fname} ${info.student.lname}`)
+          $("#mdpara_classroom").text(`ม.${info.student.class}/${info.student.room}`)
+          $("#mdpara_subject").text(`${info.subject_code} ${info.subject_title}`)
+          $("#mdpara_gradeold").text(`${info.grade_old}`)
+
+          $("#expt").removeClass('is-invalid')
+          $("#txt_unit").val("")
+          $(".box_unit").css('display','none')
+
+          $(".studentgroup").css('display','none')
+
+          if(from && from == "multiple") {
+            extra_md = 'multiple';
+            $(".multiple").css('display','block')
+            $(".standalone").css('display','none')
+            extra_name = name;
+
+            var val = $(`input[type="checkbox"][name="${name}"]:checked`);
+            var html = "";
+            for (let z = 0; z < val.length; z++) {
+              var a = $(`#${val[z].id}`).val().split("|");
+              var fullname = a[0];
+              var classroom = `ม.${a[1]}`;
+              html += `
+              <div class="card p-2 mb-1">
+                  <div class="d-flex align-items-center">
+                    <b>ชื่อ-สกุล : </b>
+                    <p id="mdpara_fullname" class="ms-2 text-success">${fullname}</p>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <b>ชั้น : </b>
+                    <p id="mdpara_classroom" class="ms-2 text-success">${classroom}</p>
+                  </div>
+              </div>`;
+            }
+            $("#render_multiple").html(html)
+          }
+          else {
+            $(".standalone").css('display','flex')
+            $(".multiple").css('display','none')
+            extra_md = "single";
+            extra_info.ids = [];
+            extra_info.ids = [parseInt(ids)];
+          }
+
+          txtapp = 1;
+          $("#render_txt").html(``)
+          addordel("+");
+          
+          $("#std").val( dateentoth(getDateMil(new Date(std).getTime()).split(" ")[0]) )
+          // $("#expt").val( dateentoth(getDateMil(new Date(exp).getTime()).split(" ")[0]) )
+          $("#expt").val("")
+          extra_exp = dateentoth(getDateMil(new Date(exp).getTime()).split(" ")[0]);
+        } 
+
+        var txtapp = 1;
+        function addordel(syn) {
+          console.log('txtapp',txtapp)
+
+          if(syn == "+") {
+            $("#render_txt").append(`<input id="txtapp${txtapp}" type="text" class="form-control mb-1" placeholder="กรอกข้อความ">`)
+            txtapp++;
+            $("#btn_txtapp_del").css('display','block')
+          }
+          else{
+            txtapp--;
+            $(`#txtapp${txtapp}`).remove()
+            
+          }
+
+          if(txtapp <= 2) {
+            $("#btn_txtapp_del").css('display','none')
+          }
+        }
+
+        function submitForm() {
+          $("#expt").removeClass('is-invalid')
+          if($("#expt").val().length <= 0) {
+            $("#expt").addClass('is-invalid').focus()
+          }
+          else if(extra_md && extra_md == "single" || extra_md == "multiple") {
+            var pass = true;
+            var round = txtapp - 1;
+            var works = [$("#txt_unitfix").val()];
+            for (let i = 0; i < round; i++) {
+              $(`#txtapp${i+1}`).removeClass('is-invalid')
+              console.log(`#txtapp${i+1}`)
+              if($(`#txtapp${i+1}`)) {
+                if($(`#txtapp${i+1}`).val().length <= 0) {
+                  $(`#txtapp${i+1}`).addClass('is-invalid').focus()
+                  pass = false;
+                  break;
+                } else {
+                  works.push($(`#txtapp${i+1}`).val())
+                }
+              }
+            }
+
+            if(extra_md == "multiple") {
+              extra_info.ids = [];
+              var val = $(`input[type="checkbox"][name="${extra_name}"]:checked`);
+              for (let z = 0; z < val.length; z++) {
+                var a = $(`#${val[z].id}`).val().split("|");
+                extra_info.ids.push(parseInt(a[2]));
+              }
+            }
+
+            if(pass) {
+              loading(true)
+              var settings = {
+                  "url": endpoint + "/utw-repeat-api/teacher/register-student",
+                  "method": "POST",
+                  "timeout": 0,
+                  "headers": {
+                      "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+                  },
+                  "data": {
+                    "ids": JSON.stringify(extra_info.ids),
+                    "works": JSON.stringify(works),
+                    //"end_date": datethtoen($("#expt").val()) + " 00:00:00",
+                  },
+              };
+              $.ajax(settings).done(function (response) {
+                console.log(">>>", response)
+                if(response.status.code == 200 || response.status.code == 201) {
+                  loading(false)
+                  Swal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    confirmButtonText: "ยืนยัน",
+                    timer: 2000
+                  }).then(() => {
+                    $(".close_md").trigger('click')
+                    render()
+
+                  })
+                }
+                else {
+                  loading(false)
+                }
+              });
+            }
+          }
+        }
+      </script>
+ 
+</body>
+</html>

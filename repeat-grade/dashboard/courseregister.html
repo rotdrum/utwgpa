@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTW</title>
+    <link rel="icon" href="../imgs/utw.gif">
+    <link rel="stylesheet" href="../global.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    
+    <div class="page">
+        <div class="fakesidebar">
+              
+        </div>
+        <div class="sidebar">
+          <div onclick="keepSidebar()" class="keepsidebar">
+            <i class="fa-solid fa-arrow-left"></i>
+          </div>
+          <div id="sidebartitle" style="display: flex; align-items: center;">
+               
+          </div>
+    
+          <div id="sidebar" class="sidebar-main">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <div style="display: flex; align-items: center;">
+                <div onclick="toggleSidebar()" class="hamburger me-3" >
+                  <i class="fa-solid fa-bars"></i>
+                </div>
+                <input type="text" placeholder="ค้นหา" class="form-control">
+              </div>
+            </div>
+            <div id="boxProfile" class="content-profile">
+              
+            </div>
+          </div>
+          <div class="content-page">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>รายวิชา รายการภาระงาน</h2>
+                <div class="btn btn-success" onclick="openmd('#openModalAddSubject')">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>สร้างภาระงาน</span>
+                </div>
+            </div>
+
+            <div id="render-box" class="row">
+              <!-- <div class="col-sm-6 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <div style="display: flex; align-items: center;">
+                        <button class="btn btn-primary me-1" data-bs-toggle="modal" data-bs-target="#openModalInfoSubject">
+                            <i class="fas fa-search" style="font-size: .8rem;"></i>
+                        </button>
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#openModalEditSubject">
+                            <i class="fas fa-edit" style="font-size: .8rem;"></i>
+                        </button>
+                        <button class="btn btn-danger " style="margin-left: 5px;">
+                            <i class="fas fa-trash" style="font-size: .8rem;"></i>
+                        </button>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
+      <!-- <div id="openModalInfoSubject" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">ภาระงานรายวิชานี้</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="box-modal-info" class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalInfoSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div id="openModalAddSubject" class="modal" style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+        <div onclick="close_modal()"  style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+        <div class="card" style="position: relative; display: flex;  flex-direction: column; width: 50%; max-width: 90%; max-height: 90vh; overflow: scroll; border-radius: 10px; background: #fff; z-index: 999999; padding: 20px;">
+          <div onclick="close_modal()" style="cursor: pointer; position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+            <i class="fas fa-times"></i>
+          </div>
+      
+          <h4 class="modal-title">เพิ่มภาระงาน</h4>
+          <hr>
+          <div class="mb-3 txt-form">
+            <span>รายวิชา</span>
+            <select id="sel_subject" class="form-control">
+              <option value="">เลือก</option>
+            </select>
+          </div>
+          <div id="boxGage">
+            <div id="gage1" class="mb-3 txt-form">
+              <span>ภาระงานที่ 1</span>
+              <input type="text" class="form-control" placeholder="ภาระงานที่ 1">
+            </div>
+          </div>
+          <div class="d-flex">
+            <button onclick="addWork()" class="btn btn-success">
+              เพิ่มภาระงาน
+            </button>
+            <button onclick="removeWork()" id="btnAddGageRemove" class="btn btn-danger ms-1" style="display: none;">
+              ลบภาระงานล่าสุด
+            </button>
+          </div>
+          <br>
+          
+          <div class="modal-footer p-0">
+            <button id="cm_openModalAddSubject" onclick="close_modal()" type="button" class="btn btn-secondary" >ยกเลิก</button>
+            <button onclick="saveWork()" type="button" class="btn btn-primary">บันทึก</button>
+          </div>
+      
+        </div>
+      </div>
+
+      <!-- <div id="openModalAddSubject" class="modal  fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">เพิ่มภาระงาน</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3 txt-form">
+                <span>รายวิชา</span>
+                <select id="sel_subject" class="form-control">
+                  <option value="">เลือก</option>
+                </select>
+              </div>
+              <div id="boxGage">
+                <div id="gage1" class="mb-3 txt-form">
+                  <span>ภาระงานที่ 1</span>
+                  <input type="text" class="form-control" placeholder="ภาระงานที่ 1">
+                </div>
+              </div>
+              <div class="d-flex">
+                <button onclick="addWork()" class="btn btn-success">
+                  เพิ่มภาระงาน
+                </button>
+                <button onclick="removeWork()" id="btnAddGageRemove" class="btn btn-danger ms-1" style="display: none;">
+                  ลบภาระงานล่าสุด
+                </button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalAddSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <button onclick="saveWork()" type="button" class="btn btn-primary">บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div id="openModalEditSubject" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">แก้ไขภาระงาน</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <span>รายวิชา</span>
+                <input id="txtedit_id" type="hidden">
+                <select id="txtedit_subject" class="form-edit form-control">
+                  <option value="">เลือก</option>
+                </select>
+              </div>
+              <span class="mb-3">รายการภาระงาน</span>
+              <div id="edit-box">
+                
+              </div>
+              <div>
+                <button onclick="addlistonedit()" class="btn btn-success">เพิ่มรายการ</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalEditSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <button onclick="saveEditWork()" type="button" class="btn btn-primary">บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    <div id="openModalInfoSubject" class="modal" style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+      <div onclick="close_modal()"  style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+      <div class="card" style="position: relative; display: flex;  flex-direction: column; width: 50%; max-width: 90%; max-height: 90vh; overflow: scroll; border-radius: 10px; background: #fff; z-index: 999999; padding: 20px;">
+        <div onclick="close_modal()" style="cursor: pointer; position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+          <i class="fas fa-times"></i>
+        </div>
+    
+        <h4>ภาระงานรายวิชานี้</h4>
+        <hr>
+        <div id="box-modal-info" class="modal-body p-0">
+          <!-- <div class="mb-3">
+            <b>ลำดับที่ 1 :</b>
+            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem labore est illo earum? Id vel quibusdam facere in accusantium obcaecati!</span>
+          </div> -->
+        </div>
+        <div class="modal-footer p-0">
+          <button  onclick="close_modal()" id="cm_openModalInfoSubject" type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">ปิด</button>
+        </div>
+    
+      </div>
+    </div>
+
+    <div id="openModalEditSubject" class="modal" style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+      <div onclick="close_modal()"  style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+      <div class="card" style="position: relative; display: flex;  flex-direction: column; width: 50%;  max-width: 90%; max-height: 90vh; overflow: scroll; border-radius: 10px; background: #fff; z-index: 100; padding: 20px;">
+        <div onclick="close_modal()" style="cursor: pointer; position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+          <i class="fas fa-times"></i>
+        </div>
+    
+        <h4>แก้ไขภาระงาน</h4>
+        <hr>
+        <div class="mb-3">
+          <span>รายวิชา</span>
+          <input id="txtedit_id" type="hidden">
+          <select id="txtedit_subject" class="form-edit form-control">
+            <option value="">เลือก</option>
+          </select>
+        </div>
+        <span class="mb-3">รายการภาระงาน</span>
+        <div id="edit-box">
+          
+        </div>
+        <div>
+          <button onclick="addlistonedit()" class="btn btn-success">เพิ่มรายการ</button>
+        </div>
+        <div class="modal-footer p-0">
+          <button  onclick="close_modal()" id="cm_openModalEditSubject" type="button" class="btn btn-secondary" >ยกเลิก</button>
+          <button onclick="saveEditWork()" type="button" class="btn btn-primary">บันทึก</button>
+        </div>
+    
+      </div>
+    </div>
+
+    <script src="../global.js"></script>
+      <script>
+
+
+        $(document).ready(() => {
+          render();
+
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-cors-api/subject/show.php',
+            // url: '../../utw-cors-api/subject/show.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+                _method: 'GET',
+                department_id: localStorage.utwDepartment
+            }, success: (response) => {
+                console.log('good', response)
+                if(response.status.code == 200) {
+                    var html = '<option value="">เลือก</option>';
+                    for (let i = 0; i < response.data.length; i++) {
+                        const data = response.data[i];
+                        html += `<option value="${data.id}|${data.name}|${data.subject_code}|${data.class}">${data.subject_code} ${data.name} ม.${data.class}</option>`
+                    }
+                    $('#sel_subject').html(html)
+                    $('#txtedit_subject').html(html)
+                }
+            }, error: (err) => {
+                console.log('bad', err)
+            }
+          })
+        })
+
+        function render() {
+          $.ajax({
+            type: 'post',
+            url: endpoint + '/utw-modify-grade-api/course/getAll.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+                _method: 'GET',
+                user_id: parseInt(localStorage.utwUserId)
+            }, success: (response) => {
+                console.log('good 2', response)
+                if(response.status.code == 200) {
+                  var html = '';
+                  for (let i = 0; i < response.data.length; i++) {
+                    const data = response.data[i];
+                    var subject = JSON.parse(data.indicators);
+                    var descrip = '';
+                    for (let k = 0; k < subject.length; k++) {
+                      const dataX = subject[k];
+                      if(k == (subject.length-1)) descrip += dataX ;
+                      else descrip += dataX + ', ';
+                    }
+                    
+                    var btn_delete = '';
+                    if(!data.disable_delete) {
+                      btn_delete = `
+                            <button onclick="listremove(${data.id}, '${data.subject_id}|${data.subject_title}|${data.subject_code}|${data.subject_class}')" class="btn btn-danger " style="margin-left: 5px;">
+                                  <i class="fas fa-trash" style="font-size: .8rem;"></i>
+                              </button>`
+                    }
+                    descrip = descrip.length > 140 ? descrip.substring(0,140) + "..." : descrip;
+                    html += `
+                    <div class="col-sm-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">${data.subject_code} ${data.subject_title} ม.${data.subject_class}</h5>
+                          <p class="card-text mb-2">${descrip}</p>
+                          <div style="display: flex; align-items: center;">
+                              <button onclick="listinfo('${subject}'); openmd('#openModalInfoSubject');" class="btn btn-primary me-1" >
+                                  <i class="fas fa-search" style="font-size: .8rem;"></i>
+                              </button>
+                              <button onclick="listedit(${data.id}, '${data.subject_id}|${data.subject_title}|${data.subject_code}|${data.subject_class}', '${subject}'); openmd('#openModalEditSubject');" class="btn btn-warning">
+                                  <i class="fas fa-edit" style="font-size: .8rem;"></i>
+                              </button>
+                              ${btn_delete}
+                          </div>
+                        </div>
+                      </div>
+                    </div>`;
+                  }
+                  if(html == "") {
+                    html = `
+                    <div style="width: 100%; height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                      <img src="../../imgs/notfound.png" style="width: 30%; object-fit: contain; margin-bottom: 20px;" />
+                      <h2>ไม่พบข้อมูล</h2>
+                    </div>`;
+                  }
+                  $('#render-box').html(html)
+                }
+                else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'getAll \nมีบางอย่างผิดพลาด'
+                  })
+                }
+            }, error: (err) => {
+                console.log('bad', err)
+            }
+          })
+        }
+
+        var numedit = 0;
+        function listedit(id, title, list) {
+          numedit = 0;
+          console.log('title',title);
+          $('#txtedit_id').val(id)
+          $('#txtedit_subject').val(title)
+          list = list.split(',')
+          var html = '';
+          for (let i = 0; i < list.length; i++) {
+            numedit++;
+            html += `<div id="editlist${i+1}" class=" mb-2" style="position: relative;">
+                        <i onclick="removelist(${i+1})" class="text-danger fas fa-trash" style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
+                        <input id="edittitle_gage${i+1}" type="text" value="${list[i]}" class="form-edit form-control" placeholder="ภาระงาน">
+                    </div>`
+          }
+          $('#edit-box').html(html)
+        }
+
+        function removelist(i) {
+          $('#editlist'+i).remove()
+        }
+
+        function addlistonedit() {
+          numedit++;
+          $('#edit-box').append(`
+            <div id="editlist${numedit}" class=" mb-2" style="position: relative;">
+                <i onclick="removelist(${numedit})" class="text-danger fas fa-trash" style="position: absolute; top: 10px; right: 10px; cursor: pointer;"></i>
+                <input id="edittitle_gage${numedit}" type="text"  class="form-edit form-control" placeholder="ภาระงาน">
+            </div>
+          `)
+        }
+
+        function listinfo(info) {
+          info = info.split(",")
+          console.log(info)
+          var html = '';
+          for (let i = 0; i < info.length; i++) {
+            const data = info[i];
+            html += `
+            <div class="mb-3">
+                <b>ลำดับที่ ${i+1} :</b>
+                <span>${data}</span>
+            </div>
+            `
+          }
+          $('#box-modal-info').html(html)
+        }
+
+        function listremove(id, subject) {
+          Swal.fire({
+            icon: "warning",
+            title: "คุณต้องการจะลบ" +subject.split('|')[1]+"?",
+            showConfirmButton: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `ลบ`,
+            cancelButtonText: "ยกเลิก"
+          }).then((result) => {
+            if (result.isDenied) {
+              $.ajax({
+                method: 'post',
+                url: endpoint + '/utw-modify-grade-api/course/delete.php',
+                headers: {
+                  Authorization: 'Bearer ' + localStorage.utwToken
+                },
+                data: {
+                  _method: 'DELETE',
+                  id: parseInt(id),
+                }, success: (response) => {
+                  console.log(response)
+                  if(response.status.code == 200) {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'สำเร็จ',
+                      timer: 2000
+                    }).then((res) => {
+                      render();
+                    })
+                  }
+                  else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'delete\nมีบางอย่างผิดพลาด'
+                    })
+                  }
+                }, error: (err) => {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'delete\nมีบางอย่างผิดพลาด'
+                  })
+                }
+              })
+            }
+          });
+
+        }
+
+        function saveWork() {
+          var pass = true;
+          $('.txt-form input').removeClass('is-invalid')
+          $('.txt-form select').removeClass('is-invalid')
+          if($('#sel_subject').val().length <= 0) {
+            pass = false;
+            $('#sel_subject').addClass('is-invalid')
+          }
+          for (let i = 1; i < workindex; i++) {
+            console.log($('#gage'+(i)+' input').val(), '#gage'+(i)+' input')
+            if($('#gage'+i+' input').val().length <= 0) {
+              pass = false;
+              $('#gage'+i+' input').addClass('is-invalid')
+            }
+          }
+
+          console.log('pass', pass)
+          console.log('workindex11111',workindex)
+
+          if(pass) {
+            var indicators = []
+            for (let i = 1; i < workindex; i++) {
+              console.log('i',i,$('#gage'+(i)+' input').val())
+              indicators.push($('#gage'+(i)+' input').val())
+            }
+            console.log(indicators)
+            console.log('workindex2222',workindex)
+
+            $.ajax({
+              method: 'post',
+              url: endpoint + '/utw-modify-grade-api/course/create.php',
+              headers: { Authorization: `Bearer ${localStorage.utwToken}` },
+              data: {
+                _method: 'POST',
+                department_id: localStorage.utwDepartment,
+                subject_class: parseInt($('#sel_subject').val().split("|")[3]),
+                subject_code: $('#sel_subject').val().split("|")[2],
+                subject_title: $('#sel_subject').val().split("|")[1],
+                subject_id: parseInt($('#sel_subject').val().split("|")[0]),
+                user_id: parseInt(localStorage.utwUserId),
+                indicators: JSON.stringify(indicators)
+              }, success: (response) => {
+                console.log(response)
+                if(response.status.code == 200) {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'บันทึกสำเร็จ',
+                    timer: 2000
+                  }).then((res) => {
+                    clearModalAdd('clear');
+                    render();
+                  })
+                }
+                else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'ภาระงานของรายวิชาซ้ำ'
+                  })
+                }
+              }, error: (err) => {
+                console.log(err)
+                var error = JSON.parse(err.responseText)
+                if(error.status.code == 422) {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'ภาระงานของรายวิชาซ้ำ'
+                  })
+                }
+                else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'create\nมีบางอย่างผิดพลาด'
+                  })
+                }
+                
+              }
+            })
+          }
+        }
+
+        function clearModalAdd(system) {
+          $("#cm_openModalAddSubject").trigger('click')
+          var html = `<div class="mb-3">
+            <span>งานที่ 1</span>
+            <input type="text" class="form-control" placeholder="รายละเอียด">
+            </div>`;
+            $('#workarea').html(html)
+            if(system == 'clear') {
+              workindex = 2
+              $('#boxGage').html(`
+                <div id="gage1" class="mb-3 txt-form">
+                  <span>ภาระงานที่ 1</span>
+                  <input type="text" class="form-control" placeholder="ภาระงานที่ 1">
+                </div>
+              `)
+            }
+          }
+          
+        var workindex = 2;
+        function addWork() {
+          $("#btnAddGageRemove").css('display', 'block')
+          $('#boxGage').append(`<div id="gage${workindex}" class="mb-3 txt-form">
+                                  <span>ภาระงานที่ ${workindex}</span>
+                                  <input type="text" class="form-control" placeholder="ภาระงานที่ ${workindex}">
+                                </div>`)
+          workindex++;
+          console.log('workindex',workindex)
+        }
+
+        function removeWork() {
+          console.log('workindex',workindex)
+          workindex--;
+          $('#gage'+workindex).remove()
+          if(workindex <= 2) {
+            $("#btnAddGageRemove").css('display', 'none')
+          }
+        }
+
+        function saveEditWork() {
+          var pass = true;
+          $('.form-edit').removeClass('is-invalid')
+          if($('#txtedit_subject').val() == '') {
+            $('#txtedit_subject').addClass('is-invalid')
+            pass = false;
+          }
+          for (let i = 0; i < numedit; i++) {
+            console.log('#edittitle_gage'+(i+1))
+            if($('#edittitle_gage'+(i+1)).length > 0) {
+              if($('#edittitle_gage'+(i+1)).val().length <= 0) {
+                pass = false;
+                $('#edittitle_gage'+(i+1)).addClass('is-invalid')
+              }
+            }
+          }
+
+          if(pass) {
+            var indicators = [];
+            for (let i = 0; i < numedit; i++) {
+              console.log('#edittitle_gage'+(i+1))
+              if($('#edittitle_gage'+(i+1)).length > 0) {
+                indicators.push($('#edittitle_gage'+(i+1)).val())
+              }
+            }
+            $.ajax({
+              method: 'post',
+              url: endpoint + '/utw-modify-grade-api/course/update.php',
+                headers: {
+                  Authorization: 'Bearer ' + localStorage.utwToken
+                },
+                data: {
+                  _method: 'PUT',
+                  id: parseInt($('#txtedit_id').val()),
+                  subject_class: parseInt($('#txtedit_subject').val().split('|')[3]),
+                  subject_code: $('#txtedit_subject').val().split('|')[2],
+                  subject_title: $('#txtedit_subject').val().split('|')[1],
+                  subject_id: parseInt($('#txtedit_subject').val().split('|')[0]),
+                  user_id: parseInt(localStorage.utwUserId),
+                  indicators: JSON.stringify(indicators)
+                }, success: (response) => {
+                  console.log(response)
+                  if(response.status.code == 200) {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'สำเร็จ',
+                      timer: 2000
+                    }).then(() => {
+                      $('#cm_openModalEditSubject').trigger('click')
+                      render()
+                    })
+                  }
+                  else {
+
+                  }
+                }, error: (err) => {
+                  console.log(err)
+                }
+            })
+          }
+        }
+
+        
+      </script>
+</body>
+</html>

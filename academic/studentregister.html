@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานกลุ่มสาระ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+    integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
+    </div>
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page" style="height: 95vh; overflow: scroll;">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>ระบบรับสมัครนักเรียน</h2>
+        </div>
+
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า วัน/เดือน/ปี</b></h5>
+              <hr>
+              <div class="mb-3">
+                <span>ปีการศึกษา</span>
+                <input type="number" id="txt_year" class="form-txt form-control" placeholder="ปีการศึกษา">
+              </div>
+              <div class="row">
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่เปิดรับสมัคร</span>
+                  <input type="text" id="txt_datebegin" class="datepick form-txt form-control"
+                    placeholder="วันที่เปิดรับสมัคร">
+                  <input type="time" id="txt_timebegin" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่ปิดรับสมัคร</span>
+                  <input type="text" id="txt_dateend" class="datepick form-txt form-control"
+                    placeholder="วันที่ปิดรับสมัคร">
+                  <input type="time" id="txt_timeend" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่สุดของการแก้เอกสาร</span>
+                  <input type="text" id="txt_datelate" class="datepick form-txt form-control"
+                    placeholder="วันที่สุดของการแก้เอกสาร">
+                  <input type="time" id="txt_timelate" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่สอบ ม.1</span>
+                  <input type="text" id="txt_sorbm1" class="datepick form-txt form-control"
+                    placeholder="วันที่สอบ">
+                  <input type="time" id="txt_timem1" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่สอบ ม.4</span>
+                  <input type="text" id="txt_sorbm4" class="datepick form-txt form-control"
+                    placeholder="วันที่สอบ">
+                  <input type="time" id="txt_timem4" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่มอบตัว ม.1</span>
+                  <input type="text" id="txt_interview_date1" class="datepick form-txt form-control"
+                    placeholder="วันที่มอบตัว">
+                  <input type="time" id="txt_interview_time1" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>วันที่มอบตัว ม.4</span>
+                  <input type="text" id="txt_interview_date4" class="datepick form-txt form-control"
+                    placeholder="วันที่มอบตัว">
+                  <input type="time" id="txt_interview_time4" class=" form-txt form-control mt-1">
+                </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>ปุ่มแจ้งคะแนน</span>
+                  <div class="form-check form-switch">
+                    <input onclick="disableonenable()" class="form-check-input" type="checkbox" id="toggleSTD1"
+                      style="cursor: pointer;">
+                    <label class="form-check-label">ปิด-เปิด</label>
+                  </div>
+                </div>
+              </div>
+              <div class="btn btn-primary" onclick="updateSheet1()">บันทึก</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า เอกสารสำหรับผู้จบการศึกษาแล้ว</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="boxstudynow1">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อเอกสารที่ 1</label>
+                          <input type="text" id="studynow_doc1" class="form-txt form-control"
+                            placeholder="ชื่อเอกสารที่ 1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">ประเภทไฟล์</label>
+                          <div class="d-flex">
+                            <select id="studynow_type1" class="form-control">
+                              <option value="">--- เลือก ---</option>
+                              <option value="img">img</option>
+                              <option value="pdf">pdf</option>
+                              <option value="img,pdf">img,pdf</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ 1 <a href="#" id="studynow_look1"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="studynow_expfile1" onchange="send(this, 1, 1, 'now')">
+                          <input type="hidden" id="1_path1" >
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <p class="mb-2">บังคับกรอก</p>
+                          <select class="form-control" id="studynow_req1">
+                            <option value="1">บังคับ</option>
+                            <option value="0">ไม่บังคับ</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetStudynow()" class="btn btn-success">เพิ่มเอกสาร</button>
+                <button onclick="removeSheetStudynow()" id="btn_delete_studynow" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateSheet2()" class="btn btn-primary">บันทึก</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า เอกสารสำหรับผู้กำลังศึกษาอยู่</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="boxstudyend1">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อเอกสารที่ 1</label>
+                          <input type="text" id="studyend_doc1" class="form-txt form-control"
+                            placeholder="ชื่อเอกสารที่ 1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <label class="form-label">ประเภทไฟล์</label>
+                          <div class="d-flex">
+                            <select id="studyend_type1" class="form-control">
+                              <option value="">--- เลือก ---</option>
+                              <option value="img">img</option>
+                              <option value="pdf">pdf</option>
+                              <option value="img,pdf">img,pdf</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ 1 <a href="#" id="studyend_look1" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="studyend_expfile1" onchange="send(this, 2, 1, 'end')">
+                          <input type="hidden" id="2_path1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="mb-3">
+                          <p class="mb-2">บังคับกรอก</p>
+                          <select class="form-control" id="studyend_req1">
+                            <option value="1">บังคับ</option>
+                            <option value="0">ไม่บังคับ</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetStudyend()" class="btn btn-success">เพิ่มเอกสาร</button>
+                <button onclick="removeSheetStudyend()" id="btn_delete_studyend" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div class="btn btn-primary" onclick="updateSheet3()">บันทึก</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า ติดต่อผู้ดูแลระบบรับสมัครเรียน</b></h5>
+              <hr>
+              <div class="mb-3">
+                <span>คำนำหน้า</span>
+                <input type="text" id="txt_tname" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+              <div class="mb-3">
+                <span>ชื่อ</span>
+                <input type="text" id="txt_fname" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+              <div class="mb-3">
+                <span>สกุล</span>
+                <input type="text" id="txt_lname" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+              <div class="mb-3">
+                <span>อีเมล</span>
+                <input type="text" id="txt_email" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+              <div class="mb-3">
+                <span>เบอร์โทรศัพท์</span>
+                <input type="text" id="txt_phoneno" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+              <div onclick="updateSheet4()" class="btn btn-primary" disabled>บันทึก</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า วิดีโอ Youtube แนะนำระบบ</b></h5>
+              <hr>
+              <div class="mb-3">
+                <span>ตั้งต่า PDPA</span>
+                <input type="text" id="txt_pdpa" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+              <div class="mb-3">
+                <span>ลิงค์</span>
+                <input type="text" id="txt_iframe" class="form-txt form-control" placeholder="ข้อความ">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <div id="btn_save" onclick="updateSheet5()" class="btn btn-primary" disabled>บันทึก</div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่าตารางสอบ ม.1</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="boxexamnow1">
+                    <div class="row">
+                      <div class="col-12 col-sm-4">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อวิชา 1</label>
+                          <input type="text" id="exam_title1" class="form-txt form-control"
+                            placeholder="ชื่อวิชา 1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">เวลาเริ่มต้น 1</label>
+                          <input type="time" id="exam_start_time1" class=" form-txt form-control mt-1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">เวลาสิ้นสุด 1</label>
+                          <input type="time" id="exam_end_time1" class=" form-txt form-control mt-1">
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetExamnow()" class="btn btn-success">เพิ่มรายการ</button>
+                <button onclick="removeSheetExamnow()" id="btn_delete_examnow" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateSheetExam1()" class="btn btn-primary">บันทึก</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่าตารางสอบ ม.4</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="boxdxamnow1">
+                    <div class="row">
+                      <div class="col-12 col-sm-4">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อวิชา 1</label>
+                          <input type="text" id="dxam_title1" class="form-txt form-control"
+                            placeholder="ชื่อวิชา 1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">เวลาเริ่มต้น 1</label>
+                          <input type="time" id="dxam_start_time1" class=" form-txt form-control mt-1">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-4">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">เวลาสิ้นสุด 1</label>
+                          <input type="time" id="dxam_end_time1" class=" form-txt form-control mt-1">
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetDxamnow()" class="btn btn-success">เพิ่มรายการ</button>
+                <button onclick="removeSheetDxamnow()" id="btn_delete_dxamnow" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateSheetDxam1()" class="btn btn-primary">บันทึก</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า เอกสารเตรียมเข้าสอบ ม.1</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="r_boxstudynow1">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อเอกสารที่ 1</label>
+                          <input type="text" id="r_studynow_doc1" class="form-txt form-control"
+                            placeholder="ชื่อเอกสารที่ 1">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ 1 <a href="#" id="r_studynow_look1"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="r_studynow_expfile1" onchange="sendReady(this, 1, 1, 'now')">
+                          <input type="hidden" id="r_1_path1" >
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetRaedynow()" class="btn btn-success">เพิ่มเอกสาร</button>
+                <button onclick="removeSheetStudyReady()" id="btn_delete_readynow" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateReady()" class="btn btn-primary">บันทึก</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า เอกสารเตรียมเข้าสอบ ม.4</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="z_boxstudynow1">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อเอกสารที่ 1</label>
+                          <input type="text" id="z_studynow_doc1" class="form-txt form-control"
+                            placeholder="ชื่อเอกสารที่ 1">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ 1 <a href="#" id="z_studynow_look1"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="z_studynow_expfile1" onchange="sendZeady(this, 1, 1, 'now')">
+                          <input type="hidden" id="z_1_path1" >
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetZaedynow()" class="btn btn-success">เพิ่มเอกสาร</button>
+                <button onclick="removeSheetStudyZeady()" id="btn_delete_zeadynow" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateZeady()" class="btn btn-primary">บันทึก</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <br>
+          <div class="card p-3">
+            <div class="row">
+              <div class="col-12 col-sm-12">
+                <h5 class="text-primary"><b>ตั้งค่า เอกสารแจ้งคะแนน ม.1 กับ ม.4</b></h5>
+                <hr>
+                <div>
+                  <section>
+                    <main id="boxdocexam">
+                      <div class="row">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสาร ม.1 <a href="#" id="d_point_exam_m1"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="point_exam_m1" onchange="sendPointExam(this, 1, 1, 'now')">
+                          <input type="hidden" id="h_point_exam_m1" >
+                        </div>
+                      </div>        
+                    </main>
+                  </section>
+                  <section>
+                    <main id="boxdocexam">
+                      <div class="row">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสาร ม.4 <a href="#" id="d_point_exam_m4"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="point_exam_m4" onchange="sendPointExam(this, 1, 4, 'now')">
+                          <input type="hidden" id="h_point_exam_m4" >
+                        </div>
+                      </div>        
+                    </main>
+                  </section>
+                  <div onclick="updatPointExam()"  class="btn btn-primary">บันทึก</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า เอกสารมอบตัว ม.1</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="r_boxinterview1">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อเอกสารที่ 1</label>
+                          <input type="text" id="r_interview_doc1" class="form-txt form-control"
+                            placeholder="ชื่อเอกสารที่ 1">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ 1 <a href="#" id="r_interview_look1"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="r_interview_expfile1" onchange="sendReady(this, 1, 1, 'now')">
+                          <input type="hidden" id="r_interview_path1" >
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetInterview1()" class="btn btn-success">เพิ่มเอกสาร</button>
+                <button onclick="removeSheetInterview1()" id="btn_delete_readynow" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateInterview1()" class="btn btn-primary">บันทึก</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <br>
+        <div class="card p-3">
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <h5 class="text-primary"><b>ตั้งค่า เอกสารมอบตัว ม.4</b></h5>
+              <hr>
+              <div>
+                <section>
+                  <main id="z_boxinterview1">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ชื่อเอกสารที่ 1</label>
+                          <input type="text" id="z_interview_doc1" class="form-txt form-control"
+                            placeholder="ชื่อเอกสารที่ 1">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ 1 <a href="#" id="z_interview_look1"
+                              target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                          <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="z_interview_expfile1" onchange="sendZeady(this, 1, 1, 'now')">
+                          <input type="hidden" id="z_interview_path1" >
+                        </div>
+                      </div>
+                    </div>
+                  </main>
+                </section>
+                <button onclick="addSheetInterview4()" class="btn btn-success">เพิ่มเอกสาร</button>
+                <button onclick="removeSheetInterview4()" id="btn_delete_interview4" class="btn btn-danger"
+                  style="display: none;">ลบเอกสารล่าสุด</button>
+                <div onclick="updateInterview4()" class="btn btn-primary">บันทึก</div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="./global.js"></script>
+  <script>
+    function disableonenable() {
+      $('#btn_save').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-primary')
+    }
+
+    $(document).ready(() => {
+      //good 1
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_date'
+        }, success: response => {
+          console.log('good 1', response)
+          if (response.status.code == 200) {
+            $('#txt_year').val(response.data.in_data.year_education)
+            $('#txt_datebegin').val(response.data.in_data.date_begin.split(" ")[0])
+            $('#txt_dateend').val(response.data.in_data.date_end.split(" ")[0])
+            $('#txt_datelate').val(response.data.in_data.date_last_doc.split(" ")[0])
+            $('#txt_sorbm1').val(response.data.in_data.date_exam_m1.split(" ")[0])
+            $('#txt_sorbm4').val(response.data.in_data.date_exam_m4.split(" ")[0])
+            $('#txt_interview_date1').val(response.data.in_data.date_interview_m1.split(" ")[0])
+            $('#txt_interview_date4').val(response.data.in_data.date_interview_m4.split(" ")[0])
+
+            $('#txt_timebegin').val(response.data.in_data.date_begin.split(" ")[1])
+            $('#txt_timeend').val(response.data.in_data.date_end.split(" ")[1])
+            $('#txt_timelate').val(response.data.in_data.date_last_doc.split(" ")[1])
+            $('#txt_timem1').val(response.data.in_data.date_exam_m1.split(" ")[1])
+            $('#txt_timem4').val(response.data.in_data.date_exam_m4.split(" ")[1])
+            $('#txt_interview_time1').val(response.data.in_data.date_interview_m1.split(" ")[1])
+            $('#txt_interview_time4').val(response.data.in_data.date_interview_m4.split(" ")[1])
+
+            response.data.in_data.page_point == 1 ? $('#toggleSTD1').trigger('click') : '';
+            $('#btn_save').attr('disabled', true).addClass('btn-secondary').removeClass('btn-primary')
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+       //good 2
+       $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_exam_list_m1'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#exam_title1').val(response.data.in_data[0].title)
+            $('#exam_start_time1').val(response.data.in_data[0].start_time)
+            $('#exam_end_time1').val(response.data.in_data[0].end_time)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetExamnow()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].start_time);
+                console.log(response.data.in_data[i].end_time);
+                $('#exam_title' + (i + 1)).val(response.data.in_data[i].title)
+                $('#exam_start_time' + (i + 1)).val(response.data.in_data[i].start_time)
+                $('#exam_end_time' + (i + 1)).val(response.data.in_data[i].end_time)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      //good 2
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_exam_list_m4'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#dxam_title1').val(response.data.in_data[0].title)
+            $('#dxam_start_time1').val(response.data.in_data[0].start_time)
+            $('#dxam_end_time1').val(response.data.in_data[0].end_time)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetDxamnow()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].start_time);
+                console.log(response.data.in_data[i].end_time);
+                $('#dxam_title' + (i + 1)).val(response.data.in_data[i].title)
+                $('#dxam_start_time' + (i + 1)).val(response.data.in_data[i].start_time)
+                $('#dxam_end_time' + (i + 1)).val(response.data.in_data[i].end_time)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      //good 2
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_doc_student_success'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#studynow_doc1').val(response.data.in_data[0].title)
+            $('#studynow_type1').val(response.data.in_data[0].type)
+            $('#studynow_req1').val(response.data.in_data[0].is_req)
+            $('#studynow_look1').attr('href', response.data.in_data[0].path)
+            $("#1_path1").val(response.data.in_data[0].path)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetStudynow()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].type);
+                console.log(response.data.in_data[i].is_req);
+                console.log(response.data.in_data[i].path);
+                $('#studynow_doc' + (i + 1)).val(response.data.in_data[i].title)
+                $('#studynow_type' + (i + 1)).val(response.data.in_data[i].type)
+                $('#studynow_req' + (i + 1)).val(response.data.in_data[i].is_req)
+                $('#studynow_look' + (i + 1)).attr('href', response.data.in_data[i].path)
+                $("#1_path" + (i + 1)).val(response.data.in_data[i].path)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+       //good 2
+       $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_exam_ready_file_m1'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#r_studynow_doc1').val(response.data.in_data[0].title)
+            $('#r_studynow_look1').attr('href', response.data.in_data[0].path)
+            $("#r_1_path1").val(response.data.in_data[0].path)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetRaedynow()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].path);
+                $('#r_studynow_doc' + (i + 1)).val(response.data.in_data[i].title)
+                $('#r_studynow_look' + (i + 1)).attr('href', response.data.in_data[i].path)
+                $("#r_1_path" + (i + 1)).val(response.data.in_data[i].path)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+         //good 2
+         $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_exam_ready_file_m4'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#z_studynow_doc1').val(response.data.in_data[0].title)
+            $('#z_studynow_look1').attr('href', response.data.in_data[0].path)
+            $("#z_1_path1").val(response.data.in_data[0].path)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetZaedynow()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].path);
+                $('#z_studynow_doc' + (i + 1)).val(response.data.in_data[i].title)
+                $('#z_studynow_look' + (i + 1)).attr('href', response.data.in_data[i].path)
+                $("#z_1_path" + (i + 1)).val(response.data.in_data[i].path)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+        //good 2
+        $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_interview_file_m1'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#r_interview_doc1').val(response.data.in_data[0].title)
+            $('#r_interview_look1').attr('href', response.data.in_data[0].path)
+            $("#r_interview_path1").val(response.data.in_data[0].path)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetInterview1()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].path);
+                $('#r_interview_doc' + (i + 1)).val(response.data.in_data[i].title)
+                $('#r_interview_look' + (i + 1)).attr('href', response.data.in_data[i].path)
+                $("#r_interview_path" + (i + 1)).val(response.data.in_data[i].path)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+        //good 2
+        $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_interview_file_m4'
+        }, success: response => {
+          console.log('good 2', response)
+          if (response.status.code == 200) {
+            $('#z_interview_doc1').val(response.data.in_data[0].title)
+            $('#z_interview_look1').attr('href', response.data.in_data[0].path)
+            $("#z_interview_path1").val(response.data.in_data[0].path)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetInterview4()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].path);
+                $('#z_interview_doc' + (i + 1)).val(response.data.in_data[i].title)
+                $('#z_interview_look' + (i + 1)).attr('href', response.data.in_data[i].path)
+                $("#z_interview_path" + (i + 1)).val(response.data.in_data[i].path)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      //good 3
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_doc_student_waiting'
+        }, success: response => {
+          console.log('good 3', response)
+          if (response.status.code == 200) {
+            $('#studyend_doc1').val(response.data.in_data[0].title)
+            $('#studyend_type1').val(response.data.in_data[0].type)
+            $('#studyend_req1').val(response.data.in_data[0].is_req)
+            $('#studyend_look1').attr('href', response.data.in_data[0].path)
+            $("#2_path1").val(response.data.in_data[0].path)
+
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              if (i != 0) {
+                addSheetStudyend()
+                console.log(response.data.in_data[i].title);
+                console.log(response.data.in_data[i].type);
+                console.log(response.data.in_data[i].is_req);
+                console.log(response.data.in_data[i].path);
+                $('#studyend_doc' + (i + 1)).val(response.data.in_data[i].title)
+                $('#studyend_type' + (i + 1)).val(response.data.in_data[i].type)
+                $('#studyend_req' + (i + 1)).val(response.data.in_data[i].is_req)
+                $('#studyend_look' + (i + 1)).attr('href', response.data.in_data[i].path)
+                $("#2_path" + (i + 1)).val(response.data.in_data[i].path)
+              }
+            }
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      //good 4
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_contact_admin'
+        }, success: response => {
+          console.log('good 4', response)
+          if (response.status.code == 200) {
+            $('#txt_tname').val(response.data.in_data.tname)
+            $('#txt_fname').val(response.data.in_data.fname)
+            $('#txt_lname').val(response.data.in_data.lname)
+            $('#txt_email').val(response.data.in_data.email)
+            $('#txt_phoneno').val(response.data.in_data.phone)
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      //good 4
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_exam_point_file'
+        }, success: response => {
+          console.log('good 4', response)
+          if (response.status.code == 200) {
+            $('#d_point_exam_m1').attr('href', response.data.in_data.m1)
+            $('#d_point_exam_m4').attr('href', response.data.in_data.m4)
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      //good 5
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'register_recommend'
+        }, success: response => {
+          console.log('good 5', response)
+          if (response.status.code == 200) {
+            $('#txt_iframe').val(response.data.in_data.iframe)
+            $('#txt_pdpa').val(response.data.in_data.pdpa)
+
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    })
+
+    $('.datepick').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      minYear: 1901,
+      // timePicker: true,
+      maxYear: parseInt(moment().format('YYYY'), 10),
+      locale: {
+        format: 'YYYY-MM-DD'
+      }
+    }, function (start, end, label) {
+
+    });
+
+    var examnow = 1;
+    function addSheetExamnow() {
+      $("#btn_delete_examnow").show()
+      examnow++;
+      var html = `
+        <main id="boxexamnow${examnow}">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อวิชา ${examnow}</label>
+                <input type="text" id="exam_title${examnow}" class="form-txt form-control"
+                  placeholder="ชื่อวิชา ${examnow}">
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">เวลาเริ่มต้น ${examnow}</label>
+                <input type="time" id="exam_start_time${examnow}" class=" form-txt form-control mt-1">
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">เวลาสิ้นสุด ${examnow}</label>
+                <input type="time" id="exam_end_time${examnow}" class=" form-txt form-control mt-1">
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#boxexamnow${examnow - 1}`).after(html)
+    }
+
+    var dxamnow = 1;
+    function addSheetDxamnow() {
+      $("#btn_delete_dxamnow").show()
+      dxamnow++;
+      var html = `
+        <main id="boxdxamnow${dxamnow}">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อวิชา ${dxamnow}</label>
+                <input type="text" id="dxam_title${dxamnow}" class="form-txt form-control"
+                  placeholder="ชื่อวิชา ${dxamnow}">
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">เวลาเริ่มต้น ${dxamnow}</label>
+                <input type="time" id="dxam_start_time${dxamnow}" class=" form-txt form-control mt-1">
+              </div>
+            </div>
+            <div class="col-12 col-sm-4">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">เวลาสิ้นสุด ${dxamnow}</label>
+                <input type="time" id="dxam_end_time${dxamnow}" class=" form-txt form-control mt-1">
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#boxdxamnow${dxamnow - 1}`).after(html)
+    }
+
+    var readynow = 1;
+    function addSheetRaedynow() {
+      $("#btn_delete_readynow").show()
+      readynow++;
+      var html = `
+        <main id="r_boxstudynow${readynow}">
+          <hr>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อเอกสารที่ ${readynow}</label>
+                <input  type="text" id="r_studynow_doc${readynow}" class="form-txt form-control" placeholder="ชื่อเอกสารที่ ${readynow}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ ${readynow} <a href="#" id="r_studynow_look${readynow}" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="r_studynow_expfile${readynow}" onchange="sendReady(this, 1, ${readynow}, 'now')">
+                <input type="hidden" id="r_1_path${readynow}">
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#r_boxstudynow${readynow - 1}`).after(html)
+    }
+
+    var zeadynow = 1;
+    function addSheetZaedynow() {
+      $("#btn_delete_zeadynow").show()
+      zeadynow++;
+      var html = `
+        <main id="z_boxstudynow${zeadynow}">
+          <hr>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อเอกสารที่ ${zeadynow}</label>
+                <input  type="text" id="z_studynow_doc${zeadynow}" class="form-txt form-control" placeholder="ชื่อเอกสารที่ ${zeadynow}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ ${zeadynow} <a href="#" id="z_studynow_look${zeadynow}" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="z_studynow_expfile${zeadynow}" onchange="sendZeady(this, 1, ${zeadynow}, 'now')">
+                <input type="hidden" id="z_1_path${zeadynow}">
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#z_boxstudynow${zeadynow - 1}`).after(html)
+    }
+
+    var interview1 = 1;
+    function addSheetInterview1() {
+      $("#btn_delete_interview1").show()
+      interview1++;
+      var html = `
+        <main id="r_boxinterview${interview1}">
+          <hr>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อเอกสารที่ ${interview1}</label>
+                <input  type="text" id="r_interview_doc${interview1}" class="form-txt form-control" placeholder="ชื่อเอกสารที่ ${interview1}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ ${interview1} <a href="#" id="r_interview_look${interview1}" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="r_interview_expfile${interview1}" onchange="sendZeady(this, 1, ${interview1}, 'now')">
+                <input type="hidden" id="r_interview_path${interview1}">
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#r_boxinterview${interview1 - 1}`).after(html)
+    }
+
+    var interview4 = 1;
+    function addSheetInterview4() {
+      $("#btn_delete_interview4").show()
+      interview4++;
+      var html = `
+        <main id="z_boxinterview${interview4}">
+          <hr>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อเอกสารที่ ${interview4}</label>
+                <input  type="text" id="z_interview_doc${interview4}" class="form-txt form-control" placeholder="ชื่อเอกสารที่ ${interview4}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ ${interview4} <a href="#" id="z_interview_look${interview4}" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="z_interview_expfile${interview4}" onchange="sendZeady(this, 1, ${interview4}, 'now')">
+                <input type="hidden" id="z_interview_path${interview4}">
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#z_boxinterview${interview4 - 1}`).after(html)
+    }
+
+    var studynow = 1;
+    function addSheetStudynow() {
+      $("#btn_delete_studynow").show()
+      studynow++;
+      var html = `
+        <main id="boxstudynow${studynow}">
+          <hr>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อเอกสารที่ ${studynow}</label>
+                <input  type="text" id="studynow_doc${studynow}" class="form-txt form-control" placeholder="ชื่อเอกสารที่ 1">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">ประเภทไฟล์</label>
+                <div class="d-flex">
+                  <select id="studynow_type${studynow}" class="form-control">
+                    <option value="">--- เลือก ---</option>
+                    <option value="img">img</option>
+                    <option value="pdf">pdf</option>
+                    <option value="img,pdf">img,pdf</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ ${studynow} <a href="#" id="studynow_look${studynow}" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="studynow_expfile${studynow}" onchange="send(this, 1, ${studynow}, 'now')">
+                <input type="hidden" id="1_path${studynow}">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <p class="mb-2">บังคับกรอก</p>
+                <select class="form-control" id="studynow_req${studynow}">
+                  <option value="1">บังคับ</option>
+                  <option value="0">ไม่บังคับ</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#boxstudynow${studynow - 1}`).after(html)
+    }
+
+
+    function removeSheetDxamnow() {
+      $(`#boxdxamnow${dxamnow}`).remove()
+      dxamnow--;
+      if (dxamnow <= 1) {
+        $("#btn_delete_dxamnow").hide()
+      }
+    }
+
+    function removeSheetExamnow() {
+      $(`#boxexamnow${examnow}`).remove()
+      examnow--;
+      if (examnow <= 1) {
+        $("#btn_delete_examnow").hide()
+      }
+    }
+
+    function removeSheetStudyReady() {
+      $(`#r_boxstudynow${readynow}`).remove()
+      readynow--;
+      if (readynow <= 1) {
+        $("#btn_delete_readynow").hide()
+      }
+    }
+
+    function removeSheetStudyZeady() {
+      $(`#z_boxstudynow${zeadynow}`).remove()
+      zeadynow--;
+      if (zeadynow <= 1) {
+        $("#btn_delete_zeadynow").hide()
+      }
+    }
+
+    function removeSheetInterview1() {
+      $(`#z_boxstudynow${interview1}`).remove()
+      interview1--;
+      if (interview1 <= 1) {
+        $("#btn_delete_interview1").hide()
+      }
+    }
+
+    function removeSheetInterview4() {
+      $(`#z_boxstudynow${interview4}`).remove()
+      interview4--;
+      if (interview4 <= 1) {
+        $("#btn_delete_interview4").hide()
+      }
+    }
+
+    function removeSheetStudynow() {
+      $(`#boxstudynow${studynow}`).remove()
+      studynow--;
+      if (studynow <= 1) {
+        $("#btn_delete_studynow").hide()
+      }
+    }
+
+    var studyend = 1;
+    function addSheetStudyend() {
+      $("#btn_delete_studyend").show()
+      studyend++;
+      var html = `
+        <main id="boxstudyend${studyend}">
+          <hr>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ชื่อเอกสารที่ ${studyend}</label>
+                <input  type="text" id="studyend_doc${studyend}" class="form-txt form-control" placeholder="ชื่อเอกสารที่ 1">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <label class="form-label">ประเภทไฟล์</label>
+                <div class="d-flex">
+                  <select id="studyend_type${studyend}" class="form-control">
+                    <option value="">--- เลือก ---</option>
+                    <option value="img">img</option>
+                    <option value="pdf">pdf</option>
+                    <option value="img,pdf">img,pdf</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">ตัวอย่างเอกสารที่ ${studyend} <a href="#" id="studyend_look${studyend}" target="_blank" class="badge bg-primary" style="font-size: .8rem;">ดูไฟล์</a></label>
+                <input class="form-control" type="file" accept="image/png,image/jpg,image/jpeg" id="studyend_expfile${studyend}" onchange="send(this, 2, ${studyend}, 'end')">
+                <input type="hidden" id="2_path${studyend}">
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="mb-3">
+                <p class="mb-2">บังคับกรอก</p>
+                <select class="form-control" id="studyend_req${studyend}">
+                  <option value="1">บังคับ</option>
+                  <option value="0">ไม่บังคับ</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </main>
+        `;
+      $(`#boxstudyend${studyend - 1}`).after(html)
+    }
+
+    function removeSheetStudyend() {
+      $(`#boxstudyend${studyend}`).remove()
+      studyend--;
+      if (studyend <= 1) {
+        $("#btn_delete_studyend").hide()
+      }
+    }
+
+    function updateSheet1() {
+      var obj = {
+        year_education: $("#txt_year").val(),
+        date_begin: $("#txt_datebegin").val() + ' ' + $("#txt_timebegin").val(),
+        date_end: $("#txt_dateend").val() + ' ' + $("#txt_timeend").val(),
+        date_last_doc: $("#txt_datelate").val() + ' ' + $("#txt_timelate").val(),
+        date_exam_m1 :$('#txt_sorbm1').val() + ' ' + $('#txt_timem1').val(),
+        date_exam_m4 :$('#txt_sorbm4').val() + ' ' + $('#txt_timem4').val(),
+        date_interview_m1 :$('#txt_interview_date1').val() + ' ' + $('#txt_interview_time1').val(),
+        date_interview_m4 :$('#txt_interview_date4').val() + ' ' + $('#txt_interview_time4').val(),
+        page_point: $('#toggleSTD1').is(':checked'),
+      }
+
+      console.log("obj", obj);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_date',
+          in_data: JSON.stringify(obj)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateSheetExam1() {
+      var ary = [];
+      for (let i = 0; i < examnow; i++) {
+        ary.push({
+          title: $('#exam_title' + (i + 1)).val(),
+          start_time: $('#exam_start_time' + (i + 1)).val(),
+          end_time: $('#exam_end_time' + (i + 1)).val(),
+        })
+      }
+
+      console.log("examnow 1", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_exam_list_m1',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updatPointExam() {
+      const ary = {
+        m1: $('#h_point_exam_m1').val(),
+        m4: $('#h_point_exam_m4').val(),
+      };
+
+      console.log("dxamnow 1", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_exam_point_file',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateSheetDxam1() {
+      var ary = [];
+      for (let i = 0; i < dxamnow; i++) {
+        ary.push({
+          title: $('#dxam_title' + (i + 1)).val(),
+          start_time: $('#dxam_start_time' + (i + 1)).val(),
+          end_time: $('#dxam_end_time' + (i + 1)).val(),
+        })
+      }
+
+      console.log("dxamnow 1", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_exam_list_m4',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateReady() {
+      var ary = [];
+      for (let i = 0; i < readynow; i++) {
+        ary.push({
+          path: $('#r_1_path' + (i + 1)).val(),
+          title: $('#r_studynow_doc' + (i + 1)).val()
+        })
+      }
+
+      console.log("ary 2", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_exam_ready_file_m1',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateZeady() {
+      var ary = [];
+      for (let i = 0; i < zeadynow; i++) {
+        ary.push({
+          path: $('#z_1_path' + (i + 1)).val(),
+          title: $('#z_studynow_doc' + (i + 1)).val()
+        })
+      }
+
+      console.log("ary 2", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_exam_ready_file_m4',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    
+    function updateInterview1() {
+      var ary = [];
+      for (let i = 0; i < interview4; i++) {
+        ary.push({
+          path: $('#r_interview_path' + (i + 1)).val(),
+          title: $('#r_interview_doc' + (i + 1)).val()
+        })
+      }
+
+      console.log("ary 2", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_interview_file_m1',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    
+    function updateInterview4() {
+      var ary = [];
+      for (let i = 0; i < interview4; i++) {
+        ary.push({
+          path: $('#z_interview_path' + (i + 1)).val(),
+          title: $('#z_interview_doc' + (i + 1)).val()
+        })
+      }
+
+      console.log("ary 2", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_interview_file_m4',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+
+    function updateSheet2() {
+      var ary = [];
+      for (let i = 0; i < studynow; i++) {
+        ary.push({
+          is_req: parseInt($('#studynow_req' + (i + 1)).val()),
+          path: $('#1_path' + (i + 1)).val(),
+          title: $('#studynow_doc' + (i + 1)).val(),
+          type: $('#studynow_type' + (i + 1)).val()
+        })
+      }
+
+      console.log("ary 2", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_doc_student_success',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateSheet3() {
+
+      var ary = [];
+      for (let i = 0; i < studyend; i++) {
+        ary.push({
+          is_req: parseInt($('#studyend_req' + (i + 1)).val()),
+          path: $('#2_path' + (i + 1)).val(),
+          title: $('#studyend_doc' + (i + 1)).val(),
+          type: $('#studyend_type' + (i + 1)).val()
+        })
+      }
+
+      console.log("ary 2", ary);
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_doc_student_waiting',
+          in_data: JSON.stringify(ary)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateSheet4() {
+      var obj = {
+        tname: $("#txt_tname").val(),
+        fname: $("#txt_fname").val(),
+        lname: $("#txt_lname").val(),
+        email: $("#txt_email").val(),
+        phone: $("#txt_phoneno").val(),
+
+      }
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_contact_admin',
+          in_data: JSON.stringify(obj)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function updateSheet5() {
+      var obj = {
+        iframe: $("#txt_iframe").val(),
+        pdpa: $('#txt_pdpa').val()
+      }
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/update.php',
+        data: {
+          _method: "POST",
+          key_address: 'register_recommend',
+          in_data: JSON.stringify(obj)
+        }, success: response => {
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    }
+
+    function sendPointExam(elem, box, at, nowend) {
+      loading(true)
+      console.log('id', elem, elem.id)
+      var myfile = document.getElementById(elem.id).files;
+      console.log(elem.id, myfile, myfile.length)
+
+      var formData = new FormData();
+      console.log('>>>', myfile[0], myfile[0].name)
+      formData.append('myfile', myfile[0], myfile[0].name)
+
+      console.log('formData', formData)
+      var conntenttype = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      }
+      var data = {
+        formData
+      }
+
+      axios.post(endpoint + `/utw-file-upload-api/register/settings/document/${elem.id}`, formData, conntenttype)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.status.code == 200) {
+            $(`#h_point_exam_m${at}`).val(response.data.data.path)
+            $(`#d_point_exam_m${at}`).attr('href', response.data.data.path)
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด'
+            })
+          }
+          loading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          loading(false)
+        })
+    }
+
+    function send(elem, box, at, nowend) {
+      loading(true)
+      console.log('id', elem, elem.id)
+      var myfile = document.getElementById(elem.id).files;
+      console.log(elem.id, myfile, myfile.length)
+
+      var formData = new FormData();
+      console.log('>>>', myfile[0], myfile[0].name)
+      formData.append('myfile', myfile[0], myfile[0].name)
+
+      console.log('formData', formData)
+      var conntenttype = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      }
+      var data = {
+        formData
+      }
+
+      axios.post(endpoint + `/utw-file-upload-api/register/settings/document/${elem.id}`, formData, conntenttype)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.status.code == 200) {
+            $(`#${box}_path${at}`).val(response.data.data.path)
+            $(`#study${nowend}_look${at}`).attr('href', response.data.data.path)
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด'
+            })
+          }
+          loading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          loading(false)
+        })
+    }
+
+    function sendReady(elem, box, at, nowend) {
+      loading(true)
+      console.log('id', elem, elem.id)
+      var myfile = document.getElementById(elem.id).files;
+      console.log(elem.id, myfile, myfile.length)
+
+      var formData = new FormData();
+      console.log('>>>', myfile[0], myfile[0].name)
+      formData.append('myfile', myfile[0], myfile[0].name)
+
+      console.log('formData', formData)
+      var conntenttype = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      }
+      var data = {
+        formData
+      }
+
+      axios.post(endpoint + `/utw-file-upload-api/register/settings/document/${elem.id}`, formData, conntenttype)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.status.code == 200) {
+            $(`#r_${box}_path${at}`).val(response.data.data.path)
+            $(`#r_study${nowend}_look${at}`).attr('href', response.data.data.path)
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด'
+            })
+          }
+          loading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          loading(false)
+        })
+    }
+
+    function sendZeady(elem, box, at, nowend) {
+      loading(true)
+      console.log('id', elem, elem.id)
+      var myfile = document.getElementById(elem.id).files;
+      console.log(elem.id, myfile, myfile.length)
+
+      var formData = new FormData();
+      console.log('>>>', myfile[0], myfile[0].name)
+      formData.append('myfile', myfile[0], myfile[0].name)
+
+      console.log('formData', formData)
+      var conntenttype = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      }
+      var data = {
+        formData
+      }
+
+      axios.post(endpoint + `/utw-file-upload-api/register/settings/document/${elem.id}`, formData, conntenttype)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.status.code == 200) {
+            $(`#z_${box}_path${at}`).val(response.data.data.path)
+            $(`#z_study${nowend}_look${at}`).attr('href', response.data.data.path)
+            Swal.fire({
+              icon: 'success',
+              title: 'สำเร็จ',
+              timer: 2000
+            })
+          }
+          else {
+            Swal.fire({
+              icon: 'error',
+              title: 'มีบางอย่างผิดพลาด'
+            })
+          }
+          loading(false)
+        })
+        .catch((err) => {
+          console.log(err)
+          loading(false)
+        })
+    }
+
+  </script>
+</body>
+
+</html>

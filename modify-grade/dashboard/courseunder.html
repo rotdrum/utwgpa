@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTW</title>
+    <link rel="icon" href="../imgs/utw.gif">
+    <link rel="stylesheet" href="../global.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      .list-group-item.active {
+        background-color: #20c997;
+        border-color: #198754;
+      }
+    </style>
+</head>
+<body>
+    
+    <div class="page">
+        <div class="fakesidebar">
+                
+        </div>
+        <div class="sidebar">
+          <div onclick="keepSidebar()" class="keepsidebar">
+            <i class="fa-solid fa-arrow-left"></i>
+          </div>
+          <div id="sidebartitle" style="display: flex; align-items: center;">
+                
+          </div>
+    
+          <div id="sidebar" class="sidebar-main">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <div style="display: flex; align-items: center;">
+                <div onclick="toggleSidebar()" class="hamburger me-3" >
+                  <i class="fa-solid fa-bars"></i>
+                </div>
+                <input type="text" placeholder="ค้นหา" class="form-control">
+              </div>
+            </div>
+            <div id="boxProfile" class="content-profile">
+              
+            </div>
+          </div>
+          <div class="content-page">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2 id="info_header">ติดตามผลนักเรียนประจำชั้น ม.3/5</h2>
+                  
+              </div>
+
+              <div id="box-render">
+
+              </div>
+    
+          </div>
+        </div>
+      </div>
+
+      <div id="openModalDetail" class="modal  fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">ภาระงาน</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <div >
+                <b >รายวิชา : </b>
+                <span id="info_subject" class="ms-2"></span>
+              </div>
+              <div >
+                <b>ชื่อกลุ่มนักเรียน : </b>
+                <span id="info_title" class="ms-2"></span>
+              </div>
+              <div>
+                <b>ชื่อ-สกุล : </b>
+                <span id="info_fname" class="ms-2"></span>
+              </div>
+              <div class="mb-3">
+                <b >ผลการเรียนเดิม : </b>
+                <span id="grade_old" class="ms-2">0</span>
+              </div>
+              
+
+              <br>
+              <b >รายการภาระงาน</b>
+              <div id="info_indicator" class="list-group mb-5 mt-3">
+                <a href="#"  id="gage1" class="list-group-item list-group-item-action active" aria-current="true">asdasd</a>
+                <a href="#"  id="gage2" class="list-group-item list-group-item-action">A second link item</a>
+                <a href="#"  id="gage3" class="list-group-item list-group-item-action active">A third link item</a>
+                <a href="#"  id="gage4" class="list-group-item list-group-item-action active">A fourth link item</a>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalAddSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <!-- <button onclick="saveWork()" type="button" class="btn btn-primary">บันทึก</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <script src="../global.js"></script>
+      <script>
+        var superdata;
+
+        $(document).ready(() => {
+          $('#info_header').text(`ติดตามผลนักเรียนประจำชั้น ม.${localStorage.utwClassRoom}`)
+          render()
+        })
+
+        function render() {
+          $.ajax({
+            method: 'post',
+            url:  endpoint + '/utw-modify-grade-api/follow_class/getAll.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+              _method: "GET",
+            }, success: (response) => {
+              console.log('good',response)
+              if(response.status.code == 200) {
+                superdata = response.data;
+                var html = ''
+                var flag = true;
+                  for (let i = 0; i < response.data.length; i++) {
+                    const data = response.data[i];
+                    var student = JSON.parse(data.activity)
+
+                    console.log('student',student)
+
+                    var html2 = '';
+                    var pass = true;
+                    for (let k = 0; k < student.length; k++) {
+                      const data2 = student[k];
+                      var lv = `${data2.class}/${data2.room}`
+                      if(lv == localStorage.utwClassRoom) {
+                        pass = false;
+                        flag = false;
+                        var status = ''
+                        var detail = ''
+                        var grade = ''
+                      
+                          if(data2.status_work == 'wait_begin') {
+                        status = `<td class="" style="color: 	#ff0000;">
+                                    <div class="d-flex align-items-center">
+                                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                      <span class="ms-2">รอลงทะเบียน</span>
+                                    </div>
+                                  </td>`
+                        grade = data2.grade_old;
+                      }
+                      else if(data2.status_work == 'begin') {
+                        status = `<td class="" style="color: #e67e22;">
+                                    <div class="d-flex align-items-center">
+                                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                      <span class="ms-2">ลงทะเบียนแล้ว</span>
+                                    </div>
+                                  </td>`
+
+                        detail = `<button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
+                              <i class="fas fa-search"></i>
+                            </button>`
+                        grade = data2.grade_old;
+                      }
+                      else if(data2.status_work == 'process') {
+                        status = `<td class="text-warning">
+                                    <div class="d-flex align-items-center">
+                                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                      <span class="ms-2">ดำเนินการซ่อมอยู่</span>
+                                    </div>
+                                  </td>`
+
+                        detail = `<button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
+                              <i class="fas fa-search"></i>
+                            </button>`
+                        grade = data2.grade_old;
+                      }
+                      else if(data2.status_work == 'success' && !data2.confirm_date) {
+                        status = `<td class="text-success">
+                                    <div class="d-flex align-items-center">
+                                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                      <span class="ms-2">สำเร็จ (รอส่งเกรด)</span>
+                                    </div>
+                                  </td>`
+
+                        detail = `<button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
+                              <i class="fas fa-search"></i>
+                            </button>`
+                        grade = data2.grade_new;
+                      } else if(data2.status_work == 'success' && data2.confirm_date) {
+                        status = `<td class="text-success">
+                                    <div class="d-flex align-items-center">
+                                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                      <span class="ms-2">สำเร็จ (ส่งเกรดแล้ว)</span>
+                                    </div>
+                                  </td>`
+
+                        detail = ``
+                        grade = data2.grade_new;
+                      }
+                        html2 += `
+                        <tr>
+                          <th scope="row">${k+1}</th>
+                          <td>${data2.tname}${data2.fname} ${data2.lname}</td>
+                          <td>ม.${data2.class}/${data2.room}</td>
+                          <!-- <td>${data2.part}</td> -->
+                          <td>${grade}</td>
+                          ${status}
+                          <td>
+                          ${detail}
+                          </td>
+                        </tr>`
+                      }
+                    }
+
+                    
+
+                    var remove = ''
+                    if(pass) {
+                      remove = 'remove'
+                    }
+
+                    html += `
+                    
+                    <h5 class="${remove}">${data.subject_code} ${data.subject_title} ม.${data.subject_class} [${data.title}]</h5>
+                    <table class="${remove} table table-striped table-hover mb-5" style="font-size: 1rem;">
+                      <thead>
+                        <tr>
+                          <th scope="col">ลำดับ</th>
+                          <th scope="col">ชื่อ-สกุล</th>
+                          <th scope="col">ระดับชั้น</th>
+                          <!-- <th scope="col">ตอน</th> -->
+                          <th scope="col">ผลการเรียน</th>
+                          <th scope="col">สถานะ</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${html2}
+                      </tbody>
+                    </table>`
+                    
+                  }
+                  if (flag === true) {
+                    html = `
+                      <div style="width: 100%; height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <img src="../../imgs/notfound.png" style="width: 30%; object-fit: contain; margin-bottom: 20px;" />
+                        <h2>ไม่พบข้อมูล</h2>
+                      </div>`;
+                    $('#box-render').html(html)
+                  } else {
+                    $('#box-render').html(html).promise().done(() => {
+                      $('.remove').remove()
+                    })
+                  }
+              }
+              else {
+                errswal()
+              }
+            }, error: (err) => {
+              console.log(err)
+              errswal()
+            }
+          })
+        }
+
+        function detailInfo(i,k) {
+          const data = superdata[i];
+          $('#info_subject').text(data.subject_title)
+          $('#info_title').text(data.title)
+          var indicator = JSON.parse(data.indicators)
+          console.log(indicator)
+
+          
+          var activity = JSON.parse(data.activity)
+          var workdetail = activity[k].work
+          $('#info_fname').text(activity[k].tname + activity[k].fname+' '+activity[k].lname)
+          $('#grade_old').text(activity[k].grade_old)
+
+
+          var html = '';
+          for (let i = 0; i < workdetail.length; i++) {
+            const element = workdetail[i];
+            var active = ''
+            var click = ''
+            if(element.status == 'success') {
+              active = `list-group-item-action active`
+            } 
+            else {
+              click = ``
+            }
+            html += `<a href="#" ${click} id="info-gage${i+1}" class="${active} list-group-item list-group-item-action" aria-current="true">${element.indicator}</a>`
+          }
+          $('#info_indicator').html(html)
+        }
+      </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการร้านค้า</title>
+    <link rel="icon" href="https://realbearpro.com/img/logo-full.png">
+    <link rel="stylesheet" href="./global.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    
+    <div class="page">
+        <div onclick="keepSidebar()" class="overlaysidebar" style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);"></div>
+        <div class="fakesidebar">
+              
+        </div>
+        <div class="sidebar">
+          <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+            <i class="bi bi-box-arrow-in-left text-white"></i>
+          </div>
+          <div id="sidebartitle" class="d-flex align-items-center">
+               
+          </div>
+    
+          <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <div style="display: flex; align-items: center;">
+                <div onclick="toggleSidebar()" class="hamburger me-3" >
+                  <i class="bi bi-list"></i>
+                </div>
+                <input type="text" placeholder="ค้นหา" class="form-control">
+              </div>
+            </div>
+            <div id="boxProfile" class="content-profile">
+              
+            </div>
+          </div>
+          <div class="content-page">
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+                <h2>กลุ่มตัวชี้วัด</h2>
+                <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div>
+            </div>
+
+            
+    
+          </div>
+        </div>
+      </div>
+
+      <div id="openModalInfoSubject" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">กลุ่มตัวชี้วัดรายวิชานี้</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <b>ลำดับที่ 1 :</b>
+                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem labore est illo earum? Id vel quibusdam facere in accusantium obcaecati!</span>
+              </div>
+              <div class="mb-3">
+                <b>ลำดับที่ 2 :</b>
+                <span>รายการ</span>
+              </div>
+              <div class="mb-3">
+                <b>ลำดับที่ 3 :</b>
+                <span>รายการ</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalEditSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="openModalAddSubject" class="modal  fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">เพิ่มกลุ่มตัวชี้วัด</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3 txt-form">
+                <span>รายวิชา</span>
+                <select id="sel_subject" class="form-control">
+                  <option value="">เลือก</option>
+                </select>
+              </div>
+              <div id="boxGage">
+                <div id="gage1" class="mb-3 txt-form">
+                  <span>ตัวชี้วัดที่ 1</span>
+                  <input type="text" class="form-control" placeholder="ตัวชี้วัดที่ 1">
+                </div>
+              </div>
+              <div class="d-flex">
+                <button onclick="addWork()" class="btn btn-success">
+                  เพิ่มตัวชี้วัด
+                </button>
+                <button onclick="removeWork()" id="btnAddGageRemove" class="btn btn-danger ms-1" style="display: none;">
+                  ลบตัวชี้วัดล่าสุด
+                </button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalAddSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <button onclick="saveWork()" type="button" class="btn btn-primary">บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="openModalEditSubject" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">แก้ไขตัวชี้วัด</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <span>รายวิชา</span>
+                <select id="" class="form-control">
+                  <option value="">เลือก</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <span>ชื่อตัวชี้วัด</span>
+                <input id="title_gage" type="text" class="form-control" placeholder="ชื่อตัวชี้วัด">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="cm_openModalEditSubject" type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+              <button onclick="saveWork()" type="button" class="btn btn-primary">บันทึก</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="./global.js"></script>
+</body>
+</html>

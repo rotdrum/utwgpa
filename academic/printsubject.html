@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;500;800&display=swap');
+        * {
+            box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: 'Sarabun', sans-serif;
+            font-weight: 300;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+  margin: 0;
+  padding: 0;
+  background-color: #FAFAFA;
+}
+
+.page {
+  width: 21cm;
+  min-height: 29.7cm;
+  padding: 1cm;
+  margin: auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.subpage {
+  /* border: 5px red solid; */
+  height: 256mm;
+  /* outline: 2cm #FFEAEA solid; */
+}
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+            }
+        }
+        div,span {
+            font-size: 16px;
+        }
+        table th,table td {
+            border: 1px solid #000;
+        }
+        table td {
+            padding: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="book">
+        <div class="page">
+            <section class="subpage" style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                <div style="position: absolute; top: -10px; right: -10px; border: 1px solid #000;" class="px-4 py-2">วผ.08/2</div>
+                <h4 style="font-size: 20px; " class="font-bold">แบบคำร้องขอเรียนซ้ำรายวิชา</h4>
+                <br>
+                <div class="w-full flex justify-end">เขียนที่ โรงเรียนอุทัยวิทยาคม</div>
+                <div class="w-full flex justify-end">วันที่                    
+                    <span class="border-dotted border-b-2 border-slate-900 px-4">25</span>
+                    เดือน
+                    <span class="border-dotted border-b-2 border-slate-900 px-4">สิงหาคม</span>
+                    พ.ศ.
+                    <span class="border-dotted border-b-2 border-slate-900 px-4">2565</span>
+                </div>
+                <div class="flex w-full">
+                    <span class="w-16">เรื่อง</span>
+                    <span class="">ขอเรียนซ้ำรายวิชา</span>
+                </div>
+                <div class="flex w-full">
+                    <span class="w-16">เรียน</span>
+                    <span class="">นายทะเบียน</span>
+                </div>    
+                <div class="flex w-full mt-4 flex-wrap">
+                    <div class="w-16"></div>
+                    <div>ข้าพเจ้า</div>
+                    <span class="border-dotted border-b-2 border-slate-900 px-8 w-48">นายอนันต์</span>
+                    <div>เลขประจำตัว</div>
+                    <span class="border-dotted border-b-2 border-slate-900 px-8 w-36">180900123</span>
+                </div>
+                <div class="flex w-full flex-wrap">
+                    <div>ชั้น ม.</div>
+                    <span class="border-dotted border-b-2 border-slate-900 px-4">2</span>
+                    <div>/</div>
+                    <span class="border-dotted border-b-2 border-slate-900 px-4">2</span>
+                    <div class="ml-2">มีความประสงค์ขอเรียนซ้ำในรายวิชานี้</div>
+                </div>
+                <br>
+                <table class="w-full" style="font-size: 14px;">
+                    <thead>
+                        <tr>
+                            <th>ที่</th>
+                            <th>รหัสวิชา</th>
+                            <th>รายวิชา</th>
+                            <th>หน่วยกิต</th>
+                            <th>ชื่อครูผู้สอน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>12031</td>
+                            <td>พละศึกษา</td>
+                            <td>4</td>
+                            <td>นายอดัม จันทรา</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: end;">รวมหน่วยการเรียน</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="flex w-full mt-4 flex-wrap">
+                    <div class="w-16"></div>
+                    <span>จึงเรียนมาเพื่อโปรดพิจารณา</span>
+                </div>
+                <br>
+                <div class="w-full">
+                    <div class="w-16"></div>
+                    <div class="w-full flex justify-between">
+                        <div class="flex flex-col items-center">
+                            <div class="flex">
+                                <div>ลงชื่อ</div>
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-36"></span>
+                                <div>นักเรียน</div>
+                            </div>
+                            <div class="mt-2">(.....................................................)</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="flex">
+                                <div>ลงชื่อ</div>
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-36"></span>
+                                <div>ผู้ปกครอง</div>
+                            </div>
+                            <div class="mt-2">(.....................................................)</div>
+                        </div>
+                    </div>
+                    <div class="w-full flex justify-center mt-8">
+                        <div class="flex flex-col items-center">
+                            <div class="flex">
+                                <div>ลงชื่อ</div>
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-36"></span>
+                                <div>ครูที่ปรึกษา</div>
+                            </div>
+                            <div class="mt-2">(.....................................................)</div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="flex"> 
+                        <div class="w-16"></div>
+                        <div>ความเห็นของนายทะเบียน</div>
+                    </div>
+                    <div class="flex mt-3">
+                        <div class="w-16"></div>
+                        <div style="width: 20px; height: 20px; border: 1px solid #000;"></div>
+                        <div class="ml-4">อนุญาต</div>
+                        <div class="w-16"></div>
+                        <div style="width: 20px; height: 20px; border: 1px solid #000;"></div>
+                        <div class="ml-4">ไม่อนุญาต</div>
+                    </div>
+                    <div class="w-full flex justify-center mt-8">
+                        <div class="flex flex-col items-center">
+                            <div class="flex">
+                                <div>ลงชื่อ</div>
+                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-36"></span>
+                            </div>
+                            <div class="flex">
+                                (<span class="border-dotted border-b-2 border-slate-900 px-8 w-48">นางสมสุข โชติพิเชฐ</span>)
+                            </div>
+                            <div>นายทะเบียน</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

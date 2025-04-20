@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTW</title>
+  <link rel="icon" href="../imgs/utw.gif">
+  <link rel="stylesheet" href="../global.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .list-group-item.active {
+      background-color: #20c997;
+      border-color: #198754;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div id="sidebartitle" style="display: flex; align-items: center;">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="card p-2 flex-row d-flex " style="height: fit-content;">
+              <i class="fa-solid fa-bullhorn text-danger"></i>
+              <div class="ms-2" id="annou">
+                <div id="annou1"></div>
+                <div id="annou2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>ประวัติผลแก้ตัวสำเร็จ</h2>
+
+        </div>
+
+        <div class="card">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">ครั้งที่</th>
+                <th scope="col">ปีการศึกษา</th>
+                <th scope="col">รายวิชา</th>
+                <th scope="col">ชื่อ-สกุล</th>
+                <th scope="col">ระดับชั้น</th>
+                <th scope="col">ผลการเรียน</th>
+                <th scope="col">วันที่ส่งเกรด</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="openModalDetail" class="modal  fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ภาระงาน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div>
+            <b>ชื่อ-สกุล : </b>
+            <span id="info_fname" class="ms-2">ทดสอบ</span>
+          </div>
+          <div>
+            <b>ชั้น : </b>
+            <span id="info_class" class="ms-2">ทดสอบ</span>
+          </div>
+          <div>
+            <b>รายวิชา : </b>
+            <span id="info_subject" class="ms-2">คณิตศาสตร์</span>
+          </div>
+          <div>
+            <b>ชื่อกลุ่ม : </b>
+            <span id="info_title" class="ms-2">ทดสอบ</span>
+          </div>
+          <div class="mb-3">
+            <b>ผลการเรียนเดิม : </b>
+            <span id="grade_old" class="ms-2">0</span>
+          </div>
+
+          <br>
+          <b>รายการภาระงาน</b>
+          <div id="info_indicator" class="list-group mb-3 mt-3">
+            <a href="#" onclick="selectGage(this)" id="gage1" class="list-group-item list-group-item-action active"
+              aria-current="true">asdasd</a>
+            <a href="#" onclick="selectGage(this)" id="gage2" class="list-group-item list-group-item-action">A second
+              link item</a>
+            <a href="#" onclick="selectGage(this)" id="gage3" class="list-group-item list-group-item-action">A third
+              link item</a>
+            <a href="#" onclick="selectGage(this)" id="gage4" class="list-group-item list-group-item-action">A fourth
+              link item</a>
+          </div>
+          <div>
+            <b>ผลการเรียนใหม่</b>
+            <select class="form-control" id="grade_new">
+              <option value="">เลือก</option>
+              <option value="ผ">ผ</option>
+              <option value="4">4</option>
+              <option value="3.5">3.5</option>
+              <option value="3">3</option>
+              <option value="2.5">2.5</option>
+              <option value="2">2</option>
+              <option value="1.5">1.5</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="modal_detail_close" type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">ยกเลิก</button>
+          <button id="modal_detail_add" onclick="updateProgress()" type="button" class="btn btn-primary">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="../global.js"></script>
+  <script>
+    var superdata;
+
+    $(document).ready(() => {
+      render()
+      openclassroom()
+      annou();
+    })
+
+    function render() {
+      $.ajax({
+        method: 'get',
+        url: endpoint + `/utw-repeat-api/history/teacher/${localStorage.utwUserId}`,
+        headers: {
+          Authorization: 'Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd'
+        },
+        success: (response) => {
+          console.log(response)
+          if (response.status.code == 200) {
+            var html = "";
+            if (response.data.length > 0) {
+              for (let i = 0; i < response.data.length; i++) {
+                const element = response.data[i];
+                var date = String(element.confirm_date).split("T")[0];
+
+                var student = "-";
+                if (element.student) {
+                  student = `${element.student.tname}${element.student.fname} ${element.student.lname}`
+                }
+
+                html += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${element.round_at}</td>
+                        <td>${element.term_at}/${element.year_at}</td>
+                        <td>${element.subject_code} ${element.subject_title}</td>
+                        <td>${student}</td>
+                        <td>ม. ${element.student.class}/${element.student.room}</td>
+                        <td>${element.grade_new}</td>
+                        <td>${dateentoth(date)}</td>
+                      </tr>`
+              }
+            }
+            else {
+              html = `
+                      <div style="width: 100%; height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <img src="../../imgs/notfound.png" style="width: 30%; object-fit: contain; margin-bottom: 20px;" />
+                        <h2>ไม่พบข้อมูล</h2>
+                      </div>`;
+            }
+            $("#tbody").html(html)
+          }
+          else {
+            // // errswal()
+          }
+        }, error: (err) => {
+          console.log(err)
+          // // errswal()
+        }
+      })
+    }
+    function annou() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'grade_announce'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            $("#annou1").text(response.data.in_data.modify);
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+    function openclassroom() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'modify_grade_class_active'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            var html = "";
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              html += "ม." + element + ", "
+            }
+            html = String(html).substring(0, html.length - 2)
+            $("#annou2").text("ใช้งานระดับชั้น " + html);
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

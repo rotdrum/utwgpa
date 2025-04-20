@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานกลุ่มสาระ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
+  <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+  <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+  <script type="text/javascript"
+    src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+  <link rel="stylesheet"
+    href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
+  <script type="text/javascript"
+    src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
+  <style>
+    .spinner-border {
+      width: 1rem;
+      height: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
+    </div>
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content" style="overflow: hidden;">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page" style="overflow: hidden;">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>ระบบรับสมัครนักเรียน</h2>
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div> -->
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <h5 style="width: 60%;" class="mb-0"><b>นักเรียนที่รอตรวจเอกสาร ม.4</b></h5>
+          <div style="width: 40%;" class="d-flex justify-content-end align-items-center">
+            <div id="loading_approve" style="display: none;" class=" align-items-center">
+              <div class="spinner-border text-primary me-2" role="status">
+                <span class="visually-hidden"></span>
+              </div>
+              <h5 class="mb-0 me-3 text-primary">ส่งอนุมัติ</h5>
+            </div>
+            <div id="loading_reject" style="display: none;" class="align-items-center">
+              <div class="spinner-border text-warning me-2" role="status">
+                <span class="visually-hidden"></span>
+              </div>
+              <h5 class="mb-0 me-3 text-warning">ส่งกลับแก้ไข</h5>
+            </div>
+            <button onclick="changelevel()" class="btnapp btn btn-warning me-1">เปลี่ยนระดับ</button>
+            <button onclick="approveList()" class="btnapp btn btn-primary me-1">บันทึก</button>
+            <button onclick="rejectList()" class="btn btn-danger btnapp">ไม่อนุมัติ</button>
+          </div>
+        </div>
+
+        <main id="mainbox" class="d-flex justify-content-between" style="width: 100%; height: 100%; ">
+          <section style="width: 60%; height: 100%; overflow: scroll;">
+            <div class=" w-100">
+              <div class="card p-0">
+                <h5 class="card-header mt-1 mb-1">1.ข้อมูลนักเรียน <span
+                    style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">เลขบัตรประชาชน </p>
+                      <input id="txt_idcard" type="text" placeholder="กรอกข้อความ" disabled id="" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">คำนำหน้าชื่อ <span class="text-danger">*</span></p>
+                      <select id="txt_tname" class="form-control">
+                        <option value="">--- เลือก ---</option>
+                        <option value="เด็กชาย">เด็กชาย</option>
+                        <option value="เด็กหญิง">เด็กหญิง</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                        <option value="นางสาว">นางสาว</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ชื่อ <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_fname" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">นามสกุล <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_lname" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">สัญชาติ <span class="text-danger">*</span></p>
+                      <select id="txt_nation" class="form-control">
+                        <option value="">--- เลือก ---</option>
+                        <option value="ไทย">ไทย</option>
+                        <option value="ลาว">ลาว</option>
+                        <option value="พม่า">พม่า</option>
+                        <option value="กัมพูชา">กัมพูชา</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">วัน/เดือน/ปีเกิด <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_dob" class="form-control dateth">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">กรุ๊ปเลือด <span class="text-danger">*</span></p>
+                      <select id="txt_blood" class="form-control">
+                        <option value="">--- เลือก ---</option>
+                        <option value="A">A</option>
+                        <option value="AB">AB</option>
+                        <option value="B">B</option>
+                        <option value="O">O</option>
+                        <option value="ไม่ทราบหมู่เลือด">ไม่ทราบหมู่เลือด</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">เบอร์โทรศัพท์ <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_phoneno" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">อีเมล </p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_email" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">2.ข้อมูลการศึกษา <span
+                    style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ระดับการศึกษา <span class="text-danger">*</span></p>
+                      <select id="txt_edulevel" class="form-control">
+                        <option value="">--- เลือก ---</option>
+                        <option value="0">กำลังศึกษาอยู่</option>
+                        <option value="1">สำเร็จการศึกษา</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ปีการศึกษา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_eduyear" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ชื่อโรงเรียนเดิม <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_oldschool" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ตำบล <span class="text-danger">*</span></p>
+                      <input id="reg_subdistrict" type="text" placeholder="กรอกข้อความ" id="" class=" form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">อำเภอ <span class="text-danger">*</span></p>
+                      <input id="reg_district" type="text" placeholder="กรอกข้อความ" id="" class=" form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">จังหวัด <span class="text-danger">*</span></p>
+                      <input id="reg_province" type="text" placeholder="กรอกข้อความ" id="" class="  form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">รหัสไปรษณีย์ <span class="text-danger">*</span></p>
+                      <input id="reg_postcode" type="text" placeholder="กรอกข้อความ" id="" class=" form-control">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">3.ที่อยู่ทะเบียนบ้าน <span
+                    style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">บ้านเลขที่ <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_houseno" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ถนน </p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_road" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ซอย </p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_soi" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">หมู่ </p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_moo" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ตำบล <span class="text-danger">*</span></p>
+                      <input id="reg_homesubdistrict" type="text" placeholder="กรอกข้อความ"
+                        class="reg_subdistrict form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">อำเภอ <span class="text-danger">*</span></p>
+                      <input id="reg_homedistrict" type="text" placeholder="กรอกข้อความ"
+                        class="reg_district form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">จังหวัด <span class="text-danger">*</span></p>
+                      <input id="reg_homeprovince" type="text" placeholder="กรอกข้อความ"
+                        class="reg_province form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">รหัสไปรษณีย์ <span class="text-danger">*</span></p>
+                      <input id="reg_homepostcode" type="text" placeholder="กรอกข้อความ"
+                        class="reg_postcode form-control">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">4.ข้อมูลบิดา มารดา หรือ ผู้ปกครอง <span
+                    style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ชื่อ-สกุลบิดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_fathername" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">อาชีพบิดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_fathercareer" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">สถานที่ทำงานบิดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_fathercareerloca" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">เบอร์โทรศัพท์บิดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_fatherphoneno" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ชื่อ-สกุลมารดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_mothername" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">อาชีพมารดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_mothercareer" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">สถานที่ทำงานมารดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_mothercareerloca" class="form-control">
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">เบอร์โทรศัพท์มารดา <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_motherphoneno" class="form-control">
+                    </div>
+
+                    <!-- <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ผู้ปกครองมีความสัมพันธ์เป็น <span class="text-danger">*</span></p>
+                                  <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                    </div> -->
+
+                    <div class="col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ผู้ปกครอง <span class="text-danger">*</span></p>
+                      <select id="reg_human" class="form-control">
+                        <option value="">--- เลือก ---</option>
+                        <option value="dad">บิดา</option>
+                        <option value="mom">มารดา</option>
+                        <option value="other">อื่นๆ</option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-sm-6 mb-3">
+                    </div>
+                    <div class="box_human col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ชื่อผู้ปกครอง <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_fpkname" class="txt form-control">
+                    </div>
+                    <div class="box_human col-12 col-sm-6 mb-3">
+                      <p class="mb-0">อาชีพผู้ปกครอง <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_pkcareer" class="txt form-control">
+                    </div>
+                    <div class="box_human col-12 col-sm-6 mb-3">
+                      <p class="mb-0">สถานที่ทำงานผู้ปกครอง <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_pkcareerloca" class="txt form-control">
+                    </div>
+                    <div class="box_human col-12 col-sm-6 mb-3">
+                      <p class="mb-0">เบอร์โทรศัพท์ผู้ปกครอง <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_pkphoneno" class="txt phoneno form-control">
+                    </div>
+                    <div id="box_pkrelative" class="box_human col-12 col-sm-6 mb-3">
+                      <p class="mb-0">ผู้ปกครองมีความสัมพันธ์เป็น <span class="text-danger">*</span></p>
+                      <input type="text" placeholder="กรอกข้อความ" id="txt_pkrelation" class="txt form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br><br><br><br><br><br><br><br><br><br><br>
+          </section>
+          <!-- <section style="width: 40%; height: 100%; overflow: scroll;">
+                
+              </section> -->
+          <section id="checkfilerender" class="d-flex flex-column align-items-start"
+            style="width: 38%; height: 100%; overflow: scroll;">
+            <!-- <div style="width: 99%;">
+              <div class="d-flex ms-1 mb-3 align-items-center w-100">
+                <div class="d-flex justify-content-between w-100">
+                  <div class="d-flex align-items-center">
+                  <h5 class="mb-0">รูปถ่าย</h5>
+                    <a class="mb-0 text-decoration-none text-dark badge bg-warning ms-3 me-1" style="cursor: pointer;"
+                      data-bs-toggle="modal" data-bs-target="#md_imginfo">เต็มจอ</a>
+                    <a href="../uploads/profile.png" target="_blank" class="mb-0 text-decoration-none badge bg-success"
+                      style="cursor: pointer;">เปิดแท็ปใหม่</a>
+                </div>
+                  <div></div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-3 ms-1">
+                <div class="w-100">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      ผ่านการตรวจสอบ
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      ส่งกลับแก้ไข
+                    </label>
+                  </div>
+                </div>
+                <span class="btn btn-primary w-100">บันทึก</span>
+              </div>
+            </div>
+                <img src="../uploads/profile.png" style="width: 100%; height: 300px; object-fit: contain;">
+                <br>
+                <hr>
+                <div class="d-flex ms-1 mb-3 align-items-center">
+                  <h5 class="mb-0">รูปถ่าย</h5>
+              <a class="mb-0 text-decoration-none text-dark badge bg-warning ms-3 me-1" style="cursor: pointer;"
+                data-bs-toggle="modal" data-bs-target="#md_fileinfo">เต็มจอ</a>
+              <a href="../uploads/pdftest.pdf" target="_blank" class="mb-0 text-decoration-none badge bg-success"
+                style="cursor: pointer;">เปิดแท็ปใหม่</a>
+                </div>
+                <div class="mb-3 ms-1">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      ผ่านการตรวจสอบ
+                    </label>
+                  </div>
+                  <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      ส่งกลับแก้ไข
+                    </label>
+                  </div>
+                </div>
+                <iframe src="../uploads/pdftest.pdf" style="width: 100%; min-height: 450px;" frameborder="0"></iframe>
+                <br>
+                <hr>
+                <div class="d-flex ms-1 mb-3 align-items-center">
+                  <h5 class="mb-0">รูปถ่าย</h5>
+              <a class="mb-0 text-decoration-none text-dark badge bg-warning ms-3 me-1" style="cursor: pointer;"
+                data-bs-toggle="modal" data-bs-target="#md_imginfo">เต็มจอ</a>
+              <a href="../uploads/profile.png" target="_blank" class="mb-0 text-decoration-none badge bg-success"
+                style="cursor: pointer;">เปิดแท็ปใหม่</a>
+                </div>
+                <div class="mb-3 ms-1">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      ผ่านการตรวจสอบ
+                    </label>
+                  </div>
+                  <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      ส่งกลับแก้ไข
+                    </label>
+                  </div>
+                </div>
+            <img src="../uploads/profile.png" style="width: 100%; height: 300px; object-fit: contain;"> -->
+            <br><br><br><br><br><br><br><br><br><br>
+          </section>
+        </main>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal PDF -->
+  <div class="modal fade" id="md_fileinfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width: 100%; min-height: 100vh; margin: 0">
+      <div class="modal-content" style="min-height: 100vh;">
+
+        <div class="modal-body">
+          <iframe id="md_pdf" style="width: 100%; min-height: 85vh;" frameborder="0"></iframe>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal IMG -->
+  <div class="modal fade" id="md_imginfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width: 100%; min-height: 100vh; margin: 0">
+      <div class="modal-content" style="min-height: 100vh;">
+
+        <div class="modal-body">
+          <img id="md_img" style="width: 100%; height: 85vh; object-fit: contain;">
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="./global.js"></script>
+  <script>
+    var documentlist;
+    var idx = 0;
+    $(document).ready(() => {
+      set_cal($(".dateth"), new_date);
+
+      $.Thailand({
+        $district: $("#reg_subdistrict"), // input ของตำบล
+        $amphoe: $("#reg_district"), // input ของอำเภอ
+        $province: $("#reg_province"), // input ของจังหวัด
+        $zipcode: $("#reg_postcode") // input ของรหัสไปรษณีย์
+      });
+      $.Thailand({
+        $district: $("#reg_homesubdistrict"), // input ของตำบล
+        $amphoe: $("#reg_homedistrict"), // input ของอำเภอ
+        $province: $("#reg_homeprovince"), // input ของจังหวัด
+        $zipcode: $("#reg_homepostcode") // input ของรหัสไปรษณีย์
+      });
+
+
+
+      $("#reg_human").change(() => {
+        if ($('#reg_human').val() == 'other') {
+          $(".box_human").show()
+        } else {
+          $(".box_human").hide()
+        }
+      })
+
+      render()
+
+    })
+
+    function render() {
+      loading(true)
+      $.ajax({
+        method: 'get',
+        url: endpoint + '/utw-register-api/register/show/high',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwAdminToken
+        },
+        success: response => {
+          console.log(response)
+          if (response.status.code == 200) {
+            const data = response.data;
+
+            $('#txt_idcard').val(data.id_card)
+            $("#txt_tname").val(data.information.tname)
+            $("#txt_fname").val(data.information.fname)
+            $("#txt_lname").val(data.information.lname)
+            $("#txt_nation").val(data.information.nationality)
+            $("#txt_dob").val(data.information.date_of_birth)
+            $("#txt_blood").val(data.information.blood)
+            $("#txt_phoneno").val(data.information.phone)
+            $("#txt_email").val(data.information.email)
+            $("#txt_edulevel").val(data.is_grade)
+
+            $("#txt_eduyear").val(data.education.year)
+            $("#txt_oldschool").val(data.education.title_school)
+            $("#reg_subdistrict").val(data.education.sup_district_school)
+            $("#reg_district").val(data.education.district_school)
+            $("#reg_province").val(data.education.province_school)
+            $("#reg_postcode").val(data.education.postcode_school)
+
+            $("#txt_houseno").val(data.address.home_no)
+            $("#txt_road").val(data.address.home_no)
+            $("#txt_soi").val(data.address.alley)
+            $("#txt_moo").val(data.address.swine)
+            $("#reg_homesubdistrict").val(data.address.sup_district)
+            $("#reg_homedistrict").val(data.address.district)
+            $("#reg_homeprovince").val(data.address.province)
+            $("#reg_homepostcode").val(data.address.postcode)
+
+            $("#txt_fathername").val(data.parent.dad_name)
+            $("#txt_fathercareer").val(data.parent.dad_career)
+            $("#txt_fathercareerloca").val(data.parent.dad_address)
+            $("#txt_fatherphoneno").val(data.parent.dad_phone)
+
+            $("#txt_mothername").val(data.parent.mom_name)
+            $("#txt_mothercareer").val(data.parent.mom_career)
+            $("#txt_mothercareerloca").val(data.parent.mom_address)
+            $("#txt_motherphoneno").val(data.parent.mom_phone)
+
+            $("#reg_human").val(data.parent.relation)
+            $("#txt_fpkname").val(data.parent.owner_name)
+            $("#txt_pkcareer").val(data.parent.owner_career)
+            $("#txt_pkcareerloca").val(data.parent.owner_address)
+            $("#txt_pkphoneno").val(data.parent.owner_phone)
+            $("#txt_pkrelation").val(data.parent.owner_relation)
+
+            if ($('#reg_human').val() != 'other') {
+              $('#box_pkrelative').hide();
+            } else {
+              $('#box_pkrelative').show();
+            }
+
+            documentlist = data.document;
+            idx = data.id;
+
+            var html = '';
+            data.document.forEach((element, i) => {
+              var checked = '';
+              if (element.status == 'approve') {
+                checked = ' checked ';
+              }
+
+              if (String(element.path).toLowerCase().includes('.jpg') ||
+                String(element.path).toLowerCase().includes('.jpeg') ||
+                String(element.path).toLowerCase().includes('.png')
+              ) {
+
+                html += `
+                <div style="width: 99%;">
+                  <div class="d-flex ms-1 mb-3 align-items-center w-100">
+                    <div class="d-flex justify-content-between w-100">
+                      <div class="d-flex align-items-center">
+                        <h5 id="docname${i + 1}" class="mb-0">${element.title}</h5>
+                        <a onclick="temjor('${element.path}', 'img')" class="mb-0 text-decoration-none text-dark badge bg-warning ms-3 me-1" style="cursor: pointer;"
+                          data-bs-toggle="modal" data-bs-target="#md_imginfo">เต็มจอ</a>
+                        <a href="${element.path}" target="_blank" class="mb-0 text-decoration-none badge bg-success"
+                          style="cursor: pointer;">เปิดแท็ปใหม่</a>
+                      </div>
+                      <div></div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mb-3 ms-1">
+                    <div class="w-100">
+                      <div class="form-check">
+                        <input ${checked} onchange="tiktok(this , 'pass', ${i + 1})" class="form-check-input" type="radio" name="flexRadioDefault${i + 1}" value="${i + 1}_pass" id="flexRadioDefault${i + 1}" style="width: 25px; height: 25px;">
+                        <label class="form-check-label" for="flexRadioDefault${i + 1}" style="margin-left: 10px; margin-top: 4px;">
+                          ผ่านการตรวจสอบ
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input onchange="tiktok(this , 'reject', ${i + 1})" class="form-check-input" type="radio" value="${i + 1}_reject"  name="flexRadioDefault${i + 1}" id="flexRadioDefault${i + 1}" style="width: 25px; height: 25px;">
+                        <label class="form-check-label" for="flexRadioDefault${i + 1}" style="margin-left: 10px; margin-top: 4px;">
+                          ส่งกลับแก้ไข
+                        </label>
+                      </div>
+                    </div>
+                    <span class="btn btn-primary w-100" style="display: none;">บันทึก</span>
+                  </div>
+                  <input id="${i + 1}_reason" type="text" class="reason form-control" placeholder="สาเหตุ" style="display: none; width: 97%; margin-left: 10px; margin-bottom: 20px;">
+                </div>
+                <img src="${element.path}" style="width: 100%; height: 300px; object-fit: contain;">
+                <br>
+                <hr>`
+              }
+              else {
+                html += `
+                <div class="d-flex ms-1 mb-3 align-items-center">
+                  <h5 id="docname${i + 1}" class="mb-0">${element.title}</h5>
+                  <a onclick="temjor('${element.path}', 'pdf')" class="mb-0 text-decoration-none text-dark badge bg-warning ms-3 me-1" style="cursor: pointer;"
+                    data-bs-toggle="modal" data-bs-target="#md_fileinfo">เต็มจอ</a>
+                  <a href="${element.path}" target="_blank" class="mb-0 text-decoration-none badge bg-success"
+                    style="cursor: pointer;">เปิดแท็ปใหม่</a>
+                </div>
+                <div class="w-100 mb-3 ms-1">
+                  <div class="d-flex justify-content-between align-items-center mb-3 ms-1">
+                    <div class="w-100">
+                      <div class="form-check">
+                        <input ${checked} onchange="tiktok(this , 'pass', ${i + 1})" class="form-check-input" type="radio" name="flexRadioDefault${i + 1}" value="${i + 1}_pass"  id="flexRadioDefault${i + 1}" style="width: 25px; height: 25px;">
+                        <label class="form-check-label" for="flexRadioDefault${i + 1}" style="margin-left: 10px; margin-top: 4px;">
+                          ผ่านการตรวจสอบ
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input onchange="tiktok(this , 'reject' , ${i + 1})" class="form-check-input" type="radio" value="${i + 1}_reject" name="flexRadioDefault${i + 1}" id="flexRadioDefault${i + 1}" style="width: 25px; height: 25px;">
+                        <label class="form-check-label" for="flexRadioDefault${i + 1}" style="margin-left: 10px; margin-top: 4px;">
+                          ส่งกลับแก้ไข
+                        </label>
+                      </div>
+                    </div>
+                    <span class="btn btn-primary w-100" style="display: none;">บันทึก</span>
+                  </div>
+                  <input id="${i + 1}_reason" type="text" class="reason form-control" placeholder="สาเหตุ" style="display: none; width: 97%; margin-left: 10px; margin-bottom: 20px;">
+                </div>
+                <iframe src="${element.path}" style="width: 100%; min-height: 450px;" frameborder="0"></iframe>
+                <br>
+                <hr>
+                `
+              }
+            });
+            html += `<br><br><br><br><br><br><br><br><br><br>`
+            $("#checkfilerender").html(html)
+          }
+          else if (response.status.code == 201) {
+            $('#mainbox').html(`
+            <div style="width: 100%; height: 50vh;" class="d-flex flex-column align-items-center justify-content-center">
+              <img src="https://cdn.discordapp.com/attachments/952512711097479171/1070786003893243985/Questions-pana.png" style="width: 20%; object-fit: contain;">
+              <br>
+              <h1>ไม่มีรายชื่อการสมัครแล้ว</h1>
+              <br>
+              <a class="text-primary" style="cursor: pointer;" onclick="window.location.reload()">รีโหลด</a>
+            </div>
+            `)
+            $('.btnapp').remove()
+          }
+          loading(false)
+        }, error: err => {
+          loading(false)
+          Swal.fire({
+            icon: 'error',
+            title: 'System error 500'
+          })
+        }
+
+      })
+    }
+
+    function temjor(path, source) {
+      if (source == 'img') {
+        $('#md_img').attr('src', path)
+      } else {
+        $('#md_pdf').attr('src', path)
+      }
+    }
+
+    function tiktok(elem, act, index) {
+      var pass = 1;
+      //1 == ไม่ขึ้นอะไรเลย
+      //2 == ขึ้นสีเหลือง
+      //3 == ขึ้นสีฟ้า
+
+      for (let i = 0; i < documentlist.length; i++) {
+        const element = documentlist[i];
+        if (!$(`input[name="flexRadioDefault${i + 1}"]:checked`).val()) {
+          pass = 1;
+          break;
+        } else {
+          if (String($(`input[name="flexRadioDefault${i + 1}"]:checked`).val()).includes('reject')) {
+            pass = 2
+            break;
+          } else {
+            pass = 3;
+          }
+        }
+      }
+
+      if (pass == 1) {
+        $("#loading_approve").css('display', 'none')
+        $("#loading_reject").css('display', 'none')
+      }
+      else if (pass == 2) {
+        $("#loading_approve").css('display', 'none')
+        $("#loading_reject").css('display', 'flex')
+      }
+      else if (pass == 3) {
+        $("#loading_approve").css('display', 'flex')
+        $("#loading_reject").css('display', 'none')
+      }
+
+      if (act == 'reject') {
+        console.log(`#${index}_reason`);
+        $(`#${index}_reason`).css('display', 'flex')
+      } else {
+        $(`#${index}_reason`).css('display', 'none')
+      }
+    }
+
+    function approveList() {
+      var pass = true;
+      var docname = ''
+      var title = ''
+      var text = ''
+      $(".reason").removeClass('is-invalid')
+
+      for (let i = 0; i < documentlist.length; i++) {
+        const element = documentlist[i];
+        if (!$(`input[name="flexRadioDefault${i + 1}"]:checked`).val()) {
+          pass = false;
+          title = 'โปรดตรวจสอบเอกสาร';
+          text = $(`#docname${i + 1}`).text();
+
+          break;
+        } else {
+          if (String($(`input[name="flexRadioDefault${i + 1}"]:checked`).val()).includes('reject') && $(`#${i + 1}_reason`).val().length <= 0) {
+            pass = false;
+            title = 'โปรดกรอกสาเหตุ'
+            text = 'สำหรับเอกสาร' + $(`#docname${i + 1}`).text()
+            $(`#${i + 1}_reason`).addClass('is-invalid')
+            break;
+          }
+        }
+      }
+
+      if (pass) {
+        loading(true)
+        var dob = $('#txt_dob').val();
+
+        var pk = ''
+        var ppk = {};
+        if ($('#reg_human').val() == 'dad') {
+          pk = $('#txt_fathername').val()
+          ppk.name = $('#txt_fathername').val()
+          ppk.career = $('#txt_fathercareer').val()
+          ppk.address = $('#txt_fathercareerloca').val()
+          ppk.phone = $('#txt_fatherphoneno').val()
+          ppk.relation = $('#reg_human').val()
+        } else if ($('#reg_human').val() == 'mom') {
+          pk = $('#txt_mothername').val();
+          ppk.name = $('#txt_mothername').val()
+          ppk.career = $('#txt_mothercareer').val()
+          ppk.address = $('#txt_mothercareerloca').val()
+          ppk.phone = $('#txt_motherphoneno').val()
+          ppk.relation = $('#reg_human').val()
+        } else {
+          pk = $('#txt_fpkname').val();
+          ppk.name = $('#txt_fpkname').val()
+          ppk.career = $('#txt_pkcareer').val()
+          ppk.address = $('#txt_pkcareerloca').val()
+          ppk.phone = $('#txt_pkphoneno').val()
+          ppk.relation = $('#txt_pkrelation').val()
+        }
+
+        var payStatus = 'approve';
+        for (let i = 0; i < documentlist.length; i++) {
+          documentlist[i].status = 'approve';
+          if (String($(`input[name="flexRadioDefault${i + 1}"]:checked`).val()).includes('reject')) {
+            payStatus = 'correct';
+            documentlist[i].status = 'correct';
+            documentlist[i].comment = $(`#${i + 1}_reason`).val();
+          }
+        }
+
+        $.ajax({
+          method: 'patch',
+          url: endpoint + `/utw-register-api/identify/${idx}/high`,
+          headers: {
+            Authorization: 'Bearer ' + localStorage.utwAdminToken
+          },
+          data: {
+            id_card: $('#txt_idcard').val(),
+            information: {
+              tname: $('#txt_tname').val(),
+              fname: $('#txt_fname').val(),
+              lname: $('#txt_lname').val(),
+              nationality: $('#txt_nation').val(),
+              date_of_birth: dob,
+              blood: $('#txt_blood').val(),
+              phone: $('#txt_phoneno').val().replace(/-/g, ''),
+              email: $('#txt_email').val()
+            },
+            address: {
+              home_no: $('#txt_houseno').val(),
+              road: $('#txt_road').val() ? $('#txt_road').val() : '-',
+              alley: $('#txt_soi').val() ? $('#txt_soi').val() : '-',
+              swine: $('#txt_moo').val() ? $('#txt_moo').val() : '-',
+              sup_district: $('#reg_homesubdistrict').val(),
+              district: $('#reg_homedistrict').val(),
+              province: $('#reg_homeprovince').val(),
+              postcode: $('#reg_homepostcode').val()
+            },
+            is_grade: parseInt($('#txt_edulevel').val()),
+            education: {
+              "year": $("#txt_eduyear").val(),
+              "title_school": $("#txt_oldschool").val(),
+              "sup_district_school": $("#reg_subdistrict").val(),
+              "district_school": $("#reg_district").val(),
+              "province_school": $("#reg_province").val(),
+              "postcode_school": $("#reg_postcode").val()
+            },
+            parent: {
+              "dad_name": $('#txt_fathername').val(),
+              "dad_career": $('#txt_fathercareer').val(),
+              "dad_address": $('#txt_fathercareerloca').val(),
+              "dad_phone": $('#txt_fatherphoneno').val().replace(/-/g, ''),
+              "mom_name": $('#txt_mothername').val(),
+              "mom_career": $('#txt_mothercareer').val(),
+              "mom_address": $('#txt_mothercareerloca').val(),
+              "mom_phone": $('#txt_motherphoneno').val().replace(/-/g, ''),
+              "owner_name": pk,
+              "owner_career": $('#txt_pkcareer').val(),
+              "owner_address": $('#txt_pkcareerloca').val(),
+              "owner_phone": $('#txt_pkphoneno').val(),
+              "owner_relation": $('#txt_pkrelation').val()
+            },
+            document: documentlist,
+            status: payStatus,
+          }, success: response => {
+            console.log('save', response)
+            loading(false)
+            var pax = true;
+            for (let i = 0; i < documentlist.length; i++) {
+              if (documentlist[i].status != 'approve') {
+                pax = false;
+                break;
+              }
+
+            }
+
+            if (pax) {
+              setRoom(idx)
+            }
+            Swal.fire({
+              icon: 'success',
+              title: 'การบันทึกข้อมูลเรียบร้อย',
+              confirmButtonText: 'ตกลง',
+            }).then((res2) => {
+              if (res2.isConfirmed) {
+                window.location.href = './registerstudent4.html'
+              } else {
+                window.location.href = './registerstudent4.html'
+              }
+            })
+          }, error: err => {
+            loading(false)
+            Swal.fire({
+              icon: 'error',
+              title: 'System error 500'
+            })
+            console.log('save err', err)
+          }
+        })
+      } else {
+        Swal.fire({
+          icon: 'warning',
+          title: title,
+          confirmButtonText: 'ตกลง',
+          text: text
+        })
+      }
+    }
+
+    function rejectList() {
+      Swal.fire({
+        icon: 'info',
+        title: 'คุณต้องการไม่อนุมัติ ?',
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        denyButtonText: 'ยืนยัน',
+        cancelButtonText: 'ยกเลิก'
+      }).then((res) => {
+        if (res.isDenied) {
+          loading(true)
+          $.ajax({
+            method: 'patch',
+            url: endpoint + `/utw-register-api/unapprove/${idx}/high`,
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwAdminToken
+            },
+            success: response => {
+              console.log(response)
+              loading(false)
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                })
+              }
+              else {
+
+              }
+              loading(false)
+            }, error: err => {
+              loading(false)
+              Swal.fire({
+                icon: 'error',
+                title: 'System error 500'
+              })
+              console.log('save err', err)
+            }
+          })
+        }
+      })
+    }
+
+    function setRoom(idx) {
+      $.ajax({
+        method: 'patch',
+        url: endpoint + `/utw-register-api/give-classroom/${idx}/high`,
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwAdminToken
+        },
+        success: response => {
+          console.log(response)
+
+          loading(false)
+        }, error: err => {
+          loading(false)
+          Swal.fire({
+            icon: 'error',
+            title: 'System error 500'
+          })
+          console.log('save err', err)
+        }
+      })
+    }
+
+    function changelevel() {
+      Swal.fire({
+        icon: "warning",
+        title: "ยืนยันการเปลี่ยนระดับ?",
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "",
+        denyButtonText: `ยืนยัน`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isDenied) {
+          if ($('#txt_edulevel').val() == '0') {
+            $('#txt_edulevel').val('1')
+          } else {
+            $('#txt_edulevel').val('0')
+          }
+
+          $.ajax({
+            method: 'patch',
+            url: endpoint + `/utw-register-api/change-level/${idx}/high`,
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwAdminToken
+            },
+            data: {
+              level: $('#txt_edulevel').val()
+            }, success: response => {
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                }).then(() => {
+                  window.location.href = './registerstudent4.html'
+                })
+              }
+              else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'System error 501'
+                })
+              }
+            }, error: err => {
+              loading(false)
+              Swal.fire({
+                icon: 'error',
+                title: 'System error 500'
+              })
+              console.log('save err change lvl 1', err)
+            }
+          })
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>

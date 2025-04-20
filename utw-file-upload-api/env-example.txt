@@ -1,0 +1,2 @@
+AuthRepo="dev" // dev uat prd
+port=

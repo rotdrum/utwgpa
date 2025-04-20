@@ -1,0 +1,1 @@
+var domainApiCors = 'https://utwgpa.com/uat/utw-cors-api';

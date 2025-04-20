@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script src="../config.js"></script>
+    <script>
+        $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: `${domainApiModifyGrade}/follow_groub/getAll.php`,
+        headers: { Authorization: `Bearer 483bdbb972a2b8b89e71abc1de4848c9@cd73502828457d15655bbd7a63fb0bc8@e74752deafa4903e11d6351b7b63d476` },
+        data: {
+            _method: "GET",
+            user_id: 35,
+        },
+        success: function(response) {
+            console.log("good", response);
+            
+        }, error: function(err) {
+            console.log("bad", err);
+        }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม</title>
+    <link rel="icon" href="./imgs/logomain.png">
+    <meta name="description" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม">
+    <meta name="keywords" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม">
+    <meta name="author" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม">
+    <meta name="copyright" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม">
+    <meta name="robots" content="FOLLOW">
+
+    <meta name="og:image" content="./imgs/preload.png" />
+    <meta property="og:image" content="./imgs/preload.png" />
+    <meta name="og:title" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม" />
+    <meta property="og:title" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม" />
+    <meta name="og:description" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม" />
+    <meta property="og:description" content="กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม" />
+    <meta property="og:type" content="website" /> 
+
+    <link rel="stylesheet" href="./global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        .systembox {
+            transition: .3s;
+            height: 150px;
+            width: 60%;
+        }
+        .systembox:hover {
+            transform: scale(1.02);
+        }
+        .hamburger {
+            display: none;
+        }
+        .submenu {
+            display: none;
+            width: 100%;
+            background: #fff;
+            z-index: 99;
+            position: fixed;
+            top: 83px;
+        }
+        .submenu a {
+            display: flex;
+            width: 100%;
+            padding: 20px;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--po);
+        }
+        .banner {
+            width: 100%; margin-bottom: 30px;  border-radius: 20px; object-fit: contain;
+        }
+        .cardbox {
+            border: 2px solid #FFB923;
+            border-radius: 20px;
+            background: #fff8e8;
+
+        }
+        @media screen and (max-width: 850px) {
+            
+            .menu {
+                display: none ;
+            }
+            .hamburger {
+                display: block;
+            }
+            navbar {
+                padding: 20px !important;
+            }
+            .navtitle {
+                flex-direction: column;
+                align-items: flex-start !important;
+            }
+            .navtitle p {
+                margin-left: 0 !important;
+            }
+            .vh1 {
+                height: 50vh !important;
+            }
+            .vh1 h1 {
+                font-size: 1.5rem !important;
+            }.vh1 p {
+                font-size: .8rem !important;
+            }
+          
+            .vh1 .btn {
+                font-size: 1rem !important;
+                padding: 10px 30px !important;
+            }
+            .vh2 {
+                width: 90% !important;
+                margin: 0 auto;
+            }
+            .vh2 > h1 {
+                font-size: 1.2rem !important;
+            }
+            .vh2 > h3 {
+                font-size: 1rem !important;
+            }
+            .vh2 .systemrender {
+                grid-template-columns: repeat(1, 1fr) !important;
+                grid-template-rows: repeat(auto-fill, 100px) !important;
+            }
+            .systembox {
+                height: 100px;
+            }
+            .vh2 .systemall .boxitems {
+                min-width: 70px !important;
+                min-height: 70px !important;
+            }
+            .vh2 .systemall .boxitems i {
+                font-size: 1.5rem !important;
+            }
+            .vh2 .systemall a {
+                width: 80%;
+            }
+            .vh2 .systemall .systembox .boxitemstext h1 {
+                font-size: .8rem !important;
+            }
+            .vh2 .systemall .systembox .boxitemstext p {
+                font-size: .8rem !important;
+            }
+            footer {
+                flex-direction: column ;
+                padding: 30px 20px !important;
+            }
+            .footerbox {
+                display: flex;
+                flex-direction: column !important;
+            }
+            .footerbox div {
+                margin-bottom: 20px ;
+            }
+            footer > div {
+                margin-bottom: 20px;
+            }
+            .systemall {
+                flex-direction: column;
+            }
+            .systemallborder {
+                margin-bottom: 20px;
+            }
+            .systemallbox {
+                width: 100% !important;
+            }
+            .hide {
+                display: none;
+            }
+        }
+        
+        
+        
+    </style>
+</head>
+<body style="background: #fff;">
+
+    <div class="container mx-auto">
+        <navbar class=" flex justify-between items-center" style="padding: 20px 0; position: sticky; top:0; background: #fff;">
+            <div class="navtitle flex items-center">
+                <a href="#" style="font-size: 1.5rem; font-weight: 500;padding: 12px 40px; border-radius: 30px;background: linear-gradient(125deg, var(--po), var(--pd));color:var(--pw);font-size: 1.2rem; cursor: pointer;">ระบบสารสนเทศ</a>
+                <p class="hide" style="color: #adadad; font-size: .8rem; margin-left: 10px;">กลุ่มบริหารวิชาการ โรงเรียนอุทัยวิทยาคม</p>
+            </div>
+            <div class="menu">
+                <a href="#" style="font-size: 1.1rem; padding: 5px 20px;">หน้าแรก</a>
+                <a onclick="openLogin()" style="cursor: pointer; font-size: 1.1rem; padding: 5px 20px; background: var(--pd2); color: var(--pd); border-radius: 30px;">ผู้ดูแลระบบ</a>
+            </div>
+            <i onclick="openmenu()" style="font-size: 2rem; cursor: pointer;" class="hamburger fa-solid fa-bars"></i>
+        </navbar>
+        <div class="submenu">
+            <div style="padding: 0; "></div>
+            <a onclick="openLogin()" style="cursor: pointer;">ผู้ดูแลระบบ</a>
+            
+        </div>
+
+        <!-- Herder -->
+        <div class="vh1 flex flex-col items-center justify-center" style="height: 90vh; display: none;">
+            <h1 style="font-size: 3.6rem; font-weight: bold;">กลุ่มบริหารวิชาการ</h1>
+            <h1 style="font-size: 3.6rem; font-weight: bold;">โรงเรียนอุทัยวิทยาคม</h1>
+            <p style="font-size: 1.3rem; margin-top: 10px;">พัฒนาเทคโนโลยีใหม่ๆ ให้กับโรงเรียนอุทัยวิทยาคม</p>
+            <p style="font-size: 1.3rem;">ศูนย์กลางแห่งการเรียนรู้</p>
+            <br>
+            <div class="flex items-center">
+                <a href="./modify-grade" target="_blank" class="btn" style="padding: 12px 40px; border-radius: 30px;background: linear-gradient(125deg, var(--po), var(--pd));color:var(--pw);font-size: 1.2rem; cursor: pointer;">
+                    เข้าสู่ระบบ
+                </a>
+            </div>
+        </div>
+
+         <!-- Body -->
+        <div class="vh2" style="width: 100%;">
+         
+            <!-- <h1 style="font-weight: bold; font-size: 2rem; text-align: center;">ระบบสารสนเทศ</h1> -->
+            <img class="banner banner-mobile" src="./imgs/banner.png" >
+
+
+            <div class="systemall" style="width:100%; display: flex; justify-content: space-between;">
+                <div class="cardbox systemallborder systemallbox" style=" width: 50%; margin-right: 20px; padding: 20px; ">
+                    <h1 style="text-align: center; color:var(--pd); font-size: 2rem; font-weight: bold;">ระบบสำหรับนักเรียน</h1>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <a onclick="closesystem()" target="_blank" class="flex items-center systembox">
+                            <!-- <div style="min-width: 100px; min-height: 100px; background: #adadad; " class="rounded-xl flex justify-center items-center boxitems"> -->
+                            <div style="min-width: 100px; min-height: 100px; background: #adadad " class="rounded-xl flex justify-center items-center boxitems">
+                                <i class="fa-solid fa-users" style="font-size: 2.5rem; color: var(--pw);" ></i>
+                            </div>
+                            <div class="ml-6 boxitemstext">
+                                <h1 style="font-size: 1.5rem; ">ระบบรับสมัครนักเรียน</h1>
+                                <p style="font-weight: 400; color: #8b8b8b;">สำหรับผู้สนใจเข้าศึกษาเรียนต่อ</p>
+                            </div>
+                        </a>
+                        <a href="./modify-grade" target="_blank" class="flex items-center systembox">
+                            <div style="min-width: 100px; min-height: 100px; background: linear-gradient(125deg, var(--po), var(--pd)); " class="rounded-xl flex justify-center items-center boxitems">
+                                <i class="fa-solid fa-user" style="font-size: 2.5rem; color: var(--pw);" ></i>
+                            </div>
+                            <div class="ml-6 boxitemstext">
+                                <h1 style="font-size: 1.5rem; ">ระบบแก้ตัวนักเรียนและระบบลงทะเบียนเรียนซ้ำ</h1>
+                                <p style="font-weight: 400; color: #8b8b8b;">สำหรับนักเรียนผู้มีผลการเรียน (0 ร มส. มผ.) และสำหรับนักเรียนที่ต้องการลงทะเบียนเรียนซ้ำ</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="cardbox systemallbox" style="width: 50%; padding: 20px;">
+                    <h1 style="text-align: center;color:var(--pd); font-size: 2rem; font-weight: bold;">ระบบสำหรับครู</h1>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <a href="./modify-grade" target="_blank" class="flex items-center systembox">
+                            <div style="min-width: 100px; min-height: 100px; background: linear-gradient(125deg, var(--po), var(--pd)); " class="rounded-xl flex justify-center items-center boxitems">
+                                <i class="fa-solid fa-user" style="font-size: 2.5rem; color: var(--pw);" ></i>
+                            </div>
+                            <div class="ml-6 boxitemstext">
+                                <h1 style="font-size: 1.5rem; ">ระบบแก้ตัวนักเรียน</h1>
+                                <p style="font-weight: 400; color: #8b8b8b;">สำหรับนักเรียนผู้มีผลการเรียน (0 ร มส. มผ.)</p>
+                            </div>
+                        </a>
+                        <a onclick="closesystem()" style="cursor: pointer;" class="flex items-center systembox">
+                            <div style="min-width: 100px; min-height: 100px; background: #adadad; " class="rounded-xl flex justify-center items-center boxitems">
+                            <!-- <div style="min-width: 100px; min-height: 100px; background: linear-gradient(125deg, var(--po), var(--pd)); " class="rounded-xl flex justify-center items-center boxitems"> -->
+                                <i class="fa-solid fa-newspaper" style="font-size: 2.5rem; color: #fff;" ></i>
+                            <!-- <i class="fa-solid fa-newspaper" style="font-size: 2.5rem; color: var(--pw);" ></i> -->
+                            </div>
+                            <div class="ml-6 boxitemstext">
+                                <h1 style="font-size: 1.5rem; ">ระบบลงทะเบียนเรียนซ้ำ</h1>
+                                <p style="font-weight: 400; color: #8b8b8b;">สำหรับนักเรียนที่ต้องการลงทะเบียนเรียนซ้ำ</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <hr>
+
+        <footer style="width: 100%; padding: 30px 0;" class="flex justify-between">
+            <div>
+                <a href="#" style="font-size: 1.5rem; font-weight: 500;">กลุ่มบริหารวิชาการ</a>
+                <p style="color: #adadad; font-size: .8rem;">โรงเรียนอุทัยวิทยาคม</p>
+            </div>
+            <div class="footerbox flex">
+                <div style="width: 250px;">
+                    <p>จัดทำโดย</p>
+                    <p style="color: #adadad; font-size: .8rem;">Realbear Production</p>
+                    <p style="color: #adadad; font-size: .8rem;"><i class="fa-regular fa-copyright"></i> 2022. All rights reserved</p>
+                </div>
+                <div style="width: 250px;">
+                    <p>ติดต่อ</p>
+                    <p style="color: #adadad; font-size: .8rem;">โรงเรียนอุทัยวิทยาคม เลขที่ 55 หมู่ 2 ต.สะแกกรัง อ.เมือง จ.อุทัยธานี 61000 </p>
+                    <p style="color: #adadad; font-size: .8rem;">โทรศัพท์ : 0-5651-1334</p>
+                    <p style="color: #adadad; font-size: .8rem;">โทรสาร : 0-5651-4471</p>
+                    <p style="color: #adadad; font-size: .8rem;"></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="md_admin" class="modal" style="display: none; opacity: 1; transform: translateY(0px); transition: .3s; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; justify-content: center; align-items: center; z-index: 99;">
+        <div onclick="close_modal()"  style="position: fixed; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);"></div>
+        <div style="position: relative; display: flex; align-items: center; flex-direction: column; min-width: 50%; max-width: 90%; max-height: 90vh; border-radius: 10px; background: transparent; z-index: 100; ">
+          <!-- <div onclick="close_modal()" style="position: absolute; top: 5px; right: 15px; font-size: 1.5rem;">
+            <i class="fas fa-times"></i>
+          </div>
+      
+          <p style="font-size: 32px; font-family: 'circularblack';">My modal!</p> -->
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700" style="width: 100%;">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    ผู้ดูแลระบบ
+                </h3>
+                <button onclick="close_modal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">บัญชีผู้ใช้</label>
+                    <input type="text" id="txt_usd" class="enter bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="บัญชีผู้ใช้" >
+                </div>
+                <div>
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสผ่าน</label>
+                    <input type="password" id="txt_pwd" class="enter bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="รหัสผ่าน" >
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button onclick="loginnow()" style=" background: linear-gradient(125deg, var(--po), var(--pd));"  type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เข้าสู่ระบบ</button>
+                <button onclick="close_modal()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">ปิด</button>
+            </div>
+        </div>
+          
+      
+        </div>
+    </div>
+
+
+   
+    
+    <script src="global.js"></script>
+    <script>
+        if (window.location.href.indexOf("/uat") > -1) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'คำเตือน! โหมดของนักพัฒนาระบบ',
+                text: 'หากคุณคือนักเรียนหรือครู กรุณาใช้งานในระบบปกติที่ http://utwgpa.com',
+                confirmButtonText: "รับทราบ"
+            })
+        }
+
+        function openmenu() {
+            $('.submenu').slideToggle()
+        }
+
+        function closesystem() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'ขออภัยในความไม่สะดวก',
+                text: 'ระบบปิดปรับปรุง'
+            })
+        }
+
+        function openLogin() {
+            $('#md_admin').css('display','flex')
+        }
+        function close_modal() {
+            $('.modal').hide()
+            $("html").css('overflow','scroll')
+        }
+        function loginnow() {
+            if($('#txt_usd').val().length <=0 ) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'โปรดกรอกบัญชีผู้ใช้',
+                })
+            }
+            else if($('#txt_pwd').val().length <=0 ) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'โปรดกรอกรหัสผ่าน',
+                })
+            }
+            else {
+                loading(true)
+                $.ajax({
+                    method: 'post',
+                    url: endpoint + '/utw-cors-api/login-admin.php',
+                    data: {
+                        username: $('#txt_usd').val(),
+                        password: $('#txt_pwd').val()
+                    }, success: response => {
+                        console.log(response)
+                        loading(false)
+                        if(response.status.code == 200) {
+                            localStorage.utwAdminToken = response.data.token;
+                            localStorage.bbsidebar = 'sidebar-dashboard';
+                            window.location.href = './academic/dashboard.html'
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'บัญชีผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง'
+                            })
+                        }
+                    }, error: err => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'บัญชีผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง'
+                        })
+                        loading(false)
+                    }
+                })
+            }
+        }
+
+        $(".enter").keypress(function(event){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if(keycode == '13'){
+                loginnow()
+            }
+        });
+    </script>
+</body>
+</html>

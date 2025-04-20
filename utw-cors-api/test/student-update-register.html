@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script src="./config.js"></script>
+    <script>
+        $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: `${domainApiCors}/student-update-register.php`,
+        data: {
+            id: 44,
+            email: "s26631@utw.ac.th",
+            class: 1,
+            room: 1,
+            mail_token: "FSDSDFSFFEWFWWFSDSDFSFFEWFWWFSDSDFSFFEWFWWFSDSDFSFFEWFWWFSDSDFSFFEWFWWFSDSDFSFFEWFWW", /* access_token (gmail) */
+        },
+        success: function(response) {
+            console.log("good", response);
+            
+        }, error: function(err) {
+            console.log("bad", err);
+        }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานกลุ่มสาระ</title>
+    <link rel="icon" href="../imgs/logomain.png">
+    <link rel="stylesheet" href="./global.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    
+    <div class="page">
+        <div onclick="keepSidebar()" class="overlaysidebar" style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);"></div>
+        <div class="fakesidebar">
+              
+        </div>
+        <div class="sidebar">
+          <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+            <i class="bi bi-box-arrow-in-left text-white"></i>
+          </div>
+          <div id="sidebartitle" class="d-flex align-items-center">
+               
+          </div>
+    
+          <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <div style="display: flex; align-items: center;">
+                <div onclick="toggleSidebar()" class="hamburger me-3" >
+                  <i class="bi bi-list"></i>
+                </div>
+                <input type="text" placeholder="ค้นหา" class="form-control">
+              </div>
+            </div>
+            <div id="boxProfile" class="content-profile">
+              
+            </div>
+          </div>
+          <div class="content-page">
+            <div class="d-flex mt-3 justify-content-between align-items-center mb-3">
+                <h2>นักเรียนที่ดำเนินการเรียนซ้ำเกินเวลา</h2>
+            </div>
+
+            <div id="render">
+
+            </div>
+
+            
+    
+          </div>
+        </div>
+      </div>
+
+
+    <script src="./global.js"></script>
+    <script>
+      var data;
+      var extra_name;
+      $(document).ready(() => {
+        // set_cal($("#std"), new_date);
+        // set_cal($("#expt"), new_date);
+        render()
+      })
+
+      function clearData(i, param, idx) {
+        const info = data[i];
+        Swal.fire({
+          icon: "info",
+          title: "โปรดยืนยันการล้างข้อมูล",
+          text: `กดปุ่ม "ยืนยัน" เพื่อล้างข้อมูล`,
+          confirmButtonText: "ยืนยัน",
+          cancelButtonText: "ยกเลิก",
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then((res) => {
+          if(res.isConfirmed) {
+
+            var ids = [];
+            if(param && param == 'onlyfan') {
+              ids.push(idx);
+            }
+            else {
+              var lng = $(`input[name="compliance${i}"]:checked`).length;
+              for (let x = 0; x < lng; x++) {
+                var id = $(`input[name="compliance${i}"]:checked`)[x].id;
+                var a = $(`#${id}`).val()
+                ids.push(a);
+              }
+            }
+
+            
+            console.log(ids)
+            var settings = {
+                "url": endpoint + "/utw-repeat-api/admin/update/register-again",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+                },
+                data: {
+                  ids: JSON.stringify(ids)
+                }
+            };
+            $.ajax(settings).done(function (response) {
+              if(response.status.code == 200) {
+                Swal.fire({
+                  icon: "success",
+                  title: "สำเร็จ",
+                  timer: 2000,
+                })
+                render();
+              }
+            })
+          }
+        })
+      }
+
+      function render() {
+        loading(true);
+        var settings = {
+            "url": endpoint + "/utw-repeat-api/admin/find/register-again",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+            },
+        };
+        $.ajax(settings).done(function (response) {
+          console.log(">>>", response)
+          if(response.status.code == 200) {
+            data = response.data;
+            var html = "";
+            var lastsubject = "";
+            for (let i = 0, j = 1, r = 1; i < response.data.length; i++, j++) {
+              const element = response.data[i];
+              if(lastsubject != element.subject_code) {
+                console.log('lastsubject', lastsubject)
+                r++;
+                if(i != 0) {
+                  html += `
+                  </tbody>
+                  </table>
+                  </div>
+                  `;
+                }
+
+                j = 1;
+                lastsubject = element.subject_code;
+                html += `
+                <br>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <h5 class="mb-0">${element.subject_code} ${element.subject_title} ม.${element.student.class}/${element.student.room}</h5>
+                  <div onclick="clearData(${r})" class="btn btn-danger" id="btn_add${r}" style="font-size: 1.2rem; display: none;">
+                    <div class="spinner-border text-light" role="status" style=" width: 1rem; height: 1rem;">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span>ล้างข้อมูล</span>
+                  </div>
+                </div>
+                
+                <div class="card p-2">
+                  <table class="w-100 table table-hover table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>ลำดับ</th>
+                        <th>ชื่อ-สกุล</th>
+                        <th>ปีการศึกษา</th>
+                        <th>ระดับชั้น</th>
+                        <th>วันที่ลงทะเบียน</th>
+                        <th>ผลการเรียน</th>
+                        <th style="width:300px;">สถานะ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                `;
+              }
+
+              var status = "";
+              var btn_register = "";
+              var inp_check = "";
+              var color = "#f39c12";
+              btn_register = `
+                <div class="btn_raikon${r} btn-sm btn-danger ms-3 "
+                      onclick="clearData(${r}, 'onlyfan', '${element.id}')"
+                      style="cursor: pointer;">
+                    ล้างข้อมูล
+                </div>`;
+              inp_check = `
+                <input onclick="checkTik(this, ${r})" id="checkbox_compliance${element.id}"  type="checkbox" name="compliance${r}" value="${element.id}" style="display: none;">
+                <label class="checkbox checkbox-success mb-1" for="checkbox_compliance${element.id}" style="width: fit-content; background: #fff;">
+                    <div class="checkbox-circle" style="margin-right: 0;">
+                        <i class="bi bi-check" style="display: none;"></i>
+                    </div>
+                </label>
+                `;
+              if(element.status == 'register') {
+                status = `<span class="ms-2">ลงทะเบียนแล้ว</span>`;
+              } 
+              else if(element.status == 'wait_register') {
+                status = `<span class="ms-2">รอลงทะเบียน</span>`;
+              }
+              else if(element.status == 'wait_success') {
+                status = `<span class="ms-2">สำเร็จ (รอส่งเกรด)</span>`;
+                color = "#1abc9c";
+              }
+              else if(element.status == 'enrol') {
+                status = `<span class="ms-2">มอบหมายงานแล้ว</span>`;
+                color = "#3498db";
+              }
+              else if(element.status == 'progress') {
+                status = `<span class="ms-2">กำลังดำเนินการ</span>`;
+              }
+              else {
+                status = `<span class="ms-2">มอบหมายงาน</span>`;
+              }
+
+             
+
+              html += `
+              <tr>
+                <td>
+                  ${inp_check}
+                </td>
+                <td>${j}</td>
+                <td>${element.student.tname}${element.student.fname} ${element.student.lname}</td>
+                <td>${element.term_at}/${element.year_at}</td>
+                <td>ม.${element.student.class}/${element.student.room}</td>
+                <td>${element.start_date ? dateentoth(getDateMil(new Date(element.start_date).getTime()).split(" ")[0]) : '-' }</td>
+                <td>${element.grade_old}</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center " style="color: ${color};">
+                      <i class="bi bi-circle-fill" style="font-size: .7rem;"></i>
+                      ${status}
+                    </div>
+                    ${btn_register}
+                  </div>
+                </td>
+              </tr>`;
+            }
+            $("#render").html(html)
+            loading(false);
+          }
+          else {
+
+            loading(false)
+            $("#render").html(`
+              <div class="d-flex justify-content-center align-items-center flex-column">
+                <img src="../imgs/notfound.png" style="width: 30%; object-fit: contain;" />
+                <p class="mt-3">ไม่พบข้อมูล</p>
+              </div>
+            `)
+          }
+        })
+      }
+
+      var end_date;
+      function checkUnit(elem) {
+        var val = $(`#${elem.id}`).val();
+        
+        if(val == "") {
+          $(".box_unit").css('display','none')
+        } else {
+          var a = (parseFloat(val)*20)/0.5;
+          var b = (80 / 100) * a;
+          $("#txt_unitfix").val(`นักเรียนต้องเรียนอย่างน้อย ${b}/${a} ชั่วโมง`)
+          $(".box_unit").css('display','block')
+
+          const personal_day = ((parseFloat(val)*20) / 0.5) / 2;
+          const rest_day = (personal_day / 5) * 2;
+          const add_day = personal_day + rest_day;
+          end_date = new Date();
+          end_date.setDate(end_date.getDate() + add_day);
+
+          var a = getDateMil(end_date).split(" ")[0];
+          var b = dateentoth(a)
+          $("#expt").val(b)
+        }
+
+        
+      }
+
+      function checkTik(elem, n) {
+        var val = $(`input[name="compliance${n}"]`).val()
+        if($(`input[name="compliance${n}"]`).is(":checked")) {
+          $(`#btn_add${n}`).css("display","block")
+          $(`.btn_raikon${n}`).css('display','none')
+        } else {
+          $(`#btn_add${n}`).css("display","none")
+          $(`.btn_raikon${n}`).css('display','block')
+        }
+      }
+
+      var extra_exp = "";
+      var extra_md = "";
+      var extra_info = {};
+      function md_para(i, std, exp, ids, from, name) {
+        const info = data[i];
+        $("#mdpara_fullname").text(`${info.student.tname}${info.student.fname} ${info.student.lname}`)
+        $("#mdpara_classroom").text(`ม.${info.student.class}/${info.student.room}`)
+        $("#mdpara_subject").text(`${info.subject_code} ${info.subject_title}`)
+        $("#mdpara_gradeold").text(`${info.grade_old}`)
+
+        $("#expt").removeClass('is-invalid')
+        $("#txt_unit").val("")
+        $(".box_unit").css('display','none')
+
+        $(".studentgroup").css('display','none')
+
+        if(from && from == "multiple") {
+          extra_md = 'multiple';
+          $(".multiple").css('display','block')
+          $(".standalone").css('display','none')
+          extra_name = name;
+
+          var val = $(`input[type="checkbox"][name="${name}"]:checked`);
+          var html = "";
+          for (let z = 0; z < val.length; z++) {
+            var a = $(`#${val[z].id}`).val().split("|");
+            var fullname = a[0];
+            var classroom = `ม.${a[1]}`;
+            html += `
+            <div class="card p-2 mb-1">
+                <div class="d-flex align-items-center">
+                  <b>ชื่อ-สกุล : </b>
+                  <p id="mdpara_fullname" class="ms-2 text-success">${fullname}</p>
+                </div>
+                <div class="d-flex align-items-center">
+                  <b>ชั้น : </b>
+                  <p id="mdpara_classroom" class="ms-2 text-success">${classroom}</p>
+                </div>
+            </div>`;
+          }
+          $("#render_multiple").html(html)
+        }
+        else {
+          $(".standalone").css('display','flex')
+          $(".multiple").css('display','none')
+          extra_md = "single";
+          extra_info.ids = [];
+          extra_info.ids = [parseInt(ids)];
+        }
+
+        txtapp = 1;
+        $("#render_txt").html(``)
+        addordel("+");
+        
+        $("#std").val( dateentoth(getDateMil(new Date(std).getTime()).split(" ")[0]) )
+        // $("#expt").val( dateentoth(getDateMil(new Date(exp).getTime()).split(" ")[0]) )
+        $("#expt").val("")
+        extra_exp = dateentoth(getDateMil(new Date(exp).getTime()).split(" ")[0]);
+      } 
+
+      var txtapp = 1;
+      function addordel(syn) {
+        console.log('txtapp',txtapp)
+
+        if(syn == "+") {
+          $("#render_txt").append(`<input id="txtapp${txtapp}" type="text" class="form-control mb-1" placeholder="กรอกข้อความ">`)
+          txtapp++;
+          $("#btn_txtapp_del").css('display','block')
+        }
+        else{
+          txtapp--;
+          $(`#txtapp${txtapp}`).remove()
+          
+        }
+
+        if(txtapp <= 2) {
+          $("#btn_txtapp_del").css('display','none')
+        }
+      }
+
+      function submitForm() {
+        $("#expt").removeClass('is-invalid')
+        if($("#expt").val().length <= 0) {
+          $("#expt").addClass('is-invalid').focus()
+        }
+        else if(extra_md && extra_md == "single" || extra_md == "multiple") {
+          var pass = true;
+          var round = txtapp - 1;
+          var works = [$("#txt_unitfix").val()];
+          for (let i = 0; i < round; i++) {
+            $(`#txtapp${i+1}`).removeClass('is-invalid')
+            console.log(`#txtapp${i+1}`)
+            if($(`#txtapp${i+1}`)) {
+              if($(`#txtapp${i+1}`).val().length <= 0) {
+                $(`#txtapp${i+1}`).addClass('is-invalid').focus()
+                pass = false;
+                break;
+              } else {
+                works.push($(`#txtapp${i+1}`).val())
+              }
+            }
+          }
+
+          if(extra_md == "multiple") {
+            extra_info.ids = [];
+            var val = $(`input[type="checkbox"][name="${extra_name}"]:checked`);
+            for (let z = 0; z < val.length; z++) {
+              var a = $(`#${val[z].id}`).val().split("|");
+              extra_info.ids.push(parseInt(a[2]));
+            }
+          }
+
+          if(pass) {
+            loading(true)
+            var settings = {
+                "url": endpoint + "/utw-repeat-api/teacher/register-student",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+                },
+                "data": {
+                  "ids": JSON.stringify(extra_info.ids),
+                  "works": JSON.stringify(works),
+                  "end_date": datethtoen($("#expt").val()) + " 00:00:00",
+                },
+            };
+            $.ajax(settings).done(function (response) {
+              console.log(">>>", response)
+              if(response.status.code == 200) {
+                loading(false)
+                Swal.fire({
+                  icon: "success",
+                  title: "สำเร็จ",
+                  confirmButtonText: "ยืนยัน",
+                  timer: 2000
+                }).then(() => {
+                  $(".close_md").trigger('click')
+                  render()
+
+                })
+              }
+              else {
+                loading(false)
+              }
+            });
+          }
+        }
+      }
+    </script>
+</body>
+</html>

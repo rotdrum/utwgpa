@@ -1,0 +1,6 @@
+CorsHost=
+CorsUsername=
+CorsPassword=
+
+AuthRepo="dev" // dev uat prd
+port=

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสมัครเรียน</title>
+    <link rel="stylesheet" href="global.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+</head>
+<body class="p-5 w-100" style="min-height: 100vh; background: linear-gradient(125deg, #c0392b, #660a00);">
+
+    <div class="d-flex flex-column align-items-center container ">
+        <div id="headerenroll" class="text-center">
+           
+        </div>
+        <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, illo!</p>
+        <br>
+        <div class="row w-100">
+            <div class="card p-0">
+                <h5 class="card-header mt-1 mb-1">1.ข้อมูลนักเรียน <span style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">คำนำหน้าชื่อ <span class="text-danger">*</span></p>
+                            <select class="form-control">
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">เชื้อชาติ <span class="text-danger">*</span></p>
+                            <select class="form-control">
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">นามสกุล <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">วัน/เดือน/ปีเกิด <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">หมู่เลือด <span class="text-danger">*</span></p>
+                            <select class="form-control">
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ผลการเรียน <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อีเมล <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">2.ข้อมูลการสำเร็จการศึกษา <span style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ระดับการศึกษา <span class="text-danger">*</span></p>
+                            <select class="form-control">
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                                <option value="">--- เลือก ---</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อสถาบันการศึกษา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ปีการศึกษา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ตำบล <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อำเภอ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">จังหวัด <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">รหัสไปรษณีย์ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">3.ที่อยู่ปัจจุบัน <span style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">บ้านเลขที่ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ถนน </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ซอย </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">หมู่ </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ตำบล <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อำเภอ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">จังหวัด <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">รหัสไปรษณีย์ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">4.ข้อมูลบิดา มารดา หรือ ผู้ปกครอง <span style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อ-สกุลบิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อ-สกุลมารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อาชีพบิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อาชีพมารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">สถานที่ทำงานบิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">สถานที่ทำงานมารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">เบอร์โทรศัพท์บิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">เบอร์โทรศัพท์มารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อ-สกุลผู้ปกครอง <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">เบอร์โทรศัพท์ผู้ปกครอง <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ผู้ปกครองมีความสัมพันธ์เป็น <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">5.หลักฐานประกอบการรับสมัคร</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-10 mb-3">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">ภาพถ่ายหน้าตรงของผู้สมัคร</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2 mb-3">
+                            <div class="rounded" style="width: 100%; height: 100px; background: #f2f2f2;"></div>
+                        </div>
+                        <div class="col-12 col-sm-10 mb-3">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">สำเนาบัตรประจำตัวประชาชน (สำเนาถูกต้องพร้อมลายเซ็นต์)</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2 mb-3">
+                            <div class="rounded" style="width: 100%; height: 100px; background: #f2f2f2;"></div>
+                        </div>
+                        <div class="col-12 col-sm-10 mb-3">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">สำเนาใบ ปพ.1 หรือใบรับรองการเป็นนักเรียน (ด้านหน้า)</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2 mb-3">
+                            <div class="rounded" style="width: 100%; height: 100px; background: #f2f2f2;"></div>
+                        </div>
+                        <div class="col-12 col-sm-10 mb-3">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">สำเนาใบ ปพ.1 หรือใบรับรองการเป็นนักเรียน (ด้านหลัง)</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2 mb-3">
+                            <div class="rounded" style="width: 100%; height: 100px; background: #f2f2f2;"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="btn btn-outline-primary me-3">ยกเลิก</div>
+                            <div class="btn btn-primary">ยื่นใบสมัคร</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+    <script src="./global.js"></script>
+</body>
+</html>

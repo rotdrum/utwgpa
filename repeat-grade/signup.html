@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="./imgs/utw.gif">
+    <link rel="stylesheet" href="./global.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./global.js"></script>
+</head>
+<body style="background: #F9F9F9; width: 100%; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    
+    <div id="loading" style="z-index: 999999999; position:fixed; top: 0; bottom:0; left:0; right:0; width: 100%; height: 100vh; display: none; justify-content: center; align-items: center; background: rgba(0,0,0,0.5)">
+        <div class="loading" style="z-index: 9999999;"></div>
+    </div>
+
+    <div id="card" style="display: flex; flex-direction: column; align-items: center; background: #fff; border: 1px solid #E0E4E8; padding: 30px; border-radius: 10px;">
+        <img src="./imgs/utw.gif" style="width: 60px; object-fit: contain; margin-bottom: 10px;">
+        <h4>ลงทะเบียน</h4>
+        <section id="section1" class="section"  style="width: 250px; transition: .5s; opacity: 1; ">
+            <div class="mb-3">
+                <span>อีเมล</span>
+                <input id="email" value="1" disabled placeholder="example@gmail.com" type="text" class="form-control">
+            </div>
+            <div class="mb-3" style="width: 100%;">
+                <span>คำนำหน้า</span>
+                <select id="prefix" class="form-control" style="width: 100%;">
+                    <option value="">เลือก</option>
+                    <option value="เด็กชาย">เด็กชาย</option>
+                    <option value="เด็กหญิง">เด็กหญิง</option>
+                    <option value="นาย">นาย</option>
+                    <option value="นางสาว">นางสาว</option>
+                    <option value="นาง">นาง</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <span>ชื่อ</span>
+                <input id="fname" placeholder="ชื่อ" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <span>สกุล</span>
+                <input id="lname" placeholder="สกุล" type="text" class="form-control">
+            </div>
+            <button onclick="firststep()" class="btn btn-primary w-100">
+                ต่อไป
+            </button>
+        </section>
+        <section id="section2" class="section" style="width: 250px; transition: .5s; opacity: 0; display: none;">
+        <!-- <section id="section2" class="section" style="width: 250px; transition: .5s; opacity: 1; display: block;"> -->
+            <div class="mb-3" >
+                <span id="textClass">ชั้น</span>
+                <select id="s2class" class="form-control" style="width: 100%;">
+                    <option value="">เลือก</option>
+                    <option value="1">ม.1</option>
+                    <option value="2">ม.2</option>
+                    <option value="3">ม.3</option>
+                    <option value="4">ม.4</option>
+                    <option value="5">ม.5</option>
+                    <option value="6">ม.6</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <span id="textRoom">ห้องเรียน</span>
+                <select id="s2room" class="form-control" style="width: 100%;">
+                    <option value="">เลือก</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                </select>
+            </div>
+            <div class="mb-3" style="display: none;">
+                <span>ตอน</span>
+                <select id="s2part" class="form-control" style="width: 100%;">
+                    <option value="">เลือก</option>
+                    <option value="ก">ก</option>
+                    <option value="ข">ข</option>
+                </select>
+            </div>
+            <div id="boxDepartment" class="mb-3">
+                <span>กลุ่มสาระการเรียนรู้</span>
+                <select id="s2department" class="form-control" style="width: 100%;">
+                    <option value="">เลือก</option>
+                    <option value="1">กลุ่มสาระ</option>
+                    <option value="2">กลุ่มสาระ</option>
+                </select>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changesection('#section1')" class="btn btn-light w-100 me-1">
+                    ย้อนกลับ
+                </button>
+                <button onclick="signup()" class="btn btn-primary w-100">
+                    สมัครสมาชิก
+                </button>
+            </div>
+        </section>
+        
+    </div>
+
+    <script>
+        var urlx = new URL(window.location.href);
+        const email = urlx.searchParams.get("email");
+        const fname = urlx.searchParams.get("fname");
+        const lname = urlx.searchParams.get("lname");
+        const img = urlx.searchParams.get("img");
+
+        $(document).ready(() => {
+            $("#email").val(email)
+            $("#fname").val(fname)
+            $("#lname").val(lname)
+
+            
+
+            if(email.includes('@utw.ac.th')) {
+                if(
+                    email.includes('s') && 
+                    email.length == 16 &&
+                    (isFinite(email[1]) && isFinite(email[2]) && isFinite(email[3]) && isFinite(email[4]) && isFinite(email[5]))
+                ) {
+                    $('#boxDepartment').remove()
+                    $('#textClass').html(`ชั้น`)
+                    $('#textRoom').html(`ห้องเรียน`)
+                } else {
+                    $('#textClass').html(`ชั้น (เป็นที่ปรึกษา)`)
+                    $('#textRoom').html(`ห้องเรียน (เป็นที่ปรึกษา)`)
+                    $('#prefix').html(`
+                        <option value="">เลือก</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นางสาว">นางสาว</option>
+                        <option value="นาง">นาง</option>
+                    `)
+                    $.ajax({
+                        method: 'post',
+                        url: endpoint + '/utw-cors-api/department.php',
+                        data: {
+                            _method: 'GET'
+                        }, success: (response) => {
+                            console.log('good', response)
+                            if(response.status.code == 200) {
+                                var html = '<option value="">เลือก</option>';
+                                for (let i = 0; i < response.data.length; i++) {
+                                    const data = response.data[i];
+                                    html += `<option value="${data.id}">${data.name}</option>`
+                                }
+                                $('#s2department').html(html)
+                            }
+                        }, error: (err) => {
+                            console.log('bad', err)
+                        }
+                    })
+                }
+            }
+            else {
+                $('#card').html(`bye bye`)
+            }
+        })
+
+        function changesection(to) {
+            $(".section").css('opacity', '0')
+            setTimeout(() => {
+                $(".section").css('display', 'none')
+                $(to).css({'display': 'block'})
+                setTimeout(() => {
+                    $(to).css({'opacity': '1'})
+                }, 10)
+            }, 500)
+        }
+
+        function firststep() {
+            var pass = true;
+            $(".form-control").removeClass('is-invalid')
+            if( $('#email').val().length <= 0 ) {
+                $("#email").addClass('is-invalid').focus()
+                pass = false;
+            }
+            else if( $('#prefix').val().length <= 0 ) {
+                $("#prefix").addClass('is-invalid').focus()
+                pass = false;
+            }
+            else if( $('#fname').val().length <= 0 ) {
+                $("#fname").addClass('is-invalid').focus()
+                pass = false;
+            }
+            else if( $('#lname').val().length <= 0 ) {
+                $("#lname").addClass('is-invalid').focus()
+                pass = false;
+            }
+
+            if(pass) {
+                changesection('#section2')
+            }
+        }
+
+        function signup() {
+            var pass = true;
+            $(".form-control").removeClass('is-invalid')
+            if( $('#s2class').val().length <= 0 ) {
+                $("#s2class").addClass('is-invalid').focus()
+                pass = false;
+            }
+            else if( $('#s2room').val().length <= 0 ) {
+                $("#s2room").addClass('is-invalid').focus()
+                pass = false;
+            }
+            // else if( $('#s2part').val().length <= 0 ) {
+            //     $("#s2part").addClass('is-invalid').focus()
+            //     pass = false;
+            // }
+            else if( $('#s2department').val() == '' ) {
+                $("#s2department").addClass('is-invalid').focus()
+                pass = false;
+            }
+
+            if(pass) {
+                var listInfo = {}
+                if (
+                    email.includes('s') && 
+                    email.includes('@utw.ac.th') &&
+                    email.length == 16 &&
+                    (isFinite(email[1]) && isFinite(email[2]) && isFinite(email[3]) && isFinite(email[4]) && isFinite(email[5]))
+                ) {
+                    listInfo.cardno = email.substr(1,5);
+                    listInfo.role = 'student';
+                    listInfo.departmentId = '';
+                }
+                else {
+                    listInfo.cardno = null;
+                    listInfo.role = 'teacher';
+                    listInfo.departmentId = parseInt($('#s2department').val());
+                }
+
+                Swal.fire({
+                    icon: 'info',
+                    title: 'ยืนยันการลงทะเบียน',
+                    text: 'โปรดตรวจสอบข้อมูล ก่อนกดปุ่มยืนยัน',
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText: 'ยกเลิก',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                }).then((res) => {
+                    if(res.isConfirmed) {
+                        loading(true)
+                        $.ajax({
+                            method: 'post',
+                            url: endpoint + '/utw-cors-api/register.php',
+                            data: {
+                                user_no: listInfo.cardno,
+                                tname: $('#prefix').val(),
+                                fname: $('#fname').val(),
+                                lname: $('#lname').val(),
+                                email: email,
+                                auth_role: listInfo.role,
+                                department_id: listInfo.departmentId,
+                                class: parseInt($('#s2class').val()),
+                                room: parseInt($('#s2room').val()),
+                                part: '-',
+                                mail_token: localStorage.utwAccessToken
+                            }, success: function(response) {
+                                console.log(response)
+                                loading(false)
+                                if(response.status.code == 200) {
+                                    localStorage.setItem('utwFullname',  response.data.tname + response.data.fname + ' ' + response.data.lname)
+                                    localStorage.setItem('utwEmail', response.data.email)
+                                    localStorage.setItem('utwToken', response.data.access_token)
+                                    localStorage.setItem('utwDepartment', listInfo.departmentId)
+                                    localStorage.setItem('utwUserId', response.data.id)
+                                    localStorage.setItem('utwImg', img)
+                                    localStorage.removeItem('utwAccessToken')
+                                    if(response.data.auth_role == 'teacher') {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'ลงทะเบียนสำเร็จ.. กรุณารอสักครู่ ระบบกำลังเปลี่ยนหน้า...',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        }).then(() => {
+                                            localStorage.setItem('utw_sidebar','sidebar4')
+                                            window.location.href = '../modify-grade/logout.php'
+                                        })
+                                    }
+                                    else {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'ลงทะเบียนสำเร็จ.. กรุณารอสักครู่ ระบบกำลังเปลี่ยนหน้า...',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        }).then(() => {
+                                            window.location.href = '../modify-grade/logout.php'
+                                        })
+                                    }
+                                    
+                                }
+                                else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'มีบางอย่างผิดพลาด',
+                                    })
+                                }
+                            }, error: function(err) {
+                                console.log(err)
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'มีบางอย่างผิดพลาด',
+                                })
+                                loading(false)
+                            }
+                        })
+                    }
+                })
+            }
+        }
+    </script>
+    
+</body>
+</html>

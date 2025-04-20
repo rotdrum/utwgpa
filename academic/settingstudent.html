@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานกลุ่มสาระ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
+    </div>
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>ตั้งค่าระบบ แก้ตัวนักเรียน (0 ร มผ.)</h2>
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div> -->
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <h5><b>ตั้งค่า (Date)</b></h5>
+            <br>
+            <div class="mb-3">
+              <span>ปีการศึกษา</span>
+              <input onkeyup="disableonenable()" type="number" id="txt_year" class="form-txt form-control"
+                placeholder="ปีการศึกษา">
+            </div>
+            <div class="mb-3">
+              <span>ภาคเรียนที่</span>
+              <input onkeyup="disableonenable()" type="number" id="txt_term" class="form-txt form-control"
+                placeholder="ภาคเรียนที่">
+            </div>
+            <div class="mb-3">
+              <span>ครั้งที่</span>
+              <input onkeyup="disableonenable()" type="number" id="txt_count" class="form-txt form-control"
+                placeholder="ครั้งที่">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <br><br>
+          </div>
+
+          <div class="col-12 col-sm-12">
+
+            <div class="row">
+              <div class="col-12 col-sm-6 mb-5">
+                <h5><b>ตั้งค่าการแสดงผลครู</b></h5>
+                <hr>
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input onclick="disableonenable()" class="form-check-input" type="checkbox" id="toggleTC1"
+                      style="cursor: pointer;">
+                    <label class="form-check-label">หน้าลงทะเบียนนักเรียนแก้ตัว</label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input onclick="disableonenable()" class="form-check-input" type="checkbox" id="toggleTC2"
+                      style="cursor: pointer;">
+                    <label class="form-check-label">หน้าติดตามผลรายวิชา</label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input onclick="disableonenable()" class="form-check-input" type="checkbox" id="toggleTC3"
+                      style="cursor: pointer;">
+                    <label class="form-check-label">หน้าติดตามผลประจำชั้น</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 mb-5">
+                <h5><b>ตั้งค่าการแสดงผลนักเรียน</b></h5>
+                <hr>
+                <div class="mb-3">
+                  <div class="form-check form-switch">
+                    <input onclick="disableonenable()" class="form-check-input" type="checkbox" id="toggleSTD1"
+                      style="cursor: pointer;">
+                    <label class="form-check-label">หน้านักเรียนลงทะเบียนแก้ตัว</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <h5><b>ตั้งค่า (ประกาศระบบ)</b></h5>
+            <br>
+            <div class="mb-3 mb-5">
+              <span>ข้อความประกาศ</span>
+              <input ype="text" id="txt_announce" class="form-txt form-control"
+                placeholder="ข้อความประกาศ">
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <div class="row">
+              <div class="col-12 col-sm-6 mb-5">
+                <h5><b>ตั้งค่าเปิดใช้งานระดับชั้น</b></h5>
+                <hr>
+                <div class="ps-4 mt-2">
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="chk_por1" style="width: 20px; height: 20px; ">
+                    <label class="form-check-label ms-2" for="chk_por1" style="cursor: pointer;">
+                      ม.1
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="chk_por2" style="width: 20px; height: 20px; ">
+                    <label class="form-check-label ms-2" for="chk_por2" style="cursor: pointer;">
+                      ม.2
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="chk_por3" style="width: 20px; height: 20px; ">
+                    <label class="form-check-label ms-2" for="chk_por3" style="cursor: pointer;">
+                      ม.3
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="chk_por4" style="width: 20px; height: 20px; ">
+                    <label class="form-check-label ms-2" for="chk_por4" style="cursor: pointer;">
+                      ม.4
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="chk_por5" style="width: 20px; height: 20px; ">
+                    <label class="form-check-label ms-2" for="chk_por5" style="cursor: pointer;">
+                      ม.5
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="" id="chk_por6" style="width: 20px; height: 20px; ">
+                    <label class="form-check-label ms-2" for="chk_por6" style="cursor: pointer;">
+                      ม.6
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div onclick="updateInfo()" id="btn_save" class="btn btn-secondary" disabled>บันทึก</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="./global.js"></script>
+  <script>
+    let repeat = null;
+
+    $(document).ready(() => {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'modify_grade_page_active'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            response.data.in_data.page_teacher_register_grade == 1 ? $('#toggleTC1').trigger('click') : '';
+            response.data.in_data.page_teacher_me_follow == 1 ? $('#toggleTC2').trigger('click') : '';
+            response.data.in_data.page_teacher_class_follow == 1 ? $('#toggleTC3').trigger('click') : '';
+            response.data.in_data.page_student_register_grade == 1 ? $('#toggleSTD1').trigger('click') : '';
+            $('#btn_save').attr('disabled', true).addClass('btn-secondary').removeClass('btn-primary')
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          console.log('bad', err)
+        }
+      })
+
+      $.ajax({
+          method: 'post',
+          url: endpoint + '/utw-cors-api/settings/get-one.php',
+          data: {
+              _method: "GET",
+              key_address: 'modify_grade_class_active'
+          },
+          success: response => {
+              console.log('good', response);
+              if (response.status.code == 200) {
+                  // Assuming response.data.in_data.repeat_grade_class_active contains the array [1, 6]
+                  let activeGrades = response.data.in_data;
+                  
+                  // Set each checkbox according to the active grades
+                  $('#chk_por1').prop('checked', activeGrades.includes(1));
+                  $('#chk_por2').prop('checked', activeGrades.includes(2));
+                  $('#chk_por3').prop('checked', activeGrades.includes(3));
+                  $('#chk_por4').prop('checked', activeGrades.includes(4));
+                  $('#chk_por5').prop('checked', activeGrades.includes(5));
+                  $('#chk_por6').prop('checked', activeGrades.includes(6));
+              } else {
+                  errswal();
+              }
+          },
+          error: err => {
+              errswal();
+              console.log('bad', err);
+          }
+      });
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'grade_announce'
+        }, success: response => {
+          if (response.status.code == 200) {
+            $('#txt_announce').val(response.data.in_data.modify)
+            repeat = response.data.in_data.repeat;
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'modify_grade_date'
+        }, success: response => {
+          console.log('good 1', response)
+          if (response.status.code == 200) {
+            $('#txt_year').val(response.data.in_data.date_year_education)
+            $('#txt_term').val(response.data.in_data.date_term)
+            $('#txt_count').val(response.data.in_data.date_section)
+          }
+          else {
+            errswal()
+          }
+        }, error: err => {
+          errswal()
+          loading(false)
+          console.log('bad', err)
+        }
+      })
+    })
+
+    function disableonenable() {
+      $('#btn_save').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-primary')
+    }
+
+        // Collect the states of checkboxes
+function collectCheckedGrades() {
+    let grades = [];
+    if ($('#chk_por1').is(':checked')) grades.push(1);
+    if ($('#chk_por2').is(':checked')) grades.push(2);
+    if ($('#chk_por3').is(':checked')) grades.push(3);
+    if ($('#chk_por4').is(':checked')) grades.push(4);
+    if ($('#chk_por5').is(':checked')) grades.push(5);
+    if ($('#chk_por6').is(':checked')) grades.push(6);
+    return grades;
+}
+
+    function updateInfo() {
+      $('.errmsg').remove()
+      $('.form-txt').removeClass('is-invalid')
+      if ($('#txt_year').val().length <= 0) {
+        $('#txt_year').after(`<span class="errmsg">โปรดกรอกข้อความ</span>`).addClass('is-invalid')
+      }
+      else if ($('#txt_term').val().length <= 0) {
+        $('#txt_term').after(`<span class="errmsg">โปรดกรอกข้อความ</span>`).addClass('is-invalid')
+      }
+      else if ($('#txt_count').val().length <= 0) {
+        $('#txt_count').after(`<span class="errmsg">โปรดกรอกข้อความ</span>`).addClass('is-invalid')
+      }
+      else {
+        loading(true)
+        var obj = {
+          page_student_register_grade: $('#toggleSTD1').is(':checked'),
+          page_teacher_register_grade: $('#toggleTC1').is(':checked'),
+          page_teacher_me_follow: $('#toggleTC2').is(':checked'),
+          page_teacher_class_follow: $('#toggleTC3').is(':checked')
+        }
+        $.ajax({
+          method: 'post',
+          url: endpoint + '/utw-cors-api/settings/update.php',
+          data: {
+            _method: "POST",
+            key_address: 'modify_grade_page_active',
+            in_data: JSON.stringify(obj)
+          }, success: response => {
+            if (response.status.code == 200) {
+
+              var obj2 = {
+                date_year_education: $('#txt_year').val(),
+                date_term: $('#txt_term').val(),
+                date_section: $('#txt_count').val()
+              }
+              $.ajax({
+                method: 'post',
+                url: endpoint + '/utw-cors-api/settings/update.php',
+                data: {
+                  _method: "POST",
+                  key_address: 'modify_grade_date',
+                  in_data: JSON.stringify(obj2)
+                }, success: response => {
+                  loading(false)
+
+                  if (response.status.code == 200) {
+                    $.ajax({
+                      method: 'post',
+                      url: endpoint + '/utw-cors-api/settings/update.php',
+                      data: {
+                        _method: "POST",
+                        key_address: 'grade_announce',
+                        in_data: JSON.stringify({
+                          repeat: repeat,
+                          modify: $('#txt_announce').val(),
+                        })
+                      }, success: response => {
+                        loading(false)
+                        if (response.status.code == 200) {
+                          let checkedGrades = collectCheckedGrades();
+                          $.ajax({
+                            method: 'post',
+                            url: endpoint + '/utw-cors-api/settings/update.php',
+                            data: {
+                              _method: "POST",
+                              key_address: 'modify_grade_class_active',
+                              in_data: JSON.stringify(checkedGrades)
+                            }, success: response => {
+                              loading(false)
+                              if (response.status.code == 200) {
+                                Swal.fire({
+                                  icon: 'success',
+                                  title: 'สำเร็จ',
+                                  timer: 2000
+                                }).then((res) => {
+                                  if (res.isConfirmed) window.location.reload()
+                                  else window.location.reload()
+                                })
+                              }
+                              else {
+                                errswal()
+                              }
+                            }, error: err => {
+                              errswal()
+                              loading(false)
+                              console.log('bad', err)
+                            }
+                          })
+                        }
+                        else {
+                          errswal()
+                        }
+                      }, error: err => {
+                        errswal()
+                        loading(false)
+                        console.log('bad', err)
+                      }
+                    })
+                 
+                    
+                  }
+                  else {
+                    errswal()
+                  }
+                }, error: err => {
+                  errswal()
+                  loading(false)
+                  console.log('bad', err)
+                }
+              })
+            }
+            else {
+              errswal()
+            }
+          }, error: err => {
+            errswal()
+            loading(false)
+            console.log('bad', err)
+          }
+        })
+      }
+    }
+  </script>
+
+</body>
+
+</html>

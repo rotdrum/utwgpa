@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานกลุ่มสาระ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <style>
+    .dataTables_wrapper {
+      padding: 10px;
+    }
+    .select2-container {
+      width: 100% !important;
+    }
+
+    span.select2.select2-container.select2-container--bootstrap {
+      width: 100% !important;
+    }
+
+    .select2-container--default .select2-results__option[aria-disabled=true] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
+    </div>
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>ระบบลงทะเบียนเรียนซ้ำ</h2>
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div> -->
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <h5 class="mb-0"><b>ภาคเรียนที่นักเรียนมีผลการเรียนตก</b></h5>
+          <div class="d-flex">
+            <div class="me-3">
+              <p class="mb-0">เทอม <span class="text-danger">*</span></p>
+              <select id="txt_term" class="form-control">
+                <option value="">--- เลือก ---</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+            <div class="me-3">
+              <p class="mb-0">ปีการศึกษา <span class="text-danger">*</span></p>
+              <select id="txt_year" class="form-control">
+                <option value="">--- เลือก ---</option>
+                <option value="2563">2563</option>
+                <option value="2564">2564</option>
+                <option value="2565">2565</option>
+                <option value="2566">2566</option>
+                <option value="2567">2567</option>
+                <option value="2568">2568</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">กลุ่มสาระการเรียนรู้</th>
+                <!-- <th scope="col">เวลาทำรายการ</th> -->
+                <th scope="col">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+      
+    </div>
+  </div>
+
+   <!-- Modal AJ -->
+   <div class="modal fade" id="md_aj" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">เปลี่ยนครูผู้สอน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <p class="mb-0">ครูผู้สอน</p>
+            <select id="txt_aj" class="form-add form-control">
+              <option value="">เลือก</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn_closemd" data-bs-dismiss="modal">ยกเลิก</button>
+          <button onclick="confirmChangeTeacher()" type="button" class="btn btn-primary">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal add -->
+  <form class="modal fade" id="md_add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">เพิ่มนักเรียน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสนักเรียน</span>
+            <input id="add_studentno" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>คำนำหน้า</span>
+            <select id="add_tname" class="txt-add form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="ด.ช.">ด.ช.</option>
+              <option value="ด.ญ.">ด.ญ.</option>
+              <option value="นาย">นาย</option>
+              <option value="น.ส.">น.ส.</option>
+              <option value="นาง">นาง</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชื่อ</span>
+            <input id="add_fname" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>สกุล</span>
+            <input id="add_lname" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>อีเมล</span>
+            <input id="add_email" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="add_class" class="txt-add form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">ม.1</option>
+              <option value="2">ม.2</option>
+              <option value="3">ม.3</option>
+              <option value="4">ม.4</option>
+              <option value="5">ม.5</option>
+              <option value="6">ม.6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน</span>
+            <select id="add_room" class="txt-add form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <div onclick="addInfo()" type="button" class="btn btn-primary">บันทึก</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal info -->
+  <form class="modal fade" id="md_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ข้อมูลนักเรียน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสนักเรียน</span>
+            <input id="info_studentno" type="text" disabled class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>คำนำหน้า</span>
+            <select id="info_tname" disabled class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="ด.ช.">ด.ช.</option>
+              <option value="ด.ญ.">ด.ญ.</option>
+              <option value="นาย">นาย</option>
+              <option value="น.ส.">น.ส.</option>
+              <option value="นาง">นาง</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชื่อ</span>
+            <input id="info_fname" type="text" disabled class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>สกุล</span>
+            <input id="info_lname" type="text" disabled class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>อีเมล</span>
+            <input id="info_email" type="text" disabled class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="info_class" disabled class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">ม.1</option>
+              <option value="2">ม.2</option>
+              <option value="3">ม.3</option>
+              <option value="4">ม.4</option>
+              <option value="5">ม.5</option>
+              <option value="6">ม.6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน</span>
+            <select id="info_room" disabled class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <button type="button" class="btn btn-primary">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal edit -->
+  <form class="modal fade" id="md_edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขนักเรียน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสนักเรียน</span>
+            <input id="edit_studentno" type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>คำนำหน้า</span>
+            <select id="edit_tname" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="ด.ช.">ด.ช.</option>
+              <option value="ด.ญ.">ด.ญ.</option>
+              <option value="นาย">นาย</option>
+              <option value="น.ส.">น.ส.</option>
+              <option value="นาง">นาง</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชื่อ</span>
+            <input id="edit_fname" type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>สกุล</span>
+            <input id="edit_lname" type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>อีเมล</span>
+            <input id="edit_email" disabled type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="edit_class" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">ม.1</option>
+              <option value="2">ม.2</option>
+              <option value="3">ม.3</option>
+              <option value="4">ม.4</option>
+              <option value="5">ม.5</option>
+              <option value="6">ม.6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน</span>
+            <select id="edit_room" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <div onclick="editWork()" type="button" class="btn btn-primary">บันทึก</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+ 
+
+
+  <script src="./global.js"></script>
+  <script>
+    $(document).ready(() => {
+      render('init')
+      renderhistory('init')
+      getAJ();
+      
+    })
+
+    $("#txt_term").change(function() {
+      render('init')
+    });
+
+    $("#txt_year").change(function() {
+      render('init')
+    });
+    
+    function render() {
+        loading(true)
+        $.ajax({
+          method: 'POST',
+          url: endpoint + '/utw-cors-api/department.php',
+          data: {
+            _method: "GET",
+          }, success: response => {
+            console.log(response)
+            if(response.status.code == 200) {
+              var html = '';
+              for (let i = 0; i < response.data.length; i++) {
+                const data = response.data[i];
+                html += `
+                <tr>
+                  <th scope="row">${i+1}</th>
+                  <td>${data.name}</td>
+                  <!-- <td>${data.created_at}</td> -->
+                  <td>
+                    <div>
+                      <a href="./printreportresult-repeat-old.html?id=${data.id}&gsr=${data.name}&term_at=${$("#txt_term").val()}&year_at=${$("#txt_year").val()}" target="_blank" class="btn btn-primary">ตรวจสอบ</a>
+                    </div>
+                  </td>
+                </tr>`
+              }
+              $('#tbody').html(html)
+              
+            }
+            else {
+
+            }
+            loading(false)
+          }, error: err => {
+            console.log(err)
+            loading(false)
+          }
+        })
+        // $.ajax({
+        //   method: 'POST',
+        //   url: endpoint + '/utw-modify-grade-api/report-department.php',
+        //   data: {
+        //     _method: "GET",
+        //     id: 1,
+        //     department_id: 1
+        //   }, success: response => {
+        //     console.log(response)
+        //   }, error: err => {
+        //     console.log(err)
+        //   }
+        // })
+      }
+
+    var ids = [];
+    
+    var cr = {
+      id: 0,
+      tid: 0
+    }
+
+    function changeRequest(id) {
+      cr.id = id;
+      cr.tid = "";
+    }
+    function confirmChangeTeacher() {
+      if($("#txt_aj").val() == "") {
+        Swal.fire({
+          icon: "warning",
+          title: "โปรดเลือกครูผู้สอน",
+          confirmButtonText: "ยืนยัน",
+          cancelButtonText: "ยกเลิก",
+          showConfirmButton: true,
+          showCancelButton: false
+        })
+      }
+      else {
+        Swal.fire({
+          icon: "info",
+          title: "ยืนยันเปลี่ยนครูผู้สอน",
+          confirmButtonText: "ยืนยัน",
+          cancelButtonText: "ยกเลิก",
+          showConfirmButton: true,
+          showCancelButton: true
+        }).then((res) => {
+          if(res.isConfirmed) {
+            cr.tid = $("#txt_aj").val().split("|")[0];
+            $.ajax({
+              method: "post",
+              url: endpoint + `/utw-repeat-api/admin/change-teacher/${cr.id}/${cr.tid}`,
+              "headers": {
+                  "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+              },
+              data: {
+               
+              },
+              success: response => {
+                console.log(response)
+                if (response.status.code == 200) {
+                  $(".btn_closemd").trigger("click")
+                  Swal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    timer: 2000
+                  }).then(() => {
+                    render();
+                    
+                  })
+                }
+                else {
+                  Swal.fire({
+                    icon: "error",
+                    title: ""
+                  })
+                }
+              }
+            })
+          }
+        })
+      }
+    }
+
+    function confirmSend(id, grade_old) {
+      ids = [id];
+      Swal.fire({
+        icon: "info",
+        title: "ยืนยันการส่งเกรด",
+        confirmButtonText: "ยืนยัน",
+        cancelButtonText: "ยกเลิก",
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then((res) => {
+        if(res.isConfirmed) {
+
+          $(".form-control").removeClass("is-invalid")
+          if($("#txt_round").val() == "") {
+            $("#txt_round").addClass('is-invalid').focus();
+            Swal.fire({
+              icon: "warning",
+              title: "โปรดเลือกรอบที่",
+              confirmButtonText: "ยืนยัน",
+            })
+          }
+          else if($("#txt_term").val() == "") {
+            $("#txt_term").addClass('is-invalid').focus();
+            Swal.fire({
+              icon: "warning",
+              title: "โปรดเลือกเทอม",
+              confirmButtonText: "ยืนยัน",
+            })
+          }
+          else if($("#txt_year").val() == "") {
+            $("#txt_year").addClass('is-invalid').focus();
+            Swal.fire({
+              icon: "warning",
+              title: "โปรดเลือกปีการศึกษา",
+              confirmButtonText: "ยืนยัน",
+            })
+          }
+          else {
+            var idx = JSON.stringify(ids);
+            var std = getDateNow().split(" ")[0];
+            var a = new Date(std).addDays(10).getTime();
+            var exp = getDateMil(a).split(" ")[0];
+
+            $.ajax({
+              method: "post",
+              url: endpoint + '/utw-repeat-api/admin/update/repeat-success-me',
+              "headers": {
+                  "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+              },
+              data: {
+                ids: idx,
+                grade_old: grade_old,
+                start_date: std,
+                end_date: exp,
+                stamp_round_at: $("#txt_round").val(),
+                stamp_term_at: $("#txt_term").val(),
+                stamp_year_at: $("#txt_year").val(),
+              },
+              success: response => {
+                console.log(response)
+                if (response.status.code == 200) {
+                  Swal.fire({
+                    icon: "success",
+                    title: "สำเร็จ",
+                    timer: 2000
+                  }).then(() => {
+                    render();
+                  })
+                }
+                else {
+                  Swal.fire({
+                    icon: "error",
+                    title: ""
+                  })
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+
+    function getAJ() {
+      $.ajax({
+        method: "post",
+        url: endpoint + '/utw-repeat-api/admin/get/teacher',
+        "headers": {
+          "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+        },
+        success: response => {
+          console.log(response)
+          if (response.status.code == 200) {
+            var html = `<option value="">เลือก</option>`;
+            for (let i = 0; i < response.data.length; i++) {
+              const element = response.data[i];
+              html += `<option value="${element.id}|">${element.tname}${element.fname} ${element.lname}</option>`;
+            }
+            $("#txt_aj").html(html).promise().done(() => {
+              $("#txt_aj").select2({
+                placeholder: "สามารถพิมพ์ค้นหาจาก ชื่อ-นามสกุล หรือ ชั้นเรียน",
+                dropdownParent: $('#md_aj')
+              });
+            })
+          }
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>

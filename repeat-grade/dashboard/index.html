@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTW</title>
+    <link rel="icon" href="../imgs/utw.gif">
+    <link rel="stylesheet" href="../global.css">
+    <link href="../bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="../bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="page">
+        <div class="sidebar">
+          <div style="display: flex; align-items: center;">
+                <img src="../imgs/utw.gif" style="margin-right: 10px; width: 50px; object-fit: contain;">
+                <div>
+                    <h2>ระบบจัดการ</h2>
+                    <p style="font-size: .8rem;">โรงเรียนอุทัยวิทยาคม</p>
+                </div>
+          </div>
+    
+          <div id="sidebar" class="sidebar-main">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <input type="text" placeholder="ค้นหา" class="form-control">
+            </div>
+            <div class="content-profile">
+              <div class="content-profile-img">
+                <img src="https://images.unsplash.com/photo-1651336635936-84752ac0c36d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="">
+              </div>
+              <p>Bearbug</p>
+            </div>
+          </div>
+          <div class="content-page">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>ข่าวสาร</h2>
+                <div class="btn btn-success">
+                    เพิ่มตัวชี้วัด
+                </div>
+            </div>
+    
+            <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Order</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Manage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>iPhone 14 Pro Max</td>
+                        <td>Bearbug</td>
+                        <td>2022-05-01</td>
+                        <td>22:09</td>
+                        <td>
+                            <div style="display: flex; align-items: center;">
+                                <button class="btn btn-warning">
+                                    <i class="fas fa-edit" style="font-size: .8rem;"></i>
+                                </button>
+                                <button class="btn btn-danger " style="margin-left: 5px;">
+                                    <i class="fas fa-trash" style="font-size: .8rem;"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <script src="../global.js"></script>
+</body>
+</html>

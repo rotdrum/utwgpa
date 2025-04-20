@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTW</title>
+  <link rel="icon" href="../imgs/utw.gif">
+  <link rel="stylesheet" href="../global.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .list-group-item.active {
+      background-color: #20c997;
+      border-color: #198754;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div id="sidebartitle" style="display: flex; align-items: center;">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="card p-2 flex-row d-flex " style="height: fit-content;">
+              <i class="fa-solid fa-bullhorn text-danger"></i>
+              <div class="ms-2" id="annou">
+                <div id="annou1"></div>
+                <div id="annou2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>ติดตามผลนักเรียนตัวเอง</h2>
+
+        </div>
+
+        <div id="box-render">
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div id="openModalDetail" class="modal  fade" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ภาระงาน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div>
+            <b>ชื่อ-สกุล : </b>
+            <span id="info_fname" class="ms-2">ทดสอบ</span>
+          </div>
+          <div>
+            <b>ชั้น : </b>
+            <span id="info_class" class="ms-2">ทดสอบ</span>
+          </div>
+          <div>
+            <b>รายวิชา : </b>
+            <span id="info_subject" class="ms-2">คณิตศาสตร์</span>
+          </div>
+          <div>
+            <b>ชื่อกลุ่ม : </b>
+            <span id="info_title" class="ms-2">ทดสอบ</span>
+          </div>
+          <div class="mb-3">
+            <b>ผลการเรียนเดิม : </b>
+            <span id="grade_old" class="ms-2">0</span>
+          </div>
+
+          <br>
+          <b>รายการภาระงาน</b>
+          <div id="info_indicator" class="list-group mb-3 mt-3">
+            <a href="#" onclick="selectGage(this)" id="gage1" class="list-group-item list-group-item-action active"
+              aria-current="true">asdasd</a>
+            <a href="#" onclick="selectGage(this)" id="gage2" class="list-group-item list-group-item-action">A second
+              link item</a>
+            <a href="#" onclick="selectGage(this)" id="gage3" class="list-group-item list-group-item-action">A third
+              link item</a>
+            <a href="#" onclick="selectGage(this)" id="gage4" class="list-group-item list-group-item-action">A fourth
+              link item</a>
+          </div>
+          <div>
+            <b>ผลการเรียนใหม่</b> <p>* คะแนนเดิม : <span id="score_old">0</span></p>
+            <select class="form-control" id="grade_new">
+              <option value="">เลือก</option>
+              <option value="ผ">ผ</option>
+              <option value="4">4</option>
+              <option value="3.5">3.5</option>
+              <option value="3">3</option>
+              <option value="2.5">2.5</option>
+              <option value="2">2</option>
+              <option value="1.5">1.5</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="modal_detail_close" type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">ยกเลิก</button>
+          <button id="modal_detail_add" onclick="updateProgress()" type="button" class="btn btn-primary">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="../global.js"></script>
+  <script>
+    var superdata;
+
+    $(document).ready(() => {
+      render();
+      annou();
+      openclassroom();
+    })
+
+    function render() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-modify-grade-api/follow_groub/getAll.php',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwToken
+        },
+        data: {
+          _method: "GET",
+          user_id: parseInt(localStorage.utwUserId)
+        }, success: (response) => {
+          console.log(response)
+          if (response.status.code == 200) {
+            superdata = response.data;
+            var html = ''
+            if (response.data.length > 0) {
+              for (let i = 0; i < response.data.length; i++) {
+                const data = response.data[i];
+                var student = JSON.parse(data.activity)
+
+                console.log(student)
+
+                var html2 = '';
+                for (let k = 0; k < student.length; k++) {
+                  const data2 = student[k];
+                  var status = '';
+                  var detail = '';
+                  var grade = '';
+                  if (data2.status == 'cancel') {
+                    status = `<td class="text-danger">
+                                      <div class="d-flex align-items-center">
+                                        <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                        <span class="ms-2">ยกเลิก</span>
+                                      </div>
+                                    </td>`
+
+                    detail = ``
+                    grade = data2.grade_new;
+                  }
+                  else if (data2.status_work == 'wait_begin') {
+                    status = `<td class="" style="color: 	#ff0000;">
+                                    <div class="d-flex align-items-center">
+                                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                      <span class="ms-2">รอลงทะเบียน</span>
+                                    </div>
+                                  </td>`;
+                    detail = `
+                              <button onclick="updateGradeCancel(${data2.id},${data.id})" class="btn-sm btn-danger">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>ลบทิ้ง</span>
+                              </button>`
+                    grade = data2.grade_old;
+                  }
+                  else if (data2.status_work == 'begin') {
+                    status = `<td class="" style="color: #e67e22;">
+                                      <div class="d-flex align-items-center">
+                                        <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                        <span class="ms-2">ลงทะเบียนแล้ว</span>
+                                      </div>
+                                    </td>`
+
+                    detail = `<button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
+                                <i class="fas fa-search"></i>
+                              </button>
+                              <button onclick="updateGradeCancel(${data2.id},${data.id})" class="btn-sm btn-danger">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>ลบทิ้ง</span>
+                              </button>`
+                    grade = data2.grade_old;
+                  }
+                  else if (data2.status_work == 'process') {
+                    status = `<td class="text-warning">
+                                      <div class="d-flex align-items-center">
+                                        <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                        <span class="ms-2">ดำเนินการซ่อมอยู่</span>
+                                      </div>
+                                    </td>`
+
+                    detail = `<button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
+                                <i class="fas fa-search"></i>
+                              </button>
+                              <button onclick="updateGradeCancel(${data2.id},${data.id})" class="btn-sm btn-danger">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>ลบทิ้ง</span>
+                              </button>`
+                    grade = data2.grade_old;
+                  }
+                  else if (data2.status_work == 'success' && !data2.confirm_date) {
+                    status = `<td class="text-success">
+                                      <div class="d-flex align-items-center">
+                                        <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                        <span class="ms-2">สำเร็จ (รอส่งเกรด)</span>
+                                      </div>
+                                    </td>`
+
+                    detail = `
+                              <button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
+                                <i class="fas fa-search"></i>
+                              </button>
+                              <button onclick="updateGradeConfirm(${data2.id},${data.id})" class="btn-sm btn-danger">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>ส่งเกรด</span>
+                              </button> `
+                    grade = data2.grade_new;
+                  } else if (data2.status_work == 'success' && data2.confirm_date) {
+                    status = `<td class="text-success">
+                                      <div class="d-flex align-items-center">
+                                        <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                                        <span class="ms-2">สำเร็จ (ส่งเกรดแล้ว)</span>
+                                      </div>
+                                    </td>`
+
+                    detail = ``
+                    grade = data2.grade_new;
+                  }
+                  html2 += `
+                        <tr>
+                          <th scope="row">${k + 1}</th>
+                          <td>${data2.tname}${data2.fname} ${data2.lname}</td>
+                          <td>ม.${data2.class}/${data2.room}</td>
+                          <!-- <td>${data2.part}</td> -->
+                          <td>${grade}</td>
+                          ${status}
+                          <td>
+                          ${detail}
+                          </td>
+                        </tr>`
+                }
+
+                if (html2 == "") {
+                  html2 = `
+                      <tr>
+                        <td colspan="6" style="text-align: center;">ไม่พบข้อมูล</td>
+                      </tr>`
+                }
+                html += `
+                    
+                    <h5>${data.subject_code} ${data.subject_title} ม.${data.subject_class} [${data.title}]</h5>
+                    <table class="table table-striped table-hover mb-5" style="font-size: 1rem;">
+                      <thead>
+                        <tr>
+                          <th scope="col">ลำดับ</th>
+                          <th scope="col">ชื่อ-สกุล</th>
+                          <th scope="col">ระดับชั้น</th>
+                          <!-- <th scope="col">ตอน</th> -->
+                          <th scope="col">ผลการเรียน</th>
+                          <th scope="col">สถานะ</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${html2}
+                      </tbody>
+                    </table>`
+
+              }
+            }
+            else {
+              if (html == '') {
+                html = `
+                      <div style="width: 100%; height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <img src="../../imgs/notfound.png" style="width: 30%; object-fit: contain; margin-bottom: 20px;" />
+                        <h2>ไม่พบข้อมูล</h2>
+                      </div>`;
+              }
+            }
+
+
+            $('#box-render').html(html)
+          }
+          else {
+            // errswal()
+          }
+        }, error: (err) => {
+          console.log(err)
+          // errswal()
+        }
+      })
+    }
+
+    var workdetail;
+    var edit_student_id;
+    var edit_row_id;
+    function detailInfo(i, k) {
+      gage = '';
+      const data = superdata[i];
+      console.log('main row', data)
+      edit_row_id = data.id
+      $('#info_subject').text(data.subject_title)
+      $('#info_title').text(data.title)
+      var indicator = JSON.parse(data.indicators)
+      console.log('indicator >>', indicator)
+      var html = '';
+
+      var activity = JSON.parse(data.activity)
+      $('#grade_old').text(activity[k].grade_old)
+
+      edit_student_id = activity[k].id
+      console.log('acc work >>> ', activity[k].work)
+
+      console.log('activity k >>> ', activity[k])
+      console.log('activity i >>> ', activity[i])
+      $('#score_old').text(activity[k].score_old)
+
+      $('#info_fname').text(activity[k].tname + activity[k].fname + ' ' + activity[k].lname)
+      // $('#info_class').text('ม.'+activity[k].class+'/'+activity[k].room+' ตอน '+activity[k].part)
+      $('#info_class').text('ม.' + activity[k].class + '/' + activity[k].room)
+      workdetail = activity[k].work
+
+      var htmloption = `<option value="${activity[k].grade_new}">${activity[k].grade_new}</option>`
+      activity[k].select_grade.forEach(element => {
+        htmloption += `<option value="${element}">${element}</option>`
+      });
+      $('#grade_new').html(htmloption)
+
+
+
+      for (let i = 0; i < workdetail.length; i++) {
+
+        const element = workdetail[i];
+        var active = ''
+        var click = ''
+        if (element.status == 'success') {
+          active = `list-group-item-action active`
+          click = `onclick="selectGage(this, ${i})"`
+          gage += `i-${i},`
+        }
+        else {
+          click = `onclick="selectGage(this, ${i})"`
+        }
+
+        html += `<a style="cursor: pointer;" ${click} id="info-gage${i + 1}" class="${active} list-group-item list-group-item-action" aria-current="true">${element.indicator}</a>`
+      }
+      $('#info_indicator').html(html)
+
+      // if(click == '') {
+      //   $('#modal_detail_add').css('display','none')
+      // } else {
+      //   $('#modal_detail_add').css('display','block')
+      // }
+    }
+
+    function updateGradeConfirm(user_id, group_course_id) {
+      Swal.fire({
+        icon: "warning",
+        title: "หากส่งผลการเรียนแล้ว จะไม่สามารถแก้ไขได้?",
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `ยืนยัน`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isDenied) {
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-modify-grade-api/groub_course/confirm-grade.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+              group_course_id: parseInt(group_course_id),
+              user_id: parseInt(user_id),
+            }, success: (response) => {
+              console.log(response)
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                }).then((res) => {
+                  render();
+                })
+              }
+              else {
+                // Swal.fire({
+                //   icon: 'error',
+                //   title: 'delete\nมีบางอย่างผิดพลาด'
+                // })
+              }
+            }, error: (err) => {
+              // Swal.fire({
+              //   icon: 'error',
+              //   title: 'delete\nมีบางอย่างผิดพลาด'
+              // })
+            }
+          })
+        }
+      });
+
+    }
+
+    function updateGradeCancel(user_id, group_course_id) {
+      Swal.fire({
+        icon: "warning",
+        title: "หากลบทิ้งแล้ว จะไม่สามารถแก้ไขได้?",
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `ยืนยัน`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isDenied) {
+          $.ajax({
+            method: 'post',
+            url: endpoint + '/utw-modify-grade-api/groub_course/cancel-grade.php',
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwToken
+            },
+            data: {
+              group_course_id: parseInt(group_course_id),
+              user_id: parseInt(user_id),
+            }, success: (response) => {
+              console.log(response)
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                }).then((res) => {
+                  render();
+                })
+              }
+              else {
+                // Swal.fire({
+                //   icon: 'error',
+                //   title: 'delete\nมีบางอย่างผิดพลาด'
+                // })
+              }
+            }, error: (err) => {
+              // Swal.fire({
+              //   icon: 'error',
+              //   title: 'delete\nมีบางอย่างผิดพลาด'
+              // })
+            }
+          })
+        }
+      });
+
+    }
+
+    var gage = '';
+    function selectGage(elem, i) {
+      var element = $('#' + elem.id)
+      if (element.hasClass('active')) {
+        element.removeClass('active')
+        gage = gage.replace(`i-${i},`, '')
+      } else {
+        element.addClass('active')
+        gage += `i-${i},`
+      }
+    }
+
+    function updateProgress() {
+      if (gage != '') {
+        gage = gage.replaceAll('i-', '')
+        gage = gage.split(",")
+        gage.pop()
+      }
+
+      console.log('gage', gage)
+      for (let i = 0; i < workdetail.length; i++) {
+        workdetail[i].status = 'register'
+      }
+      if (gage.length > 0) {
+        for (let i = 0; i < gage.length; i++) {
+          const data = parseInt(gage[i]);
+          workdetail[data].status = 'success'
+        }
+        console.log('workdetail >>> ', workdetail)
+      }
+
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-modify-grade-api/follow_groub/update.php',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwToken
+        },
+        data: {
+          _method: "POST",
+          id: parseInt(edit_row_id),
+          // grade_old: $('#grade_old').text(),
+          grade_new: $('#grade_new').val(),
+          student_id: parseInt(edit_student_id),
+          student_work: JSON.stringify(workdetail),
+        }, success: (response) => {
+          console.log(response)
+          if (response.status.code == 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'อัพเดทสำเร็จ',
+              timer: 1000
+            })
+            $('#modal_detail_close').trigger('click')
+            render()
+          }
+          else {
+            // errswal()
+          }
+        }, error: (err) => {
+          console.log(err)
+          // errswal()
+        }
+      })
+    }
+
+    function annou() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'grade_announce'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            $("#annou1").text(response.data.in_data.modify);
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+    function openclassroom() {
+      $.ajax({
+        method: 'post',
+        url: endpoint + '/utw-cors-api/settings/get-one.php',
+        data: {
+          _method: "GET",
+          key_address: 'modify_grade_class_active'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            var html = "";
+            for (let i = 0; i < response.data.in_data.length; i++) {
+              const element = response.data.in_data[i];
+              html += "ม." + element + ", "
+            }
+            html = String(html).substring(0, html.length - 2)
+            $("#annou2").text("ใช้งานระดับชั้น " + html);
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+
+  </script>
+</body>
+
+</html>

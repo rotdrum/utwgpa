@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body> 
+    Loading...
+    
+
+    <script>
+        var endpoint = 'https://utwgpa.com';
+        if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
+        endpoint = 'https://utwgpa.com/uat';
+        }
+            
+        var urlx = new URL(window.location.href);
+        const token = urlx.searchParams.get("token");
+        localStorage.setItem('utwAccessToken', token)
+        const kyc = urlx.searchParams.get("kyc");
+        const email = urlx.searchParams.get("email");
+        const img = urlx.searchParams.get("img");
+        const tname = urlx.searchParams.get("tn");
+        const fname = urlx.searchParams.get("fname");
+        const lname = urlx.searchParams.get("lname");
+        const userid = urlx.searchParams.get("userid");
+        const userno = urlx.searchParams.get("userno");
+        const actk = urlx.searchParams.get("actk");
+
+        if(kyc == 'signup') {
+            window.location.href = `./signup.html?email=${email}&fname=${fname}&lname=${lname}&img=${img}`;
+        } else if(kyc == 'signin') {
+            $.ajax({
+                method: 'post',
+                url: endpoint + '/utw-cors-api/login.php',
+                data: {
+                    _method: 'GET',
+                    email: email,
+                    access_token: token
+                }, success: function(response) {
+                    console.log('good', response)
+                    if(response.status.code == 200) {
+                        console.log(response)
+                        localStorage.setItem('utwFullname',  response.data.tname + response.data.fname + ' ' + response.data.lname)
+                        localStorage.setItem('utwEmail', response.data.email)
+                        localStorage.setItem('utwToken', response.data.access_token)
+                        localStorage.setItem('utwImg', img)
+                        localStorage.setItem('utwtname', tname)
+                        localStorage.setItem('utwlname', lname)
+                        localStorage.setItem('utwfname', fname)
+                        localStorage.setItem('utwImg', img)
+                        localStorage.setItem('utwUserId', userid)
+                        localStorage.setItem('utwClassRoom', response.data.class+'/'+response.data.room)
+                        localStorage.setItem('utwDepartment', response.data.department_id)
+                        localStorage.setItem('utw_sidebar','sidebar4')
+                        localStorage.setItem('utwUserno', userno)
+                        // localStorage.removeItem('utwAccessToken')
+
+                        if(response.data.auth_role == 'teacher') { //teacher
+                            if(!response.data.class || !response.data.room) {
+                                localStorage.setItem('utwAccessToken', actk)
+                                console.log(1)
+                                window.location.href = './confirm-teacher/'
+                            } else {
+                                console.log(2)
+                                window.location.href = './dashboard/registeragain.html'
+                            }
+                        }
+                        else { //student
+                            console.log(3)
+                            window.location.href =  `./index.php?alert=ระบบนี้ไม่อนุญาตให้นักเรียนใช้งาน`;
+                            // localStorage.setItem('utwAccessToken', actk)
+                            // window.location.href = './confirm/'
+
+                        }
+                    }
+                }, error: function(err) {
+                    console.log('bad', err)
+                }
+            })
+            // window.location.href = `./signup.html?email=${email}&fname=${fname}&lname=${lname}`;
+        }
+        
+    </script>
+</body>
+</html>

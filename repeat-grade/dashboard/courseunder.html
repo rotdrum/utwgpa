@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTW</title>
+  <link rel="icon" href="../imgs/utw.gif">
+  <link rel="stylesheet" href="../global.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script>
+  <style>
+    .list-group-item.active {
+      background-color: #20c997;
+      border-color: #198754;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div id="sidebartitle" style="display: flex; align-items: center;">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2>ติดตามผลเทอมล่าสุด (ประจำชั้น)</h2>
+
+        </div>
+        <div class="card p-2">
+          <table class="w-100 table table-hover table-striped" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th>ลำดับ</th>
+                <th>ชื่อ-สกุล</th>
+                <th>ปีการศึกษา</th>
+                <th>ระดับชั้น</th>
+                <th>รายวิชา</th>
+                <th>ผลการเรียน</th>
+                <th style="width: 150px;">สถานะ</th>
+                <th style="width: 50px;"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+              <!-- <tr>
+                <td>1</td>
+                <td>ด.ช.ณัฐเกียรติ ขุนแก้ว</td>
+                <td>ม.2/1</td>
+                <td>ร</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center " style="color: #f39c12;">
+                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                      <span class="ms-2">ดำเนินการอยู่</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex">
+                    <div class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal"
+                      data-bs-target="#md_para">
+                      <i class="fas fa-search"></i>
+                    </div>
+                    <div class="btn-sm btn-warning ms-1 " style="cursor: pointer;" data-bs-toggle="modal"
+                      data-bs-target="#md_addpara">
+                      <i class="fas fa-pen"></i>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>ด.ช.หมี มีของกลาง</td>
+                <td>ม.2/1</td>
+                <td>ร</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center text-primary">
+                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                      <span class="ms-2">สำเร็จ (รอส่งเกรด)</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex">
+                    <div class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal"
+                      data-bs-target="#md_para">
+                      <i class="fas fa-search"></i>
+                    </div>
+                    <div class="btn-sm btn-danger ms-1 " style="cursor: pointer;" data-bs-toggle="modal"
+                      data-bs-target="#md_para">
+                      <i class="fa-solid fa-file-import"></i>
+                      <span class="ms-1">ส่งเกรด</span>
+                    </div>
+                   
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>ด.ช.หมี มีของกลาง</td>
+                <td>ม.2/1</td>
+                <td>ร</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center text-success">
+                      <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                      <span class="ms-2">สำเร็จ (ส่งเกรดแล้ว)</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex">
+                    
+                  </div>
+                </td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="md_para" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ภาระงาน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex align-items-center">
+            <b>ชื่อ-สกุล : </b>
+            <p id="mdpara_fullname" class="ms-2 text-success"></p>
+          </div>
+          <div class="d-flex align-items-center">
+            <b>ชั้น : </b>
+            <p id="mdpara_class" class="ms-2 text-success"></p>
+          </div>
+          <div class="d-flex align-items-center">
+            <b>รายวิชา : </b>
+            <p id="mdpara_subjecttitle" class="ms-2 text-success"></p>
+          </div>
+          <div class="d-flex align-items-center">
+            <b>ผลการเรียนเดิม : </b>
+            <p id="mdpara_gradeold" class="ms-2 text-success"></p>
+          </div>
+          <div class="d-flex align-items-center" style="display: none !important;">
+            <b>หน่วยกิต : </b>
+            <p id="mdpara_unit" class="ms-2 text-success">0.5 หน่วยกิต</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <b>วันที่เริ่มต้น : </b>
+            <p id="mdpara_std" class="ms-2 text-success"></p>
+          </div>
+          <div class="d-flex align-items-center">
+            <b>วันที่สิ้นสุด : </b>
+            <p id="mdpara_exp" class="ms-2 text-success"></p>
+          </div>
+          <br>
+          <div>
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <b>รายการภาระงาน</b>
+              <a id="btn_calendar" href="./calendar.html" class="btn btn-primary">ดูเวลาเรียน</a>
+            </div>
+            <!-- <input id="txt_unitfix" disabled type="text" class="box_unit form-control mb-1"> -->
+            <ul id="mdpara_render" class="list-group">
+              <li onclick="selectGage(this, 0);" id="gage1" style="cursor: pointer;" class="list-group-item">
+                นักเรียนต้องเรียนอย่างน้อย 16/20 ชั่วโมง</li>
+              <li onclick="selectGage(this, 1)" id="gage2" style="cursor: pointer;" class="list-group-item">สมุดเล่มเล็ก
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ย้อนกลับ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="btn_openmdauto" data-bs-toggle="modal" data-bs-target="#md_para" style="display: none;"></button>
+
+  <script src="../global.js"></script>
+  <script>
+    var urlx = new URL(window.location.href);
+    const openmdx = urlx.searchParams.get("openmd");
+
+    var extra_exp = "";
+    var extra_md = "";
+    var extra_info = {};
+    var end_date;
+    $(document).ready(() => {
+      localStorage.removeItem("utwCalendar")
+      set_cal($("#std"), new_date);
+      set_cal($("#expt"), new_date);
+      render()
+    })
+
+    var data;
+    function render() {
+      var settings = {
+          "url": endpoint + "/utw-repeat-api/teacher/list-class/" + localStorage.utwClassRoom,
+          "method": "POST",
+          "timeout": 0,
+          "headers": {
+              "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+          },
+      };
+      $.ajax(settings).done(function (response) {
+        console.log(">>>", response)
+        if(response.status.code == 200) {
+          data = response.data;
+          var html = "";
+          for (let i = 0; i < response.data.length; i++) {
+            const element = response.data[i];
+
+            var des = {
+              btn: "",
+              status: ""
+            };
+            if(element.status == "wait_register") {
+              des.status = `
+              <div class="d-flex align-items-center text-danger">
+                <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                <span class="ms-2">รอลงทะเบียน</span>
+              </div>`;
+            }
+            else if(element.status == "register") {
+              des.status = `
+              <div class="d-flex align-items-center" style="color: #f1c40f;">
+                <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                <span class="ms-2">ลงทะเบียนแล้ว</span>
+              </div>`;
+            }
+            else if(element.status == "enrol") {
+              des.btn = `
+              <div onclick="md(${i})" class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                  <i class="fas fa-search"></i>
+              </div>`;
+              des.status = `
+              <div class="d-flex align-items-center " style="color: #f1c40f;">
+                <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                <span class="ms-2">มอบหมายงานแล้ว</span>
+              </div>`;
+            }
+            else if(element.status == "progress") {
+              des.btn = `
+              <div onclick="md(${i})" class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                  <i class="fas fa-search"></i>
+              </div>`;
+              des.status = `
+              <div class="d-flex align-items-center " style="color: #f39c12;">
+                <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                <span class="ms-2">ดำเนินการอยู่</span>
+              </div>`;
+            }
+            else if(element.status == "wait_success") {
+              des.btn = `
+              <div onclick="md(${i})" class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#md_para">
+                  <i class="fas fa-search"></i>
+              </div>`;
+              des.status = `
+              <div class="d-flex align-items-center text-primary" >
+                <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                <span class="ms-2">สำเร็จ (รอส่งเกรด)</span>
+              </div>`;
+            }
+            else if(element.status == "success") {
+              des.status = `
+              <div class="d-flex align-items-center text-success" >
+                <i class="fas fa-circle" style="font-size: .7rem;"></i>
+                <span class="ms-2">สำเร็จ (ส่งเกรดแล้ว)</span>
+              </div>`;
+            }
+
+            html += `
+            <tr>
+              <td>${i+1}</td>
+              <td>${element.student.tname}${element.student.fname} ${element.student.lname}</td>
+              <td>${element.term_at}/${element.year_at}</td>
+              <td>ม.${element.student.class}/${element.student.room}</td>
+              <td>${element.subject_code} ${element.subject_title}</td>
+              <td>${element.grade_old}</td>
+              <td>
+                ${des.status}
+              </td>
+              <td>
+                ${des.btn}
+              </td>
+            </tr>`;
+          }
+          $("#tbody").html(html)
+          localStorage.setItem("utwHistoryPage", "./courseunder.html");
+          if (openmdx && openmdx == "true" && localStorage.utwOpenmdIndex) {
+            $("#btn_openmdauto").trigger("click")
+            md(parseInt(localStorage.utwOpenmdIndex), localStorage.utwOpenmdStatus)
+          }
+        }
+        else {
+
+        }
+      })
+    }
+
+    var gage = '';
+    function selectGage(elem, i) {
+      var element = $('#' + elem.id)
+      if (element.hasClass('active')) {
+        element.removeClass('active')
+        gage = gage.replace(`i-${i},`, '')
+      } else {
+        element.addClass('active')
+        gage += `i-${i},`
+      }
+    }
+
+    function checkUnit(elem) {
+      var val = $(`#${elem.id}`).val();
+      
+      if(val == "") {
+        $(".box_unit").css('display','none')
+      } else {
+        var a = (parseFloat(val)*10)/0.5;
+        var b = (80 / 100) * a;
+        $("#txt_unitfix").val(`นักเรียนต้องเรียนอย่างน้อย ${b}/${a} ชั่วโมง`)
+        $(".box_unit").css('display','block')
+      }
+
+      
+    }
+   
+    function md_detail(i, status) {
+      const info = data[i];
+      gage = "";
+      console.log('info', info)
+      $("#mdpara_fullname").text(`${info.student.tname}${info.student.fname} ${info.student.lname}`)
+      $("#mdpara_class").text(`ม.${info.student.class}/${info.student.room}`)
+      $("#mdpara_subjecttitle").text(info.subject_code + " " + info.subject_title)
+      $("#mdpara_gradeold").text(info.grade_old)
+      var a = new Date(info.start_date).getTime();
+      var b = getDateMil(a).split(" ");
+      var c = dateentoth(b[0]);
+      $("#mdpara_std").text(`${c} ${b[1]}`);
+
+      var d = new Date(info.end_date).getTime();
+      var e = getDateMil(d).split(" ");
+      var f = dateentoth(e[0]);
+      $("#mdpara_exp").text(`${f} ${e[1]}`);
+
+      var html = "";
+      for (let x = 0; x < info.student_activity.length; x++) {
+        const element = info.student_activity[x];
+
+        var class1 = "";
+        if((status == "progress" || status == "wait_success") && element.successDate) {
+          class1 = "active";
+          gage += `i-${x},`;
+        }
+        var goto1 = "";
+        if(String(element.indicator).includes("นักเรียนต้องเรียนอย่างน้อย")) {
+          //goto1 = `gotocalendar();`;
+        }
+
+        html += `
+        <li onclick="selectGage(this, ${x}); ${goto1}" id="gage${x}" style="cursor: pointer;" class="list-group-item ${class1}">
+          ${element.indicator}
+        </li>`;
+      }
+      $("#mdpara_render").html(html)
+    }
+
+    function md_edit(i, status) {
+      const info = data[i];
+      gage = "";
+      extra_info.ids = [];
+      extra_info.ids = [parseInt(info.id)];
+      console.log('info', info)
+      $("#mdaddpara_fullname").text(`${info.student.tname}${info.student.fname} ${info.student.lname}`)
+      $("#mdaddpara_class").text(`ม.${info.student.class}/${info.student.room}`)
+      $("#mdaddpara_subjecttitle").text(info.subject_code + " " + info.subject_title)
+      $("#mdaddpara_gradeold").text(info.grade_old)
+      var a = new Date(info.start_date).getTime();
+      var b = getDateMil(a).split(" ");
+      var c = dateentoth(b[0]);
+      $("#std").val(`${c}`);
+      
+
+      var d = new Date(info.end_date).getTime();
+      var e = getDateMil(d).split(" ");
+      var f = dateentoth(e[0]);
+      $("#expt").val(`${f}`);
+      end_date = datethtoen(f);
+
+      var html = "";
+      txtapp = 1;
+      $("#render_txt").html("")
+      for (let x = 0; x < info.student_activity.length; x++) {
+        const element = info.student_activity[x];
+        addordel("+", element.indicator, x);
+      }
+      $("#mdpara_render").html(html)
+    }
+  
+    var txtapp = 1;
+    function addordel(syn, message, i) {
+      console.log('txtapp',txtapp)
+      if(syn == "+") {
+        $("#render_txt").append(`<input id="txtapp${txtapp}" type="text" class="form-control mb-1" placeholder="กรอกข้อความ" value="${message ? message : ""}">`)
+        txtapp++;
+        $("#btn_txtapp_del").css('display','block')
+      }
+      else{
+        txtapp--;
+        $(`#txtapp${txtapp}`).remove()
+      }
+
+      if(txtapp <= 2) {
+        $("#btn_txtapp_del").css('display','none')
+      }
+    }
+
+    function submitEditForm() {
+      if(true) {
+        var pass = true;
+        var round = txtapp - 1;
+        var works = [];
+        for (let i = 0; i < round; i++) {
+          $(`#txtapp${i+1}`).removeClass('is-invalid')
+          console.log(`#txtapp${i+1}`)
+          if($(`#txtapp${i+1}`)) {
+            if($(`#txtapp${i+1}`).val().length <= 0) {
+              $(`#txtapp${i+1}`).addClass('is-invalid').focus()
+              pass = false;
+              break;
+            } else {
+              works.push($(`#txtapp${i+1}`).val())
+            }
+          }
+        }
+
+        if(pass) {
+          loading(true)
+          var settings = {
+              "url": endpoint + "/utw-repeat-api/teacher/register-student",
+              "method": "POST",
+              "timeout": 0,
+              "headers": {
+                  "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+              },
+              "data": {
+                "ids": JSON.stringify(extra_info.ids),
+                "works": JSON.stringify(works),
+                "end_date": datethtoen($("#expt").val()) + " 00:00:00",
+              },
+          };
+          $.ajax(settings).done(function (response) {
+            console.log(">>>", response)
+            if(response.status.code == 200) {
+              loading(false)
+              Swal.fire({
+                icon: "success",
+                title: "สำเร็จ",
+                confirmButtonText: "ยืนยัน",
+                timer: 2000
+              }).then(() => {
+                $(".close_md").trigger('click')
+                render()
+              })
+            }
+            else {
+              loading(false)
+            }
+          });
+        }
+      }
+    }
+
+    function md(i) {
+      const info = data[i];
+      $("#mdpara_fullname").text(`${info.student.tname}${info.student.fname} ${info.student.lname}`)
+      $("#mdpara_class").text(`ม.${info.student.class}/${info.student.room}`)
+      $("#mdpara_subjecttitle").text(info.subject_code + " " + info.subject_title)
+      $("#mdpara_gradeold").text(info.grade_old);
+      localStorage.setItem("utwOpenmdIndex", i);
+      localStorage.setItem("utwOpenmdStatus", status);
+      if (info.start_date) {
+        localStorage.setItem("utwCalendarStartDate", info.start_date)
+      }
+      localStorage.setItem("utwCalendar", JSON.stringify(info.time_learning))
+      localStorage.setItem("utwCalendarDisabled", "true")
+      var n1 = String(info.student_activity[0].indicator);
+      var n2 = String(n1).split("/")[1];
+      var n3 = String(n2).replace(" ชั่วโมง", "");
+      localStorage.setItem("utwCalendarNuikit", n3)
+      var a = new Date(info.start_date).getTime();
+      var b = getDateMil(a).split(" ");
+      var c = dateentoth(b[0]);
+      $("#mdpara_std").text(`${c} ${b[1]}`);
+
+      var d = new Date(info.end_date).getTime();
+      var e = getDateMil(d).split(" ");
+      var f = dateentoth(e[0]);
+      $("#mdpara_exp").text(`${f} ${e[1]}`);
+
+      var html = "";
+      for (let x = 0; x < info.student_activity.length; x++) {
+        const element = info.student_activity[x];
+
+        var class1 = "";
+        if((status == "progress" || status == "wait_success") && element.successDate) {
+          class1 = "active";
+          gage += `i-${x},`;
+        }
+
+        var class1 = "";
+        if(element.successDate) {
+          class1 = ` active `;
+        }
+        var goto1 = "";
+        if(String(element.indicator).includes("นักเรียนต้องเรียนอย่างน้อย")) {
+          // goto1 = `gotocalendar();`;
+        }
+
+        html += `
+        <li  id="gage${x}" onclick="${goto1}" style="cursor: pointer;" class="${class1} list-group-item ${class1}">
+          ${element.indicator}
+        </li>`;
+      }
+      $("#mdpara_render").html(html)
+    }
+    function gotocalendar() {
+      window.location.href = "./calendar.html"
+    }
+
+  </script>
+</body>
+
+</html>

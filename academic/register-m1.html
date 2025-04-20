@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานกลุ่มสาระ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <style>
+    .dataTables_wrapper {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
+    </div>
+    <div class="fakesidebar">
+
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
+
+      </div>
+
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>รายการข้อมูลการสมัคร ม.1</h2>
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div> -->
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+          <!-- <h5 class="mb-0"><b>ข้อมูลนักเรียน</b></h5> -->
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#md_add">เพิ่มนักเรียน</div> -->
+        </div>
+
+        <div class="card">
+          <table id="myTable" class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">รหัสประจำตัวประชาชน</th>
+                <th scope="col">ชื่อ-นามสกุล</th>
+                <th scope="col">เบอร์โทร</th>
+                <th scope="col">อีเมล</th>
+                <th scope="col">สถานะ</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal add -->
+  <form class="modal fade w-75" id="md_add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">เพิ่มนักเรียน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสนักเรียน</span>
+            <input id="add_studentno" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>คำนำหน้า</span>
+            <select id="add_tname" class="txt-add form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="ด.ช.">ด.ช.</option>
+              <option value="ด.ญ.">ด.ญ.</option>
+              <option value="นาย">นาย</option>
+              <option value="น.ส.">น.ส.</option>
+              <option value="นาง">นาง</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชื่อ</span>
+            <input id="add_fname" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>สกุล</span>
+            <input id="add_lname" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>อีเมล</span>
+            <input id="add_email" type="text" class="txt-add form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="add_class" class="txt-add form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">ม.1</option>
+              <option value="2">ม.2</option>
+              <option value="3">ม.3</option>
+              <option value="4">ม.4</option>
+              <option value="5">ม.5</option>
+              <option value="6">ม.6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน</span>
+            <select id="add_room" class="txt-add form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <div onclick="addInfo()" type="button" class="btn btn-primary">บันทึก</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal info -->
+  <form class="modal fade" id="md_info" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ข้อมูลสถานะ</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="boxshowinfo" style="display: none;" class="row w-100">
+            <div class="respcol col-12 col-sm-6 d-flex">
+                <span>เลขบัตรประชาชน : </span>
+                <span class="ms-3"><b id="show_idcard"></b></span>
+            </div>
+            <div class="respcol col-12 col-sm-6 d-flex">
+                <span>ชื่อ-สกุล : </span>
+                <span class="ms-3"><b id="show_fullname"></b></span>
+            </div>
+            <div class="respcol col-12 col-sm-6 d-flex">
+                <span>เบอร์โทรศัพท์ : </span>
+                <span class="ms-3"><b id="show_phoneno"></b></span>
+            </div>
+            <div class="respcol col-12 col-sm-6 d-flex">
+                <span>อีเมล : </span>
+                <span class="ms-3"><b id="show_email"></b></span>
+            </div>
+            <div class="respcol col-12 col-sm-6 d-flex">
+                <span>โรงเรียนเดิม : </span>
+                <span class="ms-3"><b id="show_oldschool"></b></span>
+            </div>
+        </div>
+        <div id="boxresult_edit" style="display: none;">
+            <hr>
+            <br>
+            <div class=" d-flex align-items-center">
+                <h5 class="mb-0 text-start me-3">ผลการสมัคร :</h5>
+                <h5 class="mb-0 text-start text-warning">ต้องแก้ไขเอกสาร</h5>
+            </div>
+            <br>
+            <div class="card" style="overflow: scroll;">
+                <table class="table table-striped table-hover" style="min-width: 1000px;">
+                    <thead>
+                        <tr>
+                            <th>ลำดับ</th>
+                            <th class="text-start">สถานะ</th>
+                            <th class="text-start">เอกสาร</th>
+                        </tr>
+                    </thead>
+                    <tbody id="showresult_table_edit">
+                        <!-- <tr>
+                            <td>1</td>
+                            <td class="text-start">สำเนาบัตรประชาชน</td>
+                            <td class="text-danger text-start">ผิดพลาด (เนื่องจาก.....)</td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="btn-sm btn-primary text-decoration-none"
+                                        style="cursor: pointer;">อัพโหลดเอกสาร</a>
+                                    <a href="../imgs/exp.png" target="_blank" style="cursor: pointer;"
+                                        class="text-decoration-none btn-sm btn-warning ms-3">ตัวอย่างไฟล์</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="text-start">ใบเกรด</td>
+                            <td class="text-success text-start">สำเร็จ</td>
+                            <td></td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <button id="btn_sendto" onclick="sendtoForm()" style="width: 200px;"
+                class="btn btn-primary">บันทึกการแก้ไขเอกสาร</button>
+        </div>
+
+
+        <div id="boxresult_reject" style="display: none;">
+            <hr>
+            <br>
+            <div class="d-flex align-items-center">
+                <h5 class="mb-0 text-start me-3">ผลการสมัคร :</h5>
+                <h5 class="mb-0 text-start text-danger">ไม่อนุมัติ</h5>
+            </div>
+        </div>
+
+        <div id="boxresult_waiting" style="display: none;">
+            <hr>
+            <br>
+            <div class="d-flex align-items-center">
+                <h5 class="mb-0 text-start me-3">ผลการสมัคร :</h5>
+                <h5 class="mb-0 text-start text-warning">รอการตรวจสอบ</h5>
+            </div>
+        </div>
+
+        <div id="boxresult_success" style="display: none;">
+            <hr>
+            <br>
+            <div class="d-flex align-items-center">
+                <h5 class="mb-0 text-start me-3">ผลการสมัคร :</h5>
+                <h5 class="mb-0 text-start text-success">สำเร็จ</h5>
+            </div>
+            <div class="d-flex mt-3">
+                <p class="respcol d-flex mb-0">
+                    <b>วันที่สอบ : </b>
+                <p class="mb-0 ms-3" id="datesorb"></p>
+                </p>
+            </div>
+            <div class="respcol d-flex ">
+                <p class="d-flex mb-0">
+                    <b>สถานที่สอบ : </b>
+                <p class="mb-0 ms-3" id="hongsorb"></p>
+                </p>
+                <!-- <button class="btn-sm btn-primary ms-3">Export PDF</button> -->
+            </div>
+        </div>
+
+         </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modal edit -->
+  <form class="modal fade" id="md_edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">แก้ไขนักเรียน</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <span>รหัสนักเรียน</span>
+            <input id="edit_studentno" type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>คำนำหน้า</span>
+            <select id="edit_tname" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="ด.ช.">ด.ช.</option>
+              <option value="ด.ญ.">ด.ญ.</option>
+              <option value="นาย">นาย</option>
+              <option value="น.ส.">น.ส.</option>
+              <option value="นาง">นาง</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ชื่อ</span>
+            <input id="edit_fname" type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>สกุล</span>
+            <input id="edit_lname" type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>อีเมล</span>
+            <input id="edit_email" disabled type="text" class="form-control" placeholder="ข้อความ">
+          </div>
+          <div class="mb-3">
+            <span>ชั้นเรียน</span>
+            <select id="edit_class" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">ม.1</option>
+              <option value="2">ม.2</option>
+              <option value="3">ม.3</option>
+              <option value="4">ม.4</option>
+              <option value="5">ม.5</option>
+              <option value="6">ม.6</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <span>ห้องเรียน</span>
+            <select id="edit_room" class="form-control">
+              <option value="">--- เลือก ---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+          <div onclick="editWork()" type="button" class="btn btn-primary">บันทึก</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <script src="./global.js"></script>
+  <script>
+    $(document).ready(() => {
+      render()
+    })
+
+    function render() {
+      loading(true)
+      $("#tbody").html('')
+      $.ajax({
+        method: "get",
+        url: endpoint + '/utw-register-api/register/mid',
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwAdminToken
+        },
+        success: response => {
+          console.log(response)
+          if (response.status.code == 200) {
+            var html = ''
+            for (let i = 0; i < response.data.length; i++) {
+              const element = response.data[i];
+              let status = "ส่งใบสมัคร";
+              let classStatus = "text-info";
+              if (element.status === "approve") {
+                status = "อนุมัติแล้ว";
+                classStatus="text-success";
+              } else if (element.status === "unapprove") {
+                status = "ไม่อนุมัติ";
+                classStatus="text-danger";
+              } else if (element.status === "modify") {
+                status = "รอตรวจเอกสาร";
+                classStatus = "text-warning";
+              } else if (element.status === "correct") {
+                status = "ส่งแก้เอกสาร";
+                classStatus = "text-warning";
+              }
+              html += `
+                  <tr>
+                    <td>${element.id}</td>
+                    <td>${element.id_card}</td>
+                    <td>${element.information.tname}${element.information.fname} ${element.information.lname}</td>
+                    <td>${element.information?.phone}</td>
+                    <td>${element.information?.email}</td>
+                    <td><div class='${classStatus}'>${status}</div></td>
+                    <td>
+                      <div class="d-flex">
+                        <div onclick="detail(${element.id}, ${element.id_card})" style="cursor: pointer;" class="btn-sm me-1 btn-primary" data-bs-toggle="modal" data-bs-target="#md_info">
+                          <i class="bi bi-search"></i>
+                        </div>
+                        <div onclick="removeInfo(${element.id}, '${element.information.tname}${element.information.fname} ${element.information.lname}')" style="cursor: pointer;" class="btn-sm me-1 btn-danger">
+                          <i class="bi bi-trash3-fill"></i>
+                        </div>
+                      </div>  
+                    </td>
+                  </tr>
+                `
+            }
+            loading(false)
+            $("#tbody").html(html).promise().done(() => {
+              $('#myTable').DataTable({
+                "language": {
+                  "lengthMenu": "แสดงผล _MENU_ รายการ",
+                  "info": "พบข้อมูล _PAGE_ จาก _PAGES_ รายการ"
+                },
+                "oLanguage": {
+                  "sSearch": "ค้นหา",
+                  "sEmptyTable": 'ไม่พบข้อมูล',
+                  "sInfoEmpty": 'ไม่พบข้อมูล',
+                  "sZeroRecords": 'ไม่พบข้อมูล',
+                  "oPaginate": {
+                    "sNext": "ถัดไป",
+                    "sPrevious": "ก่อนหน้า",
+                  },
+                  "sInfoFiltered": '',
+                }
+              })
+            })
+          }
+        }, error: err => {
+          loading(false)
+          errswal()
+        }
+      })
+    }
+
+    function detail(id, id_card) {
+      $.ajax({
+        method: 'get',
+        url: endpoint + '/utw-register-api/information/show/mid/card/' + id_card,
+        headers: {
+          Authorization: 'Bearer ' + localStorage.utwAdminToken
+        },
+        success: response => {
+            console.log('good', response)
+            if (response.status.code == 200) {
+                const data = response.data;
+                id_sendto = response.data.id;
+                documentlist = response.data.document;
+                $('#boxshowinfo').show()
+                $('#show_idcard').text(data.id_card)
+                $('#show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
+                $('#show_oldschool').text(data.education.title_school)
+                $('#show_phoneno').text(data.information.phone)
+                $('#show_email').text(data.information.email)
+
+                $.ajax({
+                    method: 'post',
+                    url: endpoint + '/utw-cors-api/settings/get-one.php',
+                    data: {
+                        _method: "GET",
+                        key_address: 'register_date'
+                    }, success: response => {
+                        console.log('good setting', response)
+                        if (response.status.code == 200) {
+                            checksetting = response.data.in_data;
+                                $('#datesorb').text(response.data.in_data.date_exam_m1 + '-12:05 น.')
+
+                        }
+                        else {
+                            errswal('3')
+                        }
+                    }, error: err => {
+                        errswal('4')
+                        console.log('bad', err)
+                    }
+                })
+
+                if (data.status == 'register' || data.status == 'modify') {
+                    $('#boxresult_waiting').show()
+                    $('#boxresult_success').hide()
+                    $('#boxresult_reject').hide()
+                    $('#boxresult_edit').hide()
+                }
+                else if (data.status == 'approve') {
+                    $('#boxresult_success').show()
+                    $('#boxresult_waiting').hide()
+                    $('#boxresult_reject').hide()
+                    $('#boxresult_edit').hide()
+                    $('#hongsorb').text(`ตึก ${data.exam_room.substr(0, 1)} ห้องสอบที่ ${data.exam_room}`)
+
+                }
+                else if (data.status == 'unapprove') {
+                    $('#boxresult_reject').show()
+                    $('#boxresult_waiting').hide()
+                    $('#boxresult_success').hide()
+                    $('#boxresult_edit').hide()
+                }
+                else if (data.status == 'correct') {
+                    $('#boxresult_edit').show()
+                    $('#boxresult_waiting').hide()
+                    $('#boxresult_success').hide()
+                    $('#boxresult_reject').hide()
+                    var html = '';
+
+                    var key = ''
+                    if (data.is_grade == 1) {
+                        key = 'register_doc_student_success'
+                    } else {
+                        key = 'register_doc_student_waiting'
+                    }
+
+
+                    $.ajax({
+                        method: 'post',
+                        url: endpoint + '/utw-cors-api/settings/get-one.php',
+                        data: {
+                            _method: "GET",
+                            key_address: key
+                        }, success: response => {
+                            console.log('good 2', response)
+                            if (response.status.code == 200) {
+                                const orgindoc = response.data.in_data;
+                                data.document.forEach((element, i) => {
+                                    var html2 = ''
+                                    if (element.status == 'approve') {
+                                        html2 = `
+                                        <td class="text-success text-start">สำเร็จ</td>
+                                       `;
+                                    }
+                                    else if (element.status == 'correct') {
+                                        html2 = `
+                                        <td class="text-danger text-start">ผิดพลาด (เนื่องจาก ${element.comment})</td>
+                                       `
+
+                                    }
+
+                                    html += `
+                                    <tr>
+                                        <td>${i + 1}</td>
+                                        ${html2}
+                                        <td class="text-start">${element.title}</td>
+                                    </tr>
+
+
+                                    `
+                                });
+                                $("#showresult_table_edit").html(html)
+                            }
+                            else {
+                                errswal('12')
+                            }
+                        }, error: err => {
+                            errswal('13')
+                            loading(false)
+                            console.log('bad', err)
+                        }
+                    })
+                }
+
+            }
+            else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'ไม่พบข้อมูล'
+                })
+                loading(false)
+            }
+        }, error: err => {
+            errswal('15')
+            loading(false)
+        }
+    })
+    }
+
+    function detailInfo(id, studentno, tname, fname, lname, email, classx, room) {
+      $("#info_studentno").val(studentno)
+      $("#info_tname").val(tname)
+      $("#info_fname").val(fname)
+      $("#info_lname").val(lname)
+      $("#info_email").val(email)
+      $("#info_class").val(classx)
+      $("#info_room").val(room)
+    }
+
+    var edit_id = 0;
+    function editInfo(id, studentno, tname, fname, lname, email, classx, room) {
+      edit_id = id;
+      $("#edit_studentno").val(studentno)
+      $("#edit_tname").val(tname)
+      $("#edit_fname").val(fname)
+      $("#edit_lname").val(lname)
+      $("#edit_email").val(email)
+      $("#edit_class").val(classx)
+      $("#edit_room").val(room)
+    }
+
+    function removeInfo(idx, fullname) {
+      Swal.fire({
+        icon: "warning",
+        title: `คุณต้องการจะไม่อนุมัติ ?`,
+        text: `${fullname}`,
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `บันทึก`,
+        cancelButtonText: "ยกเลิก"
+      }).then((result) => {
+        if (result.isDenied) {
+          $.ajax({
+            type: "patch",
+            dataType: "JSON",
+            url: endpoint + `/utw-register-api/unapprove/${idx}/mid`,
+            headers: {
+              Authorization: 'Bearer ' + localStorage.utwAdminToken
+            },
+            data: {
+              id: idx,
+              _method: "GET",
+            },
+            success: function (response) {
+              console.log("good", response);
+              if (response.status.code == 200) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'สำเร็จ',
+                  timer: 2000
+                }).then(() => {
+                  window.location.reload()
+                })
+              }
+            }, error: function (err) {
+              console.log("bad", err);
+            }
+          })
+        }
+      });
+    }
+
+
+    function addInfo() {
+      $(".errmsg").removeClass().remove()
+      $(".txt-add").removeClass("is-invalid")
+      if ($('#add_studentno').val().length <= 0) {
+        $('#add_studentno').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_tname').val() == '') {
+        $('#add_tname').after(`<span class="text-danger errmsg">โปรดเลือกคำนำหน้า</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_fname').val().length <= 0) {
+        $('#add_fname').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_lname').val().length <= 0) {
+        $('#add_lname').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_email').val().length <= 0) {
+        $('#add_email').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_class').val() == '') {
+        $('#add_class').after(`<span class="text-danger errmsg">โปรดเลือกชั้นเรียน</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#add_room').val() == '') {
+        $('#add_room').after(`<span class="text-danger errmsg">โปรดเลือกห้องเรียน</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else {
+        $.ajax({
+          type: "POST",
+          dataType: "JSON",
+          url: endpoint + '/utw-cors-api/users/add.php',
+          headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
+          data: {
+            user_no: $("#add_studentno").val(), /* teacher = null */
+            tname: $("#add_tname").val(),
+            fname: $("#add_fname").val(),
+            lname: $("#add_lname").val(),
+            email: $("#add_email").val(),
+            auth_role: "student", /* student || teacher */
+            department_id: null, /* student = null */
+            class: parseInt($("#add_class").val()),
+            room: parseInt($("#add_room").val()),
+            part: "-",
+          },
+          success: function (response) {
+            console.log("good", response);
+            if (response.status.code == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                timer: 2000
+              }).then(() => {
+                window.location.reload()
+              })
+            }
+            else {
+              errswal()
+            }
+          }, error: function (err) {
+            console.log("bad", err);
+            if (JSON.parse(err.responseText).status.code == 422) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'อีเมลไม่ถูกต้อง',
+                text: 'โปรดตรวจสอบอีเมลอีกครั้ง'
+              })
+              $('#add_email').after(`<span class="text-danger errmsg">อีเมลไม่ถูกต้อง</span>`)
+                .focus().addClass('is-invalid')
+            }
+            else {
+              errswal()
+
+            }
+          }
+        })
+      }
+    }
+
+    function editWork() {
+      $(".errmsg").removeClass().remove()
+      $(".txt-add").removeClass("is-invalid")
+      if ($('#edit_studentno').val().length <= 0) {
+        $('#edit_studentno').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_tname').val() == '') {
+        $('#edit_tname').after(`<span class="text-danger errmsg">โปรดเลือกคำนำหน้า</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_fname').val().length <= 0) {
+        $('#edit_fname').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_lname').val().length <= 0) {
+        $('#edit_lname').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_email').val().length <= 0) {
+        $('#edit_email').after(`<span class="text-danger errmsg">โปรดกรอกข้อความ</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_class').val() == '') {
+        $('#edit_class').after(`<span class="text-danger errmsg">โปรดเลือกชั้นเรียน</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else if ($('#edit_room').val() == '') {
+        $('#edit_room').after(`<span class="text-danger errmsg">โปรดเลือกห้องเรียน</span>`)
+          .focus().addClass('is-invalid')
+      }
+      else {
+        $.ajax({
+          type: "POST",
+          dataType: "JSON",
+          url: endpoint + '/utw-cors-api/users/update.php',
+          headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
+          data: {
+            id: edit_id,
+            user_no: $("#edit_studentno").val(), /* teacher = null */
+            tname: $("#edit_tname").val(),
+            fname: $("#edit_fname").val(),
+            lname: $("#edit_lname").val(),
+            email: $("#edit_email").val(),
+            auth_role: "student", /* student || teacher */
+            department_id: null, /* student = null */
+            class: parseInt($("#edit_class").val()),
+            room: parseInt($("#edit_room").val()),
+            part: "-",
+          },
+          success: function (response) {
+            console.log("good", response);
+            if (response.status.code == 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'สำเร็จ',
+                timer: 2000
+              }).then(() => {
+                window.location.reload()
+              })
+            }
+            else {
+              errswal()
+            }
+          }, error: function (err) {
+            console.log("bad", err);
+            if (JSON.parse(err.responseText).status.code == 422) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'อีเมลไม่ถูกต้อง',
+                text: 'โปรดตรวจสอบอีเมลอีกครั้ง'
+              })
+              $('#edit_email').after(`<span class="text-danger errmsg">อีเมลไม่ถูกต้อง</span>`)
+                .focus().addClass('is-invalid')
+            }
+            else {
+              errswal()
+
+            }
+          }
+        })
+      }
+    }
+  </script>
+
+</body>
+
+</html>

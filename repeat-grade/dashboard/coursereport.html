@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTW</title>
+    <link rel="icon" href="../imgs/utw.gif">
+    <link rel="stylesheet" href="../global.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      .list-group-item.active {
+        background-color: #20c997;
+        border-color: #198754;
+      }
+    </style>
+</head>
+<body>
+    
+    <div class="page">
+        <div class="fakesidebar">
+                
+        </div>
+        <div class="sidebar">
+          <div onclick="keepSidebar()" class="keepsidebar">
+            <i class="fa-solid fa-arrow-left"></i>
+          </div>
+          <div id="sidebartitle" style="display: flex; align-items: center;">
+                
+          </div>
+    
+          <div id="sidebar" class="sidebar-main">
+            
+          </div>
+    
+          <!-- <div class="hr"></div> -->
+    
+          
+        </div>
+        <div class="content">
+          <div class="content-navbar">
+            <div class="content-search">
+              <div style="display: flex; align-items: center;">
+                <div onclick="toggleSidebar()" class="hamburger me-3" >
+                  <i class="fa-solid fa-bars"></i>
+                </div>
+                <input type="text" placeholder="ค้นหา" class="form-control">
+              </div>
+            </div>
+            <div id="boxProfile" class="content-profile">
+              
+            </div>
+          </div>
+          <div class="content-page">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2 id="info_header">รายงานผลการเรียนซ้ำ</h2>
+                  
+              </div>
+
+              <div id="notfound" style=" width: 100%; height: 80vh; display: none; flex-direction: column; justify-content: center; align-items: center;">
+                <img src="../../imgs/notfound.png" style="width: 30%; object-fit: contain; margin-bottom: 20px;" />
+                <h2>ไม่พบข้อมูล</h2>
+              </div>
+              <div id="found" class="card">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">ลำดับ</th>
+                      <th scope="col">รายวิชา</th>
+                      <th scope="col">จัดการ</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody">
+                    
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <script src="../global.js"></script>
+      <script>
+        $(document).ready(() => {
+          render()
+        })
+  
+        function render() {
+          loading(true)
+          $.ajax({
+            method: 'POST',
+            url: endpoint + '/utw-repeat-api/teacher/list-report/' + localStorage.utwUserId,
+            headers: {
+              "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+            }, success: response => {
+              console.log(response)
+              if(response.status.code == 200) {
+                var html = '';
+                for (let i = 0; i < response.data.length; i++) {
+                  const data = response.data[i];
+                  html += `
+                  <tr>
+                    <th scope="row">${i+1}</th>
+                    <td>${data.subject_code} ${data.subject_title}</td>
+                    <td>
+                      <div>
+                        <a href="./printreportresult.html?id=${data.subject_id}&user_id=${localStorage.utwUserId}&sbj=${data.subject_title}&sbjc=${data.subject_code}&sbjcl=${data.subject_class}" target="_blank" class="btn btn-primary">ตรวจสอบ</a>
+                      </div>
+                    </td>
+                  </tr>`
+                }
+                if(html == "") {
+                  $("#found").css('display','none')
+                  $("#notfound").css('display','flex')
+                } else {
+                  $("#found").css('display','block')
+                  $("#notfound").css('display','none')
+                }
+                $('#tbody').html(html)
+                
+              }
+              else {
+  
+              }
+              loading(false)
+            }, error: err => {
+              console.log(err)
+              loading(false)
+            }
+          })
+          // $.ajax({
+          //   method: 'POST',
+          //   url: endpoint + '/utw-modify-grade-api/report-department.php',
+          //   data: {
+          //     _method: "GET",
+          //     id: 1,
+          //     department_id: 1
+          //   }, success: response => {
+          //     console.log(response)
+          //   }, error: err => {
+          //     console.log(err)
+          //   }
+          // })
+        }
+      </script>
+</body>
+</html>
