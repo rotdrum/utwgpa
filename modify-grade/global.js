@@ -248,7 +248,7 @@ $(window).on('resize', function() {
 function gotologout() {
     localStorage.clear();
     sessionStorage.clear(); 
-    location.replace('../logout.php')
+    location.replace('../logout.html')
 }
 
 
@@ -317,7 +317,7 @@ function getDateMil(mil) {
 
 if(!localStorage.utwAccessToken) {
     localStorage.clear()
-    window.location.href = '../logout.php'
+    window.location.href = '../logout.html'
 }
 
 function openmd(mid) {
