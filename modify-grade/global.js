@@ -1,6 +1,6 @@
 
 var endpoint = 'https://utwgpa.com'
-var endpointv2 = "http://167.71.212.42:3005";
+var endpointv2 = "https://uat-api.utwgpa.com";
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบแก้ตัวนักเรียน';
 
 

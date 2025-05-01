@@ -1,5 +1,5 @@
 var endpoint = 'https://utwgpa.com';
-var endpointv2 = "http://167.71.212.42:3005";
+var endpointv2 = "https://uat-api.utwgpa.com";
 var endpoint_img = '';
 const bearer = 'Bearer 6685214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd';
 
