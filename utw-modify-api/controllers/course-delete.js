@@ -21,7 +21,7 @@ module.exports = async function (req, res) {
     var id = req.body.id;
     
     if (id) {
-      await dbCors.query(`DELETE FROM course WHERE id = ? `,
+      await dbGrade.query(`DELETE FROM course WHERE id = ? `,
         [id]
       );
       return success(res, [{
