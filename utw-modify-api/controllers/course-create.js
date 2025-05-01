@@ -18,6 +18,7 @@ module.exports = async function (req, res) {
       return; // ไม่ผ่าน auth ก็จบ
     }
     
+    var user_id = req.body.user_id;
     var subject_id = req.body.subject_id;
     var indicators = req.body.indicators;
     var subject_title = req.body.subject_title;
@@ -55,6 +56,7 @@ module.exports = async function (req, res) {
       return empty(res);
     }
   } catch (err) {
+    console.log(err)
     return error(res, err);
   }
 };
