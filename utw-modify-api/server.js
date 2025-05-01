@@ -53,6 +53,12 @@ const timezone = {
 const testModule = require("./controllers/test");
 app.get(endpoint + "/test/:id", cors(corsOptions), testModule);
 
+const courseAlldModule = require("./controllers/course-getall");
+app.get(endpoint + "/course", cors(corsOptions), courseAlldModule);
+
+const courseByIdModule = require("./controllers/course-getbyid");
+app.get(endpoint + "/course/:id", cors(corsOptions), courseByIdModule);
+
 const groubCourseCreateModule = require("./controllers/groub-course-create");
 app.post(endpoint + "/groub-course/create", cors(corsOptions), groubCourseCreateModule);
 
