@@ -783,7 +783,7 @@
       $('#info_gname').val(data.title)
       $('#info_sname').val(data.subject_code + ' ' + data.subject_title + ' ม.' + data.subject_class)
 
-      var indicator = JSON.parse(data.indicators)
+      var indicator = (data.indicators)
       var html = '';
       for (let i = 0; i < indicator.length; i++) {
         const element = indicator[i];
@@ -791,7 +791,7 @@
       }
       $('#info-indicator-list').html(html)
 
-      var activity = JSON.parse(data.activity)
+      var activity = (data.activity)
       html = '';
       for (let i = 0; i < activity.length; i++) {
         const element = activity[i];
