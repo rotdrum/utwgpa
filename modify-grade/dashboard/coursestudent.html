@@ -887,11 +887,11 @@
       editid = data.id;
       courseid = data.course_id;
 
-      var indicator = JSON.parse(data.indicators)
+      var indicator = (data.indicators)
       fetchindicator(indicator);
       console.log('indicator', indicator)
 
-      var activity = JSON.parse(data.activity)
+      var activity = (data.activity)
       console.log('activity', activity)
 
       // <select class="edit-select-fullname" id="edit_stu_name${i + 1}">
