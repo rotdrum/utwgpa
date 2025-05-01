@@ -90,4 +90,4 @@ app.post(endpoint + "/course-delete", cors(corsOptions), deleteCourse);
 
 // utw-cors-api/students.php
 const student = require("./controllers/student");
-app.get(endpoint + "/student", cors(corsOptions), student);
+app.post(endpoint + "/student", cors(corsOptions), student);
