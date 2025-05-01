@@ -847,7 +847,7 @@
       for (let i = 0; i < grouplist.length; i++) {
         const data = grouplist[i];
         if (parseInt(data.subject_id) == parseInt(id)) {
-          var list = JSON.parse(data.indicators);
+          var list = (data.indicators);
           $('#' + mainbox).css('display', 'block')
           for (let k = 0; k < list.length; k++) {
             const datb = list[k];
