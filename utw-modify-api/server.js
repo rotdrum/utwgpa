@@ -73,3 +73,6 @@ app.post(endpoint + "/course-getone", cors(corsOptions), courseGetOne);
 
 const subjectShow = require("./controllers/subject-show");
 app.post(endpoint + "/subject-show", cors(corsOptions), subjectShow);
+
+const createCourse = require("./controllers/course-create");
+app.post(endpoint + "/course-create", cors(corsOptions), createCourse);
