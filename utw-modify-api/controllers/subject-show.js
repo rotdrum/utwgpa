@@ -15,16 +15,17 @@ module.exports = async function (req, res) {
     if (authResult !== true) {
       return; // ไม่ผ่าน auth ก็จบ
     }
-
-    var key_address = req.body.key_address;
-    if(key_address) {
+    
+    var department_id = req.body.department_id;
+    var is_active = 1;
+    if(department_id) {
       const [data] = await dbCoruse.query(
-        "SELECT * FROM settings WHERE key_address = ?", 
-        [key_address]
+        `SELECT * FROM subject WHERE is_active = ? AND (department_id = ? OR department_id = ?)`, 
+        [is_active, department_id, 0]
       );
   
       if (data.length && data[0]) {
-        return success(res, data[0]);
+        return success(res, data);
       } else {
         return empty(res);
       }

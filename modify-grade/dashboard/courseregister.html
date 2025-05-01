@@ -303,8 +303,7 @@
       openclassroom();
       $.ajax({
         method: 'post',
-        url: endpoint + '/utw-cors-api/subject/show.php',
-        // url: '../../utw-cors-api/subject/show.php',
+        url: endpointv2 + '/utw-modify-api/subject-show',
         headers: {
           Authorization: 'Bearer ' + localStorage.utwToken
         },
