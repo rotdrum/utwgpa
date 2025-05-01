@@ -436,7 +436,8 @@
         method: 'post',
         url: endpointv2 + '/utw-modify-api/student',
         data: {
-          _method: "GET"
+          _method: "GET",
+
         }, success: (response) => {
           console.log('student', response)
           if (response.status.code == 200) {
@@ -720,11 +721,12 @@
           ind = ind.split(',')
           $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-grade-api/groub_course/create.php',
+            url: endpointv2 + '/utw-modify-api/groub-course-create',
             headers: {
-              Authorization: 'Bearer ' + localStorage.utwToken
+              Authorization: 'Bearer ' + bearbertoken
             },
-            data: {
+            contentType: 'application/json',
+            data: JSON.stringify({
               _method: "POST",
               course_id: parseInt($('#add_sname').val()),
               title: $('#add_gname').val(),
@@ -732,7 +734,7 @@
               grade_old: JSON.stringify(oldgrade),
               score_old: JSON.stringify(oldscore),
               indicators: JSON.stringify(ind),
-            }, success: (response) => {
+            }), success: (response) => {
               console.log(response)
               if (response.status.code == 200) {
                 Swal.fire({

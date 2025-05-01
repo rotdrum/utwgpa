@@ -1,8 +1,10 @@
 const mysql = require("mysql2/promise");
 const root = require("../config-cors.js");
 const rootGrade = require("../config-modify.js");
+const rootCors = require("../config-cors.js");
 
 const dbGrade = mysql.createPool(rootGrade());
+const dbCors = mysql.createPool(rootCors());
 
 const success = require("../response/success.js");
 const empty = require("../response/empty.js");
@@ -13,41 +15,91 @@ module.exports = async function (req, res) {
   try {
     const authResult = await authenticate(req, res);
     if (authResult !== true) {
-      return;
+      return; // ไม่ผ่าน auth ก็จบ
     }
 
-    const { teacher_id, course_id, indicators, student_id, activity, student_name, student_class, student_room, old_grade, new_grade, status, confirmed_at } = req.body;
-    const [rows] = await db.query(
-      "SELECT * FROM new_groub_course WHERE teacher_id = ? AND course_id = ?",
-      [teacher_id, course_id]
-    );
+    var user_id = JSON.parse(req.body.user_id);
+    var indicators = JSON.parse(req.body.indicators);
+    var grade_old = JSON.parse(req.body.grade_old);
+    var score_old = JSON.parse(req.body.score_old);
+    var title = req.body.title;
+    var course_id = req.body.course_id;
+    var indicators = req.body.indicators;
+    var arr_indicators = [];
+    var arr_users = [];
+    var index = 0;
 
-    if (rows.length > 0) {
-      return error(res, "Course already exists for this user.");
+    if (indicators && indicators[0]) {
+      for (let i = 0; i < indicators.length; i++) {
+        const element = indicators[i];
+        arr_indicators.push({
+          "indicator": element,
+          "status": "register",
+        })
+      }
     }
 
-    const [result] = await db.query(
-      "INSERT INTO new_groub_course (`course_id`, `indicators`, `student_id`, `activity`, `student_name`, `student_class`, `student_room`, `old_grade`, `new_grade`, `status`, `confirmed_at`, `teacher_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [course_id, JSON.stringify(indicators), student_id, JSON.stringify(activity), student_name, student_class, student_room, old_grade, new_grade, status, confirmed_at, teacher_id]
-    );
+    var arr_users = [];
+    if (user_id && user_id[0]) {
+      const [data] = await dbCors.query(`SELECT * FROM user WHERE id IN (${user_id.length})`,
+        user_id
+      );
+      if (data.length && data[0]) {
+        for (let i = 0; i < data.length; i++) {
+          const element = data[i];
+          var grade_new = null;
+          var select_grade = [];
 
-    if (result.affectedRows > 0) {
-      return success(res, {
-        course_id,
-        indicators,
-        student_id,
-        activity,
-        student_name,
-        student_class,
-        student_room,
-        old_grade,
-        new_grade,
-        status,
-        confirmed_at,
-        teacher_id
-      });
-    } else {
-      return error(res, "Failed to add course.");
+          if (grade_old[i] == 'ร') {
+            grade_new = '1';
+            select_grade = ['4', '3.5', '3', '2.5', '2', '1.5', '1'];
+          } else if (grade_old[i] == '0') {
+            grade_new = '1';
+            select_grade = ['1'];
+          } else if (grade_old[i] == 'มส.') {
+            grade_new = '1';
+            select_grade = ['1'];
+          } else if (grade_old[i] == 'มผ.') {
+            grade_new = 'ผ';
+            select_grade = ['ผ'];
+          }
+
+          arr_users.push({
+            "id": user[i].id,
+            "tname": user[i].tname,
+            "fname": user[i].fname,
+            "lname": user[i].lname,
+            "class": user[i].class,
+            "room": user[i].room,
+            "part": user[i].part,
+            "grade_old": grade_old[i],
+            "score_old": score_old[i],
+            "grade_new": grade_new,
+            "select_grade": select_grade,
+            "confirm_date": null,
+            "status": "wait_register",
+            "work": arr_indicators,
+          })
+        }
+
+        var activity = JSON.stringify(arr_users);
+        await dbGrade.query(`INSERT INTO groub_course (title, course_id, indicators, user_ids, activity) VALUES (?, ?, ?, ?, ?)`
+          , [title, course_id, indicators, user_ids, activity]
+        )
+        return success(res, [{
+          "title": title,
+          "course_id": course_id,
+          "indicators": indicators,
+          "user_ids": user_ids,
+          "activity": activity,
+        }]);
+      }
+      else {
+        return empty(res);
+      }
+    }
+    else {
+      return empty(res);
     }
   } catch (err) {
     return error(res, err);
