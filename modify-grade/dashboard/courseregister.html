@@ -568,7 +568,7 @@
         $.ajax({
           method: 'post',
           url: endpointv2 + '/utw-modify-api/course-create',
-          headers: { Authorization: `Bearer ${localStorage.utwToken}` },
+          headers: { Authorization: `Bearer ${bearbertoken}` },
           data: {
             _method: 'POST',
             department_id: localStorage.utwDepartment,
