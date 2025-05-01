@@ -15,18 +15,30 @@ module.exports = async function (req, res) {
     if (authResult !== true) {
       return; // ไม่ผ่าน auth ก็จบ
     }
-
-    const [data] = await dbGrade.query(
-      "SELECT * FROM `course` ", 
-      []
-    );
-
-    if (data.length && data[0]) {
-      return success(res, data[0]);
-    } else {
-      return empty(res);
-    }
     
+    var user_id = req.body.user_id;
+    if(user_id) {
+      const [data] = await dbGrade.query(
+        `SELECT * FROM course WHERE user_id = ? `, 
+        [user_id]
+      );
+  
+      if (data.length && data[0]) {
+        const [data1] = await dbGrade.query(
+          ` SELECT *
+            FROM groub_course WHERE course_id = ?  `, 
+          [user_id]
+        );
+        return success(res, {
+          data: data
+        });
+      } else {
+        return empty(res);
+      }
+    }
+    else {
+      return error(res, err);
+    }
   } catch (err) {
     return error(res, err);
   }
