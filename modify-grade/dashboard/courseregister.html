@@ -383,7 +383,7 @@
             var html = '';
             for (let i = 0; i < response.data.length; i++) {
               const data = response.data[i];
-              var subject = JSON.parse(data.indicators);
+              var subject = (data.indicators);
               var descrip = '';
               for (let k = 0; k < subject.length; k++) {
                 const dataX = subject[k];
