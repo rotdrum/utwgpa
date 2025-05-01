@@ -19,16 +19,13 @@ module.exports = async function (req, res) {
     var user_id = req.body.user_id;
     if(user_id) {
       const [data] = await dbGrade.query(
-        `SELECT * FROM course WHERE user_id = ? `, 
+        `SELECT groub_course.id, groub_course.course_id, course.user_id, course.subject_id, course.subject_title, course.subject_code, course.subject_class,
+                groub_course.title, groub_course.indicators, groub_course.user_ids, groub_course.activity, groub_course.created_at, groub_course.updated_at 
+                FROM groub_course INNER JOIN course ON groub_course.course_id = course.id  WHERE course.user_id = ?  `, 
         [user_id]
       );
   
       if (data.length && data[0]) {
-        const [data1] = await dbGrade.query(
-          ` SELECT *
-            FROM groub_course WHERE course_id = ?  `, 
-          [user_id]
-        );
         return success(res, data);
       } else {
         return empty(res);

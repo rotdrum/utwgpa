@@ -11,12 +11,13 @@ const authenticate = require("../middlewares/authenticate.js");
 
 module.exports = async function (req, res) {
   try {
-    const authResult = await authenticate(req, res);
-    if (authResult !== true) {
-      return; // ไม่ผ่าน auth ก็จบ
-    }
+    // const authResult = await authenticate(req, res);
+    // if (authResult !== true) {
+    //   return; // ไม่ผ่าน auth ก็จบ
+    // }
 
     var key_address = req.body.key_address;
+    
     if(key_address) {
       const [data] = await dbCoruse.query(
         "SELECT * FROM settings WHERE key_address = ?", 

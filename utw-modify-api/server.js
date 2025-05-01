@@ -56,6 +56,9 @@ app.get(endpoint + "/test/:id", cors(corsOptions), testModule);
 const courseAlldModule = require("./controllers/course-getall");
 app.post(endpoint + "/course", cors(corsOptions), courseAlldModule);
 
+const groubCourseGetAll = require("./controllers/course-groub-getall");
+app.post(endpoint + "/course-groub-getall", cors(corsOptions), groubCourseGetAll);
+
 const courseByIdModule = require("./controllers/course-getbyid");
 app.get(endpoint + "/course/:id", cors(corsOptions), courseByIdModule);
 
