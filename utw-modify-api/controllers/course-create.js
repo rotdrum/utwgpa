@@ -24,7 +24,7 @@ module.exports = async function (req, res) {
     var subject_title = req.body.subject_title;
     var subject_code = req.body.subject_code;
     var subject_class = req.body.subject_class;
-
+    
     if (subject_id) {
       const [data] = await dbCors.query(`SELECT 
             subject.id AS id, 

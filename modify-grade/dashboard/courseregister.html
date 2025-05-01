@@ -685,11 +685,12 @@
         }
         $.ajax({
           method: 'post',
-          url: endpoint + '/utw-modify-grade-api/course/update.php',
+          url: endpoint + '/utw-modify-api/course-update',
           headers: {
             Authorization: 'Bearer ' + localStorage.utwToken
           },
-          data: {
+          contentType: 'application/json',
+          data: JSON.stringify({
             _method: 'PUT',
             id: parseInt($('#txtedit_id').val()),
             subject_class: parseInt($('#txtedit_subject').val().split('|')[3]),
@@ -698,7 +699,7 @@
             subject_id: parseInt($('#txtedit_subject').val().split('|')[0]),
             user_id: parseInt(localStorage.utwUserId),
             indicators: JSON.stringify(indicators)
-          }, success: (response) => {
+          }), success: (response) => {
             console.log(response)
             if (response.status.code == 200) {
               Swal.fire({
