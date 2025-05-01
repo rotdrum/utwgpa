@@ -570,9 +570,9 @@
           url: endpointv2 + '/utw-modify-api/course-create',
           headers: { 
             Authorization: `Bearer ${bearbertoken}` ,
-            "Content-Type": "application/json"
           },
-          data: {
+          contentType: 'application/json',
+          data: JSON.stringify({
             _method: 'POST',
             department_id: localStorage.utwDepartment,
             subject_class: parseInt($('#sel_subject').val().split("|")[3]),
@@ -581,7 +581,7 @@
             subject_id: parseInt($('#sel_subject').val().split("|")[0]),
             user_id: parseInt(localStorage.utwUserId),
             indicators: JSON.stringify(indicators)
-          }, success: (response) => {
+          }), success: (response) => {
             console.log(response)
             if (response.status.code == 200) {
               Swal.fire({
