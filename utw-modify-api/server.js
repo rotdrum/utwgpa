@@ -95,3 +95,7 @@ app.post(endpoint + "/student", cors(corsOptions), student);
 // utw-modify-grade-api/groub_course/create.php
 const groubCourseCreate = require("./controllers/groub-course-create");
 app.post(endpoint + "/groub-course-create", cors(corsOptions), groubCourseCreate);
+
+// utw-modify-grade-api/groub_course/delete.php
+const groubCourseDelete = require("./controllers/groub-course-delete");
+app.post(endpoint + "/groub-course-delete", cors(corsOptions), groubCourseDelete);
