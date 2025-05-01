@@ -79,3 +79,6 @@ app.post(endpoint + "/course-create", cors(corsOptions), createCourse);
 
 const updateCourse = require("./controllers/course-update");
 app.post(endpoint + "/course-update", cors(corsOptions), updateCourse);
+
+const deleteCourse = require("./controllers/course-delete");
+app.post(endpoint + "/course-delete", cors(corsOptions), deleteCourse);

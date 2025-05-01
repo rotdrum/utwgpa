@@ -501,14 +501,15 @@
         if (result.isDenied) {
           $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-grade-api/course/delete.php',
+            url: endpointv2 + '/utw-modify-api/course-delete',
             headers: {
-              Authorization: 'Bearer ' + localStorage.utwToken
+              Authorization: 'Bearer ' + bearbertoken
             },
-            data: {
+            contentType: 'application/json',
+            data: JSON.stringify({
               _method: 'DELETE',
               id: parseInt(id),
-            }, success: (response) => {
+            }), success: (response) => {
               console.log(response)
               if (response.status.code == 200) {
                 Swal.fire({
