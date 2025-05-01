@@ -18,7 +18,16 @@ module.exports = async function (req, res) {
       return; // ไม่ผ่าน auth ก็จบ
     }
 
-    var user_id = JSON.parse(req.body.user_id);
+    function genval(lng) {
+      var sql = '';
+      for (let i = 0; i < lng; i++) {
+        if (i == (lng - 1)) sql += '?'
+        else sql += '?,'
+      }
+      return sql
+    }
+
+    var user_id = JSON.parse(req.body.users_id);
     var indicators = JSON.parse(req.body.indicators);
     var grade_old = JSON.parse(req.body.grade_old);
     var score_old = JSON.parse(req.body.score_old);
@@ -41,9 +50,11 @@ module.exports = async function (req, res) {
 
     var arr_users = [];
     if (user_id && user_id[0]) {
-      const [data] = await dbCors.query(`SELECT * FROM user WHERE id IN (${user_id.length})`,
+      console.log(`SELECT * FROM user WHERE id IN (${genval(user_id.length)})`, user_id)
+      const [data] = await dbCors.query(`SELECT * FROM user WHERE id IN (${genval(user_id.length)})`,
         user_id
       );
+      console.log(data)
       if (data.length && data[0]) {
         for (let i = 0; i < data.length; i++) {
           const element = data[i];
@@ -65,13 +76,13 @@ module.exports = async function (req, res) {
           }
 
           arr_users.push({
-            "id": user[i].id,
-            "tname": user[i].tname,
-            "fname": user[i].fname,
-            "lname": user[i].lname,
-            "class": user[i].class,
-            "room": user[i].room,
-            "part": user[i].part,
+            "id": element.id,
+            "tname": element.tname,
+            "fname": element.fname,
+            "lname": element.lname,
+            "class": element.class,
+            "room": element.room,
+            "part": element.part,
             "grade_old": grade_old[i],
             "score_old": score_old[i],
             "grade_new": grade_new,
@@ -84,13 +95,13 @@ module.exports = async function (req, res) {
 
         var activity = JSON.stringify(arr_users);
         await dbGrade.query(`INSERT INTO groub_course (title, course_id, indicators, user_ids, activity) VALUES (?, ?, ?, ?, ?)`
-          , [title, course_id, indicators, user_ids, activity]
+          , [title, course_id, indicators, JSON.stringify(user_id), activity]
         )
         return success(res, [{
           "title": title,
           "course_id": course_id,
           "indicators": indicators,
-          "user_ids": user_ids,
+          "user_ids": user_id,
           "activity": activity,
         }]);
       }
@@ -102,6 +113,7 @@ module.exports = async function (req, res) {
       return empty(res);
     }
   } catch (err) {
+    console.log(err)
     return error(res, err);
   }
 };
