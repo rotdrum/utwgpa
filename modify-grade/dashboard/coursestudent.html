@@ -473,7 +473,7 @@
               const data = response.data[i];
               subjecthtml += `<option value="${data.id}|${data.subject_id}">${data.subject_code} ${data.subject_title} ม.${data.subject_class}</option>`
 
-              var indicators = JSON.parse(data.indicators);
+              var indicators = (data.indicators);
               console.log(indicators)
             }
             $('#add_sname').html(subjecthtml)
