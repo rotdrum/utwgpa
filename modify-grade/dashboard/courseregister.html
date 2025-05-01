@@ -428,10 +428,10 @@
             $('#render-box').html(html)
           }
           else {
-            Swal.fire({
-              icon: 'error',
-              title: 'getAll \nมีบางอย่างผิดพลาด'
-            })
+            // Swal.fire({
+            //   icon: 'error',
+            //   title: 'getAll \nมีบางอย่างผิดพลาด'
+            // })
           }
         }, error: (err) => {
           console.log('bad', err)
@@ -568,7 +568,10 @@
         $.ajax({
           method: 'post',
           url: endpointv2 + '/utw-modify-api/course-create',
-          headers: { Authorization: `Bearer ${bearbertoken}` },
+          headers: { 
+            Authorization: `Bearer ${bearbertoken}` ,
+            "Content-Type": "application/json"
+          },
           data: {
             _method: 'POST',
             department_id: localStorage.utwDepartment,

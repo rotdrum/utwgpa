@@ -39,14 +39,12 @@ module.exports = async function (req, res) {
             WHERE subject.id = ?`,
         [subject_id]
       );
-      console.log("data",)
       if (data.length && data[0]) {
         var department_id = data[0].department_id;
 
         await dbGrade.query(`INSERT INTO course (subject_id, department_id, subject_title,  subject_code,  subject_class, user_id, indicators) 
           VALUES (?, ?, ?, ?, ?, ?, ?)`,
           [subject_id, department_id, subject_title, subject_code, subject_class, user_id, indicators]);
-
         return success(res, [{
           "subject_id": subject_id,
           "department_id": department_id,
