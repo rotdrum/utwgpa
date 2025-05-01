@@ -64,3 +64,6 @@ app.post(endpoint + "/groub-course/create", cors(corsOptions), groubCourseCreate
 
 const groubCourseByIdModule = require("./controllers/groub-course-create");
 app.get(endpoint + "/groub-course/:id", cors(corsOptions), groubCourseByIdModule);
+
+const courseGetOne = require("./controllers/course-getone");
+app.post(endpoint + "/course-getone", cors(corsOptions), courseGetOne);

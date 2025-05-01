@@ -1,8 +1,9 @@
 const mysql = require("mysql2/promise");
 const root = require("../config-cors.js");
-const rootGrade = require("../config-modify.js");
+const rootGrade = require("../config-cors.js");
 
-const dbGrade = mysql.createPool(rootGrade());
+// const dbGrade = mysql.createPool(rootGrade());
+const dbCoruse = mysql.createPool(rootGrade());
 
 const success = require("../response/success.js");
 const empty = require("../response/empty.js");
@@ -15,23 +16,16 @@ module.exports = async function (req, res) {
     if (authResult !== true) {
       return; // ไม่ผ่าน auth ก็จบ
     }
-    
-    var user_id = req.body.user_id;
-    if(user_id) {
-      const [data] = await dbGrade.query(
-        `SELECT * FROM course WHERE user_id = ? `, 
-        [user_id]
+
+    var key_address = req.body.key_address;
+    if(key_address) {
+      const [data] = await dbCoruse.query(
+        "SELECT * FROM settings WHERE key_address = ?", 
+        [key_address]
       );
   
       if (data.length && data[0]) {
-        const [data1] = await dbGrade.query(
-          ` SELECT *
-            FROM groub_course WHERE course_id = ?  `, 
-          [user_id]
-        );
-        return success(res, {
-          data: data
-        });
+        return success(res, data[0]);
       } else {
         return empty(res);
       }

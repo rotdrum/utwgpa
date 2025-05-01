@@ -138,7 +138,7 @@ $('#sidebar').html(sidebar).promise().done(() => {
 
         $.ajax({
             method: 'post',
-            url: endpoint + '/utw-cors-api/settings/get-one.php',
+            url: endpoint + '/utw-modify-api/course-getone',
             data: {
                 _method: "GET",
                 key_address: 'modify_grade_page_active',

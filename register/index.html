@@ -465,7 +465,7 @@
 
             $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                url: endpoint + '/utw-modify-api/course-getone',
                 data: {
                     _method: "GET",
                     key_address: 'register_date'
@@ -478,7 +478,7 @@
                             flagEndExam = true;
                             $.ajax({
                                 method: 'post',
-                                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                                url: endpoint + '/utw-modify-api/course-getone',
                                 data: {
                                 _method: "GET",
                                 key_address: 'register_exam_point_file'
@@ -528,7 +528,7 @@
 
             $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                url: endpoint + '/utw-modify-api/course-getone',
                 data: {
                     _method: "GET",
                     key_address: 'register_recommend'
@@ -657,7 +657,7 @@
             }
             $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                url: endpoint + '/utw-modify-api/course-getone',
                 data: {
                     _method: "GET",
                     key_address: 'register_contact_admin'
@@ -732,7 +732,7 @@
             if ($('#txt_mor').val() == 'mid') {
                 $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                url: endpoint + '/utw-modify-api/course-getone',
                 data: {
                     _method: "GET",
                     key_address: 'register_exam_list_m1'
@@ -751,7 +751,7 @@
 
                         $.ajax({
                             method: 'post',
-                            url: endpoint + '/utw-cors-api/settings/get-one.php',
+                            url: endpoint + '/utw-modify-api/course-getone',
                             data: {
                                 _method: "GET",
                                 key_address: 'register_exam_ready_file_m1'
@@ -793,7 +793,7 @@
             } else {
                 $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                url: endpoint + '/utw-modify-api/course-getone',
                 data: {
                     _method: "GET",
                     key_address: 'register_exam_list_m4'
@@ -811,7 +811,7 @@
                         $('#table_exam').html(htmlMe)
                         $.ajax({
                         method: 'post',
-                        url: endpoint + '/utw-cors-api/settings/get-one.php',
+                        url: endpoint + '/utw-modify-api/course-getone',
                         data: {
                             _method: "GET",
                             key_address: 'register_exam_ready_file_m4'
@@ -891,7 +891,7 @@
                             }
                             $.ajax({
                             method: 'post',
-                            url: endpoint + '/utw-cors-api/settings/get-one.php',
+                            url: endpoint + '/utw-modify-api/course-getone',
                             data: {
                                 _method: "GET",
                                 key_address: `register_interview_file_m${classQuery}`
@@ -982,7 +982,7 @@
 
                             $.ajax({
                                 method: 'post',
-                                url: endpoint + '/utw-cors-api/settings/get-one.php',
+                                url: endpoint + '/utw-modify-api/course-getone',
                                 data: {
                                     _method: "GET",
                                     key_address: 'register_date'
@@ -1043,7 +1043,7 @@
 
                                 $.ajax({
     method: 'post',
-    url: endpoint + '/utw-cors-api/settings/get-one.php',
+    url: endpoint + '/utw-modify-api/course-getone',
     data: {
         _method: "GET",
         key_address: key
@@ -1103,7 +1103,7 @@
 
                                 // $.ajax({
                                 //     method: 'post',
-                                //     url: endpoint + '/utw-cors-api/settings/get-one.php',
+                                //     url: endpoint + '/utw-modify-api/course-getone',
                                 //     data: {
                                 //         _method: "GET",
                                 //         key_address: key

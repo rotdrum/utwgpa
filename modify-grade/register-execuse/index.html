@@ -150,7 +150,7 @@
 		function rendernow() {
 			$.ajax({
 				method: 'post',
-				url: endpoint + '/utw-cors-api/settings/get-one.php',
+				url: endpoint + '/utw-modify-api/course-getone',
 				data: {
 					_method: "GET",
 					key_address: 'repeat_date'
@@ -175,7 +175,7 @@
 		function annou() {
 			$.ajax({
 				method: 'post',
-				url: endpoint + '/utw-cors-api/settings/get-one.php',
+				url: endpoint + '/utw-modify-api/course-getone',
 				data: {
 					_method: "GET",
 					key_address: 'grade_announce'
@@ -194,7 +194,7 @@
 		function openclassroom() {
 			$.ajax({
 				method: 'post',
-				url: endpoint + '/utw-cors-api/settings/get-one.php',
+				url: endpoint + '/utw-modify-api/course-getone',
 				data: {
 					_method: "GET",
 					key_address: 'repeat_grade_class_active'
@@ -222,7 +222,7 @@
 		function annou2() {
 			$.ajax({
 				method: 'post',
-				url: endpoint + '/utw-cors-api/settings/get-one.php',
+				url: endpoint + '/utw-modify-api/course-getone',
 				data: {
 					_method: "GET",
 					key_address: 'grade_announce'
@@ -239,7 +239,7 @@
 		function openclassroom2() {
 			$.ajax({
 				method: 'post',
-				url: endpoint + '/utw-cors-api/settings/get-one.php',
+				url: endpoint + '/utw-modify-api/course-getone',
 				data: {
 					_method: "GET",
 					key_address: 'modify_grade_class_active'
@@ -266,7 +266,7 @@
 
 			$.ajax({
 				method: 'post',
-				url: endpoint + '/utw-cors-api/settings/get-one.php',
+				url: endpoint + '/utw-modify-api/course-getone',
 				data: {
 					_method: "GET",
 					key_address: 'repeat_page_active',
@@ -276,7 +276,7 @@
 
 					$.ajax({
 						method: 'post',
-						url: endpoint + '/utw-cors-api/settings/get-one.php',
+						url: endpoint + '/utw-modify-api/course-getone',
 						data: {
 							_method: "GET",
 							key_address: 'modify_grade_page_active',
