@@ -434,7 +434,7 @@
 
       $.ajax({
         method: 'post',
-        url: endpoint + '/utw-cors-api/students.php',
+        url: endpointv2 + '/utw-modify-api/student',
         data: {
           _method: "GET"
         }, success: (response) => {
@@ -630,7 +630,7 @@
 
           $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-grade-api/groub_course/update.php',
+            url: endpointv2 + '/utw-modify-api/course-groub-update',
             headers: {
               Authorization: 'Bearer ' + localStorage.utwToken
             },
@@ -1015,9 +1015,9 @@
       loading(true)
       $.ajax({
         method: 'post',
-        url: endpoint + '/utw-modify-grade-api/groub_course/getAll.php',
+        url: endpointv2 + '/utw-modify-api/course-groub-getall',
         headers: {
-          Authorization: 'Bearer ' + localStorage.utwToken
+          Authorization: 'Bearer ' + bearbertoken
         },
         data: {
           _method: "GET",

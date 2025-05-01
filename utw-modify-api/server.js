@@ -56,8 +56,13 @@ app.get(endpoint + "/test/:id", cors(corsOptions), testModule);
 const courseAlldModule = require("./controllers/course-getall");
 app.post(endpoint + "/course", cors(corsOptions), courseAlldModule);
 
+// utw-modify-grade-api/groub_course/getAll.php
 const groubCourseGetAll = require("./controllers/course-groub-getall");
 app.post(endpoint + "/course-groub-getall", cors(corsOptions), groubCourseGetAll);
+
+// utw-modify-grade-api/groub_course/update.php
+const groubCourseUpdate = require("./controllers/groub-course-update");
+app.get(endpoint + "/course-groub-update", cors(corsOptions), groubCourseUpdate);
 
 const courseByIdModule = require("./controllers/course-getbyid");
 app.get(endpoint + "/course/:id", cors(corsOptions), courseByIdModule);
@@ -82,3 +87,7 @@ app.post(endpoint + "/course-update", cors(corsOptions), updateCourse);
 
 const deleteCourse = require("./controllers/course-delete");
 app.post(endpoint + "/course-delete", cors(corsOptions), deleteCourse);
+
+// utw-cors-api/students.php
+const student = require("./controllers/student");
+app.get(endpoint + "/student", cors(corsOptions), student);
