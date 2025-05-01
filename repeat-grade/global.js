@@ -126,7 +126,7 @@ $('#sidebar').html(sidebar).promise().done(() => {
 
         $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-api/course-getone',
+            url: endpointv2 + '/utw-modify-api/course-getone',
             data: {
                 _method: "GET",
                 key_address: 'repeat_page_active',

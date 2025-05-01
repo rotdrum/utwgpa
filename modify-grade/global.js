@@ -1,5 +1,6 @@
 
 var endpoint = 'https://utwgpa.com'
+var endpointv2 = "http://167.71.212.42:3005";
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบแก้ตัวนักเรียน';
 
 
@@ -138,7 +139,7 @@ $('#sidebar').html(sidebar).promise().done(() => {
 
         $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-api/course-getone',
+            url: endpointv2 + '/utw-modify-api/course-getone',
             data: {
                 _method: "GET",
                 key_address: 'modify_grade_page_active',
