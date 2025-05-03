@@ -240,7 +240,7 @@ module.exports = async function (req, res) {
           "room": data1[0].room,
           "part": data1[0].part,
           "mail_token": data1[0].mail_token,
-          "access_token": $access_token,
+          "access_token": access_token,
         }]);
       }
       else {
