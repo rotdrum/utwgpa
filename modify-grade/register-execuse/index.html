@@ -307,7 +307,7 @@
 													var status = ''
 													var btn = '';
 													if (element.activity.status == 'cancel') { }
-													else if (element.activity.status_work == 'wait_begin') {
+													else if (element.activity.status_work == 'wait_begin' ) {
 														if (cannot1) {
 															btn = `<div onclick="confirmregister(${element.id})" class="w-100 btn-sm btn-primary text-center" style="cursor: pointer;">ลงทะเบียน</div>`
 														}
@@ -717,7 +717,7 @@
 				if (res.isConfirmed) {
 					$.ajax({
 						method: 'post',
-						url: endpoint + '/utw-modify-grade-api/student_follow/update.php',
+						url: endpointv2 + '/utw-modify-api/student-follow-update',
 						headers: {
 							Authorization: 'Bearer ' + localStorage.utwToken
 						},

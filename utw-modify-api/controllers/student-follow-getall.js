@@ -34,7 +34,6 @@ module.exports = async function (req, res) {
         SELECT groub_course.id, groub_course.course_id, course.user_id, course.subject_id, course.subject_title, course.subject_code, course.subject_class,
         groub_course.title, groub_course.indicators, groub_course.user_ids, groub_course.activity, groub_course.created_at, groub_course.updated_at 
         FROM groub_course INNER JOIN course ON groub_course.course_id = course.id `);
-        console.log(data1)
       if (data1 && data1[0]) {
 
         for (let a = 0; a < data1.length; a++) {
@@ -118,7 +117,7 @@ module.exports = async function (req, res) {
                 "title": element1.title,
                 "indicators": element1.indicators,
                 "user_ids": element1.user_ids,
-                "activity": data_row_activity,
+                "activity": data_row_activity[0],
                 "created_at": element1.created_at,
                 "updated_at": element1.updated_at,
               })
