@@ -34,7 +34,7 @@ module.exports = async function (req, res) {
       );
 
       if(data1 && data1[0]) {
-        return success(res, data1);
+        return success(res, data1[0]);
       }
       else {
         return empty(res);
