@@ -33,7 +33,7 @@ module.exports = async function (req, res) {
     var score_old = JSON.parse(req.body.score_old);
     var title = req.body.title;
     var course_id = req.body.course_id;
-    var indicators = req.body.indicators;
+    // var indicators = req.body.indicators;
     var arr_indicators = [];
     var arr_users = [];
     var index = 0;
@@ -95,7 +95,7 @@ module.exports = async function (req, res) {
 
         var activity = JSON.stringify(arr_users);
         await dbGrade.query(`INSERT INTO groub_course (title, course_id, indicators, user_ids, activity) VALUES (?, ?, ?, ?, ?)`
-          , [title, course_id, indicators, JSON.stringify(user_id), activity]
+          , [title, course_id, JSON.stringify(indicators), JSON.stringify(user_id), activity]
         )
         return success(res, [{
           "title": title,

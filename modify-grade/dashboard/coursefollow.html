@@ -166,9 +166,9 @@
     function render() {
       $.ajax({
         method: 'post',
-        url: endpoint + '/utw-modify-grade-api/follow_groub/getAll.php',
+        url: endpointv2 + '/utw-modify-api/follow-group-getall',
         headers: {
-          Authorization: 'Bearer ' + localStorage.utwToken
+          Authorization: 'Bearer ' + bearbertoken
         },
         data: {
           _method: "GET",
@@ -262,7 +262,7 @@
                               <button onclick="detailInfo(${i},${k})" class="btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#openModalDetail">
                                 <i class="fas fa-search"></i>
                               </button>
-                              <button onclick="updateGradeConfirm(${data2.id},${data.id})" class="btn-sm btn-danger">
+                              <button onclick="updateGradeConfirm(${data2.id},${data.id})" class="btn-sm btn-success">
                                 <i class="fa-solid fa-paper-plane"></i>
                                 <span>ส่งเกรด</span>
                               </button> `
@@ -353,11 +353,12 @@
       edit_row_id = data.id
       $('#info_subject').text(data.subject_title)
       $('#info_title').text(data.title)
-      var indicator = JSON.parse(data.indicators)
+      var indicator = (data.indicators)
       console.log('indicator >>', indicator)
       var html = '';
 
       var activity = JSON.parse(data.activity)
+      console.log("yala", activity)
       $('#grade_old').text(activity[k].grade_old)
 
       edit_student_id = activity[k].id
@@ -371,7 +372,7 @@
       // $('#info_class').text('ม.'+activity[k].class+'/'+activity[k].room+' ตอน '+activity[k].part)
       $('#info_class').text('ม.' + activity[k].class + '/' + activity[k].room)
       workdetail = activity[k].work
-
+      console.log("activity[k].select_grade",activity[k])
       var htmloption = `<option value="${activity[k].grade_new}">${activity[k].grade_new}</option>`
       activity[k].select_grade.forEach(element => {
         htmloption += `<option value="${element}">${element}</option>`
@@ -419,9 +420,9 @@
         if (result.isDenied) {
           $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-grade-api/groub_course/confirm-grade.php',
+            url: endpointv2 + '/utw-modify-api/group-course-confirm-grade',
             headers: {
-              Authorization: 'Bearer ' + localStorage.utwToken
+              Authorization: 'Bearer ' + bearbertoken
             },
             data: {
               group_course_id: parseInt(group_course_id),
@@ -469,9 +470,9 @@
         if (result.isDenied) {
           $.ajax({
             method: 'post',
-            url: endpoint + '/utw-modify-grade-api/groub_course/cancel-grade.php',
+            url: endpointv2 + '/utw-modify-api/group-course-cancel-grade',
             headers: {
-              Authorization: 'Bearer ' + localStorage.utwToken
+              Authorization: 'Bearer ' + bearbertoken
             },
             data: {
               group_course_id: parseInt(group_course_id),
@@ -538,9 +539,9 @@
 
       $.ajax({
         method: 'post',
-        url: endpoint + '/utw-modify-grade-api/follow_groub/update.php',
+        url: endpointv2 + '/utw-modify-api/follow-group-update',
         headers: {
-          Authorization: 'Bearer ' + localStorage.utwToken
+          Authorization: 'Bearer ' + bearbertoken
         },
         data: {
           _method: "POST",

@@ -513,19 +513,19 @@ $.ajax({
   data: {
       token: localStorage.utwAdminToken
   }, error: err => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Token หมดอายุ'
-      }).then((res) => {
-        if(res.isConfirmed) {
-          localStorage.clear()
-          window.location.href = '../'
-        }
-        else {
-          localStorage.clear()
-          window.location.href = '../logout.php'
-        }
-      })
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Token หมดอายุ'
+      // }).then((res) => {
+      //   if(res.isConfirmed) {
+      //     localStorage.clear()
+      //     window.location.href = '../'
+      //   }
+      //   else {
+      //     localStorage.clear()
+      //     window.location.href = '../logout.php'
+      //   }
+      // })
   }
 })
 

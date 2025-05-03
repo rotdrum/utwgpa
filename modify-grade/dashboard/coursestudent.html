@@ -633,7 +633,7 @@
             method: 'post',
             url: endpointv2 + '/utw-modify-api/course-groub-update',
             headers: {
-              Authorization: 'Bearer ' + localStorage.utwToken
+              Authorization: 'Bearer ' + bearbertoken
             },
             data: {
               _method: "PUT",
@@ -1033,6 +1033,30 @@
             var html = '';
             for (let i = 0; i < response.data.length; i++) {
               const data = response.data[i];
+
+              console.log("data",data)
+              var detect = false;
+              if(data.activity && data.activity[0]) {
+                for (let x = 0; x < data.activity.length; x++) {
+                  const element3 = data.activity[x];
+                  if(element3.status != "wait_register") {
+                    detect = true;
+                    break;
+                  }
+                }
+              }
+
+              var button_edit = `
+              <button onclick="detailEdit(${i})" class="btn btn-warning me-1" >
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>`;
+              if(detect) {
+                button_edit = `
+                <button onclick="cannotEdit(${i})" class="btn btn-warning me-1" >
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>`;
+              }
+
               html += `
                   <div class="col-sm-6 mb-4">
                     <div class="card">
@@ -1044,9 +1068,7 @@
                           <button onclick="detailInfo(${i})" class="btn btn-primary me-1">
                             <i class="fas fa-search"></i>
                           </button>
-                          <button onclick="detailEdit(${i})" class="btn btn-warning me-1" >
-                            <i class="fa-solid fa-pen-to-square"></i>
-                          </button>
+                          ${button_edit}
                           <button onclick="deleteList(${i},'${data.title}')" class="btn btn-danger me-1" >
                             <i class="fa-solid fa-trash-can"></i>
                           </button>
@@ -1068,6 +1090,14 @@
           console.log(err)
           loading(false)
         }
+      })
+    }
+
+    function cannotEdit() {
+      Swal.fire({
+        icon: "warning",
+        title: "ไม่อนุญาตให้แก้ไข",
+        text:"เนื่องจากมีการลงทะเบียนแก้ตัวแล้ว"
       })
     }
 

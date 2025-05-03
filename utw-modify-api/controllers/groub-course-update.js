@@ -13,6 +13,18 @@ const authenticate = require("../middlewares/authenticate.js");
 
 module.exports = async function (req, res) {
   try {
+    function getDateNow() {
+      var d = new Date();
+      var dy = d.getFullYear();
+      var dm = (d.getMonth()+1) < 10 ? '0'+(d.getMonth()+1) : (d.getMonth()+1);
+      var dd = d.getDate() < 10 ? '0'+d.getDate() : d.getDate();
+    
+      var th = d.getHours() < 10 ? '0'+d.getHours() : d.getHours();
+      var tm = d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes();
+      var ts = d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds();
+      return `${dy}-${dm}-${dd} ${th}:${tm}:${ts}`;
+    }
+
     const authResult = await authenticate(req, res);
     if (authResult !== true) {
       return; // ไม่ผ่าน auth ก็จบ
@@ -26,7 +38,7 @@ module.exports = async function (req, res) {
     var grade_old = JSON.parse(req.body.grade_old);
     var score_old = JSON.parse(req.body.score_old);
     var arr_indicators = [];
-    var arr_users = [];
+    var arr_user = [];
 
     if (indicators && indicators[0]) {
       for (let i = 0; i < indicators.length; i++) {
@@ -37,19 +49,23 @@ module.exports = async function (req, res) {
         })
       }
     }
+    user_ids = req.body.users_id;
 
     const [data] = await dbGrade.query(`SELECT * FROM groub_course WHERE id = ? `,
       [id]
     );
     if (data && data[0]) {
-      var activities = JSON.parse(data[0].activity);
+      var activities = (data[0].activity);
+      console.log(activities)
 
 
-      for (let i = 0; i < user_id.length; i++) {
-        const element = user_id[i];
+      for (let i = 0; i < test_user.length; i++) {
+        const element = test_user[i];
+        console.log("element",element)
 
         var [data1] = await dbCors.query(`SELECT * FROM user WHERE id = ? `, [element])
         if (data1 && data1[0]) {
+          console.log("data1",data1[0])
 
           var grade_new = null;
           var select_grade = [];
@@ -87,28 +103,69 @@ module.exports = async function (req, res) {
               var arr_new_indicators = [];
               for (let x = 0; x < indicators.length; x++) {
                 const element3 = indicators[x];
-                arr_indicators.push({
+                arr_new_indicators.push({
                   "indicator" : element3,
                   "status" : "register",
                 })
               }
 
-              arr_users.push({
-                
+              arr_user.push({
+                "id" : data1[0].id,
+                "tname" : data1[0].tname,
+                "fname" : data1[0].fname,
+                "lname" : data1[0].lname,
+                "class" : data1[0].class,
+                "room" : data1[0].room,
+                "part" : data1[0].part,
+                "grade_old" : grade_old[i],
+                "score_old" : score_old[i],
+                "grade_new" : grade_new,
+                "confirm_date" : null,
+                "select_grade" : select_grade,
+                "status" : 'wait_register',
+                "work" : arr_indicators,
+              })
+            }
+            else {
+              arr_user.push({
+                "id" : data1[0].id,
+                "tname" : data1[0].tname,
+                "fname" : data1[0].fname,
+                "lname" : data1[0].lname,
+                "class" : data1[0].class,
+                "room" : data1[0].room,
+                "part" : data1[0].part,
+                "grade_old" : grade_old[i],
+                "score_old" : score_old[i],
+                "grade_new" : grade_new,
+                "confirm_date" : null,
+                "select_grade" : select_grade,
+                "status" : 'wait_register',
+                "work" : arr_indicators,
               })
             }
           }
         }
       }
+
+      var title = req.body.title;
+      var course_id = req.body.course_id;
+      var indicators = req.body.indicators;
+      var activity = JSON.stringify(arr_user);
+      var updated_at = getDateNow();
+
+      await dbGrade.query(`UPDATE groub_course SET course_id = ?, title = ?, indicators = ?, user_ids = ?, activity = ?, updated_at = ? WHERE id = ?`, 
+        [course_id, title, indicators, user_ids, activity, updated_at, id])
+
+      var [data2] = await dbGrade.query(`SELECT * FROM groub_course WHERE id = ?`, 
+        [id])
+        return success(res, data2);
     }
-
-    // if (data.length && data[0]) {
-    //   return success(res, data[0]);
-    // } else {
-    //   return empty(res);
-    // }
-
+    else {
+      return empty(res);
+    }
   } catch (err) {
+    console.log(err)
     return error(res, err);
   }
 };

@@ -22,6 +22,7 @@ app.listen(parseInt(process.env.port), () => {
 
 const whitelist = [
   "http://localhost",
+  "http://localhost:5500",
   "http://localhost:3005",
   "https://utwgpa.com",
   "http://utwgpa.com",
@@ -35,7 +36,8 @@ const corsOptions = {
       callback(null, true);
     } else {
       // callback(new Error('Not allowed by CORS'))
-      callback("Something is went wrong!");
+      // callback("Something is went wrong!");
+      callback(null, true);
     }
   },
 };
@@ -62,7 +64,7 @@ app.post(endpoint + "/course-groub-getall", cors(corsOptions), groubCourseGetAll
 
 // utw-modify-grade-api/groub_course/update.php
 const groubCourseUpdate = require("./controllers/groub-course-update");
-app.get(endpoint + "/course-groub-update", cors(corsOptions), groubCourseUpdate);
+app.post(endpoint + "/course-groub-update", cors(corsOptions), groubCourseUpdate);
 
 const courseByIdModule = require("./controllers/course-getbyid");
 app.get(endpoint + "/course/:id", cors(corsOptions), courseByIdModule);
@@ -72,6 +74,22 @@ app.post(endpoint + "/groub-course/create", cors(corsOptions), groubCourseCreate
 
 // const groubCourseByIdModule = require("./controllers/groub-course-create");
 // app.get(endpoint + "/groub-course/:id", cors(corsOptions), groubCourseByIdModule);
+
+// utw-modify-grade-api/follow_groub/getAll.php
+const followGroubGetAll = require("./controllers/follow-group-getall");
+app.post(endpoint + "/follow-group-getall", cors(corsOptions), followGroubGetAll);
+
+// utw-modify-grade-api/groub_course/cancel-grade.php
+const groubCourseCancelGrade = require("./controllers/groub-course-cancel-grade");
+app.post(endpoint + "/group-course-cancel-grade", cors(corsOptions), groubCourseCancelGrade);
+
+// /utw-modify-grade-api/follow_groub/update.php
+const followGroubUpdate = require("./controllers/follow-group-update");
+app.post(endpoint + "/follow-group-update", cors(corsOptions), followGroubUpdate);
+
+// utw-modify-grade-api/groub_course/confirm-grade.php
+const groubCourseConfirmGrade = require("./controllers/groub-course-confirm-grade");
+app.post(endpoint + "/group-course-confirm-grade", cors(corsOptions), groubCourseConfirmGrade);
 
 const courseGetOne = require("./controllers/course-getone");
 app.post(endpoint + "/course-getone", cors(corsOptions), courseGetOne);
@@ -99,3 +117,7 @@ app.post(endpoint + "/groub-course-create", cors(corsOptions), groubCourseCreate
 // utw-modify-grade-api/groub_course/delete.php
 const groubCourseDelete = require("./controllers/groub-course-delete");
 app.post(endpoint + "/groub-course-delete", cors(corsOptions), groubCourseDelete);
+
+// utw-cors-api/login-admin.php
+const loginAdmin = require("./controllers/login-admin");
+app.post(endpoint + "/login-admin", cors(corsOptions), loginAdmin);

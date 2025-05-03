@@ -1,13 +1,14 @@
 
 var endpoint = 'https://utwgpa.com'
 var endpointv2 = "https://uat-api.utwgpa.com";
+// var endpointv2 = "http://localhost:3005";
 var bearbertoken = "21232f297a57a5a743894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0";
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบแก้ตัวนักเรียน';
 
 
-if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
-    endpoint = 'https://utwgpa.com/uat'
-}
+// if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
+//     endpoint = 'https://utwgpa.com/uat'
+// }
 // if(!localStorage.utwToken) {
 //     Swal.fire({
 //         icon: 'error',

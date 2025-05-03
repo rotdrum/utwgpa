@@ -35,7 +35,8 @@ const corsOptions = {
       callback(null, true);
     } else {
       // callback(new Error('Not allowed by CORS'))
-      callback("Something is went wrong!");
+      callback(null, true);
+      // callback("Something is went wrong!");
     }
   },
 };
