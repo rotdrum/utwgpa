@@ -29,12 +29,12 @@ module.exports = async function (req, res) {
 
     var id = req.body.id;
     var data_item = [];
-    if (id) {
+    if (true) {
       var [data1] = await dbGrade.query(`
         SELECT groub_course.id, groub_course.course_id, course.user_id, course.subject_id, course.subject_title, course.subject_code, course.subject_class,
         groub_course.title, groub_course.indicators, groub_course.user_ids, groub_course.activity, groub_course.created_at, groub_course.updated_at 
         FROM groub_course INNER JOIN course ON groub_course.course_id = course.id `);
-
+        console.log(data1)
       if (data1 && data1[0]) {
 
         for (let a = 0; a < data1.length; a++) {
