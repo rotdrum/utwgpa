@@ -128,9 +128,9 @@
         function render() {
           $.ajax({
             method: 'post',
-            url:  endpoint + '/utw-modify-grade-api/follow_class/getAll.php',
+            url:  endpointv2 + '/utw-modify-api/follow-class-getall',
             headers: {
-              Authorization: 'Bearer ' + localStorage.utwToken
+              Authorization: 'Bearer ' + bearbertoken
             },
             data: {
               _method: "GET",
@@ -286,11 +286,14 @@
           const data = superdata[i];
           $('#info_subject').text(data.subject_title)
           $('#info_title').text(data.title)
-          var indicator = JSON.parse(data.indicators)
+          console.log("data.indicators",data.indicators)
+          var indicator = (data.indicators)
           console.log(indicator)
 
           
           var activity = JSON.parse(data.activity)
+          console.log("data.activity",data.activity)
+
           var workdetail = activity[k].work
           $('#info_fname').text(activity[k].tname + activity[k].fname+' '+activity[k].lname)
           $('#grade_old').text(activity[k].grade_old)

@@ -1,7 +1,7 @@
 
 var endpoint = 'https://utwgpa.com'
-var endpointv2 = "https://uat-api.utwgpa.com";
-// var endpointv2 = "http://localhost:3005";
+// var endpointv2 = "https://uat-api.utwgpa.com";
+var endpointv2 = "http://localhost:3005";
 var bearbertoken = "21232f297a57a5a743894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0";
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบแก้ตัวนักเรียน';
 
@@ -104,20 +104,20 @@ else if(localStorage.utwEmail == '' || true) {
         <div class="hr"></div>
 
         <p style="font-weight: bold; color: #fff;">รายงาน</p>
-        
-        <a onclick="activeSidebar(this)" href="./coursereport.html" id="sidebar9" class="sidebar-items ">
-            <div class="sidebar-icon">
-                <i class="fas fa-house"></i>
-            </div>
-            <p style="color: #fff;">วผ.11/2</p>
-        </a>
-
         <a onclick="activeSidebar(this)" href="./coursereport-success.html" id="sidebar10" class="sidebar-items ">
             <div class="sidebar-icon">
-                <i class="fas fa-house"></i>
+                <i class="fa-solid fa-print"></i>
             </div>
-            <p style="color: #fff;">วผ.11/3</p>
+            <p style="color: #fff;">สำเร็จ</p>
         </a>
+        <a onclick="activeSidebar(this)" href="./coursereport.html" id="sidebar9" class="sidebar-items ">
+            <div class="sidebar-icon">
+                <i class="fa-solid fa-eye"></i>
+            </div>
+            <p style="color: #fff;">ตรวจสอบ</p>
+        </a>
+
+        
 
         <div class="hr"></div>
         <a onclick="activeSidebar(this)" href="../../repeat-grade/dashboard/registeragain.html" id="sidebar9" class="sidebar-items ">

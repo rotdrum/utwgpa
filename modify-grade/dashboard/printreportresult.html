@@ -242,7 +242,7 @@
 
             $.ajax({
                 method: 'POST',
-                url: endpoint + '/utw-modify-grade-api/report-subject.php',
+                url: endpointv2 + '/utw-modify-api/report-subject',
                 data: {
                     _method: "GET",
                     subject_id: parseInt(idx),
@@ -256,17 +256,18 @@
 
                         // response.data.forEach((datax,a) => {
                         var a = 0;
+                        console.log("response.data.groub_course",response.data.groub_course)
                         response.data.groub_course.forEach((datag) => {
-                            datag.activity = JSON.parse(datag.activity)
+                            // datag.activity = JSON.parse(datag.activity)
                             datag.activity.forEach((datay) => {
-                                var work = true
+                                var work = false
                                 datay.work.forEach((dataw) => {
                                     if (dataw.status != 'success') {
-                                        work = false
+                                        work = true
                                     }
                                 })
 
-                                if (work && datay.confirm_date) {
+                                if (work) {
                                     a++;
                                     html += `
                                     <tr>
