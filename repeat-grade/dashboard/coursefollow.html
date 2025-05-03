@@ -308,7 +308,169 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="closemd btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-          <button onclick="sendForm()" type="button" class="btn btn-success">บันทึก</button>
+          <button id="btn_sendForm" onclick="sendForm()" type="button" class="btn btn-success">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="md_sendgrade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h5 class="modal-title" id="exampleModalLabel">ตัวชี้วัด / ผลการเรียนรู้</h5>
+            <h6 id="vicha"></h6>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="md_sendgrade_section1" class="modal-body md_sendgrade">
+          <h6>ขั้นตอน 1/4</h6>
+          <br>
+          <h6>ตัวชี้วัด</h6>
+          <textarea id="pon1" class="form-control" style="height: 150px;"></textarea>
+          <br>
+          <h6>ผลการเรียนรู้</h6>
+          <textarea id="pon2" class="form-control" style="height: 150px;"></textarea>
+          <div class="modal-footer" style="padding: 0; padding-top: 20px;">
+            <button type="button" class="closemd btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+            <button onclick="openmd_sendgrade_nextsection(2)" type="button" class="btn btn-success">ถัดไป</button>
+          </div>
+        </div>
+        <div id="md_sendgrade_section2" class="modal-body md_sendgrade" style="display: none;">
+          <h6>ขั้นตอน 2/4</h6>
+          <br>
+          <div class="fw-bold mb-3">อัตราส่วนคะแนนระหว่างภาคเรียน</div>
+
+          <h6>
+            <div class="mb-3">
+              <div>คะแนนก่อนกลางภาค</div>
+              <input id="mastercanan1" onblur="checkSum(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>คะแนนกลางภาค</div>
+              <input id="mastercanan2" onblur="checkSum(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>คะแนนก่อนปลายภาค</div>
+              <input id="mastercanan3" onblur="checkSum(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>คะแนนปลายภาค</div>
+              <input id="mastercanan4" onblur="checkSum(this)" type="number" class="form-control">
+            </div>
+            <br>
+            <div class="fw-bold mb-3"><span class="md_sendgrade_name"></span></div>
+            <div class="mb-3">
+              <div>คะแนนก่อนกลางภาค <span id="showowncanan1"></span></div>
+              <input type="number" id="owncanan1" onkeyup="checkMaximum('#mastercanan1', this)" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>คะแนนกลางภาค <span id="showowncanan2"></span></div>
+              <input type="number" id="owncanan2" onkeyup="checkMaximum('#mastercanan2', this)" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>คะแนนก่อนปลายภาค <span id="showowncanan3"></span></div>
+              <input type="number" id="owncanan3" onkeyup="checkMaximum('#mastercanan3', this)" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>คะแนนปลายภาค <span id="showowncanan4"></span></div>
+              <input type="number" id="owncanan4" onkeyup="checkMaximum('#mastercanan4', this)" class="form-control">
+            </div>
+            <div class="modal-footer" style="padding: 0; padding-top: 20px;">
+              <button onclick="openmd_sendgrade_nextsection(1)" type="button"
+                class="closemd btn btn-secondary">ย้อนกลับ</button>
+              <button onclick="openmd_sendgrade_nextsection(3)" type="button" class="btn btn-success">ถัดไป</button>
+            </div>
+
+        </div>
+        <div id="md_sendgrade_section3" class="modal-body md_sendgrade" style="display: none;">
+          <h6 class="mb-3">ขั้นตอน 3/4</h6>
+          <div class="fw-bold mb-1"><span class="md_sendgrade_name"></span></div>
+          <div class="fw-bold mb-3">คุณลักษณะอันพึงประสงค์</div>
+          <h6>
+            <div class="mb-3">
+              <div>รักชาติ ศาสนา กษัตริย์ (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana1" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>ซื่อสัตย์ สุจริต (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana2" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>มีวินัย (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana3" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>ใฝ่เรียนรู้ (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana4" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>อยู่อย่างพอเพียง (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana5" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>มุ่งมั่นการทำงาน (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana6" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>รักความเป็นไทย (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana7" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>มีจิตสาธารณะ (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="konnalaksana8" onkeyup="checkKon(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3 card p-3 bg-dark text-white">
+              <div>คะแนนเฉลี่ย</div>
+              <input id="konnalaksana_avg" type="text" disabled style="font-size: 1.5rem;" value=""
+                class="form-control fw-bold">
+            </div>
+            <div class="modal-footer" style="padding: 0; padding-top: 20px;">
+              <button onclick="openmd_sendgrade_nextsection(2)" type="button"
+                class="closemd btn btn-secondary">ย้อนกลับ</button>
+              <button onclick="openmd_sendgrade_nextsection(4)" type="button" class="btn btn-success">ถัดไป</button>
+            </div>
+
+        </div>
+        <div id="md_sendgrade_section4" class="modal-body md_sendgrade" style="display: none;">
+          <h6 class="mb-3">ขั้นตอน 4/4</h6>
+          <div class="fw-bold mb-1"><span class="md_sendgrade_name"></span></div>
+          <div class="fw-bold mb-3">อ่าน คิดวิเคราะห์ เขียน</div>
+          <h6>
+            <div class="mb-3">
+              <div>อ่าน (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="annkean1" onkeyup="checkAnnkean(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>เขียน (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="annkean2" onkeyup="checkAnnkean(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div>สื่อความ (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="annkean3" onkeyup="checkAnnkean(this)" type="number" class="form-control">
+            </div>
+            <div class="mb-3 ">
+              <div>คิดวิเคราะห์ (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="annkean4" onkeyup="checkAnnkean(this)" type="number" class="form-control ">
+            </div>
+            <div class="mb-3 ">
+              <div>สังเคราะห์ (คะแนนเต็ม 3 คะแนน)</div>
+              <input id="annkean5" onkeyup="checkAnnkean(this)" type="number" class="form-control ">
+            </div>
+
+            <div class="mb-3 card p-3 bg-dark text-white">
+              <div>คะแนนเฉลี่ย</div>
+              <input id="annkean_avg" type="text" disabled style="font-size: 1.5rem;" value=""
+                class="form-contro4 fw-bold">
+            </div>
+            <div class="modal-footer" style="padding: 0; padding-top: 20px;">
+              <button onclick="openmd_sendgrade_nextsection(3)" type="button"
+                class="closemd btn btn-secondary">ย้อนกลับ</button>
+              <button onclick="saveSendgrade()" type="button" class="btn btn-primary">ส่งเกรด</button>
+            </div>
+
         </div>
       </div>
     </div>
@@ -325,7 +487,7 @@
     var extra_info = {};
     var end_date;
     $(document).ready(() => {
-      
+
       localStorage.removeItem("utwCalendarDisabled")
       localStorage.removeItem("utwCalendar")
       set_cal($("#std"), new_date);
@@ -480,11 +642,12 @@
                   </div>`;
               btn_control = `
                   <div class="d-flex">
-                    <div onclick="md_detail(${i}, '${element.status}')" class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal"
+                    <div onclick="md_detail(${i}, '${element.status}')" class="btn-sm btn-warning ms-3 " style="cursor: pointer;" data-bs-toggle="modal"
                       data-bs-target="#md_para">
                       <i class="fas fa-search"></i>
                     </div>
-                    <div onclick="sendGrade(${i})" class="btn-sm btn-danger ms-1 " style="cursor: pointer;" >
+                    <div onclick="openmd_sendgrade('${element.subject_code} ${element.subject_title}'
+                     , '${element.student.tname}${element.student.fname} ${element.student.lname}', ${element.subject_id}, ${element.student_id}, ${i})" data-bs-toggle="modal" data-bs-target="#md_sendgrade  " class="btn-sm btn-primary ms-1 " style="cursor: pointer;" >
                       <i class="fa-solid fa-file-import"></i>
                       <span class="ms-1">ส่งเกรด</span>
                     </div>
@@ -533,6 +696,102 @@
       })
     }
 
+    function openmd_sendgrade(vicha, studentname, subject_id, student_id, io) {
+      masterGrade.subject_id = subject_id;
+      masterGrade.student_id = student_id;
+      masterGrade.i = io;
+
+      getMasterGrade();
+      $("#vicha").text(vicha)
+      openmd_sendgrade_nextsection(1)
+      $(".md_sendgrade_name").text(studentname)
+      $("#owncanan1").attr("disabled", true)
+      $("#owncanan2").attr("disabled", true)
+      $("#owncanan3").attr("disabled", true)
+      $("#owncanan4").attr("disabled", true)
+    }
+    function openmd_sendgrade_nextsection(section) {
+
+      if (section != 3 && section != 4) {
+        $(".md_sendgrade").hide();
+        $("#md_sendgrade_section" + section).show();
+
+        if (section != 1) {
+          saveDraftGradeMaster();
+        }
+      }
+
+      if (section == 3) {
+        $("#owncanan1").removeClass('is-invalid')
+        $("#owncanan2").removeClass('is-invalid')
+        $("#owncanan3").removeClass('is-invalid')
+        $("#owncanan4").removeClass('is-invalid')
+
+        if ($("#owncanan1").val().length <= 0) {
+          $("#owncanan1").addClass('is-invalid');
+          Swal.fire({
+            icon: "warning",
+            title: "กรุณาระบุคะแนนก่อนกลางภาค"
+          })
+        }
+        else if ($("#owncanan2").val().length <= 0) {
+          $("#owncanan2").addClass('is-invalid');
+          Swal.fire({
+            icon: "warning",
+            title: "กรุณาระบุคะแนนกลางภาค"
+          })
+        }
+        else if ($("#owncanan3").val().length <= 0) {
+          $("#owncanan3").addClass('is-invalid');
+          Swal.fire({
+            icon: "warning",
+            title: "กรุณาระบุคะแนนก่อนปลายภาค"
+          })
+        }
+        else if ($("#owncanan4").val().length <= 0) {
+          $("#owncanan4").addClass('is-invalid');
+          Swal.fire({
+            icon: "warning",
+            title: "กรุณาระบุคะแนนปลายภาค"
+          })
+        }
+        else {
+          $(".md_sendgrade").hide();
+          $("#md_sendgrade_section" + section).show();
+          saveDraftGradeMaster();
+        }
+      }
+      else if (section == 4) {
+        var alert = [
+          "รักชาติ ศาสนา กษัตริย์",
+          "ซื่อสัตย์ สุจริต",
+          "มีวินัย",
+          "ใฝ่เรียนรู้",
+          "อยู่อย่างพอเพียง",
+          "มุ่งมั่นการทำงาน",
+          "รักความเป็นไทย",
+          "มีจิตสาธารณะ",
+          "คะแนนเฉลี่ย",
+        ]
+        $(".form-control").removeClass("is-invalid");
+        for (let i = 0; i < 8; i++) {
+
+          if ($("#konnalaksana" + (i + 1)).val().length <= 0) {
+            $("#konnalaksana" + (i + 1)).addClass('is-invalid');
+            Swal.fire({
+              icon: "warning",
+              title: "กรุณาระบุ" + alert[i]
+            })
+            return false;
+          }
+        }
+
+        $(".md_sendgrade").hide();
+        $("#md_sendgrade_section" + section).show();
+        saveDraftGradeMaster();
+      }
+    }
+
     var gage = '';
     function selectGage(elem, i, text) {
       var element = $('#' + elem.id)
@@ -563,6 +822,15 @@
     var extra_ids = 0;
     function md_detail(i, status) {
       const info = data[i];
+
+      console.log("ddd", info.time_learning)
+      if (info.time_learning && info.time_learning[0]) {
+        $("#btn_sendForm").removeAttr("disabled");
+      }
+      else {
+        $("#btn_sendForm").attr("disabled", "true");
+      }
+
       console.log("##data", data)
       localStorage.setItem("utwOpenmdIndex", i);
       localStorage.setItem("utwOpenmdStatus", status);
@@ -583,15 +851,24 @@
       $("#mdpara_class").text(`ม.${info.student.class}/${info.student.room}`)
       $("#mdpara_subjecttitle").text(info.subject_code + " " + info.subject_title)
       $("#mdpara_gradeold").text(info.grade_old)
-      var a = new Date(info.start_date).getTime();
-      var b = getDateMil(a).split(" ");
-      var c = dateentoth(b[0]);
-      $("#mdpara_std").text(`${c} ${b[1]}`);
-
-      var d = new Date(info.end_date).getTime();
-      var e = getDateMil(d).split(" ");
-      var f = dateentoth(e[0]);
-      $("#mdpara_exp").text(`${f} ${e[1]}`);
+      if (info.start_date) {
+        var a = new Date(info.start_date).getTime();
+        var b = getDateMil(a).split(" ");
+        var c = dateentoth(b[0]);
+        $("#mdpara_std").text(`${c} ${b[1]}`);
+      }
+      else {
+        $("#mdpara_std").text(`-`);
+      }
+      if (info.end_date) {
+        var d = new Date(info.end_date).getTime();
+        var e = getDateMil(d).split(" ");
+        var f = dateentoth(e[0]);
+        $("#mdpara_exp").text(`${f} ${e[1]}`);
+      }
+      else {
+        $("#mdpara_exp").text(`-`);
+      }
 
       var html = "";
       for (let x = 0; x < info.student_activity.length; x++) {
@@ -717,6 +994,45 @@
       }
     }
 
+    var masterGrade = {
+      pon1: "",
+      pon2: "",
+      beforemid: '',
+      mid: '',
+      aftermid: '',
+      late: '',
+      subject_id: 0,
+      i: 0,
+      student_id: 0
+    }
+    function getMasterGrade() {
+      var settings = {
+        "url": endpointv2 + "/utw-modify-api/teacher/before-send-grade",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+        },
+        "data": {
+          "user_id": localStorage.utwUserId,
+        },
+      };
+      $.ajax(settings).done(function (response) {
+
+        if (response.status.code == 200) {
+          $("#pon1").val(response.data.indicators);
+          $("#pon2").val(response.data.outcomes);
+          $("#mastercanan1").val(response.data.before_mid_score);
+          $("#mastercanan2").val(response.data.mid_score);
+          $("#mastercanan3").val(response.data.before_final_score);
+          $("#mastercanan4").val(response.data.final_score);
+        }
+        else {
+          loading(false)
+        }
+      });
+    }
+
     function sendForm() {
       loading(true);
       var g = String(gage).split("|");
@@ -785,7 +1101,7 @@
                   confirmButtonText: "ตกลง",
                   timer: 2000
                 }).then(() => {
-                  render();
+                  window.location.reload();
                 })
               }
               else {
@@ -798,6 +1114,301 @@
           })
         }
       })
+    }
+
+    function checkSum(element) {
+      $("#mastercanan1").removeClass('is-invalid');
+      $("#mastercanan2").removeClass('is-invalid');
+      $("#mastercanan3").removeClass('is-invalid');
+      $("#mastercanan4").removeClass('is-invalid');
+
+      var sum1 = $("#mastercanan1").val() ? parseFloat($("#mastercanan1").val()) : 0;
+      var sum2 = $("#mastercanan2").val() ? parseFloat($("#mastercanan2").val()) : 0;
+      var sum3 = $("#mastercanan3").val() ? parseFloat($("#mastercanan3").val()) : 0;
+      var sum4 = $("#mastercanan4").val() ? parseFloat($("#mastercanan4").val()) : 0;
+      var sum = sum1 + sum2 + sum3 + sum4;
+      if (sum != 100 &&
+        $("#mastercanan1").val() &&
+        $("#mastercanan2").val() &&
+        $("#mastercanan3").val() &&
+        $("#mastercanan4").val()
+      ) {
+        Swal.fire({
+          icon: "warning",
+          title: "คะแนนไม่ครบ 100 คะแนน",
+        })
+        $("#mastercanan1").addClass('is-invalid');
+        $("#mastercanan2").addClass('is-invalid');
+        $("#mastercanan3").addClass('is-invalid');
+        $("#mastercanan4").addClass('is-invalid');
+      }
+      else {
+        crob();
+      }
+    }
+
+    function checkKon(element) {
+      if (element.value) {
+        if (String(element.value).length >= 2) {
+          element.value = String(element.value).substr(0, 1);
+        }
+        else {
+          var val = parseInt(element.value);
+          if (val > 3) {
+            element.value = 3;
+          }
+        }
+      }
+      checkKonCrob();
+    }
+
+    function checkAnnkean(element) {
+      if (element.value) {
+        if (String(element.value).length >= 2) {
+          element.value = String(element.value).substr(0, 1);
+        }
+        else {
+          var val = parseInt(element.value);
+          if (val > 3) {
+            element.value = 3;
+          }
+        }
+      }
+      checkAnnkeanCrob();
+    }
+
+    function checkAnnkeanCrob() {
+      if (
+        $("#annkean1").val() &&
+        $("#annkean2").val() &&
+        $("#annkean3").val() &&
+        $("#annkean4").val() &&
+        $("#annkean5").val()
+      ) {
+        var a1 = parseInt($("#annkean1").val());
+        var a2 = parseInt($("#annkean2").val());
+        var a3 = parseInt($("#annkean3").val());
+        var a4 = parseInt($("#annkean4").val());
+        var a5 = parseInt($("#annkean5").val());
+        var sum = a1 + a2 + a3 + a4 + a5;
+        var avg = sum / 8;
+        // avg = Math.ceil(avg);
+
+        var bo = [];
+        for (let i = 0; i < 5; i++) {
+          var a = parseInt($("#annkean" + (i + 1)).val());
+          bo.push(a)
+        }
+        var need = findMostFrequentValue(bo);
+        console.log("hasDuneedplicate", bo, need)
+
+        $("#annkean_avg").val(need);
+      }
+    }
+
+    async function saveSendgrade() {
+      var alert = [
+        "อ่าน",
+        "เขียน",
+        "สื่อความ",
+        "คิดวิเคราะห์",
+        "สังเคราะห์",
+      ]
+      $(".form-control").removeClass("is-invalid");
+      for (let i = 0; i < 5; i++) {
+
+        if ($("#annkean" + (i + 1)).val().length <= 0) {
+          $("#annkean" + (i + 1)).addClass('is-invalid');
+          Swal.fire({
+            icon: "warning",
+            title: "กรุณาระบุ" + alert[i]
+          })
+          return false;
+        }
+      }
+
+      sendCanan();
+
+
+
+    }
+
+    function saveDraftGradeMaster() {
+      $.ajax({
+        method: "post",
+        url: endpointv2 + '/utw-modify-api/teacher/after-send-grade',
+        "headers": {
+          "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+        },
+        data: {
+          user_id: localStorage.utwUserId,
+          pon1: $("#pon1").val(),
+          pon2: $("#pon2").val(),
+          subject: masterGrade.subject_id,
+          before_mid_score: $("#mastercanan1").val(),
+          mid_score: $("#mastercanan2").val(),
+          before_final_score: $("#mastercanan3").val(),
+          final_score: $("#mastercanan4").val(),
+        },
+        success: async response => {
+          if (response.status.code == 200) {
+
+
+          }
+          else {
+
+          }
+        }
+      });
+    }
+
+    function checkKonCrob() {
+      if (
+        $("#konnalaksana1").val() &&
+        $("#konnalaksana2").val() &&
+        $("#konnalaksana3").val() &&
+        $("#konnalaksana4").val() &&
+        $("#konnalaksana5").val() &&
+        $("#konnalaksana6").val() &&
+        $("#konnalaksana7").val() &&
+        $("#konnalaksana8").val()
+      ) {
+        var a1 = parseInt($("#konnalaksana1").val());
+        var a2 = parseInt($("#konnalaksana2").val());
+        var a3 = parseInt($("#konnalaksana3").val());
+        var a4 = parseInt($("#konnalaksana4").val());
+        var a5 = parseInt($("#konnalaksana5").val());
+        var a6 = parseInt($("#konnalaksana6").val());
+        var a7 = parseInt($("#konnalaksana7").val());
+        var a8 = parseInt($("#konnalaksana8").val());
+        var sum = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8;
+        var avg = sum / 8;
+        // avg = Math.ceil(avg);
+
+        var bo = [];
+        for (let i = 0; i < 8; i++) {
+          var a = parseInt($("#konnalaksana" + (i + 1)).val());
+          bo.push(a)
+        }
+        var need = findMostFrequentValue(bo);
+        console.log("hasDuneedplicate", bo, need)
+
+        $("#konnalaksana_avg").val(need);
+      }
+    }
+
+    function findMostFrequentValue(arr) {
+      let count = { 1: 0, 2: 0, 3: 0 };
+
+      // นับจำนวนของแต่ละเลข
+      arr.forEach(num => {
+        if (count[num] !== undefined) count[num]++;
+      });
+
+      // หาค่าที่ซ้ำมากที่สุด
+      let maxCount = Math.max(...Object.values(count));
+
+      // หาทุกค่าที่มีจำนวนเท่ากับ maxCount
+      let candidates = Object.keys(count)
+        .filter(key => count[key] === maxCount)
+        .map(Number);
+
+      // กรณีมีหลายค่า → เอาเลขที่มากที่สุด
+      return Math.max(...candidates);
+    }
+
+    function crob() {
+      if (
+        $("#mastercanan1").val() &&
+        $("#mastercanan2").val() &&
+        $("#mastercanan3").val() &&
+        $("#mastercanan4").val()
+      ) {
+        $("#showowncanan1").show().text(`(${$("#mastercanan1").val()} คะแนน)`);
+        $("#showowncanan2").show().text(`(${$("#mastercanan2").val()} คะแนน)`);
+        $("#showowncanan3").show().text(`(${$("#mastercanan3").val()} คะแนน)`);
+        $("#showowncanan4").show().text(`(${$("#mastercanan4").val()} คะแนน)`);
+        $("#owncanan1").removeAttr("disabled")
+        $("#owncanan2").removeAttr("disabled")
+        $("#owncanan3").removeAttr("disabled")
+        $("#owncanan4").removeAttr("disabled")
+      }
+      else {
+        $("#owncanan1").attr("disabled", true)
+        $("#owncanan2").attr("disabled", true)
+        $("#owncanan3").attr("disabled", true)
+        $("#owncanan4").attr("disabled", true)
+        $("#showowncanan1").hide()
+        $("#showowncanan2").hide()
+        $("#showowncanan3").hide()
+        $("#showowncanan4").hide()
+
+      }
+    }
+
+    function checkMaximum(fromx, element) {
+      var frommaster = $(fromx).val() ? parseFloat($(fromx).val()) : 100;
+      var ownval = $(element).val() ? parseFloat($(element).val()) : 0;
+      console.log(frommaster, ownval)
+      if (ownval > frommaster) {
+        $(element).val(frommaster)
+      }
+    }
+
+    function sendCanan() {
+      loading(true)
+      var settings = {
+        "url": endpointv2 + "/utw-modify-api/teacher/sendCanan",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+        },
+        "data": {
+          student_id: masterGrade.student_id,
+          "teacher_id": localStorage.utwUserId,
+          subject: masterGrade.subject_id,
+          pon1: $("#pon1").val(),
+          pon2: $("#pon2").val(),
+
+          own1: $("#owncanan1").val(),
+          own2: $("#owncanan2").val(),
+          own3: $("#owncanan3").val(),
+          own4: $("#owncanan4").val(),
+          kon1: $("#konnalaksana1").val(),
+          kon2: $("#konnalaksana2").val(),
+          kon3: $("#konnalaksana3").val(),
+          kon4: $("#konnalaksana4").val(),
+          kon5: $("#konnalaksana5").val(),
+          kon6: $("#konnalaksana6").val(),
+          kon7: $("#konnalaksana7").val(),
+          kon8: $("#konnalaksana8").val(),
+          konavg: $("#konnalaksana_avg").val(),
+          kean1: $("#annkean1").val(),
+          kean2: $("#annkean2").val(),
+          kean3: $("#annkean3").val(),
+          kean4: $("#annkean4").val(),
+          kean5: $("#annkean5").val(),
+          keanavg: $("#annkean_avg").val(),
+        },
+      };
+      $.ajax(settings).done(function (response) {
+        loading(false)
+
+        if (response.status.code == 200) {
+          sendGrade(masterGrade.i);
+          // Swal.fire({
+          //   icon: "success",
+          //   title: "สำเร็จ",
+          //   timer: 2000
+          // }).then(() => {
+          //   window.location.reload();
+          // })
+        }
+        else {
+          loading(false)
+        }
+      });
     }
 
   </script>

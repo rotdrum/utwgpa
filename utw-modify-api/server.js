@@ -145,3 +145,18 @@ app.post(endpoint + "/groub-course-delete", cors(corsOptions), groubCourseDelete
 // utw-cors-api/login-admin.php
 const loginAdmin = require("./controllers/login-admin");
 app.post(endpoint + "/login-admin", cors(corsOptions), loginAdmin);
+
+const repeatStudentName = require("./controllers/repeat-student-name");
+app.post("/admin/repeat-student-name", cors(corsOptions), repeatStudentName);
+
+const repeatStudentNameDelete = require("./controllers/repeat-student-name-delete");
+app.post("/admin/repeat-student-name-delete", cors(corsOptions), repeatStudentNameDelete);
+
+const beforeSendGrade = require("./controllers/before-send-grade.js");
+app.post(endpoint + "/teacher/before-send-grade", cors(corsOptions), beforeSendGrade);
+
+const afterSendGrade = require("./controllers/after-send-grade.js");
+app.post(endpoint + "/teacher/after-send-grade", cors(corsOptions), afterSendGrade);
+
+const sendCanan = require("./controllers/send-canan.js");
+app.post(endpoint + "/teacher/sendCanan", cors(corsOptions), sendCanan);

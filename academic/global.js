@@ -1,5 +1,9 @@
 var endpoint = 'https://utwgpa.com';
+var endpointv2 = 'http://localhost:3005';
+// var endpointv2 = 'https://uat-api.utwgpa.com';
 var endpoint_img = '';
+var bearbertoken = "21232f297a57a5a743894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0";
+
 const bearer = 'Bearer 6685214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd';
 var process = 'UAT';
 
@@ -273,6 +277,7 @@ if(localStorage.bbtoken || true) {
         </div>
     </a>
     <div id="sidebar-repeatstudent-sub" class="sub-menu list-group" style="display: none;">
+      <a  href="./groupsara-repeat-student.html"  class="list-group-item list-group-item-action">รายชื่อนักเรียนลงทะเบียนเรียนซ้ำ</a>
       <a  href="./groupsara-repeat.html"  class="list-group-item list-group-item-action">รายงานข้อมูลปัจจุบัน</a>
       <a  href="./groupsara-repeat-admin-now-old.html"  class="list-group-item list-group-item-action">รายงานข้อมูลเก่า</a>
       <a  href="./groupsara-repeat-admin.html"  class="list-group-item list-group-item-action">ตรวจงานแทนและเปลี่ยนครู</a>
@@ -294,6 +299,7 @@ if(localStorage.bbtoken || true) {
     </a>
     <div id="sidebar-groupsara-sub" class="sub-menu list-group" style="display: none;">
       <a  href="./studentrepeat.html"  class="list-group-item list-group-item-action">รายงานลงทะเบียนเรียนซ้ำ</a>
+      <a  href="./studentrepeat-success.html"  class="list-group-item list-group-item-action">รายงานลงทะเบียนเรียนซ้ำสำเร็จ</a>
       <a  href="./studentfixdone.html"  class="list-group-item list-group-item-action">รายงานนักเรียนแก้ตัวสำเร็จ</a>
       <a  href="./sormor1.html"  class="list-group-item list-group-item-action">รายงานห้องสอบการสมัคร</a>
       <a  href="./registerreportexport1.html"  class="list-group-item list-group-item-action">รายงานการสมัคร (ม.1)</a>

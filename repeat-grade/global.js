@@ -1,7 +1,7 @@
 
 var endpoint = 'https://utwgpa.com'
-var endpointv2 = "https://uat-api.utwgpa.com";
-// var endpointv2 = "http://localhost:3005";
+// var endpointv2 = "https://uat-api.utwgpa.com";
+var endpointv2 = "http://localhost:3005";
 
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบลงทะเบียนเรียนซ้ำ';
 
@@ -88,22 +88,21 @@ else if(localStorage.utwEmail == '' || true) {
             <p style="color: #fff;">ติดตามผลเทอมล่าสุด</p>
         </a>
 
-        <a  href="#"  class="killmenu-class sidebar-items ">
-            <div class="sidebar-icon">
-                <i class="fas fa-house"></i>
-            </div>
-            <p style="color: #fff;">ติดตามผลรายบุคคล (..กำลังสร้างหน้า)</p>
-        </a>
 
         <div class="hr"></div>
 
         <p style="font-weight: bold; color: #fff;">รายงาน</p>
-        
+        <a onclick="activeSidebar(this)" href="./coursefollow-success.html" id="sidebar10" class="sidebar-items ">
+            <div class="sidebar-icon">
+                <i class="fa-solid fa-print"></i>
+            </div>
+            <p style="color: #fff;">สำเร็จ</p>
+        </a>
         <a onclick="activeSidebar(this)" href="./coursereport.html" id="sidebar9" class="sidebar-items ">
             <div class="sidebar-icon">
-                <i class="fas fa-house"></i>
+                 <i class="fa-solid fa-eye"></i>
             </div>
-            <p style="color: #fff;">วผ.12/2</p>
+            <p style="color: #fff;">ตรวจสอบ</p>
         </a>
 
         <div class="hr"></div>

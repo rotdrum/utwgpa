@@ -475,7 +475,14 @@
                   status = `<span class="ms-2">รอลงทะเบียน</span>`;
                 }
 
-               
+
+                var nowyear = new Date().getFullYear() - 2;
+                var korsor = parseInt(element.year_at) - 543;
+                console.log(nowyear, korsor)
+                if(korsor < nowyear) {
+                  continue;
+                }
+
 
                 html += `
                 <tr>
