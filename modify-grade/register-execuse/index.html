@@ -288,9 +288,9 @@
 
 								$.ajax({
 									method: 'post',
-									url: endpoint + '/utw-modify-grade-api/student_follow/getAll.php',
+									url: endpointv2 + '/utw-modify-api/student-follow-getall',
 									headers: {
-										Authorization: 'Bearer ' + localStorage.utwToken
+										Authorization: 'Bearer ' + bearbertoken
 									},
 									data: {
 										_method: "GET",

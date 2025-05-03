@@ -60,7 +60,6 @@ module.exports = async function (req, res) {
         teacher_id = subject_id[0].user_id;
       }
 
-      console.log("course_id",course_id)
 
       var data_groub_course_item = [];
 
@@ -69,7 +68,6 @@ module.exports = async function (req, res) {
         WHERE course_id = ? AND JSON_UNQUOTE(JSON_EXTRACT(activity, '$.confirm_date')) IS NOT NULL`,
         [course_id]
       );
-      console.log("groub_course",groub_course)
       if (groub_course && groub_course[0]) {
         for (let i = 0; i < groub_course.length; i++) {
           const element = groub_course[i];
@@ -110,7 +108,6 @@ module.exports = async function (req, res) {
       var [user] = await dbCors.query(`SELECT * FROM user WHERE id = ?`,
         [teacher_id]
       );
-      console.log("data_groub_course_item",data_groub_course_item)
       if (user && user[0]) {
         var data_row = [];
         for (let x = 0; x < user.length; x++) {

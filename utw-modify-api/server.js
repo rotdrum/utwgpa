@@ -99,6 +99,10 @@ app.post(endpoint + "/follow-class-getall", cors(corsOptions), followClassGetAll
 const reportSubject = require("./controllers/report-subject");
 app.post(endpoint + "/report-subject", cors(corsOptions), reportSubject);
 
+// utw-modify-grade-api/student_follow/getAll.php
+const studentFollowGetAll = require("./controllers/student-follow-getall");
+app.post(endpoint + "/student-follow-getall", cors(corsOptions), studentFollowGetAll);
+
 const courseGetOne = require("./controllers/course-getone");
 app.post(endpoint + "/course-getone", cors(corsOptions), courseGetOne);
 
