@@ -107,6 +107,10 @@ app.post(endpoint + "/student-follow-getall", cors(corsOptions), studentFollowGe
 const studentFollowUpdate = require("./controllers/student-follow-update");
 app.post(endpoint + "/student-follow-update", cors(corsOptions), studentFollowUpdate);
 
+// utw-cors-api/check-mail.php
+const checkMail = require("./controllers/check-mail");
+app.post(endpoint + "/check-mail", cors(corsOptions), checkMail);
+
 const courseGetOne = require("./controllers/course-getone");
 app.post(endpoint + "/course-getone", cors(corsOptions), courseGetOne);
 
