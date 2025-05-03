@@ -164,6 +164,7 @@
 
   <script>
     var myendpoint = "https://utwgpa.com";
+    var myendpointv2 = "https://uat-api.utwgpa.com";
     var infomation = {
       accessToken: "",
       firstname: "",
@@ -196,7 +197,7 @@
       }
 
       if (infomation.email && String(infomation.email).includes("@utw")) {
-        const endpointNew = `${myendpoint}/utw-modify-api/check-mail`;
+        const endpointNew = `${myendpointv2}/utw-modify-api/check-mail`;
         const email = infomation.email;
 
         // console.log('email', email);
