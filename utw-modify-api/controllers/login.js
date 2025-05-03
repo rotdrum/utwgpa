@@ -213,7 +213,7 @@ module.exports = async function (req, res) {
 
     var txt_email = req.body.email;
     var txt_access_token = req.body.access_token;
-    var access_token = MD5(req.body['email']) + '@' + MD5($req.body['auth_role']) + '@' + MD5(new Date().getTime());
+    var access_token = MD5(req.body['email']) + '@' + MD5(req.body['auth_role']) + '@' + MD5(new Date().getTime());
     var email = req.body.email;
     var updated_at = getDateNow()
 
