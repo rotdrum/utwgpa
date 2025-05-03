@@ -21,7 +21,7 @@ module.exports = async function (req, res) {
     function genval(lng) {
       var sql = '';
       for (let i = 0; i < lng; i++) {
-        if (i == (lng - 1)) sql += '?'
+        if (i == (lng - 1)) sql += '?' 
         else sql += '?,'
       }
       return sql
