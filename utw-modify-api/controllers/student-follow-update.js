@@ -17,7 +17,17 @@ module.exports = async function (req, res) {
     if (authResult !== true) {
       return; // ไม่ผ่าน auth ก็จบ
     }
-
+    function getDateNow() {
+      var d = new Date();
+      var dy = d.getFullYear();
+      var dm = (d.getMonth()+1) < 10 ? '0'+(d.getMonth()+1) : (d.getMonth()+1);
+      var dd = d.getDate() < 10 ? '0'+d.getDate() : d.getDate();
+    
+      var th = d.getHours() < 10 ? '0'+d.getHours() : d.getHours();
+      var tm = d.getMinutes() < 10 ? '0'+d.getMinutes() : d.getMinutes();
+      var ts = d.getSeconds() < 10 ? '0'+d.getSeconds() : d.getSeconds();
+      return `${dy}-${dm}-${dd} ${th}:${tm}:${ts}`;
+  }
     function genval(lng) {
       var sql = '';
       for (let i = 0; i < lng; i++) {
@@ -53,6 +63,7 @@ module.exports = async function (req, res) {
               "confirm_date": element2.confirm_date,
               "status": 'register',
               "work": element2.work,
+              "score_old" : element2.score_old,
             })
           }
           else {
@@ -70,6 +81,7 @@ module.exports = async function (req, res) {
               "confirm_date": element2.confirm_date,
               "status": element2.status,
               "work": element2.work,
+              "score_old" : element2.score_old,
             })
           }
         }

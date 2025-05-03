@@ -43,7 +43,7 @@ module.exports = async function (req, res) {
           for (let b = 0; b < user_ids.length; b++) {
             const element2 = user_ids[b];
             if (element2 == req.body.user_id) {
-
+              var data_row_activity = [];
               for (let c = 0; c < element1.activity.length; c++) {
                 const element3 = element1.activity[c];
                 if (element3.id == req.body.user_id) {
@@ -61,6 +61,7 @@ module.exports = async function (req, res) {
                   var status = element3.status;
                   var status_register = element3.status;
                   var works = element3.work;
+                  var score_old = element3.score_old;
 
                   var countIndex = 0;
                   var countStatus = 0;
@@ -82,11 +83,11 @@ module.exports = async function (req, res) {
                     } else if (countStatus > 0) {
                       status_work = 'process';
                     } else if (countStatus === 0) {
-                      $status_work = 'begin';
+                      status_work = 'begin';
                     }
                   }
 
-                  var data_row_activity = [{
+                  data_row_activity = [{
                     'id': student_id,
                     'tname': tname,
                     'fname': fname,
@@ -101,26 +102,30 @@ module.exports = async function (req, res) {
                     'grade_new': grade_new,
                     'select_grade': select_grade,
                     "confirm_date": confirm_date,
+                    "score_old": score_old,
                   }];
                 }
               }
 
               //
-              data_item.push({
-                "id": element1.id,
-                "course_id": element1.course_id,
-                "user_id": element1.user_id,
-                "subject_id": element1.subject_id,
-                "subject_title": element1.subject_title,
-                "subject_code": element1.subject_code,
-                "subject_class": element1.subject_class,
-                "title": element1.title,
-                "indicators": element1.indicators,
-                "user_ids": element1.user_ids,
-                "activity": data_row_activity[0],
-                "created_at": element1.created_at,
-                "updated_at": element1.updated_at,
-              })
+              if(data_row_activity && data_row_activity[0]) {
+                data_item.push({
+                  "id": element1.id,
+                  "course_id": element1.course_id,
+                  "user_id": element1.user_id,
+                  "subject_id": element1.subject_id,
+                  "subject_title": element1.subject_title,
+                  "subject_code": element1.subject_code,
+                  "subject_class": element1.subject_class,
+                  "title": element1.title,
+                  "indicators": element1.indicators,
+                  "user_ids": element1.user_ids,
+                  "activity": data_row_activity && data_row_activity[0] ? data_row_activity[0] : [],
+                  "created_at": element1.created_at,
+                  "updated_at": element1.updated_at,
+                })
+              }
+              
             }
           }
         }
