@@ -81,9 +81,9 @@ module.exports = async function (req, res) {
                   await dbGrade.query(`INSERT INTO report_course_modify (student_id, student_activity, student, department_id, subject_id, subject_title, 
                                     subject_code, subject_class, teacher_id, teacher, grade_old, grade_new, 
                                     confirm_date, round_at, term_at, year_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                    [ data1[0].id, 
-                      JSON.stringify(data1[0].work), 
-                      JSON.stringify(data1[0]),  // Assuming you want the entire activity as JSON
+                    [ element.id, 
+                      JSON.stringify(element.work), 
+                      JSON.stringify(element),  // Assuming you want the entire activity as JSON
                       data2[0].department_id, 
                       data2[0].subject_id, 
                       data2[0].subject_title, 
