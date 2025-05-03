@@ -29,7 +29,7 @@ module.exports = async function (req, res) {
 
     var email = req.body.email;
     if (email) {
-      var [data1] = await dbGrade.query(`SELECT * FROM user WHERE email = ?`,
+      var [data1] = await dbCors.query(`SELECT * FROM user WHERE email = ?`,
         [email]
       );
 
