@@ -164,6 +164,8 @@
 
   <script>
     var myendpoint = "https://utwgpa.com";
+    var myendpointv2 = "https://uat-api.utwgpa.com";
+
     var infomation = {
       accessToken: "",
       firstname: "",
@@ -196,7 +198,7 @@
       }
 
       if (infomation.email && String(infomation.email).includes("@utw")) {
-        const endpointNew = `${myendpoint}/utw-cors-api/check-mail.php`;
+        const endpointNew = `${myendpointv2}/check-mail`;
         const email = infomation.email;
 
         // console.log('email', email);
