@@ -13,6 +13,8 @@
 
     <script>
         var endpoint = 'https://utwgpa.com';
+        var endpointv2 = "https://uat-api.utwgpa.com";
+
         if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
         endpoint = 'https://utwgpa.com/uat';
         }
@@ -35,7 +37,7 @@
         } else if(kyc == 'signin') {
             $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/login.php',
+                url: endpointv2 + '/login',
                 data: {
                     _method: 'GET',
                     email: email,
