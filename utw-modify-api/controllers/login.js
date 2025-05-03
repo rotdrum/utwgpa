@@ -225,7 +225,7 @@ module.exports = async function (req, res) {
        await dbCors.query(`UPDATE user SET access_token = ?, updated_at = ? WHERE id = ?`,
           [access_token, updated_at, data1[0].id]
         );
-        var response = [{
+        var response = {
           "id": data1[0].id,
           "user_no": data1[0].user_no,
           "tname": data1[0].tname,
@@ -240,7 +240,7 @@ module.exports = async function (req, res) {
           "part": data1[0].part,
           "mail_token": data1[0].mail_token,
           "access_token": access_token,
-        }]
+        }
         console.log(response)
         return success(res, response);
       }
