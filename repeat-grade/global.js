@@ -1,7 +1,7 @@
 
 var endpoint = 'https://utwgpa.com'
-// var endpointv2 = "https://uat-api.utwgpa.com";
-var endpointv2 = "http://localhost:3005";
+var endpointv2 = "https://uat-api.utwgpa.com";
+// var endpointv2 = "http://localhost:3005";
 
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบลงทะเบียนเรียนซ้ำ';
 

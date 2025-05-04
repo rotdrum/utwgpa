@@ -229,6 +229,9 @@
         const sbjc = urlx.searchParams.get("sbjc");
         const sbjcl = urlx.searchParams.get("sbjcl");
         const user_id = urlx.searchParams.get("user_id");
+        const Pterm = urlx.searchParams.get("term");
+        const Pyear = urlx.searchParams.get("year");
+        const Pround = urlx.searchParams.get("round");
 
         $(document).ready(() => {
             render()
@@ -258,8 +261,50 @@
 
             return grouped;
         }
+        function getDateNow() {
+            var d = new Date();
+            var dy = d.getFullYear();
+            var dm = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : (d.getMonth() + 1);
+            var dd = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
 
-var nuikit = "";
+            var th = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
+            var tm = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+            var ts = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
+            return `${dy}-${dm}-${dd} ${th}:${tm}:${ts}`;
+        }
+        function dateengtodatethai(date) {
+            if (date) {
+                var d = String(date).split('-')
+                date = `${d[2]}/${d[1]}/${parseInt(d[0]) + 543}`
+                return date;
+            }
+            else {
+                return 'invalid format'
+            }
+        }
+        function dateentoth(date) {
+            var d = String(date).split('-')
+            var dd = d[2];
+            var dm = d[1];
+            var dy = parseInt(d[0]) + 543;
+            return `${dd}/${dm}/${dy}`;
+        }
+        function getDateMil(mil) {
+            var d = new Date(mil)
+            var dy = d.getFullYear();
+            var dm = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : (d.getMonth() + 1);
+            var dd = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
+
+            var th = d.getHours() < 10 ? '0' + d.getHours() : d.getHours();
+            var tm = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
+            var ts = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
+            return `${dy}-${dm}-${dd} ${th}:${tm}:${ts}`;
+        }
+        Date.prototype.addDays = function (days) {
+            this.setDate(this.getDate() + parseInt(days));
+            return this;
+        };
+        var nuikit = "";
         function render() {
             loading(true)
             $.ajax({
@@ -274,11 +319,6 @@ var nuikit = "";
                         $('#countja').text(response.data.in_data.date_section)
                         $('#numyearja').text(response.data.in_data.date_term)
                         $('#yearterm').text(response.data.in_data.date_year_education)
-                        rendertable(
-                            response.data.in_data.date_section,
-                            response.data.in_data.date_term,
-                            response.data.in_data.date_year_education,
-                        );
                     }
                     else {
                         errswal()
@@ -289,10 +329,6 @@ var nuikit = "";
                 }
             })
 
-            
-        }
-
-        function rendertable(Pround, Pterm, Pyear) {
             $.ajax({
                 method: 'POST',
                 url: endpointv2 + `/utw-modify-api/report/course-follow-success`,
@@ -300,10 +336,10 @@ var nuikit = "";
                     "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
                 }, data: {
                     subject_id: idx,
-                    teacher_id: localStorage.utwUserId,
-                    round: Pround,
+                    teacher_id: user_id,
                     term: Pterm,
                     year: Pyear,
+                    round: Pround
                 }, success: response => {
                     console.log(response)
                     // response.data = [
@@ -687,12 +723,12 @@ var nuikit = "";
 
 
                             var tick = "";
-                            console.log("cleanDateV2",cleanDateV2)
-                            console.log("cleanDateV2ByStudent",cleanDateV2ByStudent)
+                            console.log("cleanDateV2", cleanDateV2)
+                            console.log("cleanDateV2ByStudent", cleanDateV2ByStudent)
                             for (let z = 0, c = 0; z < cleanDateV2.length; z++) {
                                 const elementA = cleanDateV2[z];
                                 const elementB = cleanDateV2ByStudent[c];
-                                console.log("elementB",elementB)
+                                console.log("elementB", elementB)
                                 if (elementA == elementB) {
                                     tick += `<td style="padding: 0; text-align: center;">/</td>`;
                                     c++;
@@ -702,7 +738,7 @@ var nuikit = "";
                                 }
                             }
 
-                            if(element.student_activity && element.student_activity[0]) {
+                            if (element.student_activity && element.student_activity[0]) {
                                 haNuikit(element.student_activity[0]);
                             }
 

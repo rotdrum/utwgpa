@@ -51,6 +51,12 @@ const timezone = {
   timezone: "Asia/Bangkok"
 };
 
+app.get("/health", (req,res) => {
+  return res.status(200).json({
+    responseCode: "200"
+  })
+});
+
 /** API */
 const testModule = require("./controllers/test");
 app.get(endpoint + "/test/:id", cors(corsOptions), testModule);
@@ -160,3 +166,9 @@ app.post(endpoint + "/teacher/after-send-grade", cors(corsOptions), afterSendGra
 
 const sendCanan = require("./controllers/send-canan.js");
 app.post(endpoint + "/teacher/sendCanan", cors(corsOptions), sendCanan);
+
+const reportFollowSuccess = require("./controllers/report-course-follow-success");
+app.post(endpoint + "/report/course-follow-success", cors(corsOptions), reportFollowSuccess);
+
+const reportFollowSuccessAdmin = require("./controllers/admin-report-course-follow-success");
+app.post("/admin/report/course-follow-success", cors(corsOptions), reportFollowSuccessAdmin);

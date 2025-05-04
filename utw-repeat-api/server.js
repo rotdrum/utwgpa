@@ -50,6 +50,12 @@ const timezone = {
   timezone: "Asia/Bangkok"
 };
 
+app.get("/health", (req,res) => {
+  return res.status(200).json({
+    responseCode: "200"
+  })
+});
+
 /** API */
 const migrationDepartmentModule = require("./migration/department.js");
 app.get(endpoint + "/migration/department/:id", cors(corsOptions), migrationDepartmentModule);

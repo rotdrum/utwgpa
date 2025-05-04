@@ -2,496 +2,301 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;500;800&display=swap');
-
-        * {
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            font-family: 'Sarabun', sans-serif;
-            font-weight: 300;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #FAFAFA;
-            font: 12pt "Tahoma";
-        }
-
-        .page-break {
-            /* page-break-after: always !important; */
-            page-break-before: auto;
-
-        }
-
-        .page {
-            width: 29.7cm;
-            min-height: 21cm;
-            padding: 1cm;
-            margin: auto;
-            /* border: 1px #D3D3D3 solid; */
-            border-radius: 5px;
-            /* background: white; */
-            /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
-        }
-
-        .subpage {
-            padding: 1cm;
-            /* border: 5px red solid; */
-            height: 210mm;
-            /* outline: 1cm #FFEAEA solid; */
-        }
-
-        @page {
-            size: landscape;
-            /* size: A4; */
-            margin: 0;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            width: 297mm;
-            height: 210mm;
-        }
-
-        @media print {
-
-            html,
-            body {
-                width: 297mm;
-                height: 210mm;
-            }
-
-        }
-
-        .table-breaked {
-            page-break-before: auto;
-        }
-
-        div,
-        span {
-            font-size: 16px;
-        }
-
-        table th,
-        table td {
-            border: 1px solid #000;
-            font-size: 12px;
-            font-size: .5rem !important;
-        }
-
-        table td {
-            padding: 0 5px;
-        }
-
-        @supports (writing-mode: vertical-lr) {
-            .subhead span {
-                display: inline-block;
-                writing-mode: vertical-lr;
-                white-space: nowrap;
-                transform: rotate(180deg);
-                line-height: 0;
-                font-size: .5rem;
-                margin-left: 5px;
-                margin-top: 7px; 
-            }
-        }
-        table {
-            
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายงานลงทะเบียนเรียนซ้ำ</title>
+  <link rel="icon" href="../imgs/logomain.png">
+  <link rel="stylesheet" href="./global.css?v01">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+    integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <style>
+    .select2-container .select2-selection--single {
+      height: 37px;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="book">
-        <div class="page">
-            <section class="subpage"
-                style="position: relative; display: flex; flex-direction: column; align-items: center;">
-                <div style="position: absolute; top: 10px; right: 38px; border: 1px solid #000;" class="px-4 py-2">
-                    วผ.12/3</div>
-                <div class="flex flex-col items-end px-4 py-2"
-                    style="position: absolute; top: 60px; right: 38px; border: 1px solid #000;">
-                    <div class="flex">
-                        <div>ครั้งที่</div>
-                        <span id="countja" class="border-dotted border-b-2 border-slate-900 px-4"></span>
-                    </div>
-                    <div class="flex mt-2">
-                        <div>ภาคเรียนที่</div>
-                        <span id="numyearja" class="border-dotted border-b-2 border-slate-900 px-4"></span>
-                        <div>/</div>
-                        <span id="yearterm" class="border-dotted border-b-2 border-slate-900 px-4"></span>
-                    </div>
-                </div>
-                <h4 style="font-size: 20px; " class="font-bold">โรงเรียนอุทัยวิทยาคม จังหวัดอุทัยธานี</h4>
-                <h4 style="font-size: 20px; " class="font-bold">แบบรายงานลงทะเบียนเรียนซ้ำ</h4>
-                <div class="flex  mt-2">
-                    <div>รายวิชา</div>
-                    <span id="raivicha" class="border-dotted border-b-2 border-slate-900 px-4 w-64 text-center"></span>
-                </div>
-                <br>
 
-                <h6 style="font-size: 14px;" class="font-bold">อัตราส่วนคะแนนระหว่างภาค : ปลายภาค
-                    <span style="font-size: 14px;" class="font-bold">75</span> :
-                    <span style="font-size: 14px;" class="font-bold">25</span>
-                    ตัวชี้วัด / ผลการเรียนรู้ ก่อนวัดผลกลางภาค : วัดผลกลางภาคเรียน : หลังวัดผลกลางภาค =
-                    <span style="font-size: 14px;" class="font-bold">25</span> :
-                    <span style="font-size: 14px;" class="font-bold">25</span> :
-                    <span style="font-size: 14px;" class="font-bold">25</span>
-                </h6>
-
-
-                <div class="table-breaked" style="width: 100%;">
-                    <table class="w-full" style="width: 100%; font-size: 14px;">
-                        <thead>
-                            <tr class="subhead">
-                                <th rowspan="4" style="font-size: .5rem; text-align: center; padding: 0 5px;">เลขที่</th>
-                                <th rowspan="4" style="font-size: .5rem; text-align: center; padding: 0 5px;">ชื่อ - สกุล</th>
-                                <th rowspan="4" style="font-size: .5rem; text-align: center; padding: 0 5px;">ชั้น</th>
-                                <th rowspan="2" colspan="30" style="font-size: .5rem; text-align: center; padding: 0 5px;">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div style="font-size: .5rem;">ครั้งที่ <span style="font-size: .5rem;">1</span>
-                                            ระยะเวลาตั้งแต่</div>
-                                        <div style="font-size: .5rem;">วันที่ 20-04-2025</div>
-                                        <div style="font-size: .5rem;">ถึง</div>
-                                        <div style="font-size: .5rem;">วันที่ 25-04-2025</div>
-                                    </div>
-                                </th>
-                                <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
-                                    <span>ก่อนวัดผลกลางภาคเรียน</span></th>
-                                <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
-                                    <span>วัดผลกลางภาคเรียน</span></th>
-                                <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
-                                    <span>หลังวัดผลกลางภาคเรียน</span></th>
-                                <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
-                                    <span>วัดผลปลายภาคเรียน</span></th>
-                                <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
-                                    <span>คะแนนรวม</span></th>
-                                <th colspan="9" style="font-size: .7rem; text-align: center; padding: 0 5px;">คุณลักษณะอันพึงประสงค์
-                                </th>
-                                <th colspan="6" style="font-size: .7rem; text-align: center; padding: 0 5px;">การอ่าน,
-                                    คิดวิเคราะห์,<br>เขียน</th>
-
-                            </tr>
-                            <tr class="subhead">
-                                <th class="vertical-cell">
-                                    <span class="">รักชาติ ศาสนา กษัตริย์</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">ซื่อสัตย์ สุจริต</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">มีวินัย</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">ใฝ่เรียนรู้</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">อยู่อย่างพอเพียง</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">มุ่งมั่นการทำงาน</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">รักความเป็นไทย</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">มีจิตสาธารณะ</span>
-                                </th>
-                                <th rowspan="3" class="vertical-cell">
-                                    <span class="">สรุปผลการประเมิน</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">อ่าน</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">เขียน</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">สื่อความ</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">คิดวิเคราะห์</span>
-                                </th>
-                                <th class="vertical-cell">
-                                    <span class="">สังเคราะห์</span>
-                                </th>
-                                <th rowspan="3" class="vertical-cell">
-                                    <span class="">สรุปผลการประเมิน</span>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td colspan="15" style="font-size: .7rem; text-align: center;">พฤษศจิกายน</td>
-                                <td colspan="15" style="font-size: .7rem; text-align: center;">ธันวาคม</td>
-                            </tr>
-                            <tr>
-                                
-                                <th style="text-align: center; font-size: .5rem;">16</th>
-                                <th style="text-align: center; font-size: .5rem;">17</th>
-                                <th style="text-align: center; font-size: .5rem;">18</th>
-                                <th style="text-align: center; font-size: .5rem;">19</th>
-                                <th style="text-align: center; font-size: .5rem;">20</th>
-                                <th style="text-align: center; font-size: .5rem;">21</th>
-                                <th style="text-align: center; font-size: .5rem;">22</th>
-                                <th style="text-align: center; font-size: .5rem;">23</th>
-                                <th style="text-align: center; font-size: .5rem;">24</th>
-                                <th style="text-align: center; font-size: .5rem;">25</th>
-                                <th style="text-align: center; font-size: .5rem;">26</th>
-                                <th style="text-align: center; font-size: .5rem;">27</th>
-                                <th style="text-align: center; font-size: .5rem;">28</th>
-                                <th style="text-align: center; font-size: .5rem;">29</th>
-                                <th style="text-align: center; font-size: .5rem;">30</th>
-                                <th style="text-align: center; font-size: .5rem;">01</th>
-                                <th style="text-align: center; font-size: .5rem;">02</th>
-                                <th style="text-align: center; font-size: .5rem;">03</th>
-                                <th style="text-align: center; font-size: .5rem;">04</th>
-                                <th style="text-align: center; font-size: .5rem;">05</th>
-                                <th style="text-align: center; font-size: .5rem;">06</th>
-                                <th style="text-align: center; font-size: .5rem;">07</th>
-                                <th style="text-align: center; font-size: .5rem;">08</th>
-                                <th style="text-align: center; font-size: .5rem;">09</th>
-                                <th style="text-align: center; font-size: .5rem;">10</th>
-                                <th style="text-align: center; font-size: .5rem;">11</th>
-                                <th style="text-align: center; font-size: .5rem;">12</th>
-                                <th style="text-align: center; font-size: .5rem;">13</th>
-                                <th style="text-align: center; font-size: .5rem;">14</th>
-                                <th style="text-align: center; font-size: .5rem;">15</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                                <th style="text-align: center;">3</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                            <tr>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; ">นายหมี โว้โว้</td>
-                                <td style="padding: 0; text-align: center;">3/12</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">/</td>
-                                <td style="padding: 0; text-align: center;">25</td>
-                                <td style="padding: 0; text-align: center;">25</td>
-                                <td style="padding: 0; text-align: center;">25</td>
-                                <td style="padding: 0; text-align: center;">25</td>
-                                <td style="padding: 0; text-align: center;">100</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">9</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">1</td>
-                                <td style="padding: 0; text-align: center;">5</td>
-                                
-                            </tr>
-                          
-                        </tbody>
-                    </table>
-                </div>
-
-                <br>
-                <div class="w-full breaked-after">
-                    <div class="w-16"></div>
-                    <div class="w-full flex justify-content-between">
-                        <div class="flex flex-col items-center">
-                            <div>รับรองข้อมูล</div>
-                            <br><br>
-                            <div class="flex">
-                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-64"></span>
-                            </div>
-                            <div class="flex mt-2">
-                                <div>(</div>
-                                <span id="myteacher" class="border-dotted border-b-2 border-slate-900 px-8 "></span>
-                                <div>)</div>
-                            </div>
-                            <div>ครูประจำวิชา</div>
-                            <span class="datenow border-dotted border-b-2 border-slate-900 px-8 "></span>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div>รับรองข้อมูล</div>
-                            <br><br>
-                            <div class="flex">
-                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-64"></span>
-                            </div>
-                            <div class="flex mt-2">
-                                <div>(</div>
-                                <span class="border-dotted border-b-2 border-slate-900 px-8 ">นางสมสุข โชติพิเชฐ</span>
-                                <div>)</div>
-                            </div>
-                            <div>นายทะเบียน</div>
-                            <!-- <span class="datenow border-dotted border-b-2 border-slate-900 px-8 "></span> -->
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div>ดำเนินการแก้ไขเรียบร้อยแล้ว</div>
-                            <br><br>
-                            <div class="flex">
-                                <span class="border-dotted border-b-2 border-slate-900 px-8 w-64"></span>
-                            </div>
-                            <div class="flex mt-2">
-                                <div>(</div>
-                                <span class="border-dotted border-b-2 border-slate-900 px-8 ">นางสาวสุภาวดี
-                                    กระแสสินธุ์</span>
-                                <div>)</div>
-                            </div>
-                            <div>งาน GPA</div>
-                            <!-- <span class="datenow border-dotted border-b-2 border-slate-900 px-8 "></span> -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+  <div class="page">
+    <div onclick="keepSidebar()" class="overlaysidebar"
+      style="display: none; width: 100%; height: 100vh; position: fixed; top: 0; bottom: 0; right: 0; left: 0; z-index: 99; background: rgba(0,0,0,0.5);">
     </div>
+    <div class="fakesidebar">
 
-    <script src="../global.js?v03"></script>
-    <script>
-        const urlx = new URL(window.location.href);
-        const idx = urlx.searchParams.get("id");
-        const sbj = urlx.searchParams.get("sbj");
-        const sbjc = urlx.searchParams.get("sbjc");
-        const sbjcl = urlx.searchParams.get("sbjcl");
-        const user_id = urlx.searchParams.get("user_id");
+    </div>
+    <div class="sidebar">
+      <div onclick="keepSidebar()" class="keepsidebar" style="
+          position: absolute; z-index: 100;
+          right: 40px;
+      ">
+        <i class="bi bi-box-arrow-in-left text-white"></i>
+      </div>
+      <div id="sidebartitle" class="d-flex align-items-center">
 
-        $(document).ready(() => {
-            render()
-            $('#myteacher').text(localStorage.utwFullname)
-            $('.datenow').text(dateengtodatethai(getDateNow().split(" ")[0]))
-        })
+      </div>
 
-        function render() {
-            loading(true)
-            $.ajax({
-                method: 'post',
-                url: endpointv2 + '/utw-modify-api/course-getone',
-                data: {
-                    _method: "GET",
-                    key_address: 'repeat_date'
-                }, success: response => {
-                    console.log('good', response)
-                    if (response.status.code == 200) {
-                        $('#countja').text(response.data.in_data.date_section)
-                        $('#numyearja').text(response.data.in_data.date_term)
-                        $('#yearterm').text(response.data.in_data.date_year_education)
-                    }
-                    else {
-                        errswal()
-                    }
-                }, error: err => {
-                    errswal()
-                    console.log('bad', err)
+      <div id="sidebar" class="sidebar-main" style="overflow: scroll; height: calc(100vh - 170px);">
+
+      </div>
+
+      <!-- <div class="hr"></div> -->
+
+
+    </div>
+    <div class="content">
+      <div class="content-navbar">
+        <div class="content-search">
+          <div style="display: flex; align-items: center;">
+            <div onclick="toggleSidebar()" class="hamburger me-3">
+              <i class="bi bi-list"></i>
+            </div>
+            <input type="text" placeholder="ค้นหา" class="form-control">
+          </div>
+        </div>
+        <div id="boxProfile" class="content-profile">
+
+        </div>
+      </div>
+      <div class="content-page">
+        <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
+          <h2>รายงานลงทะเบียนเรียนซ้ำเรียนซ้ำ</h2>
+          <!-- <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddSubject">
+                  <i class="fa-solid fa-circle-plus" style="margin-right: 5px;"></i>  
+                  <span>กลุ่มตัวชี้วัด</span>
+                </div> -->
+        </div>
+
+        <div class="w-100 d-flex align-items-end mb-3">
+          <div class="me-3">
+            <p class="mb-0">รายวิชา</p>
+            <select class="form-control" id="edu_vicha" style="width: 200px;">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="me-3">
+            <p class="mb-0">อาจารย์</p>
+            <select class="form-control" id="edu_teacher" style="width: 200px;">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="me-3">
+            <p class="mb-0">ปีการศึกษา</p>
+            <select class="form-control" id="edu_year" style="width: 100px;">
+              <option value="2561">2561</option>
+              <option value="2562">2562</option>
+              <option value="2563">2563</option>
+              <option value="2564">2564</option>
+              <option value="2565">2565</option>
+              <option value="2566">2566</option>
+              <option value="2567">2567</option>
+              <option value="2568">2568</option>
+            </select>
+          </div>
+          <div class="me-3">
+            <p class="mb-0">ภาคเรียนที่</p>
+            <select class="form-control" id="edu_term" style="width: 100px;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+          <div class="me-3">
+            <p class="mb-0">ครั้งที่</p>
+            <select class="form-control" id="edu_count" style="width: 100px;">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="me-3">
+            <button onclick="render()" class="btn btn-primary">ค้นหา</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">รายวิชา</th>
+                <th scope="col">อาจารย์</th>
+                <th scope="col">ปีการศึกษา</th>
+                <th scope="col">ครั้งที่</th>
+                <th scope="col">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="./global.js?v01"></script>
+  <script>
+    $(document).ready(() => {
+      render('init');
+      getEducationYear();
+    })
+
+    function render(param) {
+      loading(true)
+      $.ajax({
+        method: 'POST',
+        url: endpointv2 + '/admin/report/course-follow-success',
+        headers: {
+          Authorization: 'Bearer ' + bearbertoken
+        },
+        data: {
+          _method: "GET",
+        }, success: response => {
+          console.log(response)
+          if (response.status.code == 200) {
+            var html = '';
+            var vicha = [];
+            var teacher = [];
+            var search = {
+              vicha: $("#edu_vicha").val(),
+              teacher: $("#edu_teacher").val(),
+              year: $("#edu_year").val(),
+              term: $("#edu_term").val(),
+              count: $("#edu_count").val(),
+            }
+            for (let i = 0; i < response.data.length; i++) {
+              const data = response.data[i];
+              var teachername = `${data.teacher && data.teacher.tname ? data.teacher.tname : ""}${data.teacher && data.teacher.fname ? data.teacher.fname : ""} ${data.teacher && data.teacher.lname ? data.teacher.lname : ""}`;
+              var vichaname = `${data.subject_code} ${data.subject_title}`;
+
+              if (!teacher.includes(teachername)) {
+                teacher.push(teachername)
+              }
+              if (!vicha.includes(vichaname)) {
+                vicha.push(vichaname)
+              }
+
+              if (
+                String(vichaname).includes(search.vicha) &&
+                String(teachername).includes(search.teacher) &&
+                String(data.stamp_year_at).includes(search.year) &&
+                String(data.stamp_term_at).includes(search.term) &&
+                String(data.stamp_round_at).includes(search.count)
+              ) {
+                html += `
+                <tr>
+                  <th scope="row">${i + 1}</th>
+                  <td>${vichaname}</td>
+                  <td>${teachername}</td>
+                  <td>${data.stamp_term_at}/${data.stamp_year_at}</td>
+                  <td>${data.stamp_round_at}</td>
+                  <td>
+                    <div>
+                      <a href="./printreportresult-success.html?id=${data.subject_id}&user_id=${data.teacher_id}&sbj=${data.subject_title}&sbjc=${data.subject_code}&sbjcl=${data.subject_class}&term=${data.stamp_term_at}&year=${data.stamp_year_at}&round=${data.stamp_round_at}" target="_blank" class="btn btn-primary">ตรวจสอบ</a>
+                    </div>
+                  </td>
+                </tr>`;
+              }
+
+
+            }
+            $('#tbody').html(html).promise().done(() => {
+              if (param && param == "init") {
+                if (teacher && teacher[0]) {
+                  var option = `<option value="">ทั้งหมด</option>`;
+                  for (let x = 0; x < teacher.length; x++) {
+                    const element = teacher[x];
+                    option += `<option value="${element}">${element}</option>`;
+                  }
+                  $("#edu_teacher").html(option).select2();
                 }
+
+                if (vicha && vicha[0]) {
+                  var option = `<option value="">ทั้งหมด</option>`;
+                  for (let x = 0; x < vicha.length; x++) {
+                    const element = vicha[x];
+                    option += `<option value="${element}">${element}</option>`;
+                  }
+                  $("#edu_vicha").html(option).select2();
+                }
+              }
+
             })
 
-            $.ajax({
-                method: 'POST',
-                url: endpoint + `/utw-repeat-api/teacher/detail-report/${localStorage.utwUserId}/${idx}`,
-                headers: {
-                    "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
-                }, success: response => {
-                    console.log(response)
-                    if (response.status.code == 200) {
-                        var html = '';
-                        $('#raivicha').text(sbjc + ' ' + sbj)
+          }
+          else {
 
-                        // response.data.forEach((datax,a) => {
-                        var a = 0;
-                        var html = "";
-                        for (let i = 0; i < response.data.length; i++) {
-                            const element = response.data[i];
-
-                            var a = new Date(element.start_date).getTime();
-                            var b = getDateMil(a).split(" ");
-                            var c = dateentoth(b[0]);
-
-                            var d = new Date(element.end_date).getTime();
-                            var e = getDateMil(d).split(" ");
-                            var f = dateentoth(e[0]);
-
-                            var g = new Date(element.confirm_date).getTime();
-                            var h = getDateMil(g).split(" ");
-                            var k = dateentoth(h[0]);
-
-                            html += `
-                            <tr>
-                                <td>${i + 1}</td>
-                                <td>${element.student.tname}${element.student.fname} ${element.student.lname}</td>
-                                <td>ม.${element.student.class}/${element.student.room}</td>
-                                <td>${c} - ${f}</td>
-                                <td>${element.grade_new ? element.grade_new : ""}</td>
-                                <td>${k ? k : ""}</td>
-                                <td></td>
-                            </tr>`;
-                        }
-                        $('#tbody').html(html)
-                        loading(false)
-
-                    }
-                    else {
-                        loading(false)
-                    }
-                }, error: err => {
-                    loading(false)
-                    console.log(err)
-                }
-            })
+          }
+          loading(false)
+        }, error: err => {
+          console.log(err)
+          loading(false)
         }
-    </script>
+      })
+      // $.ajax({
+      //   method: 'POST',
+      //   url: endpoint + '/utw-modify-grade-api/report-department.php',
+      //   data: {
+      //     _method: "GET",
+      //     id: 1,
+      //     department_id: 1
+      //   }, success: response => {
+      //     console.log(response)
+      //   }, error: err => {
+      //     console.log(err)
+      //   }
+      // })
+    }
+
+    function gotoreport(page) {
+      window.open(`${page}&ey=${$("#edu_year").val()}&et=${$("#edu_term").val()}&ec=${$("#edu_count").val()}`)
+    }
+
+    function getEducationYear() {
+      $.ajax({
+        method: 'post',
+        url: endpointv2 + '/utw-modify-api/course-getone',
+        data: {
+          _method: "GET",
+          key_address: 'repeat_date'
+        }, success: response => {
+          console.log('good', response)
+          if (response.status.code == 200) {
+            $("#edu_year").val(response.data.in_data.date_year_education)
+            $("#edu_count").val(response.data.in_data.date_section)
+            $("#edu_term").val(response.data.in_data.date_term)
+          }
+        }, error: err => {
+          console.log('bad', err)
+        }
+      })
+    }
+
+
+
+  </script>
 </body>
 
 </html>
