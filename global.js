@@ -1,5 +1,5 @@
 var endpoint = 'https://utwgpa.com'
-var endpointv2 = "https://modify-api.utwgpa.com";
+var endpointv2 = "https://prd-api.utwgpa.com";
 // var endpointv2 = "http://localhost:3005";
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบแก้ตัวนักเรียน';
 
