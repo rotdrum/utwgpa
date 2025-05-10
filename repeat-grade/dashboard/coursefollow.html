@@ -345,37 +345,37 @@
 
           <h6>
             <div class="mb-3">
-              <div>คะแนนก่อนกลางภาค</div>
+              <div>คะแนนเต็มก่อนกลางภาค</div>
               <input id="mastercanan1" onblur="checkSum(this)" type="number" class="form-control">
             </div>
             <div class="mb-3">
-              <div>คะแนนกลางภาค</div>
+              <div>คะแนนเต็มกลางภาค</div>
               <input id="mastercanan2" onblur="checkSum(this)" type="number" class="form-control">
             </div>
             <div class="mb-3">
-              <div>คะแนนก่อนปลายภาค</div>
+              <div>คะแนนเต็มหลังกลางภาค</div>
               <input id="mastercanan3" onblur="checkSum(this)" type="number" class="form-control">
             </div>
             <div class="mb-3">
-              <div>คะแนนปลายภาค</div>
+              <div>คะแนนเต็มปลายภาค</div>
               <input id="mastercanan4" onblur="checkSum(this)" type="number" class="form-control">
             </div>
             <br>
             <div class="fw-bold mb-3"><span class="md_sendgrade_name"></span></div>
             <div class="mb-3">
-              <div>คะแนนก่อนกลางภาค <span id="showowncanan1"></span></div>
+              <div>คะแนนที่ได้ก่อนกลางภาค <span id="showowncanan1"></span></div>
               <input type="number" id="owncanan1" onkeyup="checkMaximum('#mastercanan1', this)" class="form-control">
             </div>
             <div class="mb-3">
-              <div>คะแนนกลางภาค <span id="showowncanan2"></span></div>
+              <div>คะแนนที่ได้กลางภาค <span id="showowncanan2"></span></div>
               <input type="number" id="owncanan2" onkeyup="checkMaximum('#mastercanan2', this)" class="form-control">
             </div>
             <div class="mb-3">
-              <div>คะแนนก่อนปลายภาค <span id="showowncanan3"></span></div>
+              <div>คะแนนที่ได้หลังกลางภาค <span id="showowncanan3"></span></div>
               <input type="number" id="owncanan3" onkeyup="checkMaximum('#mastercanan3', this)" class="form-control">
             </div>
             <div class="mb-3">
-              <div>คะแนนปลายภาค <span id="showowncanan4"></span></div>
+              <div>คะแนนที่ได้ปลายภาค <span id="showowncanan4"></span></div>
               <input type="number" id="owncanan4" onkeyup="checkMaximum('#mastercanan4', this)" class="form-control">
             </div>
             <div class="modal-footer" style="padding: 0; padding-top: 20px;">
@@ -815,7 +815,7 @@
         $("#txt_unitfix").val(`นักเรียนต้องเรียนอย่างน้อย ${b}/${a} ชั่วโมง`)
         $(".box_unit").css('display', 'block')
       }
-
+      return b;
 
     }
 
@@ -871,17 +871,44 @@
       }
 
       var html = "";
+      var needhour = 0;
       for (let x = 0; x < info.student_activity.length; x++) {
         const element = info.student_activity[x];
-
         var class1 = "";
-        if ((status == "progress" || status == "wait_success") && element.successDate) {
+        var cursor = "cursor: pointer;";
+        var onclick = `selectGage(this, ${x}, '${element.indicator}')`;
+        if (x == 0) {
+          onclick = "";
+          cursor = "cursor: not-allowed;"
+          var a1 = String(element.indicator).split(" ")[1];
+          var a2 = String(a1).split("/")[0];
+          var a3 = parseInt(a2);
+          needhour = a3;
+
+          if (info.time_learning && info.time_learning[0]) {
+            var countHours = 0;
+            for (let z = 0; z < info.time_learning.length; z++) {
+              const dayz = info.time_learning[z];
+              var checkDate = String(new Date(dayz)).split(" ")[0];
+              if (checkDate == "Sat" || checkDate == "Sun") {
+                countHours += 6;
+              } else {
+                countHours += 3;
+              }
+            }
+
+            if (countHours >= needhour) {
+              class1 = "active";
+            }
+          }
+        }
+        else if ((status == "progress" || status == "wait_success") && element.successDate) {
           class1 = "active";
           gage += `${element.indicator}|`;
         }
 
         html += `
-        <li onclick="selectGage(this, ${x}, '${element.indicator}')" id="gage${x}" style="cursor: pointer;" class="list-group-item ${class1}">
+        <li onclick="${onclick}" id="gage${x}" style="${cursor}" class="list-group-item ${class1}">
           ${element.indicator}
         </li>`;
       }

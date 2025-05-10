@@ -1,13 +1,13 @@
 
 var endpoint = 'https://utwgpa.com'
-var endpointv2 = "https://prd-api.utwgpa.com";
-// var endpointv2 = "http://localhost:3005";
+// var endpointv2 = "https://prd-api.utwgpa.com";
+var endpointv2 = "http://localhost:3005";
 
 var sidebartitle = localStorage.selectSystem ? localStorage.selectSystem : 'ระบบลงทะเบียนเรียนซ้ำ';
 
-if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
-    endpoint = 'https://utwgpa.com/uat'
-}
+// if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
+//     endpoint = 'https://utwgpa.com/uat'
+// }
 // if(!localStorage.utwToken) {
 //     Swal.fire({
 //         icon: 'error',

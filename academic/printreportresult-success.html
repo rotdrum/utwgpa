@@ -587,6 +587,14 @@
                             thead_tmonth += `<th colspan="${date_couter}" style="font-size: .7rem; text-align: center;">${key}</th>`;
                         }
 
+                        // if(thead_tdate == "") {
+                        //     thead_tdate = `<th></th>`;
+                        // }
+                        // if(thead_tmonth == "") {
+                        //     thead_tmonth = `<th></th>`;
+                        // }
+
+
                         var thead =
                             `<tr class="subhead">
                                 <th rowspan="4" style="font-size: .5rem; text-align: center; padding: 0 5px;">เลขที่</th>
@@ -614,6 +622,8 @@
                                     <span>วัดผลปลายภาคเรียน</span></th>
                                 <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
                                     <span>คะแนนรวม</span></th>
+                                <th rowspan="4" style="font-size: .7rem; text-align: center; padding: 0 5px;">
+                                    <span>ผลการเรียน</span></th>
                                 <th colspan="9" style="font-size: .7rem; text-align: center; padding: 0 5px;">คุณลักษณะอันพึงประสงค์
                                 </th>
                                 <th colspan="6" style="font-size: .7rem; text-align: center; padding: 0 5px;">การอ่าน,
@@ -738,6 +748,10 @@
                                 }
                             }
 
+                            if(tick == "" ) {
+                                tick += `<td style="padding: 0; text-align: center;"></td>`;
+                            }
+
                             if (element.student_activity && element.student_activity[0]) {
                                 haNuikit(element.student_activity[0]);
                             }
@@ -753,6 +767,7 @@
                                 <td style="padding: 0; text-align: center;">${element.before_final_score ? element.before_final_score : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.final_score ? element.final_score : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.sum_score ? element.sum_score : ""}</td>
+                                <td style="padding: 0; text-align: center;">1</td>
                                 <td style="padding: 0; text-align: center;">${element.ac_1 ? element.ac_1 : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.ac_2 ? element.ac_2 : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.ac_3 ? element.ac_3 : ""}</td>
