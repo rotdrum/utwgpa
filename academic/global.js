@@ -1,6 +1,6 @@
 var endpoint = 'https://utwgpa.com';
-var endpointv2 = 'http://localhost:3005';
-// var endpointv2 = 'https://uat-api.utwgpa.com';
+// var endpointv2 = 'http://localhost:3005';
+var endpointv2 = 'https://uat-api.utwgpa.com';
 var endpoint_img = '';
 var bearbertoken = "21232f297a57a5a743894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0";
 
