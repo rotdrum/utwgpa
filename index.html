@@ -377,10 +377,13 @@
                 $.ajax({
                     method: 'post',
                     url: endpointv2 + '/utw-modify-api/login-admin',
-                    data: {
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    data: JSON.stringify({
                         username: $('#txt_usd').val(),
                         password: $('#txt_pwd').val()
-                    }, success: response => {
+                    }), success: response => {
                         console.log(response)
                         loading(false)
                         if(response.status.code == 200) {

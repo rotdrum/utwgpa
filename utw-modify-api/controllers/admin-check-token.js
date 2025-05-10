@@ -1,10 +1,10 @@
 const mysql = require("mysql2/promise");
 const root = require("../config-cors.js");
-const rootCors = require("../config-cors.js");
 const rootGrade = require("../config-modify.js");
+const rootCors = require("../config-cors.js");
 
-const dbCors = mysql.createPool(rootCors());
 const dbGrade = mysql.createPool(rootGrade());
+const dbCors = mysql.createPool(rootCors());
 
 const success = require("../response/success.js");
 const empty = require("../response/empty.js");
@@ -18,29 +18,25 @@ module.exports = async function (req, res) {
     //   return; // ไม่ผ่าน auth ก็จบ
     // }
 
-    var username = req.body.username;
-    var password = req.body.password;
+    function genval(lng) {
+      var sql = '';
+      for (let i = 0; i < lng; i++) {
+        if (i == (lng - 1)) sql += '?'
+        else sql += '?,'
+      }
+      return sql
+    }
 
-    if (username && password) {
-      console.log("username",username)
+    var token = req.body.token;
 
-      if (password == "Password@1234" &&
-        (username == "education@utw.ac.th" || username == "education")
-      ) {
-        var key_address = "admin";
-        var [data1] = await dbCors.query(`SELECT * FROM token_basic WHERE key_address = ? `,
-          [key_address]
-        );
-        if (data1 && data1[0]) {
-          console.log(data1[0])
-          return success(res, data1[0]);
-        }
-        else {
-          return empty(res);
-        }
+
+    if (token) {
+      var [data1] = await dbCors.query("SELECT * FROM token_basic WHERE token = ? ", [token]);
+      if (data1 && data1[0]) {
+        return success(res, data1[0]);
       }
       else {
-        return empty(res);
+        return empty(res);    
       }
     }
     else {

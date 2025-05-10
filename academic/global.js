@@ -1,15 +1,15 @@
 var endpoint = 'https://utwgpa.com';
-// var endpointv2 = 'http://localhost:3005';
-var endpointv2 = 'https://uat-api.utwgpa.com';
+var endpointv2 = 'http://localhost:3005';
+// var endpointv2 = 'https://uat-api.utwgpa.com';
 var endpoint_img = '';
 var bearbertoken = "21232f297a57a5a743894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0";
 
 const bearer = 'Bearer 6685214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd';
 var process = 'UAT';
 
-if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
-  endpoint = 'https://utwgpa.com/uat';
-}
+// if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
+//   endpoint = 'https://utwgpa.com/uat';
+// }
 
 // if(process == 'UAT') {
 //   endpoint = 'https://utwgpa.com/uat'
@@ -515,7 +515,7 @@ function errswal() {
 
 $.ajax({
   method: 'post',
-  url: endpoint+ '/utw-cors-api/check-token-admin.php',
+  url: endpointv2+ '/admin/check-token',
   data: {
       token: localStorage.utwAdminToken
   }, error: err => {
