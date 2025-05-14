@@ -17,8 +17,8 @@ require('dotenv').config();
 const authRepo = process.env.AuthRepo;
 app.use(cors());
 app.listen(parseInt(process.env.port), () => {
-  console.log("server utw-modify-api is running....");
-});
+  console.log("server utw-modify-api is running.... http://localhost:"+process.env.port);
+}); 
 
 const whitelist = [
   "http://localhost",
@@ -172,3 +172,7 @@ app.post(endpoint + "/report/course-follow-success", cors(corsOptions), reportFo
 
 const reportFollowSuccessAdmin = require("./controllers/admin-report-course-follow-success");
 app.post("/admin/report/course-follow-success", cors(corsOptions), reportFollowSuccessAdmin);
+
+// /utw-cors-api/check-token-admin.php
+const checkTokenAdmin = require("./controllers/admin-check-token");
+app.post("/admin/check-token", cors(corsOptions), checkTokenAdmin);
