@@ -220,7 +220,11 @@
     function getDepartment() {
       $.ajax({
         method: "post",
-        url: endpoint + '/utw-cors-api/department.php',
+        url: endpointv2 + '/admin/department',
+        data: {
+              token: localStorage.utwAdminToken,
+
+        },
         success: response => {
           console.log(response)
           if (response.status.code == 200) {
@@ -246,7 +250,10 @@
       loading(true)
       $.ajax({
         method: "post",
-        url: endpoint + '/utw-cors-api/subjects.php',
+        url: endpointv2 + '/admin/subject',
+        data: {
+          token: localStorage.utwAdminToken
+        },
         success: response => {
           console.log(response)
           if (response.status.code == 200) {
@@ -334,9 +341,10 @@
         $.ajax({
           type: "POST",
           dataType: "JSON",
-          url: endpoint + '/utw-cors-api/subjects/add.php',
+          url: endpointv2 + '/admin/subject-add',
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
+            token: localStorage.utwAdminToken,
             _method: "GET",
             subject_code: $('#add_code').val(),
             name: $('#add_subject').val(),
@@ -387,9 +395,10 @@
       $.ajax({
         type: "POST",
         dataType: "JSON",
-        url: endpoint + '/utw-cors-api/subjects/updateActive.php',
+        url: endpointv2 + '/admin/subject-active',
         headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
         data: {
+          token: localStorage.utwAdminToken,
           id: parseInt(idx),
           is_active: tg
         },
@@ -447,9 +456,10 @@
         $.ajax({
           type: "POST",
           dataType: "JSON",
-          url: endpoint + '/utw-cors-api/subjects/update.php',
+          url: endpointv2 + '/admin/subject-update',
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
+            token: localStorage.utwAdminToken,
             _method: "GET",
             id: edit_id,
             subject_code: $('#edit_code').val(),
@@ -492,7 +502,7 @@
       }
     }
 
-    function removeInfo(idx,code,name) {
+    function removeInfo(idx, code, name) {
       Swal.fire({
         icon: "warning",
         title: `คุณต้องการจะลบ ?`,
@@ -508,11 +518,12 @@
           $.ajax({
             type: "POST",
             dataType: "JSON",
-            url: endpoint + '/utw-cors-api/subjects/delete.php',
+            url: endpointv2 + '/admin/subject-delete',
             headers: {
               Authorization: 'Bearer ' + localStorage.utwAdminToken
             },
             data: {
+              token: localStorage.utwAdminToken,
               id: idx,
               _method: "GET",
             },

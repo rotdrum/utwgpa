@@ -196,3 +196,23 @@ app.post("/admin/teacher-update", cors(corsOptions), adminTeacherUpdate);
 // utw-cors-api/users/delete.php
 const adminTeacherDelete = require("./controllers/admin-teacher-delete");
 app.post("/admin/teacher-delete", cors(corsOptions), adminTeacherDelete);
+
+// utw-cors-api/subjects.php
+const adminSubject = require("./controllers/admin-subject");
+app.post("/admin/subject", cors(corsOptions), adminSubject);
+
+// utw-cors-api/subjects/add.php
+const adminSubjectAdd = require("./controllers/admin-subject-add");
+app.post("/admin/subject-add", cors(corsOptions), adminSubjectAdd);
+
+// utw-cors-api/subjects/updateActive.php
+const adminSubjectActive = require("./controllers/admin-subject-active");
+app.post("/admin/subject-active", cors(corsOptions), adminSubjectActive);
+
+// utw-cors-api/subjects/update.php
+const adminSubjectUpdate = require("./controllers/admin-subject-update");
+app.post("/admin/subject-update", cors(corsOptions), adminSubjectUpdate);
+
+// utw-cors-api/subjects/delete.php
+const adminSubjectDelete = require("./controllers/admin-subject-delete");
+app.post("/admin/subject-delete", cors(corsOptions), adminSubjectDelete);

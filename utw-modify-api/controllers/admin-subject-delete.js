@@ -14,24 +14,21 @@ const { checkTokenAdmin, getDateNow, MD5, genval } = require("../middlewares/bea
 
 module.exports = async function (req, res) {
   try {
-    // const authResult = await authenticate(req, res);
-    // if (authResult !== true) {
-    //   return; // ไม่ผ่าน auth ก็จบ
-    // }
-
-
-
     var token = req.body.token;
+    const authResult = await checkTokenAdmin(token);
+    if (!authResult) {
+      return empty(res);
+    }
+    var id = req.body.id;
 
 
-    if (token) {
-      var [data1] = await dbCors.query("SELECT * FROM token_basic WHERE token = ? ", [token]);
-      if (data1 && data1[0]) {
-        return success(res, data1[0]);
-      }
-      else {
-        return empty(res);    
-      }
+    if (token && id) {
+
+
+      await dbCors.query("DELETE FROM subject WHERE id = ? ", [id]);
+
+      return success(res, [id]);
+
     }
     else {
       return empty(res);

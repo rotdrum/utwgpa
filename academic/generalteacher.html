@@ -359,6 +359,9 @@
       $.ajax({
         method: "post",
         url: endpointv2 + '/admin/department',
+        data: {
+              token: localStorage.utwAdminToken,
+        },
         success: response => {
           console.log(response)
           if (response.status.code == 200) {
@@ -386,6 +389,10 @@
       $.ajax({
         method: "post",
         url: endpointv2 + '/admin/teacher',
+        data: {
+              token: localStorage.utwAdminToken,
+
+        },
         success: response => {
           console.log(response)
           responseResult = response;
@@ -518,6 +525,7 @@
               Authorization: 'Bearer ' + localStorage.utwAdminToken
             },
             data: {
+              token: localStorage.utwAdminToken,
               id: idx,
               _method: "GET",
             },
@@ -578,6 +586,8 @@
           url: endpointv2 + '/admin/teacher-add',
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
+              token: localStorage.utwAdminToken,
+
             user_no: null, /* teacher = null */
             tname: $("#add_tname").val(),
             fname: $("#add_fname").val(),
@@ -661,6 +671,8 @@
           url: endpointv2 + '/admin/teacher-update',
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
+              token: localStorage.utwAdminToken,
+
             id: edit_id,
             user_no: null, /* teacher = null */
             tname: $("#edit_tname").val(),

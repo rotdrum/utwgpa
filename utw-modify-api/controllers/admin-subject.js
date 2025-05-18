@@ -10,28 +10,29 @@ const success = require("../response/success.js");
 const empty = require("../response/empty.js");
 const error = require("../response/error.js");
 const authenticate = require("../middlewares/authenticate.js");
-const { checkTokenAdmin, getDateNow, MD5, genval } = require("../middlewares/bearbug.js");
+const {checkTokenAdmin, getDateNow, MD5, genval} = require("../middlewares/bearbug.js");
 
 module.exports = async function (req, res) {
   try {
-    // const authResult = await authenticate(req, res);
-    // if (authResult !== true) {
-    //   return; // ไม่ผ่าน auth ก็จบ
-    // }
-
-
-
     var token = req.body.token;
+    const authResult = await checkTokenAdmin(token);
+    if (!authResult) {
+      return empty(res);
+    }
+    
 
 
     if (token) {
-      var [data1] = await dbCors.query("SELECT * FROM token_basic WHERE token = ? ", [token]);
-      if (data1 && data1[0]) {
-        return success(res, data1[0]);
-      }
-      else {
-        return empty(res);    
-      }
+     
+
+        var [data2] = await dbCors.query("SELECT * FROM subject ", ["teacher"]);
+        if (data2 && data2[0]) {
+          return success(res, data2);
+        }
+        else {
+          return empty(res);
+        }
+      
     }
     else {
       return empty(res);
