@@ -139,12 +139,9 @@ module.exports = async function (req, res) {
             "created_at": element.created_at,
             "updated_at": element.updated_at,
           })
+        }
 
-          return success(res, data_item);
-        }
-        else {
-          return empty(res);
-        }
+        return success(res, data_item);
       }
     }
     else {
