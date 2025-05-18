@@ -358,7 +358,7 @@
     function getDepartment() {
       $.ajax({
         method: "post",
-        url: endpoint + '/utw-cors-api/department.php',
+        url: endpointv2 + '/admin/department',
         success: response => {
           console.log(response)
           if (response.status.code == 200) {
@@ -385,7 +385,7 @@
       loading(true)
       $.ajax({
         method: "post",
-        url: endpoint + '/utw-cors-api/teachers.php',
+        url: endpointv2 + '/admin/teacher',
         success: response => {
           console.log(response)
           responseResult = response;
@@ -513,7 +513,7 @@
           $.ajax({
             type: "POST",
             dataType: "JSON",
-            url: endpoint + '/utw-cors-api/users/delete.php',
+            url: endpointv2 + '/admin/teacher-delete',
             headers: {
               Authorization: 'Bearer ' + localStorage.utwAdminToken
             },
@@ -575,7 +575,7 @@
         $.ajax({
           type: "POST",
           dataType: "JSON",
-          url: endpoint + '/utw-cors-api/users/add.php',
+          url: endpointv2 + '/admin/teacher-add',
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
             user_no: null, /* teacher = null */
@@ -658,7 +658,7 @@
         $.ajax({
           type: "POST",
           dataType: "JSON",
-          url: endpoint + '/utw-cors-api/users/update.php',
+          url: endpointv2 + '/admin/teacher-update',
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
             id: edit_id,

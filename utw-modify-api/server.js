@@ -173,6 +173,26 @@ app.post(endpoint + "/report/course-follow-success", cors(corsOptions), reportFo
 const reportFollowSuccessAdmin = require("./controllers/admin-report-course-follow-success");
 app.post("/admin/report/course-follow-success", cors(corsOptions), reportFollowSuccessAdmin);
 
-// /utw-cors-api/check-token-admin.php
+// utw-cors-api/check-token-admin.php
 const checkTokenAdmin = require("./controllers/admin-check-token");
 app.post("/admin/check-token", cors(corsOptions), checkTokenAdmin);
+
+// utw-cors-api/teachers.php
+const adminTeacher = require("./controllers/admin-teacher");
+app.post("/admin/teacher", cors(corsOptions), adminTeacher);
+
+// utw-cors-api/department.php
+const adminDepartment = require("./controllers/admin-department");
+app.post("/admin/department", cors(corsOptions), adminDepartment);
+
+// utw-cors-api/users/add.php
+const adminTeacherAdd = require("./controllers/admin-teacher-add");
+app.post("/admin/teacher-add", cors(corsOptions), adminTeacherAdd);
+
+// utw-cors-api/users/update.php
+const adminTeacherUpdate = require("./controllers/admin-teacher-update");
+app.post("/admin/teacher-update", cors(corsOptions), adminTeacherUpdate);
+
+// utw-cors-api/users/delete.php
+const adminTeacherDelete = require("./controllers/admin-teacher-delete");
+app.post("/admin/teacher-delete", cors(corsOptions), adminTeacherDelete);
