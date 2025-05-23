@@ -206,7 +206,8 @@
         const formData = new URLSearchParams();
         formData.append('_method', 'GET');
         formData.append('email', infomation.email);
-
+        formData.append('fname', infomation.firstname.replace(/[A-Za-z0-9\s_]/g, ''));
+        
         fetch(endpointNew, {
           method: 'POST',
           body: formData.toString(),
@@ -222,7 +223,7 @@
             const oktoken = infomation.accessToken; // ค่า $oktoken ที่ส่งมาจาก PHP
             const email = infomation.email; // ค่า $email ที่ส่งมาจาก PHP
             let firstname = infomation.firstname; 
-firstname = firstname.replace(/[A-Za-z0-9\s]/g, '');
+firstname = firstname.replace(/[A-Za-z0-9\s_]/g, '');
             const lastname = infomation.lastname; // ค่า $lastname ที่ส่งมาจาก PHP
             const picture = infomation.picture; // ค่า $picture ที่ส่งมาจาก PHP
             console.log('data data :', data.data);
