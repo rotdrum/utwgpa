@@ -93,12 +93,18 @@ else if(localStorage.utwEmail == '' || true) {
         <div class="hr"></div>
         
         <p style="font-weight: bold; color: #fff;">อาจารย์ประจำชั้น</p>
-        
+       
         <a onclick="activeSidebar(this)" href="./courseunder.html" id="sidebar6" class="killmenu-class sidebar-items ">
             <div class="sidebar-icon">
                 <i class="fas fa-house"></i>
             </div>
             <p style="color: #fff;">ติดตามผล</p>
+        </a>
+         <a onclick="activeSidebar(this)" href="./courseunder-success.html" id="sidebar61" class="killmenu-class sidebar-items ">
+            <div class="sidebar-icon">
+                <i class="fas fa-house"></i>
+            </div>
+            <p style="color: #fff;">ประวัติแก้ตัวสำเร็จ</p>
         </a>
 
         <div class="hr"></div>

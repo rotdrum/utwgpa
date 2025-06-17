@@ -101,6 +101,10 @@ app.post(endpoint + "/group-course-confirm-grade", cors(corsOptions), groubCours
 const followClassGetAll = require("./controllers/follow-class-getall");
 app.post(endpoint + "/follow-class-getall", cors(corsOptions), followClassGetAll);
 
+
+const followClassGetAllSuccess = require("./controllers/follow-class-getall-success");
+app.post(endpoint + "/follow-class-getall-success", cors(corsOptions), followClassGetAllSuccess);
+
 // utw-modify-grade-api/report-subject.php
 const reportSubject = require("./controllers/report-subject");
 app.post(endpoint + "/report-subject", cors(corsOptions), reportSubject);
