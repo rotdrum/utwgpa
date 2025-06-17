@@ -123,29 +123,27 @@ module.exports = async function (req, res) {
               'confirm_date': confirm_date,
             })
           }
-
-          data_item.push({
-            "id": element.id,
-            "course_id": element.course_id,
-            "user_id": element.user_id,
-            "subject_id": element.subject_id,
-            "subject_title": element.subject_title,
-            "subject_class": element.subject_class,
-            "subject_code": element.subject_code,
-            "title": element.title,
-            "indicators": element.indicators,
-            "user_ids": element.user_ids,
-            "activity": JSON.stringify(data_item_activity),
-            "created_at": element.created_at,
-            "updated_at": element.updated_at,
-          })
-
-          return success(res, data_item);
         }
-        else {
-          return empty(res);
-        }
+
+
+        data_item.push({
+          "id": element.id,
+          "course_id": element.course_id,
+          "user_id": element.user_id,
+          "subject_id": element.subject_id,
+          "subject_title": element.subject_title,
+          "subject_class": element.subject_class,
+          "subject_code": element.subject_code,
+          "title": element.title,
+          "indicators": element.indicators,
+          "user_ids": element.user_ids,
+          "activity": JSON.stringify(data_item_activity),
+          "created_at": element.created_at,
+          "updated_at": element.updated_at,
+        })
       }
+
+      return success(res, data_item);
     }
     else {
       return empty(res);

@@ -28,9 +28,11 @@ module.exports = async function (req, res) {
     }
 
     var email = req.body.email;
-    if (email) {
-      var [data1] = await dbCors.query(`SELECT * FROM user WHERE email = ?`,
-        [email]
+    var fname = req.body.fname;
+
+    if (email && fname) {
+      var [data1] = await dbCors.query(`SELECT * FROM user WHERE email = ? and  fname = ?`,
+        [email, fname]
       );
 
       if(data1 && data1[0]) {
