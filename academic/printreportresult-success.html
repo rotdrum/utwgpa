@@ -342,214 +342,23 @@
                     round: Pround
                 }, success: response => {
                     console.log(response)
-                    // response.data = [
-                    //     {
-                    //         "id": 5,
-                    //         "student_id": 623,
-                    //         "student": {
-                    //             "id": "623",
-                    //             "part": "-",
-                    //             "room": "6",
-                    //             "class": "3",
-                    //             "fname": "นันทัชพร",
-                    //             "lname": "บวรสิริยานนท์",
-                    //             "tname": "ด.ญ."
-                    //         },
-                    //         "student_activity": [
-                    //             {
-                    //                 "indicator": "นักเรียนต้องเรียนอย่างน้อย 32/40 ชั่วโมง",
-                    //                 "successDate": "2025-05-03T16:28:57.441Z"
-                    //             },
-                    //             {
-                    //                 "indicator": "ok",
-                    //                 "successDate": "2025-05-03T16:28:57.441Z"
-                    //             },
-                    //             {
-                    //                 "indicator": "dog",
-                    //                 "successDate": "2025-05-03T16:28:57.441Z"
-                    //             },
-                    //             {
-                    //                 "indicator": "cat",
-                    //                 "successDate": "2025-05-03T16:29:07.468Z"
-                    //             }
-                    //         ],
-                    //         "learn_amount": null,
-                    //         "learn_total": null,
-                    //         "status": "success",
-                    //         "department_id": 4,
-                    //         "subject_id": 251,
-                    //         "subject_title": "ภูมิศาสตร์",
-                    //         "subject_code": "ส23103",
-                    //         "subject_class": 3,
-                    //         "teacher_id": 2226,
-                    //         "teacher": {
-                    //             "id": 2226,
-                    //             "part": "-",
-                    //             "room": 10,
-                    //             "class": 3,
-                    //             "fname": "สุภาวดี",
-                    //             "lname": "กระแสสินธุ์",
-                    //             "tname": "นางสาว"
-                    //         },
-                    //         "grade_old": "0",
-                    //         "grade_new": "1",
-                    //         "confirm_date": "2025-05-03T20:26:41.000Z",
-                    //         "round_at": 3,
-                    //         "term_at": 2,
-                    //         "year_at": 2566,
-                    //         "created_at": "2025-05-03T20:26:40.000Z",
-                    //         "updated_at": "2025-05-03T20:26:40.000Z",
-                    //         "stamp_round_at": 3,
-                    //         "stamp_term_at": 2,
-                    //         "stamp_year_at": 2567,
-                    //         "start_date": null,
-                    //         "end_date": null,
-                    //         "input_type": "system",
-                    //         "time_learning": [
-                    //             "2025-03-04",
-                    //             "2025-03-05",
-                    //             "2025-03-06",
-                    //             "2025-03-07",
-                    //             "2025-03-08",
-                    //             "2025-03-10",
-                    //             "2025-03-11",
-                    //             "2025-03-12",
-                    //             "2025-03-13",
-                    //             "2025-03-14",
-                    //             "2025-03-15",
-                    //             "2025-03-17",
-                    //             "2025-03-18",
-                    //             "2025-03-19",
-                    //             "2025-04-03",
-                    //         ],
-                    //         "before_mid_score": 12,
-                    //         "mid_score": 22,
-                    //         "before_final_score": 30,
-                    //         "final_score": 20,
-                    //         "sum_score": 84,
-                    //         "ac_1": 1,
-                    //         "ac_2": 1,
-                    //         "ac_3": 1,
-                    //         "ac_4": 1,
-                    //         "ac_5": 1,
-                    //         "ac_6": 1,
-                    //         "ac_7": 1,
-                    //         "ac_8": 1,
-                    //         "ac_avg": 1,
-                    //         "rtw_1": 1,
-                    //         "rtw_2": 1,
-                    //         "rtw_3": 1,
-                    //         "rtw_4": 1,
-                    //         "rtw_5": 1,
-                    //         "rtw_avg": 1
-                    //     },
-                    //     {
-                    //         "id": 5,
-                    //         "student_id": 623,
-                    //         "student": {
-                    //             "id": "623",
-                    //             "part": "-",
-                    //             "room": "6",
-                    //             "class": "3",
-                    //             "fname": "นันทัชพร",
-                    //             "lname": "บวรสิริยานนท์",
-                    //             "tname": "ด.ญ."
-                    //         },
-                    //         "student_activity": [
-                    //             {
-                    //                 "indicator": "นักเรียนต้องเรียนอย่างน้อย 32/40 ชั่วโมง",
-                    //                 "successDate": "2025-05-03T16:28:57.441Z"
-                    //             },
-                    //             {
-                    //                 "indicator": "ok",
-                    //                 "successDate": "2025-05-03T16:28:57.441Z"
-                    //             },
-                    //             {
-                    //                 "indicator": "dog",
-                    //                 "successDate": "2025-05-03T16:28:57.441Z"
-                    //             },
-                    //             {
-                    //                 "indicator": "cat",
-                    //                 "successDate": "2025-05-03T16:29:07.468Z"
-                    //             }
-                    //         ],
-                    //         "learn_amount": null,
-                    //         "learn_total": null,
-                    //         "status": "success",
-                    //         "department_id": 4,
-                    //         "subject_id": 251,
-                    //         "subject_title": "ภูมิศาสตร์",
-                    //         "subject_code": "ส23103",
-                    //         "subject_class": 3,
-                    //         "teacher_id": 2226,
-                    //         "teacher": {
-                    //             "id": 2226,
-                    //             "part": "-",
-                    //             "room": 10,
-                    //             "class": 3,
-                    //             "fname": "สุภาวดี",
-                    //             "lname": "กระแสสินธุ์",
-                    //             "tname": "นางสาว"
-                    //         },
-                    //         "grade_old": "0",
-                    //         "grade_new": "1",
-                    //         "confirm_date": "2025-05-03T20:26:41.000Z",
-                    //         "round_at": 3,
-                    //         "term_at": 2,
-                    //         "year_at": 2566,
-                    //         "created_at": "2025-05-03T20:26:40.000Z",
-                    //         "updated_at": "2025-05-03T20:26:40.000Z",
-                    //         "stamp_round_at": 3,
-                    //         "stamp_term_at": 2,
-                    //         "stamp_year_at": 2567,
-                    //         "start_date": null,
-                    //         "end_date": null,
-                    //         "input_type": "system",
-                    //         "time_learning": [
-                    //             "2025-03-04",
-                    //             "2025-03-05",
-                    //             "2025-03-06",
-                    //             "2025-03-07",
-                    //             "2025-03-08",
-                    //             "2025-03-10",
-                    //             "2025-03-11",
-                    //             "2025-03-12",
-                    //             "2025-03-13",
-                    //             "2025-03-14",
-                    //             "2025-03-15",
-                    //             "2025-03-17",
-                    //             "2025-03-18",
-                    //             "2025-03-19",
-                    //             "2025-04-02",
-                    //             "2025-04-01",
-                    //         ],
-                    //         "before_mid_score": 12,
-                    //         "mid_score": 22,
-                    //         "before_final_score": 30,
-                    //         "final_score": 20,
-                    //         "sum_score": 84,
-                    //         "ac_1": 1,
-                    //         "ac_2": 1,
-                    //         "ac_3": 1,
-                    //         "ac_4": 1,
-                    //         "ac_5": 1,
-                    //         "ac_6": 1,
-                    //         "ac_7": 1,
-                    //         "ac_8": 1,
-                    //         "ac_avg": 1,
-                    //         "rtw_1": 1,
-                    //         "rtw_2": 1,
-                    //         "rtw_3": 1,
-                    //         "rtw_4": 1,
-                    //         "rtw_5": 1,
-                    //         "rtw_avg": 1
-                    //     }
-
-                    // ]
+                    
                     console.log("###", response.data)
                     if (response.status.code == 200) {
                         var html = '';
                         $('#raivicha').text(sbjc + ' ' + sbj)
+
+                        var checkdup = [];
+                        var initial = [];
+                        for (let i = 0; i < response.data.length; i++) {
+                            const element = response.data[i];
+                            if (!checkdup.includes(element.student_id)) {
+                                initial.push(element)
+                                checkdup.push(element.student_id)
+                            }
+                        }
+                        console.log("initial",initial)
+                        response.data = initial;
 
                         var alldate = [];
                         for (let i = 0; i < response.data.length; i++) {
