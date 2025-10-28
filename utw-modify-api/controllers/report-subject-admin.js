@@ -14,7 +14,7 @@ const authenticate = require("../middlewares/authenticate.js");
 module.exports = async function (req, res) {
   try {
     const { department_id } = req.body;
-    if (!department_id) return error(res, "กรุณาระบุ department_id");
+    if (!department_id || +department_id !== 0) return error(res, "กรุณาระบุ department_id");
 
     // ดึงรายวิชาทั้งหมดในแผนก
     const [subjects] = await dbCors.query(`
