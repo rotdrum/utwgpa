@@ -217,22 +217,31 @@
             })
 
             $.ajax({
-                method: 'get',
-                url: endpoint + `/utw-modify-grade-api/report-department.php?department_id=${idx}`,
-                data: {}, success: response => {
+                method: 'post',
+                url: endpointv2 + `/utw-modify-api/report-subject-admin`,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                    department_id: idx
+                }),
+                success: response => {
                     console.log(response)
                     if (response.status.code == 200) {
                         $('#groupsara').text(gsr)
                         var html = '';
                         var indexActivity = 0;
                         response.data.forEach((datax) => {
-                            datax.course.forEach((datag) => {
+                            if (datax.groub_course && datax.groub_course[0]) {
+                                let datag = datax;
+                                // datax.course.forEach((datag) => {
                                 // datag.activity = JSON.parse(datag.activity)
-                                datag.groub_course.forEach((datay) => {
-                                    var activity = JSON.parse(datay.activity)
+                                datax.groub_course.forEach((datay) => {
+                                    // var activity = JSON.parse(datay.activity)
+                                    var activity = (datay.activity)
 
                                     activity.forEach((datah) => {
-                                        console.log('datah', datah);
+                                        // console.log('datah', datah);
                                         indexActivity++
 
                                         var work = true
@@ -242,10 +251,12 @@
                                             }
                                         })
 
+                                     
+
                                         var teacher = datag.teacher.tname + datag.teacher.fname + ' ' + datag.teacher.lname;
                                         var study = datah.tname + datah.fname + ' ' + datah.lname;
                                         var classroom = `ม.${datah.class}/${datah.room}`;
-                                        var subjectcode = datag.subject_code + ' ' + datag.subject_title;
+                                        var subjectcode = datag.subject_code + ' ' + datag.name;
                                         var gradeold = datah.grade_old;
 
                                         html += `
@@ -263,7 +274,10 @@
                                         </tr>`
                                     })
                                 })
-                            })
+                                // })
+                            }
+
+
                         });
                         $('#tbody').html(html)
                         loading(false)
