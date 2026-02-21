@@ -5,6 +5,7 @@ let db = mysql.createPool(root());
 const success = require("../response/success.js");
 const error = require("../response/error.js");
 const authorization = require("../response/authorization.js");
+const empty = require("../response/empty.js");
 
 function modify(req, res) {
   const status = req.params.status;
@@ -48,7 +49,7 @@ function getOne(req, res) {
         } else if (err) {
           return error(res, err);
         } else {
-          // return empty(res);
+          return empty(res);
         }
       }
     );
