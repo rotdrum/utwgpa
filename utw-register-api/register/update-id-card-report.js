@@ -11,8 +11,8 @@ function modify(req, res) {
   const status = req.params.status;
   const updated_at = new Date();
 
-  db.query(`update register_${req.params.part} set status = ?, updated_at = ? WHERE id = ? `, [
-    status, updated_at, req.params.id
+  db.query(`update register_${req.params.part} set status = ?, updated_at = ? WHERE id_card = ? `, [
+    status, updated_at, req.params.id_card
   ], (err) => {
       if(!err) {
         console.log(JSON.stringify({
