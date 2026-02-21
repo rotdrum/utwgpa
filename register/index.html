@@ -78,7 +78,7 @@
             <img src="../imgs/logomain.png" style="width: 90px; object-fit: contain;">
             <br><br>
             <h4 class="text-white">ระบบรับสมัครนักเรียนออนไลน์</h4>
-            <h4 class="text-white">โรงเรียนอุทัยวิทยาคม ปีการศึกษา 2568</h4>
+            <h4 class="text-white">โรงเรียนอุทัยวิทยาคม ปีการศึกษา 2569</h4>
         </div>
         <p class="text-white text-center"></p>
         <br>
@@ -109,14 +109,17 @@
                                     <div class="d-flex justify-content-center">
                                         <!-- <a onclick="checkOpenRegister('m1')" class="btn btn-primary">สมัครเรียน</a> -->
                                         <a id="pointPage"><a>
-                                        <a onclick="checkTimer()" id="btn-register-m1"
-                                            class="btn btn-primary ms-1">สมัครเรียน</a>
-                                        <a href="./คู่มือขั้นตอนการสมัครเรียนออนไลน์-ม.1.pdf" target="_blank" id="menuSup2"
-                                            class="btn btn-warning ms-1 d-flex justify-content-center align-items-center">
-                                            คู่มือสมัครเรียน
-                                        </a>
-                                        <a onclick="selectMenu('check',this)" id="list2" class="btn btn-danger ms-1 d-flex justify-content-center align-items-center"
-                                        href="#">ตรวจผลการสมัคร</a>
+                                                <a id="pointPage4"><a>
+                                                        <a onclick="checkTimer()" id="btn-register-m1"
+                                                            class="btn btn-primary ms-1">สมัครเรียน</a>
+                                                        <a href="./คู่มือขั้นตอนการสมัครเรียนออนไลน์-ม.1.pdf"
+                                                            target="_blank" id="menuSup2"
+                                                            class="btn btn-warning ms-1 d-flex justify-content-center align-items-center">
+                                                            คู่มือสมัครเรียน
+                                                        </a>
+                                                        <a onclick="selectMenu('check',this)" id="list2"
+                                                            class="btn btn-danger ms-1 d-flex justify-content-center align-items-center"
+                                                            href="#">ตรวจผลการสมัคร</a>
                                     </div>
                                     <button id="openmdregis" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                         style="display: none;"></button>
@@ -133,14 +136,17 @@
                                     <div class="d-flex justify-content-center">
                                         <!-- <a onclick="checkOpenRegister('m4')" class="btn btn-primary">สมัครเรียน</a> -->
                                         <a id="pointPage2"><a>
-                                        <a onclick="checkTimer()" id="btn-register-m4"
-                                            class="btn btn-primary ms-1">สมัครเรียน</a>
-                                        <a href="./คู่มือขั้นตอนการสมัครเรียนออนไลน์-ม.4.pdf" target="_blank"
-                                            class="btn btn-warning ms-1 d-flex justify-content-center align-items-center">
-                                            คู่มือสมัครเรียน
-                                        <a onclick="selectMenu('check',this)" id="list2" class="btn btn-danger ms-1 d-flex justify-content-center align-items-center"
-                                            href="#">ตรวจผลการสมัคร</a>
-                                        </a>
+                                                <a id="pointPage3"><a>
+                                                        <a onclick="checkTimer()" id="btn-register-m4"
+                                                            class="btn btn-primary ms-1">สมัครเรียน</a>
+                                                        <a href="./คู่มือขั้นตอนการสมัครเรียนออนไลน์-ม.4.pdf"
+                                                            target="_blank"
+                                                            class="btn btn-warning ms-1 d-flex justify-content-center align-items-center">
+                                                            คู่มือสมัครเรียน
+                                                            <a onclick="selectMenu('check',this)" id="list2"
+                                                                class="btn btn-danger ms-1 d-flex justify-content-center align-items-center"
+                                                                href="#">ตรวจผลการสมัคร</a>
+                                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +212,49 @@
                         </div>
                     </div>
                     <br>
+                    <div id="wo_boxshowinfo" style="display: none;" class="row w-100">
+                        <div class="respcol col-12 col-sm-6 d-flex">
+                            <span>เลขบัตรประชาชน : </span>
+                            <span class="ms-3"><b id="wo_show_idcard"></b></span>
+                        </div>
+                        <div class="respcol col-12 col-sm-6 d-flex">
+                            <span>ชื่อ-สกุล : </span>
+                            <span class="ms-3"><b id="wo_show_fullname"></b></span>
+                        </div>
+                        <div class="respcol col-12 col-sm-6 d-flex">
+                            <span>เบอร์โทรศัพท์ : </span>
+                            <span class="ms-3"><b id="wo_show_phoneno"></b></span>
+                        </div>
+                        <div class="respcol col-12 col-sm-6 d-flex">
+                            <span>อีเมล : </span>
+                            <span class="ms-3"><b id="wo_show_email"></b></span>
+                        </div>
+                        <div class="respcol col-12 col-sm-6 d-flex">
+                            <span>โรงเรียนเดิม : </span>
+                            <span class="ms-3"><b id="wo_show_oldschool"></b></span>
+                        </div>
+
+                        <br>
+                        <div class="d-flex align-items-center mt-3">
+                            <h5 class="mb-0 text-start me-3">ผลการสมัคร :</h5>
+                            <h5 class="mb-0 text-start text-success">สำเร็จ</h5>
+                        </div>
+
+                        <div class="w-100 mt-3 p-5">
+                            <div id="wo3">กรุณาดำเนินการยืนยันสิทธิ์เพื่อรายงานตัวเข้าเรียนตามกำหนด</div>
+                            <div id="wo4" style="display: none;">คุณดำเนินการแล้ว : <span id="wo5"></span></div>
+                            <div class="w-100 d-flex justify-content-center">
+
+                                <div id="wo2" class="d-flex w-50 justify-content-center mt-3">
+                                    <button onclick="UsedSit('accept')" class="btn btn-success">ยืนยันสิทธิ์</button>
+                                    <button onclick="UsedSit('unaccept')" class="btn btn-danger ms-3">สละสิทธิ์</button>
+                                </div>
+                            </div>
+                            <div id="wo1" class="mt-5" style="display: none;">หมายเหตุ:
+                                ผู้ที่ยืนยันสิทธิ์เข้าศึกษาจะต้องดำเนินการมอบตัวในวันที่ 5 เมษายน 2569 ระหว่างเวลา 08.00
+                                – 12.00 น. ที่โรงเรียนอุทัยวิทยาคมเท่านั้น</div>
+                        </div>
+                    </div>
                     <div id="boxshowinfo" style="display: none;" class="row w-100">
                         <div class="respcol col-12 col-sm-6 d-flex">
                             <span>เลขบัตรประชาชน : </span>
@@ -242,7 +291,7 @@
                             บันทึกการแก้ไขเอกสาร
                         </button>
                         <br>
-                        
+
                         <!-- <div class="card" style="overflow: scroll;">
                             <table class="table table-striped table-hover" style="min-width: 1000px;">
                                 <thead>
@@ -317,7 +366,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table_exam">
-                                
+
                                 </tbody>
                             </table>
                         </div>
@@ -337,7 +386,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table_exam_ready">
-                                
+
                                 </tbody>
                             </table>
                         </div>
@@ -351,8 +400,12 @@
                             <h5 class="mb-0 text-start me-3">ลำดับที่ :</h5>
                             <h5 class="mb-0 text-start text-success" id="exam_no">-</h5>
                         </div>
+                        <div class="d-flex align-items-center">
+                            <h5 class="mb-0 text-start me-3">คะแนนรวม :</h5>
+                            <h5 class="mb-0 text-start text-success" id="exam_sumno">-</h5>
+                        </div>
 
-                        <div class="card">
+                        <div class="card" style="display: none;">
                             <table class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -361,18 +414,20 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table_exam_end">
-                                    <tr><td colspan="2">ไม่พบข้อมูล</td></tr>
+                                    <tr>
+                                        <td colspan="2">ไม่พบข้อมูล</td>
+                                    </tr>
                             </table>
                         </div>
 
                         <div class="d-flex mt-3">
                             <p class="respcol d-flex mb-0">
-                                <b>วันที่รายงานตัว และ มอบตัว : </b>
-                            <p class="mb-0 ms-3" id="datesorbend"></p>
+                                <b>วันที่รายงานตัว 2026-04-05 08:00 น. - 12:00 น. บนระบบออนไลน์</b>
+                            <p class="mb-0 ms-3" id="datesorbend" style="display: none;"></p>
                             </p>
                         </div>
 
-                        <div class="respcol d-flex ">
+                        <!-- <div class="respcol d-flex ">
                             <p class="d-flex mb-0">
                                 <b>เอกสารมอบตัว</b>
                             </p>
@@ -390,7 +445,7 @@
                                 
                                 </tbody>
                             </table>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -445,6 +500,7 @@
         var id_sendto = 0;
         var bypass = '';
         let flagEndExam = false;
+        let pagemyself = false;
         $(document).ready(() => {
             check ? $("#list2").trigger('click') : "";
             $('.idcard').mask('0-0000-00000-00-0')
@@ -474,14 +530,27 @@
                     if (response.status.code == 200) {
                         checksetting = response.data.in_data;
 
-                        if (response.data.in_data.page_point == 1) {
+                        if (response.data.in_data.page_myself == 1) {
+                            pagemyself = true;
+                            $('#pointPage4').html(`<a onclick="$('#list2').trigger('click')" href="#" id="list2"
+                                            class="btn btn-primary ms-1 d-flex justify-content-center align-items-center">
+                                            รายงานตัว
+                                        </a>`);
+                            $('#pointPage3').html(`<a onclick="$('#list2').trigger('click')" href="#" id="list2"
+                                            class="btn btn-primary ms-1 d-flex justify-content-center align-items-center">
+                                            รายงานตัว
+                                        </a>`);
+                            $('#btn-register-m1').hide();
+                            $('#btn-register-m4').hide();
+                        }
+                        else if (response.data.in_data.page_point == 1) {
                             flagEndExam = true;
                             $.ajax({
                                 method: 'post',
                                 url: endpointv2 + '/utw-modify-api/course-getone',
                                 data: {
-                                _method: "GET",
-                                key_address: 'register_exam_point_file'
+                                    _method: "GET",
+                                    key_address: 'register_exam_point_file'
                                 }, success: response => {
                                     console.log('good 4', response)
                                     if (response.status.code == 200) {
@@ -497,9 +566,9 @@
                                         $('#btn-register-m1').hide();
                                         $('#btn-register-m4').hide();
                                     }
-                                else {
-                                    errswal()
-                                }
+                                    else {
+                                        errswal()
+                                    }
                                 }, error: err => {
                                     errswal()
                                     console.log('bad', err)
@@ -724,43 +793,43 @@
         var filevad = [];
         function checkList() {
 
-            var htmlMe ='';
-            var htmlMe2 ='';
-            var htmlMe5 ='';
+            var htmlMe = '';
+            var htmlMe2 = '';
+            var htmlMe5 = '';
 
 
             if ($('#txt_mor').val() == 'mid') {
                 $.ajax({
-                method: 'post',
-                url: endpointv2 + '/utw-modify-api/course-getone',
-                data: {
-                    _method: "GET",
-                    key_address: 'register_exam_list_m1'
-                }, success: response => {
-                    console.log('good setting', response)
-                    if (response.status.code == 200) {
-                        for (let i = 0; i < response.data.in_data.length; i++) {
-                        const element = response.data.in_data[i];
-                            htmlMe += `
+                    method: 'post',
+                    url: endpointv2 + '/utw-modify-api/course-getone',
+                    data: {
+                        _method: "GET",
+                        key_address: 'register_exam_list_m1'
+                    }, success: response => {
+                        console.log('good setting', response)
+                        if (response.status.code == 200) {
+                            for (let i = 0; i < response.data.in_data.length; i++) {
+                                const element = response.data.in_data[i];
+                                htmlMe += `
                             <tr>
                                 <td>${response.data.in_data[i].start_time} - ${response.data.in_data[i].end_time} น.</td>
                                 <td>${response.data.in_data[i].title}</td>
                             </tr>`;
-                        }
-                        $('#table_exam').html(htmlMe)
+                            }
+                            $('#table_exam').html(htmlMe)
 
-                        $.ajax({
-                            method: 'post',
-                            url: endpointv2 + '/utw-modify-api/course-getone',
-                            data: {
-                                _method: "GET",
-                                key_address: 'register_exam_ready_file_m1'
-                            }, success: response2 => {
-                                console.log('good setting', response2)
-                                if (response2.status.code == 200) {
-                                    for (let i = 0; i < response2.data.in_data.length; i++) {
-                                    const element = response2.data.in_data[i];
-                                    htmlMe2 += `
+                            $.ajax({
+                                method: 'post',
+                                url: endpointv2 + '/utw-modify-api/course-getone',
+                                data: {
+                                    _method: "GET",
+                                    key_address: 'register_exam_ready_file_m1'
+                                }, success: response2 => {
+                                    console.log('good setting', response2)
+                                    if (response2.status.code == 200) {
+                                        for (let i = 0; i < response2.data.in_data.length; i++) {
+                                            const element = response2.data.in_data[i];
+                                            htmlMe2 += `
                                         <tr>
                                             <td>${element.title}</td>
                                             <td>
@@ -768,59 +837,59 @@
                                                                 class="text-decoration-none btn-sm btn-warning ms-3">ตัวอย่าง</a>
                                             </td>
                                         </tr>`;
+                                        }
+                                        $('#table_exam_ready').html(htmlMe2)
+
                                     }
-                                    $('#table_exam_ready').html(htmlMe2)
-
+                                    else {
+                                        errswal('3')
+                                    }
+                                }, error: err => {
+                                    errswal('4')
+                                    console.log('bad', err)
                                 }
-                                else {
-                                    errswal('3')
-                                }
-                            }, error: err => {
-                                errswal('4')
-                                console.log('bad', err)
-                            }
-                        })
+                            })
 
+                        }
+                        else {
+                            errswal('3')
+                        }
+                    }, error: err => {
+                        errswal('4')
+                        console.log('bad', err)
                     }
-                    else {
-                        errswal('3')
-                    }
-                }, error: err => {
-                    errswal('4')
-                    console.log('bad', err)
-                }
-            })
+                })
             } else {
                 $.ajax({
-                method: 'post',
-                url: endpointv2 + '/utw-modify-api/course-getone',
-                data: {
-                    _method: "GET",
-                    key_address: 'register_exam_list_m4'
-                }, success: response => {
-                    console.log('good setting', response)
-                    if (response.status.code == 200) {
-                        for (let i = 0; i < response.data.in_data.length; i++) {
-                        const element = response.data.in_data[i];
-                            htmlMe += `
+                    method: 'post',
+                    url: endpointv2 + '/utw-modify-api/course-getone',
+                    data: {
+                        _method: "GET",
+                        key_address: 'register_exam_list_m4'
+                    }, success: response => {
+                        console.log('good setting', response)
+                        if (response.status.code == 200) {
+                            for (let i = 0; i < response.data.in_data.length; i++) {
+                                const element = response.data.in_data[i];
+                                htmlMe += `
                             <tr>
                                 <td>${response.data.in_data[i].start_time} - ${response.data.in_data[i].end_time} น.</td>
                                 <td>${response.data.in_data[i].title}</td>
                             </tr>`;
-                        }
-                        $('#table_exam').html(htmlMe)
-                        $.ajax({
-                        method: 'post',
-                        url: endpointv2 + '/utw-modify-api/course-getone',
-                        data: {
-                            _method: "GET",
-                            key_address: 'register_exam_ready_file_m4'
-                        }, success: response2 => {
-                            console.log('good setting', response2)
-                            if (response2.status.code == 200) {
-                                for (let i = 0; i < response2.data.in_data.length; i++) {
-                                const element = response2.data.in_data[i];
-                                htmlMe2 += `
+                            }
+                            $('#table_exam').html(htmlMe)
+                            $.ajax({
+                                method: 'post',
+                                url: endpointv2 + '/utw-modify-api/course-getone',
+                                data: {
+                                    _method: "GET",
+                                    key_address: 'register_exam_ready_file_m4'
+                                }, success: response2 => {
+                                    console.log('good setting', response2)
+                                    if (response2.status.code == 200) {
+                                        for (let i = 0; i < response2.data.in_data.length; i++) {
+                                            const element = response2.data.in_data[i];
+                                            htmlMe2 += `
                                     <tr>
                                         <td>${element.title}</td>
                                         <td>
@@ -828,27 +897,27 @@
                                                             class="text-decoration-none btn-sm btn-warning ms-3">ตัวอย่าง</a>
                                         </td>
                                     </tr>`;
-                                }
-                        $('#table_exam_ready').html(htmlMe2)
+                                        }
+                                        $('#table_exam_ready').html(htmlMe2)
 
+                                    }
+                                    else {
+                                        errswal('3')
+                                    }
+                                }, error: err => {
+                                    errswal('4')
+                                    console.log('bad', err)
+                                }
+                            })
+                        }
+                        else {
+                            errswal('3')
+                        }
+                    }, error: err => {
+                        errswal('4')
+                        console.log('bad', err)
                     }
-                    else {
-                        errswal('3')
-                    }
-                }, error: err => {
-                    errswal('4')
-                    console.log('bad', err)
-                }
-            })
-                    }
-                    else {
-                        errswal('3')
-                    }
-                }, error: err => {
-                    errswal('4')
-                    console.log('bad', err)
-                }
-            })
+                })
             }
 
 
@@ -865,42 +934,75 @@
                 })
             }
             else {
-                if (flagEndExam && flagEndExam === true) {
+                if (pagemyself) {
                     $.ajax({
-                    method: 'get',
-                    url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
-                    headers: {
-                        Authorization: bearer
-                    },
-                    success: response => {
-                        console.log('good', response)
-                        if (response.status.code == 200) {
-                            const data = response.data;
-                            id_sendto = response.data.id;
-                            documentlist = response.data.document;
-                            $('#boxshowinfo').show()
-                            $('#show_idcard').text(data.id_card)
-                            $('#show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
-                            $('#show_oldschool').text(data.education.title_school)
-                            $('#show_phoneno').text(data.information.phone)
-                            $('#show_email').text(data.information.email)
+                        method: 'get',
+                        url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
+                        headers: {
+                            Authorization: bearer
+                        },
+                        success: response => {
+                            console.log('good', response)
+                            if (response.status.code == 200) {
+                                const data = response.data;
+                                $('#wo_boxshowinfo').show()
+                                $('#wo_show_idcard').text(data.id_card)
+                                $('#wo_show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
+                                $('#wo_show_oldschool').text(data.education.title_school)
+                                $('#wo_show_phoneno').text(data.information.phone)
+                                $('#wo_show_email').text(data.information.email)
 
-                            let classQuery = 4;
-                            if ($('#txt_mor').val() == 'mid') {
-                                classQuery = 1;
+                                if (data.status) {
+                                    $("#wo2").remove();
+                                    $("#wo3").remove();
+                                    $("#wo4").show();
+                                    if (data.status == "accept") {
+                                        $("#wo5").text("ยืนยันสิทธิ์").addClass("text-success");
+                                    } else if (data.status == "unaccept") {
+                                        $("#wo5").text("สละสิทธิ์").addClass("text-danger");
+                                    }
+                                    $("#wo1").show();
+                                }
                             }
-                            $.ajax({
-                            method: 'post',
-                            url: endpointv2 + '/utw-modify-api/course-getone',
-                            data: {
-                                _method: "GET",
-                                key_address: `register_interview_file_m${classQuery}`
-                            }, success: response2 => {
-                                console.log('good setting', response2)
-                                if (response2.status.code == 200) {
-                                    for (let i = 0; i < response2.data.in_data.length; i++) {
-                                    const element = response2.data.in_data[i];
-                                    htmlMe5 += `
+                        }
+                    })
+                }
+                else if (flagEndExam && flagEndExam === true) {
+                    $.ajax({
+                        method: 'get',
+                        url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
+                        headers: {
+                            Authorization: bearer
+                        },
+                        success: response => {
+                            console.log('good', response)
+                            if (response.status.code == 200) {
+                                const data = response.data;
+                                id_sendto = response.data.id;
+                                documentlist = response.data.document;
+                                $('#boxshowinfo').show()
+                                $('#show_idcard').text(data.id_card)
+                                $('#show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
+                                $('#show_oldschool').text(data.education.title_school)
+                                $('#show_phoneno').text(data.information.phone)
+                                $('#show_email').text(data.information.email)
+
+                                let classQuery = 4;
+                                if ($('#txt_mor').val() == 'mid') {
+                                    classQuery = 1;
+                                }
+                                $.ajax({
+                                    method: 'post',
+                                    url: endpointv2 + '/utw-modify-api/course-getone',
+                                    data: {
+                                        _method: "GET",
+                                        key_address: `register_interview_file_m${classQuery}`
+                                    }, success: response2 => {
+                                        console.log('good setting', response2)
+                                        if (response2.status.code == 200) {
+                                            for (let i = 0; i < response2.data.in_data.length; i++) {
+                                                const element = response2.data.in_data[i];
+                                                htmlMe5 += `
                                         <tr>
                                             <td>${element.title}</td>
                                             <td>
@@ -908,164 +1010,172 @@
                                                                 class="text-decoration-none btn-sm btn-warning ms-3">ตัวอย่าง</a>
                                             </td>
                                         </tr>`;
-                                    }
-                                    $('#table_exam_interview').html(htmlMe5)
+                                            }
+                                            $('#table_exam_interview').html(htmlMe5)
 
-                                }
-                                else {
-                                    errswal('3')
-                                }
-                            }, error: err => {
-                                errswal('4')
-                                console.log('bad', err)
+                                        }
+                                        else {
+                                            errswal('3')
+                                        }
+                                    }, error: err => {
+                                        errswal('4')
+                                        console.log('bad', err)
+                                    }
+                                })
                             }
-                            })
+                        },
+                        error: err => {
+                            errswal('13');
+                            loading(false);
+                            console.log('bad', err);
                         }
-                    }, 
-                    error: err => {
-                        errswal('13');
-                        loading(false);
-                        console.log('bad', err);
-                    }
                     });
 
                     $.ajax({
-                    method: 'get',
-                    url: endpoint + '/utw-register-api/score/information/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
-                    headers: {
-                        Authorization: bearer
-                    },
-                    success: response => {
-                        console.log('good', response)
-                        if (response.status.code == 200) {
-                            const data = response.data;
-                            if (data) {
-                                $('#exam_no').text(`${data?.no || "-"}`)
-                                $('#table_exam_end').html(`
+                        method: 'get',
+                        url: endpoint + '/utw-register-api/score/information/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
+                        headers: {
+                            Authorization: bearer
+                        },
+                        success: response => {
+                            console.log('good', response)
+                            if (response.status.code == 200) {
+                                let sumno = 0;
+                                const data = response.data;
+                                if (data) {
+                                    $('#exam_no').text(`${data?.no || "-"}`)
+                                    $('#table_exam_end').html(`
                                     <tr><td>คณิตศาสตร์</td><td>${data?.score_match || "ไม่พบข้อมูล"}</td></tr>
                                     <tr><td>ภาษาไทย</td><td>${data?.score_thai || "ไม่พบข้อมูล"}</td></tr>
                                     <tr><td>วิทยาศาสตร์</td><td>${data?.score_science || "ไม่พบข้อมูล"}</td></tr>
                                     <tr><td>ภาษาอังกฤษ</td><td>${data?.score_english || "ไม่พบข้อมูล"}</td></tr>
                                 `);
-                            }
-                            $('#boxresult_interview').show()
+                                    data.score_match = data.score_match ? data.score_match : 0;
+                                    data.score_thai = data.score_thai ? data.score_thai : 0;
+                                    data.score_science = data.score_science ? data.score_science : 0;
+                                    data.score_english = data.score_english ? data.score_english : 0;
+                                    sumno = data.score_match + data.score_thai + data.score_science + data.score_english;
+                                    $("#exam_sumno").text(sumno);
+                                }
 
-                        } else  {
-                            $('#boxresult_interview').show()
+                                $('#boxresult_interview').show()
+
+                            } else {
+                                $('#boxresult_interview').show()
+                            }
+                        },
+                        error: err => {
+                            errswal('13');
+                            loading(false);
+                            console.log('bad', err);
                         }
-                    }, 
-                    error: err => {
-                        errswal('13');
-                        loading(false);
-                        console.log('bad', err);
-                    }
                     });
                 } else {
                     $.ajax({
-                    method: 'get',
-                    url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
-                    headers: {
-                        Authorization: bearer
-                    },
-                    success: response => {
-                        console.log('good', response)
-                        if (response.status.code == 200) {
-                            const data = response.data;
-                            id_sendto = response.data.id;
-                            documentlist = response.data.document;
-                            $('#boxshowinfo').show()
-                            $('#show_idcard').text(data.id_card)
-                            $('#show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
-                            $('#show_oldschool').text(data.education.title_school)
-                            $('#show_phoneno').text(data.information.phone)
-                            $('#show_email').text(data.information.email)
-
-                            $.ajax({
-                                method: 'post',
-                                url: endpointv2 + '/utw-modify-api/course-getone',
-                                data: {
-                                    _method: "GET",
-                                    key_address: 'register_date'
-                                }, success: response => {
-                                    console.log('good setting', response)
-                                    if (response.status.code == 200) {
-                                        checksetting = response.data.in_data;
-                                        if ($('#txt_mor').val() == 'mid') {
-                                            $('#datesorb').text(response.data.in_data.date_exam_m1 + ' น. เป็นต้นไป')
-                                        } else {
-                                            $('#datesorb').text(response.data.in_data.date_exam_m4 + ' น. เป็นต้นไป')
-                                        }
-
-
-                                    }
-                                    else {
-                                        errswal('3')
-                                    }
-                                }, error: err => {
-                                    errswal('4')
-                                    console.log('bad', err)
-                                }
-                            })
-
-                            if (data.status == 'register' || data.status == 'modify') {
-                                $('#boxresult_waiting').show()
-                                $('#boxresult_success').hide()
-                                $('#boxresult_reject').hide()
-                                $('#boxresult_edit').hide()
-                            }
-                            else if (data.status == 'approve') {
-                                $('#boxresult_success').show()
-                                $('#boxresult_waiting').hide()
-                                $('#boxresult_reject').hide()
-                                $('#boxresult_edit').hide()
-                                $('#hongsorb').text(`ตึก ${data.exam_room.substr(0, 1)} ห้องสอบที่ ${data.exam_room}`)
-
-                            }
-                            else if (data.status == 'unapprove') {
-                                $('#boxresult_reject').show()
-                                $('#boxresult_waiting').hide()
-                                $('#boxresult_success').hide()
-                                $('#boxresult_edit').hide()
-                            }
-                            else if (data.status == 'correct') {
-                                $('#boxresult_edit').show()
-                                $('#boxresult_waiting').hide()
-                                $('#boxresult_success').hide()
-                                $('#boxresult_reject').hide()
-                                var html = '';
-
-                                var key = ''
-                                if (data.is_grade == 1) {
-                                    key = 'register_doc_student_success'
-                                } else {
-                                    key = 'register_doc_student_waiting'
-                                }
+                        method: 'get',
+                        url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
+                        headers: {
+                            Authorization: bearer
+                        },
+                        success: response => {
+                            console.log('good', response)
+                            if (response.status.code == 200) {
+                                const data = response.data;
+                                id_sendto = response.data.id;
+                                documentlist = response.data.document;
+                                $('#boxshowinfo').show()
+                                $('#show_idcard').text(data.id_card)
+                                $('#show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
+                                $('#show_oldschool').text(data.education.title_school)
+                                $('#show_phoneno').text(data.information.phone)
+                                $('#show_email').text(data.information.email)
 
                                 $.ajax({
-    method: 'post',
-    url: endpointv2 + '/utw-modify-api/course-getone',
-    data: {
-        _method: "GET",
-        key_address: key
-    }, 
-    success: response => {
-        console.log('good 2', response)
-        if (response.status.code == 200) {
-            const orgindoc = response.data.in_data;
-            let html = '';
+                                    method: 'post',
+                                    url: endpointv2 + '/utw-modify-api/course-getone',
+                                    data: {
+                                        _method: "GET",
+                                        key_address: 'register_date'
+                                    }, success: response => {
+                                        console.log('good setting', response)
+                                        if (response.status.code == 200) {
+                                            checksetting = response.data.in_data;
+                                            if ($('#txt_mor').val() == 'mid') {
+                                                $('#datesorb').text(response.data.in_data.date_exam_m1 + ' น. เป็นต้นไป')
+                                            } else {
+                                                $('#datesorb').text(response.data.in_data.date_exam_m4 + ' น. เป็นต้นไป')
+                                            }
 
-            data.document.forEach((element, i) => {
-                let statusHtml = '';
-                let actionHtml = '';
 
-                if (element.status === 'approve') {
-                    statusHtml = `<span class="badge bg-success">สำเร็จ</span>`;
-                } 
-                else if (element.status === 'correct') {
-                    filevad.push(i);
-                    statusHtml = `<span class="badge bg-danger">ผิดพลาด</span> <small class="text-danger">(${element.comment})</small>`;
+                                        }
+                                        else {
+                                            errswal('3')
+                                        }
+                                    }, error: err => {
+                                        errswal('4')
+                                        console.log('bad', err)
+                                    }
+                                })
 
-                    actionHtml = `
+                                if (data.status == 'register' || data.status == 'modify') {
+                                    $('#boxresult_waiting').show()
+                                    $('#boxresult_success').hide()
+                                    $('#boxresult_reject').hide()
+                                    $('#boxresult_edit').hide()
+                                }
+                                else if (data.status == 'approve') {
+                                    $('#boxresult_success').show()
+                                    $('#boxresult_waiting').hide()
+                                    $('#boxresult_reject').hide()
+                                    $('#boxresult_edit').hide()
+                                    $('#hongsorb').text(`ตึก ${data.exam_room.substr(0, 1)} ห้องสอบที่ ${data.exam_room}`)
+
+                                }
+                                else if (data.status == 'unapprove') {
+                                    $('#boxresult_reject').show()
+                                    $('#boxresult_waiting').hide()
+                                    $('#boxresult_success').hide()
+                                    $('#boxresult_edit').hide()
+                                }
+                                else if (data.status == 'correct') {
+                                    $('#boxresult_edit').show()
+                                    $('#boxresult_waiting').hide()
+                                    $('#boxresult_success').hide()
+                                    $('#boxresult_reject').hide()
+                                    var html = '';
+
+                                    var key = ''
+                                    if (data.is_grade == 1) {
+                                        key = 'register_doc_student_success'
+                                    } else {
+                                        key = 'register_doc_student_waiting'
+                                    }
+
+                                    $.ajax({
+                                        method: 'post',
+                                        url: endpointv2 + '/utw-modify-api/course-getone',
+                                        data: {
+                                            _method: "GET",
+                                            key_address: key
+                                        },
+                                        success: response => {
+                                            console.log('good 2', response)
+                                            if (response.status.code == 200) {
+                                                const orgindoc = response.data.in_data;
+                                                let html = '';
+
+                                                data.document.forEach((element, i) => {
+                                                    let statusHtml = '';
+                                                    let actionHtml = '';
+
+                                                    if (element.status === 'approve') {
+                                                        statusHtml = `<span class="badge bg-success">สำเร็จ</span>`;
+                                                    }
+                                                    else if (element.status === 'correct') {
+                                                        filevad.push(i);
+                                                        statusHtml = `<span class="badge bg-danger">ผิดพลาด</span> <small class="text-danger">(${element.comment})</small>`;
+
+                                                        actionHtml = `
                         <div class="d-flex gap-2">
                             <a onclick="uploadfile(${i});" class="btn btn-sm btn-success">อัพโหลดเอกสาร</a>
                             <input style="display: none;" onchange="send(this, ${i})" id="upload${i}" type="file" accept="image/png,image/jpg,image/jpeg,application/pdf">
@@ -1073,9 +1183,9 @@
                             <a id="filename${i}">-</a>
                             </div>
                     `;
-                }
+                                                    }
 
-                html += `
+                                                    html += `
                     <div class="card p-3 mb-2">
                         <div class="d-flex flex-column">
                             <div><strong>ลำดับ:</strong> ${i + 1}</div>
@@ -1085,99 +1195,99 @@
                         </div>
                     </div>
                 `;
-            });
+                                                });
 
-            $("#showresult_card_edit").html(html);
-        } 
-        else {
-            errswal('12');
-        }
-    }, 
-    error: err => {
-        errswal('13');
-        loading(false);
-        console.log('bad', err);
-    }
-});
-
-
-                                // $.ajax({
-                                //     method: 'post',
-                                //     url: endpointv2 + '/utw-modify-api/course-getone',
-                                //     data: {
-                                //         _method: "GET",
-                                //         key_address: key
-                                //     }, success: response => {
-                                //         console.log('good 2', response)
-                                //         if (response.status.code == 200) {
-                                //             const orgindoc = response.data.in_data;
-                                //             data.document.forEach((element, i) => {
-                                //                 var html2 = ''
-                                //                 if (element.status == 'approve') {
-                                //                     html2 = `
-                                //                     <td></td>
-                                //                     <td class="text-success text-start">สำเร็จ</td>
-                                //                     <td></td>`;
-                                //                 }
-                                //                 else if (element.status == 'correct') {
-                                //                     filevad.push(i);
-                                //                     html2 = `
-                                //                     <td>
-                                //                         <div class="d-flex">
-                                //                             <a onclick="uploadfile(${i});"  class="btn-sm btn-success text-decoration-none"
-                                //                                 style="cursor: pointer;">อัพโหลดเอกสาร</a>
-                                //                             <input style="display: none;" onchange="send(this, ${i})" id="upload${i}" type="file" accept="image/png,image/jpg,image/jpeg,application/pdf">
-                                //                             <a href="${orgindoc[i].path}" id="btn_lookfile${i}" target="_blank" style="cursor: pointer;"
-                                //                                 class="text-decoration-none btn-sm btn-warning ms-3">ตัวอย่างไฟล์</a>
-                                //                         </div>
-                                //                     </td>
-                                //                     <td class="text-start"><a id="filename${i}">-</a></td>
-                                //                     <td class="text-danger text-start">ผิดพลาด (เนื่องจาก ${element.comment})</td>
-                                //                    `
-
-                                //                 }
-
-                                //                 html += `
-                                //                 <tr>
-                                //                     <td>${i + 1}</td>
-                                //                     ${html2}
-                                //                     <td class="text-start">${element.title}</td>
-                                //                 </tr>
+                                                $("#showresult_card_edit").html(html);
+                                            }
+                                            else {
+                                                errswal('12');
+                                            }
+                                        },
+                                        error: err => {
+                                            errswal('13');
+                                            loading(false);
+                                            console.log('bad', err);
+                                        }
+                                    });
 
 
-                                //                 `
-                                //             });
-                                //             $("#showresult_table_edit").html(html)
-                                //         }
-                                //         else {
-                                //             errswal('12')
-                                //         }
-                                //     }, error: err => {
-                                //         errswal('13')
-                                //         loading(false)
-                                //         console.log('bad', err)
-                                //     }
-                                // })
-                            
-                            
+                                    // $.ajax({
+                                    //     method: 'post',
+                                    //     url: endpointv2 + '/utw-modify-api/course-getone',
+                                    //     data: {
+                                    //         _method: "GET",
+                                    //         key_address: key
+                                    //     }, success: response => {
+                                    //         console.log('good 2', response)
+                                    //         if (response.status.code == 200) {
+                                    //             const orgindoc = response.data.in_data;
+                                    //             data.document.forEach((element, i) => {
+                                    //                 var html2 = ''
+                                    //                 if (element.status == 'approve') {
+                                    //                     html2 = `
+                                    //                     <td></td>
+                                    //                     <td class="text-success text-start">สำเร็จ</td>
+                                    //                     <td></td>`;
+                                    //                 }
+                                    //                 else if (element.status == 'correct') {
+                                    //                     filevad.push(i);
+                                    //                     html2 = `
+                                    //                     <td>
+                                    //                         <div class="d-flex">
+                                    //                             <a onclick="uploadfile(${i});"  class="btn-sm btn-success text-decoration-none"
+                                    //                                 style="cursor: pointer;">อัพโหลดเอกสาร</a>
+                                    //                             <input style="display: none;" onchange="send(this, ${i})" id="upload${i}" type="file" accept="image/png,image/jpg,image/jpeg,application/pdf">
+                                    //                             <a href="${orgindoc[i].path}" id="btn_lookfile${i}" target="_blank" style="cursor: pointer;"
+                                    //                                 class="text-decoration-none btn-sm btn-warning ms-3">ตัวอย่างไฟล์</a>
+                                    //                         </div>
+                                    //                     </td>
+                                    //                     <td class="text-start"><a id="filename${i}">-</a></td>
+                                    //                     <td class="text-danger text-start">ผิดพลาด (เนื่องจาก ${element.comment})</td>
+                                    //                    `
+
+                                    //                 }
+
+                                    //                 html += `
+                                    //                 <tr>
+                                    //                     <td>${i + 1}</td>
+                                    //                     ${html2}
+                                    //                     <td class="text-start">${element.title}</td>
+                                    //                 </tr>
+
+
+                                    //                 `
+                                    //             });
+                                    //             $("#showresult_table_edit").html(html)
+                                    //         }
+                                    //         else {
+                                    //             errswal('12')
+                                    //         }
+                                    //     }, error: err => {
+                                    //         errswal('13')
+                                    //         loading(false)
+                                    //         console.log('bad', err)
+                                    //     }
+                                    // })
+
+
+                                }
+
                             }
-
-                        }
-                        else {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'ไม่พบข้อมูล'
-                            })
+                            else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'ไม่พบข้อมูล'
+                                })
+                                loading(false)
+                            }
+                        }, error: err => {
+                            errswal('15')
                             loading(false)
                         }
-                    }, error: err => {
-                        errswal('15')
-                        loading(false)
-                    }
-                })
-       
+                    })
+
                 }
-              }
+            }
         }
 
         function uploadfile(i) {
@@ -1346,20 +1456,102 @@
             var std = `${dy}/${dm}/${dd} 08:30:00`;
             var exp = `${dy}/${dm}/${dd} 16:30:00`;
 
-            console.log(std , now, exp);
+            console.log(std, now, exp);
 
             now = new Date(now).getTime();
             std = new Date(std).getTime();
             exp = new Date(exp).getTime();
 
-            console.log(std , now , exp);
-            if ((std <= now && now <= exp) || (bypass == 'bearbug')) {
-                $('#btn-register-m1').attr('onclick', `checkOpenRegister('m1')`)
-                $('#btn-register-m4').attr('onclick', `checkOpenRegister('m4')`)
-            } else {
-                $('#btn-register-m1').attr('onclick', `sorry('m1')`)
-                $('#btn-register-m4').attr('onclick', `sorry('m4')`)
-            }
+            console.log(std, now, exp);
+            $('#btn-register-m1').attr('onclick', `checkOpenRegister('m1')`)
+            $('#btn-register-m4').attr('onclick', `checkOpenRegister('m4')`)
+
+            // if ((std <= now && now <= exp) || (bypass == 'bearbug')) {
+            //     $('#btn-register-m1').attr('onclick', `checkOpenRegister('m1')`)
+            //     $('#btn-register-m4').attr('onclick', `checkOpenRegister('m4')`)
+            // } else {
+            //     $('#btn-register-m1').attr('onclick', `sorry('m1')`)
+            //     $('#btn-register-m4').attr('onclick', `sorry('m4')`)
+            // }
+        }
+
+        function UsedSit(param) {
+            loading(true)
+            let idno = $("#txt_idcard").val().replace(/-/g, "");
+            $.ajax({
+                method: 'post',
+                // url: endpoint + `/utw-register-api/modify/${id_sendto}/${$('#txt_mor').val()}`,
+                url: endpoint + `/utw-register-api/update/id-card/${idno}/report/${param}/part/${$("#txt_mor").val()}`,
+
+                headers: {
+                    Authorization: bearer
+                },
+                data: {
+
+                },
+                success: response => {
+                    loading(false)
+                    console.log('good', response)
+                    $("#wo2").remove();
+                    $("#wo3").remove();
+                    $("#wo4").show();
+
+                    $("#wo1").show();
+                    if (response.status.code == 200 || response.status.code == 201) {
+                        if (param == "accept") {
+                            $("#wo5").text("ยืนยันสิทธิ์").addClass("text-success");
+                        } else if (param == "unaccept") {
+                            $("#wo5").text("สละสิทธิ์").addClass("text-danger");
+                        }
+
+                        if (param == "accept") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'ยืนยันสิทธิ์เรียบร้อย',
+                                html: `วันที่รายงานตัว 2026-04-05 <br>08:00 น. - 12:00 น. <br>บนระบบออนไลน์`,
+                                confirmButtonText: 'ยืนยัน',
+                            }).then(() => {
+
+                            })
+
+
+                        }
+                        else if (param == "unaccept") {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'สละสิทธิ์เรียบร้อย',
+                                confirmButtonText: 'ยืนยัน',
+                            }).then(() => {
+
+                            })
+                        }
+                        // Swal.fire({
+                        //     icon: 'success',
+                        //     title: 'แก้ไขข้อมูลสำเร็จ',
+                        //     text: 'โปรดรอการตรวจสอบอีกครั้ง',
+                        //     confirmButtonText: 'ยืนยัน',
+                        //     timer: 3000
+                        // }).then((res) => {
+
+                        // })
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'มีบางอย่างผิดพลาด',
+                            confirmButtonText: 'ยืนยัน',
+                        })
+                    }
+                    loading(false)
+                }, error: err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'มีบางอย่างผิดพลาด',
+                        confirmButtonText: 'ยืนยัน',
+                    })
+                    loading(false)
+                }
+            })
         }
     </script>
 </body>

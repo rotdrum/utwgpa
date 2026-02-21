@@ -20,7 +20,8 @@
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="https://รับเขียนโปรแกรม.net/jquery_datepicker_thai/jquery-ui.js"></script> -->
-     <script src="../datepickerth.js"></script>
+     <script src="../datepickerth.js?v001"></script>
+      
     <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> -->
     <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
@@ -65,7 +66,7 @@
             <img src="../../imgs/logomain.png" style="width: 90px; object-fit: contain;">
             <br><br>
             <h4 class="text-white">ระบบรับสมัครนักเรียนออนไลน์ ม.1</h4>
-            <h4 class="text-white">โรงเรียนอุทัยวิทยาคม ปีการศึกษา 2567</h4>
+            <h4 class="text-white">โรงเรียนอุทัยวิทยาคม ปีการศึกษา 2569</h4>
         </div>
         <p class="text-white text-center"></p>
         <br>
@@ -145,15 +146,175 @@
                                 class="phoneno txt form-control">
                         </div>
                         <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">อีเมล</p>
+                            <p class="mb-0">อีเมล (ถ้ามี)</p>
                             <input type="text" placeholder="กรอกข้อความ" id="txt_email" class="txt form-control">
                         </div>
                     </div>
                 </div>
             </div>
 
+            
+
             <div class="card p-0 mt-5">
-                <h5 class="card-header mt-1 mb-1">2.ข้อมูลการศึกษา <span
+                <h5 class="card-header mt-1 mb-1">2.ที่อยู่นักเรียนตามทะเบียนบ้าน <span
+                        style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">บ้านเลขที่ <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_houseno" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ถนน </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_road" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ซอย </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_soi" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">หมู่ </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_moo" class="form-control txt ">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ตำบล <span class="text-danger">*</span></p>
+                            <input id="reg_homesubdistrict" type="text" placeholder="กรอกข้อความ" id=""
+                                class="form-control txt">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อำเภอ <span class="text-danger">*</span></p>
+                            <input id="reg_homedistrict" type="text" placeholder="กรอกข้อความ" id=""
+                                class="form-control txt">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">จังหวัด <span class="text-danger">*</span></p>
+                            <input id="reg_homeprovince" type="text" placeholder="กรอกข้อความ" id=""
+                                class="form-control txt">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">รหัสไปรษณีย์ <span class="text-danger">*</span></p>
+                            <input id="reg_homepostcode" type="text" placeholder="กรอกข้อความ" id=""
+                                class="form-control txt">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">3.ข้อมูลบิดา มารดา หรือ ผู้ปกครอง <span
+                        style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">คำนำหน้าบิดา <span class="text-danger">*</span></p>
+                            <select name="" class="form-control" id="txt_tfathername">
+                                <option value="นาย">นาย</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อบิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_ffathername" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">สกุลบิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_lfathername" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อาชีพบิดา </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_fathercareer" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3" style="display: none !important;">
+                            <p class="mb-0">สถานที่ทำงานบิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" value="-" id="txt_fathercareerloca"
+                                class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">เบอร์โทรศัพท์บิดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_fatherphoneno"
+                                class="txt form-control phoneno">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">คำนำหน้ามารดา <span class="text-danger">*</span></p>
+                            <select name="" class="form-control" id="txt_tmothername">
+                                <option value="">--- เลือก ---</option>
+                                <option value="นาง">นาง</option>
+                                <option value="นางสาว">นางสาว</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ชื่อมารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_fmothername" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">สกุลมารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_lmothername" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">อาชีพมารดา </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_mothercareer" class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3" style="display: none !important;">
+                            <p class="mb-0">สถานที่ทำงานมารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ"  value="-" id="txt_mothercareerloca"
+                                class="txt form-control">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">เบอร์โทรศัพท์มารดา <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_motherphoneno"
+                                class="txt form-control phoneno">
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <p class="mb-0">ผู้ปกครอง <span class="text-danger">*</span></p>
+                            <select id="reg_human" class="txt form-control">
+                                <option value="">--- เลือก ---</option>
+                                <option value="dad">บิดา</option>
+                                <option value="mom">มารดา</option>
+                                <option value="other">อื่นๆ</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                        </div>
+                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
+                            <p class="mb-0">คำนำผู้ปกครอง <span class="text-danger">*</span></p>
+                            <select name="" class="form-control" id="txt_tpkname">
+                                <option value="">--- เลือก ---</option>
+                                <option value="นาย">นาย</option>
+                                <option value="นาง">นาง</option>
+                                <option value="นางสาว">นางสาว</option>
+                            </select>
+                        </div>
+                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
+                            <p class="mb-0">ชื่อผู้ปกครอง <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_fpkname" class="txt form-control">
+                        </div>
+                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
+                            <p class="mb-0">สกุลผู้ปกครอง <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_lpkname" class="txt form-control">
+                        </div>
+                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
+                            <p class="mb-0">อาชีพผู้ปกครอง </p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_pkcareer" class="txt form-control">
+                        </div>
+                        <div class=" col-12 col-sm-6 mb-3" style="display: none !important;">
+                            <p class="mb-0">สถานที่ทำงานผู้ปกครอง <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" value="-" id="txt_pkcareerloca" class="txt form-control">
+                        </div>
+                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
+                            <p class="mb-0">เบอร์โทรศัพท์ผู้ปกครอง <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_pkphoneno"
+                                class="txt phoneno form-control">
+                        </div>
+                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
+                            <p class="mb-0">ผู้ปกครองมีความสัมพันธ์เป็น <span class="text-danger">*</span></p>
+                            <input type="text" placeholder="กรอกข้อความ" id="txt_pkrelation" class="txt form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-0 mt-5">
+                <h5 class="card-header mt-1 mb-1">4.ข้อมูลการศึกษา <span
                         style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
                 <div class="card-body">
                     <div class="row">
@@ -206,164 +367,6 @@
                             <input id="reg_postcode" type="text" placeholder="กรอกข้อความ" class="txt form-control">
                         </div>
 
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-0 mt-5">
-                <h5 class="card-header mt-1 mb-1">3.ที่อยู่นักเรียนตามทะเบียนบ้าน <span
-                        style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">บ้านเลขที่ <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_houseno" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">ถนน </p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_road" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">ซอย </p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_soi" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">หมู่ </p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_moo" class="form-control txt ">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">ตำบล <span class="text-danger">*</span></p>
-                            <input id="reg_homesubdistrict" type="text" placeholder="กรอกข้อความ" id=""
-                                class="form-control txt">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">อำเภอ <span class="text-danger">*</span></p>
-                            <input id="reg_homedistrict" type="text" placeholder="กรอกข้อความ" id=""
-                                class="form-control txt">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">จังหวัด <span class="text-danger">*</span></p>
-                            <input id="reg_homeprovince" type="text" placeholder="กรอกข้อความ" id=""
-                                class="form-control txt">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">รหัสไปรษณีย์ <span class="text-danger">*</span></p>
-                            <input id="reg_homepostcode" type="text" placeholder="กรอกข้อความ" id=""
-                                class="form-control txt">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-0 mt-5">
-                <h5 class="card-header mt-1 mb-1">4.ข้อมูลบิดา มารดา หรือ ผู้ปกครอง <span
-                        style="font-size: .8rem;">(หากไม่มีกรุณาใส่เครื่องหมาย -)</span></h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">คำนำหน้าบิดา <span class="text-danger">*</span></p>
-                            <select name="" class="form-control" id="txt_tfathername">
-                                <option value="นาย">นาย</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">ชื่อบิดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_ffathername" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">สกุลบิดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_lfathername" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">อาชีพบิดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_fathercareer" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3" style="display: none !important;">
-                            <p class="mb-0">สถานที่ทำงานบิดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" value="-" id="txt_fathercareerloca"
-                                class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">เบอร์โทรศัพท์บิดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_fatherphoneno"
-                                class="txt form-control phoneno">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">คำนำหน้ามารดา <span class="text-danger">*</span></p>
-                            <select name="" class="form-control" id="txt_tmothername">
-                                <option value="">--- เลือก ---</option>
-                                <option value="นาง">นาง</option>
-                                <option value="นางสาว">นางสาว</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">ชื่อมารดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_fmothername" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">สกุลมารดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_lmothername" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">อาชีพมารดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_mothercareer" class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3" style="display: none !important;">
-                            <p class="mb-0">สถานที่ทำงานมารดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ"  value="-" id="txt_mothercareerloca"
-                                class="txt form-control">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">เบอร์โทรศัพท์มารดา <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_motherphoneno"
-                                class="txt form-control phoneno">
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <p class="mb-0">ผู้ปกครอง <span class="text-danger">*</span></p>
-                            <select id="reg_human" class="txt form-control">
-                                <option value="">--- เลือก ---</option>
-                                <option value="dad">บิดา</option>
-                                <option value="mom">มารดา</option>
-                                <option value="other">อื่นๆ</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                        </div>
-                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
-                            <p class="mb-0">คำนำผู้ปกครอง <span class="text-danger">*</span></p>
-                            <select name="" class="form-control" id="txt_tpkname">
-                                <option value="">--- เลือก ---</option>
-                                <option value="นาย">นาย</option>
-                                <option value="นาง">นาง</option>
-                                <option value="นางสาว">นางสาว</option>
-                            </select>
-                        </div>
-                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
-                            <p class="mb-0">ชื่อผู้ปกครอง <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_fpkname" class="txt form-control">
-                        </div>
-                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
-                            <p class="mb-0">สกุลผู้ปกครอง <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_lpkname" class="txt form-control">
-                        </div>
-                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
-                            <p class="mb-0">อาชีพผู้ปกครอง <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_pkcareer" class="txt form-control">
-                        </div>
-                        <div class=" col-12 col-sm-6 mb-3" style="display: none !important;">
-                            <p class="mb-0">สถานที่ทำงานผู้ปกครอง <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" value="-" id="txt_pkcareerloca" class="txt form-control">
-                        </div>
-                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
-                            <p class="mb-0">เบอร์โทรศัพท์ผู้ปกครอง <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_pkphoneno"
-                                class="txt phoneno form-control">
-                        </div>
-                        <div class="box_human col-12 col-sm-6 mb-3" style="display: none;">
-                            <p class="mb-0">ผู้ปกครองมีความสัมพันธ์เป็น <span class="text-danger">*</span></p>
-                            <input type="text" placeholder="กรอกข้อความ" id="txt_pkrelation" class="txt form-control">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -555,41 +558,7 @@
                 sw('โปรดกรอกเบอร์โทรศัพท์')
                 pass = false;
             }
-            else if ($('#txt_edulevel').val() == '') {
-                $('#txt_edulevel').addClass('is-invalid').focus()
-                sw('โปรดเลือกระดับการศึกษา')
-                pass = false;
-            }
-            else if ($('#txt_eduyear').val() == '') {
-                $('#txt_eduyear').addClass('is-invalid').focus()
-                sw('โปรดเลือกปีการศึกษา')
-                pass = false;
-            }
-            else if ($('#txt_schoolname').val().length <= 0) {
-                $('#txt_schoolname').addClass('is-invalid').focus()
-                sw('โปรดกรอกชื่อโรงเรียนเดิม')
-                pass = false;
-            }
-            else if ($('#reg_subdistrict').val().length <= 0) {
-                $('#reg_subdistrict').addClass('is-invalid').focus()
-                sw('โปรดกรอกตำบล')
-                pass = false;
-            }
-            else if ($('#reg_district').val().length <= 0) {
-                $('#reg_district').addClass('is-invalid').focus()
-                sw('โปรดกรอกอำเภอ')
-                pass = false;
-            }
-            else if ($('#reg_province').val().length <= 0) {
-                $('#reg_province').addClass('is-invalid').focus()
-                sw('โปรดกรอกจังหวัด')
-                pass = false;
-            }
-            else if ($('#reg_postcode').val().length <= 0) {
-                $('#reg_postcode').addClass('is-invalid').focus()
-                sw('โปรดกรอกรหัสไปรษณีย์')
-                pass = false;
-            }
+            
             else if ($('#txt_houseno').val().length <= 0) {
                 $('#txt_houseno').addClass('is-invalid').focus()
                 sw('โปรดกรอกบ้านเลขที่')
@@ -625,11 +594,11 @@
                 sw('โปรดกรอกสกุลบิดา')
                 pass = false;
             }
-            else if ($('#txt_fathercareer').val().length <= 0) {
-                $('#txt_fathercareer').addClass('is-invalid').focus()
-                sw('โปรดกรอกอาชีพบิดา')
-                pass = false;
-            }
+            // else if ($('#txt_fathercareer').val().length <= 0) {
+            //     $('#txt_fathercareer').addClass('is-invalid').focus()
+            //     sw('โปรดกรอกอาชีพบิดา')
+            //     pass = false;
+            // }
             // else if ($('#txt_fathercareerloca').val().length <= 0) {
             //     $('#txt_fathercareerloca').addClass('is-invalid').focus()
             //     sw('โปรดกรอกที่อยู่อาชีพบิดา')
@@ -655,11 +624,11 @@
                 sw('โปรดกรอกสกุลมารดา')
                 pass = false;
             }
-            else if ($('#txt_mothercareer').val().length <= 0) {
-                $('#txt_mothercareer').addClass('is-invalid').focus()
-                sw('โปรดกรอกอาชีพมารดา')
-                pass = false;
-            }
+            // else if ($('#txt_mothercareer').val().length <= 0) {
+            //     $('#txt_mothercareer').addClass('is-invalid').focus()
+            //     sw('โปรดกรอกอาชีพมารดา')
+            //     pass = false;
+            // }
             // else if ($('#txt_mothercareerloca').val().length <= 0) {
             //     $('#txt_mothercareerloca').addClass('is-invalid').focus()
             //     sw('โปรดกรอกที่อยู่อาชีพมารดา')
@@ -691,11 +660,11 @@
                     sw('โปรดกรอกสกุลผู้ปกครอง')
                     pass = false;
                 }
-                else if ($('#txt_pkcareer').val().length <= 0) {
-                    $('#txt_pkcareer').addClass('is-invalid').focus()
-                    sw('โปรดกรอกอาชีพผู้ปกครอง')
-                    pass = false;
-                }
+                // else if ($('#txt_pkcareer').val().length <= 0) {
+                //     $('#txt_pkcareer').addClass('is-invalid').focus()
+                //     sw('โปรดกรอกอาชีพผู้ปกครอง')
+                //     pass = false;
+                // }
                 // else if ($('#txt_pkcareerloca').val().length <= 0) {
                 //     $('#txt_pkcareerloca').addClass('is-invalid').focus()
                 //     sw('โปรดกรอกสถานที่ทำงานผู้ปกครอง')
@@ -711,6 +680,41 @@
                     sw('โปรดเลือกผู้ปกครองมีความสัมพันธ์เป็น')
                     pass = false;
                 }
+            }
+            else if ($('#txt_edulevel').val() == '') {
+                $('#txt_edulevel').addClass('is-invalid').focus()
+                sw('โปรดเลือกระดับการศึกษา')
+                pass = false;
+            }
+            else if ($('#txt_eduyear').val() == '') {
+                $('#txt_eduyear').addClass('is-invalid').focus()
+                sw('โปรดเลือกปีการศึกษา')
+                pass = false;
+            }
+            else if ($('#txt_schoolname').val().length <= 0) {
+                $('#txt_schoolname').addClass('is-invalid').focus()
+                sw('โปรดกรอกชื่อโรงเรียนเดิม')
+                pass = false;
+            }
+            else if ($('#reg_subdistrict').val().length <= 0) {
+                $('#reg_subdistrict').addClass('is-invalid').focus()
+                sw('โปรดกรอกตำบล')
+                pass = false;
+            }
+            else if ($('#reg_district').val().length <= 0) {
+                $('#reg_district').addClass('is-invalid').focus()
+                sw('โปรดกรอกอำเภอ')
+                pass = false;
+            }
+            else if ($('#reg_province').val().length <= 0) {
+                $('#reg_province').addClass('is-invalid').focus()
+                sw('โปรดกรอกจังหวัด')
+                pass = false;
+            }
+            else if ($('#reg_postcode').val().length <= 0) {
+                $('#reg_postcode').addClass('is-invalid').focus()
+                sw('โปรดกรอกรหัสไปรษณีย์')
+                pass = false;
             }
 
             var type = '';

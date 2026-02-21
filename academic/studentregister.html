@@ -138,6 +138,14 @@
                     <label class="form-check-label">ปิด-เปิด</label>
                   </div>
                 </div>
+                <div class="mb-3 col-12 col-sm-4">
+                  <span>ปุ่มรายงานตัว</span>
+                  <div class="form-check form-switch">
+                    <input onclick="raikarntua(this)" class="form-check-input" type="checkbox" id="toggleSTD2"
+                      style="cursor: pointer;">
+                    <label class="form-check-label">ปิด-เปิด</label>
+                  </div>
+                </div>
               </div>
               <div class="btn btn-primary" onclick="updateSheet1()">บันทึก</div>
             </div>
@@ -597,6 +605,10 @@
       $('#btn_save').removeAttr('disabled').removeClass('btn-secondary').addClass('btn-primary')
     }
 
+    function raikarntua(element) {
+      
+    }
+
     $(document).ready(() => {
       //good 1
       $.ajax({
@@ -626,6 +638,7 @@
             $('#txt_interview_time4').val(response.data.in_data.date_interview_m4.split(" ")[1])
 
             response.data.in_data.page_point == 1 ? $('#toggleSTD1').trigger('click') : '';
+            response.data.in_data.page_myself == 1 ? $('#toggleSTD2').trigger('click') : '';
             $('#btn_save').attr('disabled', true).addClass('btn-secondary').removeClass('btn-primary')
           }
           else {
@@ -1391,6 +1404,8 @@
         date_interview_m1 :$('#txt_interview_date1').val() + ' ' + $('#txt_interview_time1').val(),
         date_interview_m4 :$('#txt_interview_date4').val() + ' ' + $('#txt_interview_time4').val(),
         page_point: $('#toggleSTD1').is(':checked'),
+        page_myself: $('#toggleSTD2').is(':checked'),
+
       }
 
       console.log("obj", obj);

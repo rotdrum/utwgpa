@@ -6,9 +6,9 @@ const bearer = 'Bearer 6685214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667da
 
 var process = 'UAT';
 
-if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
-  endpoint = 'https://utwgpa.com/uat';
-}
+// if((window.location.href.indexOf("/uat") > -1) || (window.location.href.indexOf("localhost") > -1)) {
+//   endpoint = 'https://utwgpa.com/uat';
+// }
 
 function errswal(msg) {
   console.log('msg', msg);
