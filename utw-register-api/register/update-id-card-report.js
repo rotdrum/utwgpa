@@ -48,7 +48,7 @@ function getOne(req, res) {
         } else if (err) {
           return error(res, err);
         } else {
-          return empty(res);
+          // return empty(res);
         }
       }
     );
