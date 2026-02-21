@@ -92,6 +92,13 @@ app.get(endpoint + "/register/report/edit/:part", cors(corsOptions), registerGet
 const registerGetUnapproveModule = require("./register/get-all-unapprove.js");
 app.get(endpoint + "/register/report/not-approve/:part", cors(corsOptions), registerGetUnapproveModule);
 
+const accept = require("./register/get-all-accept.js");
+app.get(endpoint + "/register/report/accept/:part", cors(corsOptions), accept);
+
+const unaccept = require("./register/get-all-unaccept.js");
+app.get(endpoint + "/register/report/unaccept/:part", cors(corsOptions), unaccept);
+
+
 const registerGetSummeryModule = require("./register/summery.js");
 app.get(endpoint + "/register/report/summery/:part", cors(corsOptions), registerGetSummeryModule);
 
@@ -106,6 +113,9 @@ app.post(endpoint + "/register/high", cors(corsOptions), registerHighModule);
 
 const registerCheckCradIdModule = require("./register/check-id-card.js");
 app.post(endpoint + "/check/id-card", cors(corsOptions), registerCheckCradIdModule);
+
+const registerCheckCradIdReportModule = require("./register/update-id-card-report.js");
+app.post(endpoint + "/update/id-card/:id_card/report/:status/part/:part", cors(corsOptions), registerCheckCradIdReportModule);
 
 const buildingGetAllModule = require("./building/get-all.js");
 app.get(endpoint + "/building", cors(corsOptions), buildingGetAllModule);
