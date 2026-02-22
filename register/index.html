@@ -235,24 +235,84 @@
                         </div>
 
                         <br>
-                        <div class="d-flex align-items-center mt-3">
-                            <h5 class="mb-0 text-start me-3">ผลการสมัคร :</h5>
-                            <h5 class="mb-0 text-start text-success">สำเร็จ</h5>
+                        <div class="d-flex align-items-center">
+                            <div class="mb-0 text-start me-3">ผลการสมัคร :</div>
+                            <div class="mb-0 text-start text-success">สำเร็จ</div>
                         </div>
 
-                        <div class="w-100 mt-3 p-5">
+                        <div class="w-100 mt-3 ">
                             <div id="wo3">กรุณาดำเนินการยืนยันสิทธิ์เพื่อรายงานตัวเข้าเรียนตามกำหนด</div>
-                            <div id="wo4" style="display: none;">คุณดำเนินการแล้ว : <span id="wo5"></span></div>
-                            <div class="w-100 d-flex justify-content-center">
 
+                            <div id="wo4" style="display: none; font-size: 1.5rem; font-weight: bold;">ผลการรายงานตัว :
+                                <span id="wo5"></span>
+                            </div>
+                            <div class="w-100 d-flex flex-column align-items-center">
+                                <div id="wo12"
+                                    class="d-flex flex-column align-items-center w-50 justify-content-center mt-3">
+
+                                    <select id="wo131" class="form-control" onchange="CheckDupJa(this)">
+                                        <option value="">เลือกสายการเรียนอันดับที่ 1</option>
+                                        <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
+                                            คณิตศาสตร์ </option>
+                                        <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
+                                        <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
+                                    </select>
+                                    <br>
+                                    <select id="wo132" class="form-control" onchange="CheckDupJa(this)">
+                                        <option value="">เลือกสายการเรียนอันดับที่ 2</option>
+                                        <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
+                                            คณิตศาสตร์ </option>
+                                        <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
+                                        <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
+                                    </select>
+                                    <br>
+                                    <select id="wo133" class="form-control" onchange="CheckDupJa(this)">
+                                        <option value="">เลือกสายการเรียนอันดับที่ 3</option>
+                                        <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
+                                            คณิตศาสตร์ </option>
+                                        <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
+                                        <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
+                                    </select>
+                                </div>
                                 <div id="wo2" class="d-flex w-50 justify-content-center mt-3">
                                     <button onclick="UsedSit('accept')" class="btn btn-success">ยืนยันสิทธิ์</button>
                                     <button onclick="UsedSit('unaccept')" class="btn btn-danger ms-3">สละสิทธิ์</button>
                                 </div>
+                                <div id="wo14" class="flex-column w-75  mt-3" style="display : flex;">
+                                    <div id="wo134" style="text-align: start;">ผู้สมัครต้องจัดลำดับแผนการเรียนจำนวน 3 อันดับ
+                                        โดยลำดับที่เลือกจะมีผลต่อการคัดเลือก และไม่สามารถเปลี่ยนแปลงได้ภายหลัง
+                                        กรุณาตรวจสอบข้อมูลก่อนยืนยัน โดยมีแผนการเรียนดังนี้</div>
+                                    <div style="text-align: start;">- แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์ จำนวน 2
+                                        ห้องเรียน (80 คน)</div>
+                                    <div style="text-align: start;">- แผนการเรียนศิลป์ - คำนวณ จำนวน 1 ห้องเรียน (40
+                                        คน)
+                                    </div>
+                                    <div style="text-align: start;">- แผนการเรียนศิลป์ - สังคม จำนวน 2 ห้องเรียน (80
+                                        คน)</div>
+                                </div>
                             </div>
-                            <div id="wo1" class="mt-5" style="display: none;">หมายเหตุ:
-                                ผู้ที่ยืนยันสิทธิ์เข้าศึกษาจะต้องดำเนินการมอบตัวในวันที่ 5 เมษายน 2569 ระหว่างเวลา 08.00
-                                – 12.00 น. ที่โรงเรียนอุทัยวิทยาคมเท่านั้น</div>
+                            <div id="wo1" class="mt-5" style="display: none;">
+                                <div style="display: flex;  flex-direction: column; align-items: start;">
+                                    <div style="text-align: start;">หมายเหตุ:</div>
+                                    <div style="text-align: start;">นักเรียนที่สอบได้ห้องเรียนปกติชั้นมัธยมศึกษาปีที่ 1
+                                    </div>
+                                    <div style="text-align: start;">ให้นักเรียนมอบตัวในวันที่ 4 เมษายน 2569
+                                        เวลา 08.30-11.00 น. </div>
+                                    <div style="text-align: start;">ณ ลานธรรมประชารวมใจไทยเศรษฐ์</div>
+                                </div>
+                            </div>
+                            <div id="wo11" class="mt-5" style="display: none;">
+                                <div style="display: flex;  flex-direction: column; align-items: start;">
+                                    <div style="text-align: start;">หมายเหตุ:</div>
+                                    <div style="text-align: start;">นักเรียนที่สอบได้ห้องเรียนปกติชั้นมัธยมศึกษาปีที่ 4
+                                    </div>
+                                    <div style="text-align: start;">ให้นักเรียนมอบตัวในวันที่ 5 เมษายน 2569
+                                        เวลา 08.30-11.00 น. </div>
+                                    <div style="text-align: start;">ณ ลานธรรมประชารวมใจไทยเศรษฐ์
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div id="boxshowinfo" style="display: none;" class="row w-100">
@@ -422,7 +482,7 @@
 
                         <div class="d-flex mt-3">
                             <p class="respcol d-flex mb-0">
-                                <b>วันที่รายงานตัว 2026-04-05 08:00 น. - 12:00 น. บนระบบออนไลน์</b>
+                                <b>หมายเหตุ : วันที่รายงานตัว 1 เมษายน 2569 เวลา 08:00 - 12:00 น. บนระบบออนไลน์</b>
                             <p class="mb-0 ms-3" id="datesorbend" style="display: none;"></p>
                             </p>
                         </div>
@@ -793,12 +853,19 @@
         var filevad = [];
         function checkList() {
 
+            $("#wo1").hide();
+            $("#wo11").hide();
             var htmlMe = '';
             var htmlMe2 = '';
             var htmlMe5 = '';
 
 
             if ($('#txt_mor').val() == 'mid') {
+                $("#wo131").hide();
+                $("#wo132").hide();
+                $("#wo133").hide();
+
+                $("#wo14").css("display", "none");
                 $.ajax({
                     method: 'post',
                     url: endpointv2 + '/utw-modify-api/course-getone',
@@ -860,6 +927,11 @@
                     }
                 })
             } else {
+                $("#wo131").show();
+                $("#wo132").show();
+                $("#wo133").show();
+
+                $("#wo14").show();
                 $.ajax({
                     method: 'post',
                     url: endpointv2 + '/utw-modify-api/course-getone',
@@ -953,15 +1025,42 @@
                                 $('#wo_show_email').text(data.information.email)
 
                                 if (data.status) {
-                                    $("#wo2").remove();
-                                    $("#wo3").remove();
-                                    $("#wo4").show();
-                                    if (data.status == "accept") {
+
+
+                                    $("#wo5").removeClass("text-success").removeClass("text-danger");
+
+                                    if (data.status == "approve") {
+                                        $("#wo131").attr("disabled", false);
+                                        $("#wo132").attr("disabled", false);
+                                        $("#wo133").attr("disabled", false);
+                                        $("#wo2").show();
+                                        $("#wo3").show();
+                                        $("#wo4").hide();
+                                        $("#wo12").show();
+                                    }
+                                    else if (data.status == "accept") {
+                                        let k = data.study_program.toString().split(",");
+                                        $("#wo131").attr("disabled", true).val(k[0]);
+                                        $("#wo132").attr("disabled", true).val(k[1]);
+                                        $("#wo133").attr("disabled", true).val(k[2]);
+                                        $("#wo4").show();
+                                        $("#wo2").remove();
+                                        $("#wo3").remove();
                                         $("#wo5").text("ยืนยันสิทธิ์").addClass("text-success");
                                     } else if (data.status == "unaccept") {
+                                        $("#wo131").attr("disabled", true)
+                                        $("#wo132").attr("disabled", true)
+                                        $("#wo133").attr("disabled", true)
+                                        $("#wo4").show();
+                                        $("#wo2").remove();
+                                        $("#wo3").remove();
                                         $("#wo5").text("สละสิทธิ์").addClass("text-danger");
                                     }
-                                    $("#wo1").show();
+
+                                    if ($("#txt_mor").val() == "mid")
+                                        $("#wo1").show()
+                                    else if ($("#txt_mor").val() == "high")
+                                        $("#wo11").show()
                                 }
                             }
                         }
@@ -1475,7 +1574,38 @@
             // }
         }
 
-        function UsedSit(param) {
+        async function UsedSit(param) {
+            if (($("#wo131").val() == "" || $("#wo132").val() == "" || $("#wo133").val() == "") && param == "accept" && txt_mor.value == "high") {
+                Swal.fire({
+                    icon: "warning",
+                    title: "กรุณาเลือกแผนการเรียน"
+                })
+                return false;
+            }
+
+
+            let a = "ยืนยันสิทธิ์";
+            if (param == "unaccept") {
+                a = "ยืนยันการสละสิทธิ์";
+            }
+            await new Promise((resolve) => {
+                Swal.fire({
+                    icon: "info",
+                    title: a,
+                    confirmButtonText: "ยืนยัน",
+                    cancelButtonText: "ยกเลิก",
+                    showCancelButton: true
+                }).then((res) => {
+                    if (res.isConfirmed) {
+
+                        resolve(param);
+                        // ทำงานตอนกด confirm
+                    }
+
+                })
+            })
+
+
             loading(true)
             let idno = $("#txt_idcard").val().replace(/-/g, "");
             $.ajax({
@@ -1487,7 +1617,7 @@
                     Authorization: bearer
                 },
                 data: {
-
+                    "study_program": pan
                 },
                 success: response => {
                     loading(false)
@@ -1495,8 +1625,16 @@
                     $("#wo2").remove();
                     $("#wo3").remove();
                     $("#wo4").show();
+                    $("#wo131").attr("disabled", true)
+                    $("#wo132").attr("disabled", true)
+                    $("#wo133").attr("disabled", true)
+                    pan = "";
 
-                    $("#wo1").show();
+                    $("#wo5").removeClass("text-success").removeClass("text-danger");
+                    if ($("#txt_mor").val() == "mid")
+                        $("#wo1").show()
+                    else if ($("#txt_mor").val() == "high")
+                        $("#wo11").show()
                     if (response.status.code == 200 || response.status.code == 201) {
                         if (param == "accept") {
                             $("#wo5").text("ยืนยันสิทธิ์").addClass("text-success");
@@ -1508,7 +1646,6 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'ยืนยันสิทธิ์เรียบร้อย',
-                                html: `วันที่รายงานตัว 2026-04-05 <br>08:00 น. - 12:00 น. <br>บนระบบออนไลน์`,
                                 confirmButtonText: 'ยืนยัน',
                             }).then(() => {
 
@@ -1552,6 +1689,22 @@
                     loading(false)
                 }
             })
+        }
+
+        let pan = "";
+        function CheckDupJa(Element) {
+            let val = Element.value;
+            if (pan.includes(val)) {
+                Element.value = "";
+                Swal.fire({
+                    icon: 'error',
+                    title: 'แผนการเรียนซ้ำ',
+                    text: "กรุณาเลือกใหม่",
+                    confirmButtonText: 'ยืนยัน',
+                })
+                return false;
+            }
+            pan += val + ",";
         }
     </script>
 </body>

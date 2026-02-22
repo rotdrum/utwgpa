@@ -304,6 +304,8 @@ if(localStorage.bbtoken || true) {
       <a  href="./sormor1.html"  class="list-group-item list-group-item-action">รายงานห้องสอบการสมัคร</a>
       <a  href="./registerreportexport1.html"  class="list-group-item list-group-item-action">รายงานการสมัคร (ม.1)</a>
       <a  href="./registerreportexport4.html"  class="list-group-item list-group-item-action">รายงานการสมัคร (ม.4)</a>
+      <a  href="./registerreportreport1.html"  class="list-group-item list-group-item-action">รายงานการรายงานตัว (ม.1)</a>
+      <a  href="./registerreportreport4.html"  class="list-group-item list-group-item-action">รายงานการรายงานตัว (ม.4)</a>
     </div>
 
     <a onclick="openSubmenu(this); activeSidebar(this);" id="sidebar-setting" class="sidebar-items" >
