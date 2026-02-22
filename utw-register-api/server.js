@@ -98,6 +98,8 @@ app.get(endpoint + "/register/report/accept/:part", cors(corsOptions), accept);
 const unaccept = require("./register/get-all-unaccept.js");
 app.get(endpoint + "/register/report/unaccept/:part", cors(corsOptions), unaccept);
 
+const approve2 = require("./register/get-all-approve.js");
+app.get(endpoint + "/register/report/approve/:part", cors(corsOptions), approve2);
 
 const registerGetSummeryModule = require("./register/summery.js");
 app.get(endpoint + "/register/report/summery/:part", cors(corsOptions), registerGetSummeryModule);
