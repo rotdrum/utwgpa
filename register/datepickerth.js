@@ -7236,11 +7236,12 @@ function Datepicker() {
 		prevText: "Prev", // Display text for previous month link
 		nextText: "Next", // Display text for next month link
 		currentText: "Today", // Display text for current month link
-		monthNames: [ "à¸¡à¸à¸£à¸²à¸„à¸¡","à¸à¸¸à¸¡à¸ à¸²à¸žà¸±à¸™à¸˜à¹Œ","à¸¡à¸µà¸™à¸²à¸„à¸¡","à¹€à¸¡à¸©à¸²à¸¢à¸™","à¸žà¸¤à¸©à¸ à¸²à¸„à¸¡","à¸¡à¸´à¸–à¸¸à¸™à¸²à¸¢à¸™","à¸à¸£à¸à¸Žà¸²à¸„à¸¡","à¸ªà¸´à¸‡à¸«à¸²à¸„à¸¡","à¸à¸±à¸™à¸¢à¸²à¸¢à¸™","à¸•à¸¸à¸¥à¸²à¸„à¸¡","à¸žà¸¤à¸¨à¸ˆà¸´à¸à¸²à¸¢à¸™","à¸˜à¸±à¸™à¸§à¸²à¸„à¸¡" ], // Names of months for drop-down and formatting
-		monthNamesShort: [ "à¸¡à¸à¸£à¸²à¸„à¸¡","à¸à¸¸à¸¡à¸ à¸²à¸žà¸±à¸™à¸˜à¹Œ","à¸¡à¸µà¸™à¸²à¸„à¸¡","à¹€à¸¡à¸©à¸²à¸¢à¸™","à¸žà¸¤à¸©à¸ à¸²à¸„à¸¡","à¸¡à¸´à¸–à¸¸à¸™à¸²à¸¢à¸™","à¸à¸£à¸à¸Žà¸²à¸„à¸¡","à¸ªà¸´à¸‡à¸«à¸²à¸„à¸¡","à¸à¸±à¸™à¸¢à¸²à¸¢à¸™","à¸•à¸¸à¸¥à¸²à¸„à¸¡","à¸žà¸¤à¸¨à¸ˆà¸´à¸à¸²à¸¢à¸™","à¸˜à¸±à¸™à¸§à¸²à¸„à¸¡"  ], // For formatting
-		dayNames: [ "à¸­à¸²","à¸ˆ","à¸­","à¸ž","à¸žà¸¤","à¸¨","à¸ª"  ], // For formatting
-		dayNamesShort: [ "à¸­à¸²","à¸ˆ","à¸­","à¸ž","à¸žà¸¤","à¸¨","à¸ª"  ], // For formatting
-		dayNamesMin: [ "à¸­à¸²","à¸ˆ","à¸­","à¸ž","à¸žà¸¤","à¸¨","à¸ª"   ], // Column headings for days starting at Sunday
+		monthNames: [ "มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม" ], // Names of months for drop-down and formatting
+		// monthNamesShort: [ "มค","กพ","มีค","เมย","พค","มิย","กค","สค","กย","ตค","พย","ธค",  ], // For formatting
+		monthNamesShort: [ "มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"  ], // For formatting
+		dayNames: [ "อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"  ], // For formatting
+		dayNamesShort: [ "อา","จ","อ","พ","พฤ","ศ","ส" ], // For formatting
+		dayNamesMin: [ "อา","จ","อ","พ","พฤ","ศ","ส"   ], // Column headings for days starting at Sunday
 		weekHeader: "Wk", // Column header for week of the year
 		dateFormat: "mm/dd/yy", // See format options on parseDate
 		firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
