@@ -10,9 +10,10 @@ const empty = require("../response/empty.js");
 function modify(req, res) {
   const status = req.params.status;
   const updated_at = new Date();
+  const study_program = _.get(req, "body.study_program" ,null)
 
-  db.query(`update register_${req.params.part} set status = ?, updated_at = ? WHERE id_card = ? `, [
-    status, updated_at, req.params.id_card
+  db.query(`update register_${req.params.part} set status = ?, study_program = ?, updated_at = ? WHERE id_card = ? `, [
+    status, study_program, updated_at, req.params.id_card
   ], (err) => {
       if(!err) {
         console.log(JSON.stringify({
