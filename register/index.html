@@ -240,6 +240,29 @@
                             <div class="mb-0 text-start text-success">สำเร็จ</div>
                         </div>
 
+                        <div id="wo1" class="mt-5" style="display: none;">
+                            <div style="display: flex;  flex-direction: column; align-items: start;">
+                                <div class="text-danger fw-bold fs-20" style="text-align: start;">* หมายเหตุ:</div>
+                                <div style="text-align: start;">นักเรียนที่สอบได้ห้องเรียนปกติชั้นมัธยมศึกษาปีที่ 1
+                                </div>
+                                <div style="text-align: start;">ให้นักเรียนมอบตัวในวันที่ 4 เมษายน 2569
+                                    เวลา 08.00-12.00 น. </div>
+                                <div style="text-align: start;">ณ ลานธรรมประชารวมใจไทยเศรษฐ์</div>
+                            </div>
+                        </div>
+                        <div id="wo11" class="mt-5" style="display: none;">
+                            <div style="display: flex;  flex-direction: column; align-items: start;">
+                                <div class="text-danger fw-bold fs-20" style="text-align: start;">* หมายเหตุ:</div>
+                                <div style="text-align: start;">นักเรียนที่สอบได้ห้องเรียนปกติชั้นมัธยมศึกษาปีที่ 4
+                                </div>
+                                <div style="text-align: start;">ให้นักเรียนมอบตัวในวันที่ 5 เมษายน 2569
+                                    เวลา 08.00-12.00 น. </div>
+                                <div style="text-align: start;">ณ ลานธรรมประชารวมใจไทยเศรษฐ์
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div class="w-100 mt-3 ">
                             <div id="wo3">กรุณาดำเนินการยืนยันสิทธิ์เพื่อรายงานตัวเข้าเรียนตามกำหนด</div>
 
@@ -250,36 +273,46 @@
                                 <div id="wo12"
                                     class="d-flex flex-column align-items-center w-50 justify-content-center mt-3">
 
-                                    <select id="wo131" class="form-control" onchange="CheckDupJa(this)">
-                                        <option value="">เลือกสายการเรียนอันดับที่ 1</option>
-                                        <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
-                                            คณิตศาสตร์ </option>
-                                        <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
-                                        <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
-                                    </select>
+                                    <div id="wo131" class="align-items-center" style="display: none;">
+                                        <div class="me-3">1)</div>
+                                        <select class="form-control CheckDupJa" onchange="CheckDupJa(this)">
+                                            <option value="">เลือกสายการเรียนอันดับที่ 1</option>
+                                            <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
+                                                คณิตศาสตร์ </option>
+                                            <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
+                                            <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
+                                        </select>
+                                    </div>
                                     <br>
-                                    <select id="wo132" class="form-control" onchange="CheckDupJa(this)">
-                                        <option value="">เลือกสายการเรียนอันดับที่ 2</option>
-                                        <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
-                                            คณิตศาสตร์ </option>
-                                        <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
-                                        <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
-                                    </select>
+                                    <div id="wo132" class="align-items-center" style="display: none;">
+                                        <div class="me-3">2)</div>
+                                        <select class="form-control CheckDupJa" onchange="CheckDupJa(this)">
+                                            <option value="">เลือกสายการเรียนอันดับที่ 2</option>
+                                            <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
+                                                คณิตศาสตร์ </option>
+                                            <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
+                                            <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
+                                        </select>
+                                    </div>
                                     <br>
-                                    <select id="wo133" class="form-control" onchange="CheckDupJa(this)">
-                                        <option value="">เลือกสายการเรียนอันดับที่ 3</option>
-                                        <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
-                                            คณิตศาสตร์ </option>
-                                        <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
-                                        <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
-                                    </select>
+                                    <div id="wo133" class="align-items-center" style="display: none;">
+                                        <div class="me-3">3)</div>
+                                        <select class="form-control CheckDupJa" onchange="CheckDupJa(this)">
+                                            <option value="">เลือกสายการเรียนอันดับที่ 3</option>
+                                            <option value="แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์">แผนการเรียนวิทยาศาสตร์ -
+                                                คณิตศาสตร์ </option>
+                                            <option value="แผนการเรียนศิลป์ - คำนวณ">แผนการเรียนศิลป์ - คำนวณ</option>
+                                            <option value="แผนการเรียนศิลป์ - สังคม">แผนการเรียนศิลป์ - สังคม</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div id="wo2" class="d-flex w-50 justify-content-center mt-3">
                                     <button onclick="UsedSit('accept')" class="btn btn-success">ยืนยันสิทธิ์</button>
                                     <button onclick="UsedSit('unaccept')" class="btn btn-danger ms-3">สละสิทธิ์</button>
                                 </div>
                                 <div id="wo14" class="flex-column w-75  mt-3" style="display : flex;">
-                                    <div id="wo134" style="text-align: start;">ผู้สมัครต้องจัดลำดับแผนการเรียนจำนวน 3 อันดับ
+                                    <div id="wo134" style="text-align: start;">ผู้สมัครต้องจัดลำดับแผนการเรียนจำนวน 3
+                                        อันดับ
                                         โดยลำดับที่เลือกจะมีผลต่อการคัดเลือก และไม่สามารถเปลี่ยนแปลงได้ภายหลัง
                                         กรุณาตรวจสอบข้อมูลก่อนยืนยัน โดยมีแผนการเรียนดังนี้</div>
                                     <div style="text-align: start;">- แผนการเรียนวิทยาศาสตร์ - คณิตศาสตร์ จำนวน 2
@@ -291,28 +324,7 @@
                                         คน)</div>
                                 </div>
                             </div>
-                            <div id="wo1" class="mt-5" style="display: none;">
-                                <div style="display: flex;  flex-direction: column; align-items: start;">
-                                    <div style="text-align: start;">หมายเหตุ:</div>
-                                    <div style="text-align: start;">นักเรียนที่สอบได้ห้องเรียนปกติชั้นมัธยมศึกษาปีที่ 1
-                                    </div>
-                                    <div style="text-align: start;">ให้นักเรียนมอบตัวในวันที่ 4 เมษายน 2569
-                                        เวลา 08.30-11.00 น. </div>
-                                    <div style="text-align: start;">ณ ลานธรรมประชารวมใจไทยเศรษฐ์</div>
-                                </div>
-                            </div>
-                            <div id="wo11" class="mt-5" style="display: none;">
-                                <div style="display: flex;  flex-direction: column; align-items: start;">
-                                    <div style="text-align: start;">หมายเหตุ:</div>
-                                    <div style="text-align: start;">นักเรียนที่สอบได้ห้องเรียนปกติชั้นมัธยมศึกษาปีที่ 4
-                                    </div>
-                                    <div style="text-align: start;">ให้นักเรียนมอบตัวในวันที่ 5 เมษายน 2569
-                                        เวลา 08.30-11.00 น. </div>
-                                    <div style="text-align: start;">ณ ลานธรรมประชารวมใจไทยเศรษฐ์
-                                    </div>
 
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div id="boxshowinfo" style="display: none;" class="row w-100">
@@ -482,7 +494,7 @@
 
                         <div class="d-flex mt-3">
                             <p class="respcol d-flex mb-0">
-                                <b>หมายเหตุ : วันที่รายงานตัว 1 เมษายน 2569 เวลา 08:00 - 12:00 น. บนระบบออนไลน์</b>
+                                <b>หมายเหตุ : วันที่รายงานตัว <span id="date_raikarntua">1</span> เมษายน 2569 เวลา 08:00 - 12:00 น. บนระบบออนไลน์</b>
                             <p class="mb-0 ms-3" id="datesorbend" style="display: none;"></p>
                             </p>
                         </div>
@@ -560,7 +572,8 @@
         var id_sendto = 0;
         var bypass = '';
         let flagEndExam = false;
-        let pagemyself = false;
+        let pagemyself1 = false;
+        let pagemyself4 = false;
         $(document).ready(() => {
             check ? $("#list2").trigger('click') : "";
             $('.idcard').mask('0-0000-00000-00-0')
@@ -590,20 +603,29 @@
                     if (response.status.code == 200) {
                         checksetting = response.data.in_data;
 
-                        if (response.data.in_data.page_myself == 1) {
-                            pagemyself = true;
+                        if (response.data.in_data.page_myself_m1 == 1) {
+                            
+                            pagemyself1 = true;
                             $('#pointPage4').html(`<a onclick="$('#list2').trigger('click')" href="#" id="list2"
                                             class="btn btn-primary ms-1 d-flex justify-content-center align-items-center">
                                             รายงานตัว
                                         </a>`);
+                            $('#btn-register-m1').hide();
+                            $("#pointPage").hide();
+                        }
+                        if (response.data.in_data.page_myself_m4 == 1) {
+                            
+                            pagemyself4 = true;
+                            
                             $('#pointPage3').html(`<a onclick="$('#list2').trigger('click')" href="#" id="list2"
                                             class="btn btn-primary ms-1 d-flex justify-content-center align-items-center">
                                             รายงานตัว
                                         </a>`);
-                            $('#btn-register-m1').hide();
                             $('#btn-register-m4').hide();
+                            $("#pointPage2").hide();
                         }
-                        else if (response.data.in_data.page_point == 1) {
+
+                        if (response.data.in_data.page_point == 1) {
                             flagEndExam = true;
                             $.ajax({
                                 method: 'post',
@@ -927,9 +949,9 @@
                     }
                 })
             } else {
-                $("#wo131").show();
-                $("#wo132").show();
-                $("#wo133").show();
+                $("#wo131").css("display","flex");
+                $("#wo132").css("display","flex");
+                $("#wo133").css("display","flex");
 
                 $("#wo14").show();
                 $.ajax({
@@ -1006,7 +1028,14 @@
                 })
             }
             else {
-                if (pagemyself) {
+                $("#wo_boxshowinfo").hide();
+                $("#boxshowinfo").hide();
+                $("#boxresult_interview").hide();
+                $("#boxresult_success").hide();
+                $("#boxresult_reject").hide();
+                $("#boxresult_edit").hide();
+
+                if ($("#txt_mor").val() == "mid" && pagemyself1) {
                     $.ajax({
                         method: 'get',
                         url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
@@ -1040,17 +1069,17 @@
                                     }
                                     else if (data.status == "accept") {
                                         let k = data.study_program.toString().split(",");
-                                        $("#wo131").attr("disabled", true).val(k[0]);
-                                        $("#wo132").attr("disabled", true).val(k[1]);
-                                        $("#wo133").attr("disabled", true).val(k[2]);
+                                        $("#wo131 > select").attr("disabled", true).val(k[0]);
+                                        $("#wo132 > select").attr("disabled", true).val(k[1]);
+                                        $("#wo133 > select").attr("disabled", true).val(k[2]);
                                         $("#wo4").show();
                                         $("#wo2").remove();
                                         $("#wo3").remove();
                                         $("#wo5").text("ยืนยันสิทธิ์").addClass("text-success");
                                     } else if (data.status == "unaccept") {
-                                        $("#wo131").attr("disabled", true)
-                                        $("#wo132").attr("disabled", true)
-                                        $("#wo133").attr("disabled", true)
+                                        $("#wo131 > select").attr("disabled", true)
+                                        $("#wo132 > select").attr("disabled", true)
+                                        $("#wo133 > select").attr("disabled", true)
                                         $("#wo4").show();
                                         $("#wo2").remove();
                                         $("#wo3").remove();
@@ -1063,10 +1092,19 @@
                                         $("#wo11").show()
                                 }
                             }
+                            else {
+                                Swal.fire({
+                                    icon: "warning",
+                                    title: "ไม่พบข้อมูลในระบบ",
+                                    text: "กรุณาลองใหม่อีกครั้งในภายหลัง"
+                                })
+                                $("#wo_boxshowinfo").hide();
+                                
+                            }
                         }
                     })
                 }
-                else if (flagEndExam && flagEndExam === true) {
+                else if ($("#txt_mor").val() == "high" && pagemyself4) {
                     $.ajax({
                         method: 'get',
                         url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
@@ -1076,6 +1114,83 @@
                         success: response => {
                             console.log('good', response)
                             if (response.status.code == 200) {
+                                const data = response.data;
+                                $('#wo_boxshowinfo').show()
+                                $('#wo_show_idcard').text(data.id_card)
+                                $('#wo_show_fullname').text(data.information.tname + data.information.fname + ' ' + data.information.lname)
+                                $('#wo_show_oldschool').text(data.education.title_school)
+                                $('#wo_show_phoneno').text(data.information.phone)
+                                $('#wo_show_email').text(data.information.email)
+
+                                if (data.status) {
+
+
+                                    $("#wo5").removeClass("text-success").removeClass("text-danger");
+
+                                    if (data.status == "approve") {
+                                        $("#wo131").attr("disabled", false);
+                                        $("#wo132").attr("disabled", false);
+                                        $("#wo133").attr("disabled", false);
+                                        $("#wo2").show();
+                                        $("#wo3").show();
+                                        $("#wo4").hide();
+                                        $("#wo12").show();
+                                    }
+                                    else if (data.status == "accept") {
+                                        let k = data.study_program.toString().split(",");
+                                        $("#wo131 > select").attr("disabled", true).val(k[0]);
+                                        $("#wo132 > select").attr("disabled", true).val(k[1]);
+                                        $("#wo133 > select").attr("disabled", true).val(k[2]);
+                                        $("#wo4").show();
+                                        $("#wo2").remove();
+                                        $("#wo3").remove();
+                                        $("#wo5").text("ยืนยันสิทธิ์").addClass("text-success");
+                                    } else if (data.status == "unaccept") {
+                                        $("#wo131 > select").attr("disabled", true)
+                                        $("#wo132 > select").attr("disabled", true)
+                                        $("#wo133 > select").attr("disabled", true)
+                                        $("#wo4").show();
+                                        $("#wo2").remove();
+                                        $("#wo3").remove();
+                                        $("#wo5").text("สละสิทธิ์").addClass("text-danger");
+                                    }
+
+                                    if ($("#txt_mor").val() == "mid")
+                                        $("#wo1").show()
+                                    else if ($("#txt_mor").val() == "high")
+                                        $("#wo11").show()
+                                }
+                            }
+                            else {
+                                Swal.fire({
+                                    icon: "warning",
+                                    title: "ไม่พบข้อมูลในระบบ",
+                                    text: "กรุณาลองใหม่อีกครั้งในภายหลัง"
+                                })
+                                $("#wo_boxshowinfo").hide();
+                                
+                            }
+                        }
+                    })
+                }
+                else if (flagEndExam && flagEndExam === true) {
+                    // $("#exam_no").text('')
+                    // $("#exam_sumno").text('')
+
+                    $.ajax({
+                        method: 'get',
+                        url: endpoint + '/utw-register-api/information/show/' + $('#txt_mor').val() + '/card/' + $('#txt_idcard').val().replace(/-/g, ''),
+                        headers: {
+                            Authorization: bearer
+                        },
+                        success: response => {
+                            console.log('good', response)
+                            if (response.status.code == 200) {
+                                if($('#txt_mor').val() == "mid") {
+                                    $("#date_raikarntua").text(`1`);
+                                } else if($('#txt_mor').val() == "high") {
+                                    $("#date_raikarntua").text(`2`);
+                                }
                                 const data = response.data;
                                 id_sendto = response.data.id;
                                 documentlist = response.data.document;
@@ -1575,7 +1690,7 @@
         }
 
         async function UsedSit(param) {
-            if (($("#wo131").val() == "" || $("#wo132").val() == "" || $("#wo133").val() == "") && param == "accept" && txt_mor.value == "high") {
+            if (($("#wo131 > select").val() == "" || $("#wo132 > select").val() == "" || $("#wo133 > select").val() == "") && param == "accept" && txt_mor.value == "high") {
                 Swal.fire({
                     icon: "warning",
                     title: "กรุณาเลือกแผนการเรียน"
@@ -1592,6 +1707,7 @@
                 Swal.fire({
                     icon: "info",
                     title: a,
+                    text: "หากดำเนินการแล้ว ไม่สามารถแก้ไขได้อีก",
                     confirmButtonText: "ยืนยัน",
                     cancelButtonText: "ยกเลิก",
                     showCancelButton: true
@@ -1625,9 +1741,9 @@
                     $("#wo2").remove();
                     $("#wo3").remove();
                     $("#wo4").show();
-                    $("#wo131").attr("disabled", true)
-                    $("#wo132").attr("disabled", true)
-                    $("#wo133").attr("disabled", true)
+                    $("#wo131 > select").attr("disabled", true)
+                    $("#wo132 > select").attr("disabled", true)
+                    $("#wo133 > select").attr("disabled", true)
                     pan = "";
 
                     $("#wo5").removeClass("text-success").removeClass("text-danger");
@@ -1692,19 +1808,30 @@
         }
 
         let pan = "";
-        function CheckDupJa(Element) {
-            let val = Element.value;
-            if (pan.includes(val)) {
-                Element.value = "";
-                Swal.fire({
-                    icon: 'error',
-                    title: 'แผนการเรียนซ้ำ',
-                    text: "กรุณาเลือกใหม่",
-                    confirmButtonText: 'ยืนยัน',
-                })
-                return false;
+        function CheckDupJa(element) {
+            const selects = document.querySelectorAll("select.form-control.CheckDupJa");
+            const values = [];
+
+            for (let select of selects) {
+                if (select.value !== "") {
+                    if (values.includes(select.value)) {
+                        element.value = ""; // reset ตัวที่เลือกซ้ำ
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'แผนการเรียนซ้ำ',
+                            text: "กรุณาเลือกใหม่",
+                            confirmButtonText: 'ยืนยัน',
+                        });
+
+                        return false;
+                    }
+                    values.push(select.value);
+                }
             }
-            pan += val + ",";
+
+            console.log("ค่าปัจจุบัน:", values);
+            pan = values.join(",");
         }
     </script>
 </body>
