@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UTW</title>
   <link rel="icon" href="../imgs/utw.gif">
-  <link rel="stylesheet" href="../global.css?v01">
+  <link rel="stylesheet" href="../global.css?v02">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -312,7 +312,9 @@
           for (let i = 0; i < pushDate.length; i++) {
             const element = pushDate[i];
             var d = String(new Date(element)).substr(0, 3);
-            var score = 3;
+            // จำนวนชั่วโมง 
+            // var score = 3;
+            var score = 6;
             if (d == "Sat" || d == "Sun") {
               score = 6;
             }
