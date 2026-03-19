@@ -1680,13 +1680,13 @@
             $('#btn-register-m1').attr('onclick', `checkOpenRegister('m1')`)
             $('#btn-register-m4').attr('onclick', `checkOpenRegister('m4')`)
 
-            // if ((std <= now && now <= exp) || (bypass == 'bearbug')) {
-            //     $('#btn-register-m1').attr('onclick', `checkOpenRegister('m1')`)
-            //     $('#btn-register-m4').attr('onclick', `checkOpenRegister('m4')`)
-            // } else {
-            //     $('#btn-register-m1').attr('onclick', `sorry('m1')`)
-            //     $('#btn-register-m4').attr('onclick', `sorry('m4')`)
-            // }
+            if ((std <= now && now <= exp) || (bypass == 'bearbug')) {
+                $('#btn-register-m1').attr('onclick', `checkOpenRegister('m1')`)
+                $('#btn-register-m4').attr('onclick', `checkOpenRegister('m4')`)
+            } else {
+                $('#btn-register-m1').attr('onclick', `sorry('m1')`)
+                $('#btn-register-m4').attr('onclick', `sorry('m4')`)
+            }
         }
 
         async function UsedSit(param) {
