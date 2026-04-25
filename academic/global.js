@@ -277,6 +277,7 @@ if(localStorage.bbtoken || true) {
         </div>
     </a>
     <div id="sidebar-repeatstudent-sub" class="sub-menu list-group" style="display: none;">
+      <a  href="./groupsara-repeat-manage.html"  class="list-group-item list-group-item-action">จัดการข้อมูลลงทะเบียนเรียนซ้ำ</a>
       <a  href="./groupsara-repeat-student.html"  class="list-group-item list-group-item-action">รายชื่อนักเรียนลงทะเบียนเรียนซ้ำ</a>
       <a  href="./groupsara-repeat.html"  class="list-group-item list-group-item-action">รายงานข้อมูลปัจจุบัน</a>
       <a  href="./groupsara-repeat-admin-now-old.html"  class="list-group-item list-group-item-action">รายงานข้อมูลเก่า</a>

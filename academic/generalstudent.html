@@ -457,7 +457,8 @@
           $.ajax({
             type: "POST",
             dataType: "JSON",
-            url: endpoint + '/utw-cors-api/users/delete.php',
+            // url: endpoint + '/utw-cors-api/users/delete.php',
+            url: endpoint + "/utw-repeat-api/admin/student-delete",
             headers: {
               Authorization: 'Bearer ' + localStorage.utwAdminToken
             },
@@ -520,7 +521,8 @@
         $.ajax({
           type: "POST",
           dataType: "JSON",
-          url: endpoint + '/utw-cors-api/users/add.php',
+          // url: endpoint + '/utw-cors-api/users/add.php',
+          url: endpoint + "/utw-repeat-api/admin/student-create",
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
             user_no: $("#add_studentno").val(), /* teacher = null */
@@ -543,6 +545,12 @@
                 timer: 2000
               }).then(() => {
                 window.location.reload()
+              })
+            }
+            else if( response.status.code == 201) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'ผู้ใช้ซ้ำ',
               })
             }
             else {
@@ -603,7 +611,8 @@
         $.ajax({
           type: "POST",
           dataType: "JSON",
-          url: endpoint + '/utw-cors-api/users/update.php',
+          // url: endpoint + '/utw-cors-api/users/update.php',
+          url: endpoint + "/utw-repeat-api/admin/student-update",
           headers: { Authorization: 'Bearer ' + localStorage.utwAdminToken },
           data: {
             id: edit_id,

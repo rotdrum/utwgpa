@@ -165,3 +165,25 @@ app.post(endpoint + "/admin/delete-repeat/:id", cors(corsOptions), rrrr);
 const abcd = require("./admin/changeTeacher.js");
 app.post(endpoint + "/admin/change-teacher/:id/:teacher_id", cors(corsOptions), abcd);
 
+
+const bangyai = require("./admin/studentAdd.js");
+app.post(endpoint + "/admin/student-create", cors(corsOptions), bangyai);
+
+const bangsue = require("./admin/studentUpdate.js");
+app.post(endpoint + "/admin/student-update", cors(corsOptions), bangsue);
+
+const bangplat = require("./admin/studentDelete.js");
+app.post(endpoint + "/admin/student-delete", cors(corsOptions), bangplat);
+
+
+
+
+const bangna = require("./admin/repeatGet.js");
+app.post(endpoint + "/admin/repeat-get", cors(corsOptions), bangna);
+
+const bangkruy = require("./admin/repeatAdd.js");
+app.post(endpoint + "/admin/repeat-create", cors(corsOptions), bangkruy);
+
+const bangson = require("./admin/repeatDelete.js");
+app.post(endpoint + "/admin/repeat-delete", cors(corsOptions), bangson);
+
