@@ -228,10 +228,10 @@ firstname = firstname.replace(/[A-Za-z0-9\s_]/g, '');
             const lastname = infomation.lastname; // ค่า $lastname ที่ส่งมาจาก PHP
             const picture = infomation.picture; // ค่า $picture ที่ส่งมาจาก PHP
             console.log('data data :', data.data);
-            if (false && statusCode == 201) {
+            if (statusCode == 201) {
               window.location.href = './keeptoken.html?token=' + oktoken + '&email=' + email + '&fname=' + firstname + '&lname=' + lastname + '&kyc=signup&img=' + picture + '&userid=' + data.data.id + '&actk=' + oktoken;
             }
-            else if (statusCode == 200 || statusCode == 201) {
+            else if (statusCode == 200) {
               const tokenlogin = data.data.access_token;
               window.location.href = './keeptoken.html?token=' + tokenlogin + '&email=' + email + '&kyc=signin&img=' + picture + '&userid=' + data.data.id + '&userno=' + data.data.user_no + '&tn=' + data.data.tname + '&fname=' + data.data.fname + '&lname=' + data.data.lname + '&actk=' + oktoken;
             }
