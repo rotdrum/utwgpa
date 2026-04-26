@@ -31,7 +31,7 @@ module.exports = async function (req, res) {
     let subject = req.body.subject;
     if (user_id) {
 
-      var [data1] = await dbGrade.query("select * from indicators_master where teacher_id = ? and subject = ?", [user_id, subject])
+      var [data1] = await dbGrade.query("select * from indicators_master where teacher_id = ? and subject_id = ?", [user_id, subject])
       if (data1 && data1[0]) {
         return success(res, data1[0]);
       }
