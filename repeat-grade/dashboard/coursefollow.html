@@ -608,9 +608,10 @@
               </div>`;
               btn_control = `
               <div class="d-flex">
-                  <div onclick="md_detail(${i}, '${element.status}')" class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal"
+                  <div onclick="md_detail(${i}, '${element.status}')" class="btn-sm btn-primary ms-3 d-flex align-items-center" style="cursor: pointer;" data-bs-toggle="modal"
                     data-bs-target="#md_para">
                     <i class="fas fa-search"></i>
+                    <div class="ms-2 ">ตรวจงาน</div>
                   </div>
                   <div onclick="md_edit(${i}, '${element.status}')" class="btn-sm btn-warning ms-1 " style="cursor: pointer;" data-bs-toggle="modal"
                     data-bs-target="#md_addpara">
@@ -628,11 +629,18 @@
               </div>`;
               btn_control = `
               <div class="d-flex">
-                  <div onclick="md_detail(${i}, '${element.status}')" class="btn-sm btn-primary ms-3 " style="cursor: pointer;" data-bs-toggle="modal"
+                  <div onclick="md_detail(${i}, '${element.status}')" class="btn-sm btn-primary ms-3 d-flex align-items-center" style="cursor: pointer;" data-bs-toggle="modal"
                     data-bs-target="#md_para">
                     <i class="fas fa-search"></i>
+                    <div class="ms-2 ">ตรวจงาน</div>
+                    
                   </div>
-              </div>`;
+                   <div onclick="md_edit(${i}, '${element.status}')" class="btn-sm btn-warning ms-1 " style="cursor: pointer;" data-bs-toggle="modal"
+                    data-bs-target="#md_addpara">
+                    <i class="fas fa-pen"></i>
+                  </div>
+              </div>
+              `;
             }
             else if (element.status == "wait_success") {
               status = `
@@ -826,12 +834,12 @@
       const info = data[i];
 
       console.log("ddd", info.time_learning)
-      if (info.time_learning && info.time_learning[0]) {
-        $("#btn_sendForm").removeAttr("disabled");
-      }
-      else {
-        $("#btn_sendForm").attr("disabled", "true");
-      }
+      // if (info.time_learning && info.time_learning[0]) {
+      //   $("#btn_sendForm").removeAttr("disabled");
+      // }
+      // else {
+      //   $("#btn_sendForm").attr("disabled", "true");
+      // }
 
       console.log("##data", data)
       localStorage.setItem("utwOpenmdIndex", i);
@@ -1045,6 +1053,7 @@
         },
         "data": {
           "user_id": localStorage.utwUserId,
+          "subject": masterGrade.subject_id
         },
       };
       $.ajax(settings).done(function (response) {

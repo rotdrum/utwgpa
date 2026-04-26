@@ -187,3 +187,7 @@ app.post(endpoint + "/admin/repeat-create", cors(corsOptions), bangkruy);
 const bangson = require("./admin/repeatDelete.js");
 app.post(endpoint + "/admin/repeat-delete", cors(corsOptions), bangson);
 
+
+const bangsan = require("./admin/masterScore4Factor.js");
+app.post(endpoint + "/admin/master-score-4factor", cors(corsOptions), bangsan);
+

@@ -237,6 +237,7 @@
             render()
             $('#myteacher').text(localStorage.utwFullname)
             $('.datenow').text(dateengtodatethai(getDateNow().split(" ")[0]))
+            Score4FactorMaster();
         })
 
         function groupDatesByMonth(dates) {
@@ -305,6 +306,8 @@
             return this;
         };
         var nuikit = "";
+        let smid = 0;;
+        let sfinal = 0;
         function render() {
             loading(true)
             $.ajax({
@@ -632,6 +635,24 @@
             }
             $("#nuikiy").text(nuikit ? nuikit : "-")
             return nuikit;
+        }
+
+        function Score4FactorMaster() {
+            $.ajax({
+                method: 'post',
+                url: 'http://localhost:3006/utw-repeat-api/admin/master-score-4factor',
+                headers: {
+                    "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
+                },
+                data: {
+                    subject_id: sbjcl,
+                    teacher_id: user_id
+                }, success: response => {
+                    console.log('good', response)
+                    if (response.status.code == 200) {
+                    }
+                }
+            });
         }
     </script>
 </body>

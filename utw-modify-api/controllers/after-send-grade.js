@@ -40,7 +40,7 @@ module.exports = async function (req, res) {
 
     if (teacher_id && subject) {
 
-      var [data1] = await dbGrade.query("select * from indicators_master where teacher_id = ?", [teacher_id])
+      var [data1] = await dbGrade.query("select * from indicators_master where teacher_id = ? and subject = ? ", [teacher_id, subject])
       if (data1 && data1[0]) {
         dbGrade.query("update  indicators_master set  indicators=?,outcomes=?, updated_at=?, before_mid_score=?, mid_score=?, before_final_score=?, final_score=? where teacher_id =? and  subject_id =? ", 
           [pon1, pon2,  new Date(), before_mid_score, mid_score, before_final_score, final_score,teacher_id, subject])
