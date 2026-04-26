@@ -11,7 +11,7 @@ const error = require("../response/error.js");
 const authorization = require("../response/authorization.js");
 
 function getOne(req, res) {
-  dbGrade.query(`select * from repeat_student_score where subject_id = ? and teacher_id =?`,
+  dbGrade.query(`select * from indicators_master where subject_id = ? and teacher_id =?`,
     [
       req.body.subject_id,
       req.body.teacher_id,

@@ -146,12 +146,12 @@
                 <br>
 
                 <h6 style="font-size: 14px;" class="font-bold">อัตราส่วนคะแนนระหว่างภาค : ปลายภาค
-                    <span style="font-size: 14px;" class="font-bold">75</span> :
-                    <span style="font-size: 14px;" class="font-bold">25</span>
+                    <span style="font-size: 14px;" class="font-bold" id="indc_1">75</span> :
+                    <span style="font-size: 14px;" class="font-bold" id="indc_2">25</span>
                     ตัวชี้วัด / ผลการเรียนรู้ ก่อนวัดผลกลางภาค : วัดผลกลางภาคเรียน : หลังวัดผลกลางภาค =
-                    <span style="font-size: 14px;" class="font-bold">25</span> :
-                    <span style="font-size: 14px;" class="font-bold">25</span> :
-                    <span style="font-size: 14px;" class="font-bold">25</span>
+                    <span style="font-size: 14px;" class="font-bold" id="indc_3">25</span> :
+                    <span style="font-size: 14px;" class="font-bold" id="indc_4">25</span> :
+                    <span style="font-size: 14px;" class="font-bold" id="indc_5">25</span>
                 </h6>
 
 
@@ -568,6 +568,11 @@
                                 haNuikit(element.student_activity[0]);
                             }
 
+                            let sumscore = "1";
+                            if(element.grade_new) {
+                                sumscore = element.grade_new;
+                            }
+
                             html += `
                             <tr>
                                 <td style="padding: 0; text-align: center;">${element.student.id}</td>
@@ -579,7 +584,7 @@
                                 <td style="padding: 0; text-align: center;">${element.before_final_score ? element.before_final_score : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.final_score ? element.final_score : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.sum_score ? element.sum_score : ""}</td>
-                                <td style="padding: 0; text-align: center;">1</td>
+                                <td style="padding: 0; text-align: center;">${sumscore}</td>
                                 <td style="padding: 0; text-align: center;">${element.ac_1 ? element.ac_1 : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.ac_2 ? element.ac_2 : ""}</td>
                                 <td style="padding: 0; text-align: center;">${element.ac_3 ? element.ac_3 : ""}</td>
@@ -640,7 +645,7 @@
         function Score4FactorMaster() {
             $.ajax({
                 method: 'post',
-                url: 'http://localhost:3006/utw-repeat-api/admin/master-score-4factor',
+                url: endpoint + '/utw-repeat-api/admin/master-score-4factor',
                 headers: {
                     "Authorization": "Bearer 36FFDS5214FSAFASddaF894a0e4a801fc38251f1f40f8c3b8f5bed1667dae64de0dasd"
                 },
@@ -650,6 +655,12 @@
                 }, success: response => {
                     console.log('good', response)
                     if (response.status.code == 200) {
+                        indc_1.innerText = response.data[0].before_final_score + response.data[0].before_mid_score + response.data[0].mid_score;
+                        indc_2.innerText = response.data[0].final_score;
+
+                        indc_3.innerText = response.data[0].before_mid_score;
+                        indc_4.innerText = response.data[0].mid_score;
+                        indc_5.innerText = response.data[0].before_final_score;
                     }
                 }
             });
