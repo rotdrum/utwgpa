@@ -388,12 +388,13 @@
         },
         success: response => {
           console.log(response)
-          if (response.status.code == 200) {
+          if (statusCode(response) == 200) {
             var html = `<option value="">--- เลือก ---</option>`
-            for (let i = 0; i < response.data.length; i++) {
-              const element = response.data[i];
+            const departments = dataList(response);
+            for (let i = 0; i < departments.length; i++) {
+              const element = departments[i] || {};
               html += `
-                <option value="${element.id}">${element.name}</option>
+                <option value="${safeText(element.id)}">${safeText(element.name, "-")}</option>
                 `
             }
             $("#add_department").html(html)
@@ -408,6 +409,44 @@
     }
 
     var responseResult;
+
+    function safeText(value, fallback = "") {
+      return value === null || value === undefined || value === "" ? fallback : value;
+    }
+
+    function statusCode(response) {
+      return response && response.status ? response.status.code : null;
+    }
+
+    function dataList(response) {
+      return response && Array.isArray(response.data) ? response.data : [];
+    }
+
+    function fullName(person, fallback = "-") {
+      if (!person) {
+        return fallback;
+      }
+
+      const name = `${safeText(person.tname)}${safeText(person.fname)} ${safeText(person.lname)}`.trim();
+      return name || fallback;
+    }
+
+    function personOptionValue(person) {
+      if (!person) {
+        return "";
+      }
+
+      return [
+        safeText(person.id),
+        safeText(person.tname),
+        safeText(person.fname),
+        safeText(person.lname),
+        safeText(person.part, "-"),
+        safeText(person.room),
+        safeText(person.class)
+      ].join("|");
+    }
+
     function render() {
       loading(true)
       $.ajax({
@@ -424,25 +463,26 @@
         success: response => {
           console.log(response)
           responseResult = response;
-          if (response.status.code == 200) {
+          if (statusCode(response) == 200) {
             var html = ''
-            for (let i = 0; i < response.data.length; i++) {
-              const element = response.data[i];
+            const resultData = dataList(response);
+            for (let i = 0; i < resultData.length; i++) {
+              const element = resultData[i] || {};
               html += `
                 <tr>
-                    <td>${element.id}</td>
+                    <td>${safeText(element.id, "-")}</td>
                     
-                    <td>${element.teacher.tname}${element.teacher.fname} ${element.teacher.lname}</td>
-                    <td>${element.student.tname}${element.student.fname} ${element.student.lname}</td>
-                    <td>[${element.subject_code}] ${element.subject_title}</td>
-                    <td>${element.year_at ? element.year_at : "-"}</td>
+                    <td>${fullName(element.teacher)}</td>
+                    <td>${fullName(element.student)}</td>
+                    <td>[${safeText(element.subject_code, "-")}] ${safeText(element.subject_title, "-")}</td>
+                    <td>${safeText(element.year_at, "-")}</td>
                     <td>
                       <div class="d-flex">
                     
                         <!-- <div onclick="editInfo(${i})" style="cursor: pointer;" class="btn-sm me-1 btn-warning" data-bs-toggle="modal" data-bs-target="#md_edit">
                           <i class="bi bi-pencil-square"></i>
                         </div> -->
-                        <div onclick="removeInfo(${i}, '${element.id}')" style="cursor: pointer;" class="btn-sm me-1 btn-danger">
+                        <div onclick="removeInfo(${i}, '${safeText(element.id)}')" style="cursor: pointer;" class="btn-sm me-1 btn-danger">
                           <i class="bi bi-trash3-fill"></i>
                         </div>
                       </div>
@@ -513,10 +553,10 @@
 
     var edit_id = 0;
     function editInfo(n) {
-      const data = responseResult.data[n];
+      const data = dataList(responseResult)[n] || {};
       console.log(data);
       let student = data.student;
-      $("#upd_student").val(`${student.id}|${student.tname}|${student.fname}|${student.lname}|${student.part ? student.part : "-"}|${student.room}|${student.class}`)
+      $("#upd_student").val(personOptionValue(student))
       .change('trigger');
 
     }
@@ -550,7 +590,7 @@
             },
             success: function (response) {
               console.log("good", response);
-              if (response.status.code == 200) {
+              if (statusCode(response) == 200) {
                 Swal.fire({
                   icon: 'success',
                   title: 'สำเร็จ',
@@ -617,7 +657,7 @@
           },
           success: function (response) {
             console.log("good", response);
-            if (response.status.code == 200) {
+            if (statusCode(response) == 200) {
               Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
@@ -703,7 +743,7 @@
           },
           success: function (response) {
             console.log("good", response);
-            if (response.status.code == 200) {
+            if (statusCode(response) == 200) {
               Swal.fire({
                 icon: 'success',
                 title: 'สำเร็จ',
@@ -745,12 +785,12 @@
         url: endpoint + '/utw-cors-api/students.php',
         success: response => {
           console.log(response)
-          if (response.status.code == 200) {
-            gStudent = response.data;
+          if (statusCode(response) == 200) {
+            gStudent = dataList(response);
             let html = `<option value="">เลือก</option>`;
             for (let i = 0; i < gStudent.length; i++) {
-              const element = gStudent[i];
-              html += `<option value="${element.id}|${element.tname}|${element.fname}|${element.lname}|${element.part ? element.part : "-"}|${element.room}|${element.class}">${element.tname}${element.fname} ${element.lname}</option>`;
+              const element = gStudent[i] || {};
+              html += `<option value="${personOptionValue(element)}">${fullName(element)}</option>`;
             }
             $("#add_student").html(html).select2({
               dropdownParent: $('#md_add')
@@ -772,12 +812,12 @@
         },
         success: response => {
           console.log(response)
-          if (response.status.code == 200) {
-            gTeacher = response.data;
+          if (statusCode(response) == 200) {
+            gTeacher = dataList(response);
             let html = `<option value="">เลือก</option>`;
             for (let i = 0; i < gTeacher.length; i++) {
-              const element = gTeacher[i];
-              html += `<option value="${element.id}|${element.tname}|${element.fname}|${element.lname}|${element.part ? element.part : "-"}|${element.room}|${element.class}">${element.tname}${element.fname} ${element.lname}</option>`;
+              const element = gTeacher[i] || {};
+              html += `<option value="${personOptionValue(element)}">${fullName(element)}</option>`;
             }
             $("#add_teacher").html(html).select2({
               dropdownParent: $('#md_add')
@@ -799,12 +839,12 @@
         },
         success: response => {
           console.log(response)
-          if (response.status.code == 200) {
-            gSubject = response.data;
+          if (statusCode(response) == 200) {
+            gSubject = dataList(response);
             let html = `<option value="">เลือก</option>`;
             for (let i = 0; i < gSubject.length; i++) {
-              const element = gSubject[i];
-              html += `<option value="${element.subject_code}|${element.name}|${element.department_id}|${element.id}|${element.class}">[${element.subject_code}] ${element.name}</option>`;
+              const element = gSubject[i] || {};
+              html += `<option value="${safeText(element.subject_code)}|${safeText(element.name)}|${safeText(element.department_id)}|${safeText(element.id)}|${safeText(element.class)}">[${safeText(element.subject_code, "-")}] ${safeText(element.name, "-")}</option>`;
             }
             $("#add_subject").html(html).select2({
               dropdownParent: $('#md_add')
