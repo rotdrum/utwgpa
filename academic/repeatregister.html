@@ -222,7 +222,7 @@
   </div>
 
 
-  <script src="./global.js?v04"></script>
+  <script src="./global.js?v05"></script>
   <script>
     let modify = null;
     $(document).ready(() => {
@@ -347,8 +347,18 @@ function collectCheckedGrades() {
     function updateInfo() {
       $('.errmsg').remove()
       $('.form-txt').removeClass('is-invalid')
+      const currentEducationYear = new Date().getFullYear() + 543;
+      const minimumEducationYear = currentEducationYear - 1;
+      const educationYear = Number($('#txt_year').val());
+
       if ($('#txt_year').val().length <= 0) {
         $('#txt_year').after(`<span class="errmsg">โปรดกรอกข้อความ</span>`).addClass('is-invalid')
+      }
+      else if (!Number.isInteger(educationYear) || educationYear < minimumEducationYear || educationYear > currentEducationYear) {
+        $('#txt_year')
+          .after(`<span class="errmsg">ปีการศึกษาต้องอยู่ระหว่าง ${minimumEducationYear} - ${currentEducationYear}</span>`)
+          .addClass('is-invalid')
+          .focus()
       }
       else if ($('#txt_term').val().length <= 0) {
         $('#txt_term').after(`<span class="errmsg">โปรดกรอกข้อความ</span>`).addClass('is-invalid')
@@ -366,7 +376,7 @@ function collectCheckedGrades() {
         }
         $.ajax({
           method: 'post',
-          url: endpoint + '/utw-cors-api/settings/update.php',
+          url: endpointv2 + '/utw-modify-api/settings-update',
           data: {
             _method: "POST",
             key_address: 'repeat_page_active',
@@ -383,7 +393,7 @@ function collectCheckedGrades() {
               }
               $.ajax({
                 method: 'post',
-                url: endpoint + '/utw-cors-api/settings/update.php',
+                url: endpointv2 + '/utw-modify-api/settings-update',
                 data: {
                   _method: "POST",
                   key_address: 'repeat_date',
@@ -392,7 +402,7 @@ function collectCheckedGrades() {
                   if (response.status.code == 200) {
                     $.ajax({
                       method: 'post',
-                      url: endpoint + '/utw-cors-api/settings/update.php',
+                      url: endpointv2 + '/utw-modify-api/settings-update',
                       data: {
                         _method: "POST",
                         key_address: 'grade_announce',
@@ -406,7 +416,7 @@ function collectCheckedGrades() {
                           let checkedGrades = collectCheckedGrades();
                           $.ajax({
                             method: 'post',
-                            url: endpoint + '/utw-cors-api/settings/update.php',
+                            url: endpointv2 + '/utw-modify-api/settings-update',
                             data: {
                               _method: "POST",
                               key_address: 'repeat_grade_class_active',

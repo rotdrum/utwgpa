@@ -326,6 +326,13 @@ if(localStorage.bbtoken || true) {
       <a  href="./repeatregister.html"  class="list-group-item list-group-item-action">ระบบลงทะเบียนเรียนซ้ำ</a>
     </div>
 
+    <a onclick="activeSidebar(this)" href="./certificate.html" id="sidebar-certificate" class="sidebar-items">
+      <div class="sidebar-icon">
+        <i class="bi bi-shield-check"></i>
+      </div>
+      <p style="color: #fff;margin: 0;">certificate</p>
+    </a>
+
     
     
     <a onclick="gotologout()"  id="sidebar-logout" class="sidebar-items">

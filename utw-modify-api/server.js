@@ -131,6 +131,9 @@ app.post("/login", cors(corsOptions), login);
 const courseGetOne = require("./controllers/course-getone");
 app.post(endpoint + "/course-getone", cors(corsOptions), courseGetOne);
 
+const settingsUpdate = require("./controllers/settings-update");
+app.post(endpoint + "/settings-update", cors(corsOptions), settingsUpdate);
+
 const subjectShow = require("./controllers/subject-show");
 app.post(endpoint + "/subject-show", cors(corsOptions), subjectShow);
 
