@@ -139,12 +139,13 @@
               room: classroom[1],
             }, success: (response) => {
               console.log('good',response)
-              if(response.status.code == 200) {
-                superdata = response.data;
+              // 201 = API ไม่พบข้อมูล ไม่ใช่ error
+              if(response.status.code == 200 || response.status.code == 201) {
+                superdata = response.data || [];
                 var html = ''
                 var flag = true;
-                  for (let i = 0; i < response.data.length; i++) {
-                    const data = response.data[i];
+                  for (let i = 0; i < superdata.length; i++) {
+                    const data = superdata[i];
                     var student = JSON.parse(data.activity)
 
                     console.log('student',student)

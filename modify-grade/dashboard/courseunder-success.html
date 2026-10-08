@@ -165,11 +165,11 @@
           room: classroom[1],
         }, success: (response) => {
           console.log('good', response)
-          if (response.status.code == 200) {
-            superdata = response.data;
+          // 201 = API ไม่พบข้อมูล ไม่ใช่ error
+          if (response.status.code == 200 || response.status.code == 201) {
+            superdata = response.data || [];
             var html = ''
-            var flag = true;
-            for (let i = 0, a = 1; i < response.data.length; i++) {
+            for (let i = 0, a = 0; i < superdata.length; i++) {
               const element = response.data[i];
 
               if (element.student && `${element.student.class}/${element.student.room}` == localStorage.utwClassRoom) {
@@ -196,6 +196,15 @@
                 </tr>`;
               }
 
+            }
+            if (html == '') {
+              html = `
+                <tr>
+                  <td colspan="8" class="text-center py-5">
+                    <img src="../../imgs/notfound.png" style="width: 20%; object-fit: contain; margin-bottom: 20px;" />
+                    <h4>ไม่พบข้อมูล</h4>
+                  </td>
+                </tr>`;
             }
             $("#tbody").html(html);
           }
