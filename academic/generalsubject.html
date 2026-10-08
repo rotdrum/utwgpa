@@ -246,6 +246,15 @@
       })
     }
 
+    var subjects = {}
+
+    // ห้องเรียน เช่น "1, 2 ,3" หรือ "1，2" -> "1,2,3" / ว่าง -> null (ไม่กำหนด)
+    function normalizeRoom(value) {
+      const room = String(value || '').replace(/[，、]/g, ',').split(',')
+        .map(x => x.trim()).filter(x => x !== '').join(',')
+      return room === '' ? null : room
+    }
+
     function render() {
       loading(true)
       $.ajax({
@@ -260,6 +269,7 @@
             var html = ''
             for (let i = 0; i < response.data.length; i++) {
               const element = response.data[i];
+              subjects[element.id] = element
               html += `
                   <tr>
                     <td>${element.id}</td>
@@ -277,7 +287,7 @@
                     </td>
                     <td>
                       <div class="d-flex">
-                        <div onclick="editInfo(${element.id}, '${element.subject_code}', '${element.name}', '${element.class}', '${element.room}', ${element.department_id})" style="cursor: pointer;" class="btn-sm me-1 btn-warning" data-bs-toggle="modal" data-bs-target="#md_edit">
+                        <div onclick="editInfo(${element.id})" style="cursor: pointer;" class="btn-sm me-1 btn-warning" data-bs-toggle="modal" data-bs-target="#md_edit">
                           <i class="bi bi-pencil-square"></i>
                         </div>
                         <div onclick="removeInfo(${element.id}, '${element.subject_code}','${element.name}')" style="cursor: pointer;" class="btn-sm me-1 btn-danger">
@@ -349,7 +359,7 @@
             subject_code: $('#add_code').val(),
             name: $('#add_subject').val(),
             class: $('#add_class').val() ? parseInt($('#add_class').val()) : null, /* null ได้ */
-            room: $('#add_room').val() ? $('#add_room').val() : null, /* null ได้ */
+            room: normalizeRoom($('#add_room').val()), /* null ได้ */
             department_id: parseInt($('#add_department').val()),
           },
           success: function (response) {
@@ -424,13 +434,14 @@
     }
 
     var edit_id = 0;
-    function editInfo(idx, code, name, classx, room, depid) {
+    function editInfo(idx) {
+      const subject = subjects[idx] || {}
       edit_id = idx;
-      $('#edit_code').val(code)
-      $('#edit_subject').val(name)
-      $('#edit_department').val(depid)
-      $('#edit_class').val(classx)
-      $('#edit_room').val(room)
+      $('#edit_code').val(subject.subject_code || '')
+      $('#edit_subject').val(subject.name || '')
+      $('#edit_department').val(subject.department_id || '')
+      $('#edit_class').val(subject.class || '')
+      $('#edit_room').val(subject.room || '')
     }
 
     function editInfoList() {
@@ -465,7 +476,7 @@
             subject_code: $('#edit_code').val(),
             name: $('#edit_subject').val(),
             class: $('#edit_class').val() ? parseInt($('#edit_class').val()) : null, /* null ได้ */
-            room: $('#edit_room').val() ? $('#edit_room').val() : null, /* null ได้ */
+            room: normalizeRoom($('#edit_room').val()), /* null ได้ */
             department_id: parseInt($('#edit_department').val()),
           },
           success: function (response) {

@@ -12,6 +12,15 @@ const error = require("../response/error.js");
 const authenticate = require("../middlewares/authenticate.js");
 const { checkTokenAdmin, getDateNow, MD5, genval } = require("../middlewares/bearbug.js");
 
+// ห้องเรียน เช่น "1, 2 ,3" -> "1,2,3" / ว่าง หรือ "null" -> null (ไม่กำหนด)
+function normalizeRoom(value) {
+  if (value === undefined || value === null) return null;
+  const room = String(Array.isArray(value) ? value.join(",") : value)
+    .replace(/[，、]/g, ",").split(",")
+    .map((x) => x.trim()).filter((x) => x !== "").join(",");
+  return room === "" || room === "null" || room === "undefined" ? null : room;
+}
+
 module.exports = async function (req, res) {
   try {
     var token = req.body.token;
@@ -24,7 +33,7 @@ module.exports = async function (req, res) {
     var subject_code = req.body.subject_code
     var name = req.body.name
     var classx = req.body.class
-    var room = req.body.room
+    var room = normalizeRoom(req.body.room)
     var department_id = req.body.department_id
     var updated_at = getDateNow();
 
