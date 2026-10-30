@@ -173,7 +173,6 @@
     .status-ok { color: #067647; background: #ecfdf3; }
     .status-warning { color: #b54708; background: #fffaeb; }
     .status-danger { color: #b42318; background: #fef3f2; }
-    .status-lifetime { color: #5925dc; background: #f4f3ff; }
 
     .days-row {
       display: flex;
@@ -302,8 +301,8 @@
             <div><div class="summary-label">ใกล้หมดอายุที่สุด</div><p class="summary-value" id="nearestDays">-</p></div>
           </article>
           <article class="summary-card">
-            <div class="summary-icon purple"><i class="bi bi-arrow-repeat"></i></div>
-            <div><div class="summary-label">ต่ออายุอัตโนมัติ (Cloudflare)</div><p class="summary-value" id="autoRenewCount">-</p></div>
+            <div class="summary-icon purple"><i class="bi bi-calendar-event"></i></div>
+            <div><div class="summary-label">หมดอายุรอบถัดไป</div><p class="summary-value" id="nextExpiry">-</p></div>
           </article>
         </section>
 
@@ -314,11 +313,13 @@
 
   <script src="./global.js?v05"></script>
   <script>
+    const renewedAt = '2026-10-23T00:00:00+07:00';
+    const expiresAt = '2027-01-23T00:00:00+07:00';
     const certificates = [
-      { domain: 'modify-api.utwgpa.com', provider: 'Cloudflare · Google Trust Services', autoRenew: true, renewedAt: '2026-10-10T02:34:19Z', expiresAt: '2027-01-08T03:32:07Z' },
-      { domain: 'prd-api.utwgpa.com', provider: 'Cloudflare · Google Trust Services', autoRenew: true, renewedAt: '2026-10-10T02:34:19Z', expiresAt: '2027-01-08T03:32:07Z' },
-      { domain: 'repeat-api.utwgpa.com', provider: 'Cloudflare · Google Trust Services', autoRenew: true, renewedAt: '2026-10-10T02:34:19Z', expiresAt: '2027-01-08T03:32:07Z' },
-      { domain: 'utw.ac.th', provider: 'UTW Certificate · ต่ออายุทุก 3 เดือน', autoRenew: false, renewedAt: '2026-10-23T00:00:00+07:00', expiresAt: '2027-01-23T00:00:00+07:00' }
+      { domain: 'modify-api.utwgpa.com', provider: 'ผ่าน Cloudflare · ต่ออายุทุก 3 เดือน', renewedAt, expiresAt },
+      { domain: 'prd-api.utwgpa.com', provider: 'ผ่าน Cloudflare · ต่ออายุทุก 3 เดือน', renewedAt, expiresAt },
+      { domain: 'repeat-api.utwgpa.com', provider: 'ผ่าน Cloudflare · ต่ออายุทุก 3 เดือน', renewedAt, expiresAt },
+      { domain: 'utw.ac.th', provider: 'UTW Certificate · ต่ออายุทุก 3 เดือน', renewedAt, expiresAt }
     ];
 
     const dayMs = 24 * 60 * 60 * 1000;
@@ -353,7 +354,7 @@
       });
 
       document.getElementById('totalCount').textContent = items.length + ' รายการ';
-      document.getElementById('autoRenewCount').textContent = items.filter(item => item.autoRenew).length + ' รายการ';
+      document.getElementById('nextExpiry').textContent = thaiDate(new Date(Math.min(...items.map(item => item.expiresAt)))).replace(/ เวลา.*/, '');
       document.getElementById('nearestDays').textContent = Math.min(...items.map(item => item.days)) + ' วัน';
       document.getElementById('lastUpdate').textContent = 'อัปเดตล่าสุด ' + thaiDate(now);
 
@@ -361,9 +362,6 @@
         const status = certificateStatus(data.days);
         const progress = Math.max(0, Math.min(100, (data.days / data.validityDays) * 100));
         const renewBefore = new Date(data.expiresAt.getTime() - (30 * dayMs));
-        const renewNote = data.autoRenew
-          ? '<span class="status-badge status-lifetime"><i class="bi bi-arrow-repeat"></i><span>ต่ออายุอัตโนมัติ</span></span>'
-          : '';
 
         return `
           <article class="certificate-card">
@@ -372,10 +370,7 @@
                 <div class="certificate-icon"><i class="bi bi-shield-lock-fill"></i></div>
                 <div><h2 class="certificate-domain">${data.domain}</h2><p class="certificate-provider">${data.provider}</p></div>
               </div>
-              <div class="d-flex flex-wrap justify-content-end gap-1">
-                <div class="status-badge status-${status.tone}"><i class="bi bi-circle-fill" style="font-size:.45rem"></i><span>${status.label}</span></div>
-                ${renewNote}
-              </div>
+              <div class="status-badge status-${status.tone}"><i class="bi bi-circle-fill" style="font-size:.45rem"></i><span>${status.label}</span></div>
             </div>
             <div class="days-row">
               <div><span class="days-number">${data.days}</span> <span class="days-unit">วัน</span></div>
@@ -387,7 +382,7 @@
             <div class="certificate-details">
               <div><span class="detail-label">ต่ออายุล่าสุด</span><p class="detail-value">${thaiDate(data.renewedAt)}</p></div>
               <div><span class="detail-label">วันหมดอายุ</span><p class="detail-value">${thaiDate(data.expiresAt)}</p></div>
-              <div><span class="detail-label">${data.autoRenew ? 'Cloudflare จะต่ออายุก่อน' : 'แนะนำให้ต่อภายใน'}</span><p class="detail-value">${thaiDate(renewBefore)}</p></div>
+              <div><span class="detail-label">แนะนำให้ต่อภายใน</span><p class="detail-value">${thaiDate(renewBefore)}</p></div>
               <div><span class="detail-label">อายุใบรับรอง</span><p class="detail-value">${data.validityDays} วัน</p></div>
             </div>
           </article>`;
