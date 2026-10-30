@@ -145,10 +145,6 @@
       background: #eaf2ff;
     }
 
-    .certificate-icon.lifetime {
-      color: #079455;
-      background: #e9fbf2;
-    }
 
     .certificate-domain {
       overflow-wrap: anywhere;
@@ -237,28 +233,8 @@
       font-weight: 600;
     }
 
-    .lifetime-body {
-      display: grid;
-      min-height: 183px;
-      place-items: center;
-      margin-top: 18px;
-      border-radius: 15px;
-      text-align: center;
-      background: linear-gradient(135deg, #f0fdf4, #ecfdf3);
-    }
 
-    .lifetime-body i {
-      display: block;
-      margin-bottom: 8px;
-      color: #12b76a;
-      font-size: 2.5rem;
-    }
 
-    .lifetime-body strong {
-      display: block;
-      color: #067647;
-      font-size: 1.45rem;
-    }
 
     .last-update {
       position: relative;
@@ -319,15 +295,15 @@
         <section class="summary-grid" aria-label="สรุปใบรับรอง">
           <article class="summary-card">
             <div class="summary-icon blue"><i class="bi bi-shield-check"></i></div>
-            <div><div class="summary-label">Certificate ที่ติดตาม</div><p class="summary-value">4 รายการ</p></div>
+            <div><div class="summary-label">Certificate ที่ติดตาม</div><p class="summary-value" id="totalCount">-</p></div>
           </article>
           <article class="summary-card">
             <div class="summary-icon green"><i class="bi bi-hourglass-split"></i></div>
             <div><div class="summary-label">ใกล้หมดอายุที่สุด</div><p class="summary-value" id="nearestDays">-</p></div>
           </article>
           <article class="summary-card">
-            <div class="summary-icon purple"><i class="bi bi-infinity"></i></div>
-            <div><div class="summary-label">สิทธิ์ตลอดชีพ</div><p class="summary-value">1 รายการ</p></div>
+            <div class="summary-icon purple"><i class="bi bi-arrow-repeat"></i></div>
+            <div><div class="summary-label">ต่ออายุอัตโนมัติ (Cloudflare)</div><p class="summary-value" id="autoRenewCount">-</p></div>
           </article>
         </section>
 
@@ -339,14 +315,12 @@
   <script src="./global.js?v05"></script>
   <script>
     const certificates = [
-      { domain: 'modify-api.utwgpa.com', expiresAt: '2026-11-01T16:13:31Z' },
-      { domain: 'prd-api.utwgpa.com', expiresAt: '2026-11-01T16:13:43Z' },
-      { domain: 'repeat-api.utwgpa.com', expiresAt: '2026-11-01T16:12:53Z' },
-      { domain: 'utw.ac.th', lifetime: true }
+      { domain: 'modify-api.utwgpa.com', provider: 'Cloudflare · Google Trust Services', autoRenew: true, renewedAt: '2026-10-10T02:34:19Z', expiresAt: '2027-01-08T03:32:07Z' },
+      { domain: 'prd-api.utwgpa.com', provider: 'Cloudflare · Google Trust Services', autoRenew: true, renewedAt: '2026-10-10T02:34:19Z', expiresAt: '2027-01-08T03:32:07Z' },
+      { domain: 'repeat-api.utwgpa.com', provider: 'Cloudflare · Google Trust Services', autoRenew: true, renewedAt: '2026-10-10T02:34:19Z', expiresAt: '2027-01-08T03:32:07Z' },
+      { domain: 'utw.ac.th', provider: 'UTW Certificate · ต่ออายุทุก 3 เดือน', autoRenew: false, renewedAt: '2026-10-23T00:00:00+07:00', expiresAt: '2027-01-23T00:00:00+07:00' }
     ];
 
-    const validityDays = 90;
-    const renewedAt = new Date('2026-08-04T01:00:00+07:00');
     const dayMs = 24 * 60 * 60 * 1000;
 
     function thaiDate(date) {
@@ -366,57 +340,55 @@
 
     function renderCertificates() {
       const now = new Date();
-      const renewable = certificates.filter(item => !item.lifetime).map(item => {
+      const items = certificates.map(item => {
+        const renewedAt = new Date(item.renewedAt);
         const expiresAt = new Date(item.expiresAt);
-        return { ...item, expiresAt, days: Math.max(0, Math.ceil((expiresAt - now) / dayMs)) };
+        return {
+          ...item,
+          renewedAt,
+          expiresAt,
+          validityDays: Math.round((expiresAt - renewedAt) / dayMs),
+          days: Math.max(0, Math.ceil((expiresAt - now) / dayMs))
+        };
       });
 
-      document.getElementById('nearestDays').textContent = Math.min(...renewable.map(item => item.days)) + ' วัน';
+      document.getElementById('totalCount').textContent = items.length + ' รายการ';
+      document.getElementById('autoRenewCount').textContent = items.filter(item => item.autoRenew).length + ' รายการ';
+      document.getElementById('nearestDays').textContent = Math.min(...items.map(item => item.days)) + ' วัน';
       document.getElementById('lastUpdate').textContent = 'อัปเดตล่าสุด ' + thaiDate(now);
 
-      document.getElementById('certificateList').innerHTML = certificates.map(item => {
-        if (item.lifetime) {
-          return `
-            <article class="certificate-card">
-              <div class="certificate-card-head">
-                <div class="certificate-domain-wrap">
-                  <div class="certificate-icon lifetime"><i class="bi bi-patch-check-fill"></i></div>
-                  <div><h2 class="certificate-domain">${item.domain}</h2><p class="certificate-provider">UTW Lifetime Certificate</p></div>
-                </div>
-                <div class="status-badge status-lifetime"><i class="bi bi-infinity"></i><span>ตลอดชีพ</span></div>
-              </div>
-              <div class="lifetime-body">
-                <div><i class="bi bi-infinity"></i><strong>ไม่มีวันหมดอายุ</strong><span class="days-caption">ไม่ต้องต่ออายุตามรอบ 90 วัน</span></div>
-              </div>
-            </article>`;
-        }
-
-        const data = renewable.find(cert => cert.domain === item.domain);
+      document.getElementById('certificateList').innerHTML = items.map(data => {
         const status = certificateStatus(data.days);
-        const progress = Math.max(0, Math.min(100, (data.days / validityDays) * 100));
+        const progress = Math.max(0, Math.min(100, (data.days / data.validityDays) * 100));
         const renewBefore = new Date(data.expiresAt.getTime() - (30 * dayMs));
+        const renewNote = data.autoRenew
+          ? '<span class="status-badge status-lifetime"><i class="bi bi-arrow-repeat"></i><span>ต่ออายุอัตโนมัติ</span></span>'
+          : '';
 
         return `
           <article class="certificate-card">
             <div class="certificate-card-head">
               <div class="certificate-domain-wrap">
                 <div class="certificate-icon"><i class="bi bi-shield-lock-fill"></i></div>
-                <div><h2 class="certificate-domain">${data.domain}</h2><p class="certificate-provider">Let's Encrypt · ECDSA</p></div>
+                <div><h2 class="certificate-domain">${data.domain}</h2><p class="certificate-provider">${data.provider}</p></div>
               </div>
-              <div class="status-badge status-${status.tone}"><i class="bi bi-circle-fill" style="font-size:.45rem"></i><span>${status.label}</span></div>
+              <div class="d-flex flex-wrap justify-content-end gap-1">
+                <div class="status-badge status-${status.tone}"><i class="bi bi-circle-fill" style="font-size:.45rem"></i><span>${status.label}</span></div>
+                ${renewNote}
+              </div>
             </div>
             <div class="days-row">
               <div><span class="days-number">${data.days}</span> <span class="days-unit">วัน</span></div>
-              <span class="days-caption">คงเหลือจาก ${validityDays} วัน</span>
+              <span class="days-caption">คงเหลือจาก ${data.validityDays} วัน</span>
             </div>
             <div class="certificate-progress" role="progressbar" aria-label="เหลือ ${data.days} วัน" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">
               <div class="certificate-progress-bar progress-${status.tone}" style="width:${progress}%"></div>
             </div>
             <div class="certificate-details">
-              <div><span class="detail-label">ต่ออายุล่าสุด</span><p class="detail-value">${thaiDate(renewedAt)}</p></div>
+              <div><span class="detail-label">ต่ออายุล่าสุด</span><p class="detail-value">${thaiDate(data.renewedAt)}</p></div>
               <div><span class="detail-label">วันหมดอายุ</span><p class="detail-value">${thaiDate(data.expiresAt)}</p></div>
-              <div><span class="detail-label">แนะนำให้ต่อภายใน</span><p class="detail-value">${thaiDate(renewBefore)}</p></div>
-              <div><span class="detail-label">อายุใบรับรอง</span><p class="detail-value">${validityDays} วัน</p></div>
+              <div><span class="detail-label">${data.autoRenew ? 'Cloudflare จะต่ออายุก่อน' : 'แนะนำให้ต่อภายใน'}</span><p class="detail-value">${thaiDate(renewBefore)}</p></div>
+              <div><span class="detail-label">อายุใบรับรอง</span><p class="detail-value">${data.validityDays} วัน</p></div>
             </div>
           </article>`;
       }).join('');
